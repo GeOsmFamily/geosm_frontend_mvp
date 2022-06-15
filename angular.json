@@ -24,6 +24,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "xml-utils/find-tags-by-name.js",
+              "lru-cache",
+              "pbf",
+              "rxjs/internal/observable/from",
+              "rxjs/internal/operators/catchError",
+              "rxjs/internal/operators/map"
+            ],
             "outputPath": "dist/geosm",
             "index": "src/index.html",
             "main": "src/main.ts",

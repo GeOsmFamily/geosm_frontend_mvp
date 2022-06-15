@@ -4,7 +4,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   width: 250px;
   margin: 0 auto;
-
+  background-color: white;
 }
 
 .break-words {
@@ -17,8 +17,8 @@
   background-position: center;
   background-size: cover;
   display: block;
-  height: 56.25px;
-  margin: -12px -12px 0;
+  height: 76.25px;
+  margin: -20px -12px -12px -12px;
   background-image: url(https://media-exp2.licdn.com/dms/image/C4D16AQHloTjzzWgexw/profile-displaybackgroundimage-shrink_200_800/0/1609433426546?e=1660780800&v=beta&t=WJXz90-Q_WB-A4O88piFVkPT18ZWNGB4DN95aeql3_c);
 }
 
@@ -67,4 +67,8 @@
 
 .t-normal {
   font-weight: 400;
+}
+
+a {
+  text-decoration: none;
 }

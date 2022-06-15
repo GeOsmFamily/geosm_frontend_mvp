@@ -8,14 +8,14 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../core/modules/material';
 import { PrimaryPageComponent } from './sidebar-layout/sidebar-left/primary-page/primary-page.component';
 import { SecondaryPageComponent } from './sidebar-layout/sidebar-left/secondary-page/secondary-page.component';
-import { MapComponent } from './sidebar-layout/map/map.component';
+import { MapModule } from './sidebar-layout/map/map.module';
 
 
 
 @NgModule({
-  declarations: [AuthLayoutComponent,SidebarLayoutComponent,NavbarLayoutComponent,BaseLayoutComponent, PrimaryPageComponent, SecondaryPageComponent, MapComponent],
+  declarations: [AuthLayoutComponent,SidebarLayoutComponent,NavbarLayoutComponent,BaseLayoutComponent, PrimaryPageComponent, SecondaryPageComponent],
   imports: [
-    CommonModule,RouterModule,MaterialModule
+    CommonModule,RouterModule,MaterialModule,MapModule
   ]
 })
 export class LayoutsModule { }
