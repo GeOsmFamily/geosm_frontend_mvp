@@ -1,0 +1,16 @@
+.sidenav-container {
+  width: 100%;
+  height: calc(100% - 60px);
+  background-color: white;
+}
+
+.sidebar-left {
+  width: 360px;
+  padding: 5px;
+  border: none !important;
+  background-color: white;
+}
+
+.sidebar-right {
+  width: 220px;
+}
