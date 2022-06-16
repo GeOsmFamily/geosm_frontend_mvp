@@ -9,11 +9,12 @@ import { MaterialModule } from '../core/modules/material';
 import { PrimaryPageComponent } from './sidebar-layout/sidebar-left/primary-page/primary-page.component';
 import { SecondaryPageComponent } from './sidebar-layout/sidebar-left/secondary-page/secondary-page.component';
 import { MapModule } from './sidebar-layout/map/map.module';
+import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/searchbar-layout.component';
 
 
 
 @NgModule({
-  declarations: [AuthLayoutComponent,SidebarLayoutComponent,NavbarLayoutComponent,BaseLayoutComponent, PrimaryPageComponent, SecondaryPageComponent],
+  declarations: [AuthLayoutComponent,SidebarLayoutComponent,NavbarLayoutComponent,BaseLayoutComponent, PrimaryPageComponent, SecondaryPageComponent,SearchbarLayoutComponent],
   imports: [
     CommonModule,RouterModule,MaterialModule,MapModule
   ]
