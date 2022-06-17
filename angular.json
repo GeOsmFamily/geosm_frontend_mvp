@@ -30,7 +30,14 @@
               "pbf",
               "rxjs/internal/observable/from",
               "rxjs/internal/operators/catchError",
-              "rxjs/internal/operators/map"
+              "rxjs/internal/operators/map",
+              "geojson-equality",
+              "density-clustering",
+              "skmeans",
+              "rbush",
+              "concaveman",
+              "geojson-rbush",
+              "deep-equal"
             ],
             "outputPath": "dist/geosm",
             "index": "src/index.html",

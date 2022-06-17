@@ -17,9 +17,10 @@
     created_at: Date;
     updated_at: Date;
     deleted_at?: any;
+    check: boolean;
   }
 
-  export interface GroupesCartes {
+  export interface GroupesCarte {
     id: number;
     nom: string;
     nom_en: string;
@@ -30,10 +31,10 @@
   }
 
   export interface Data {
-    groupes_cartes: GroupesCartes;
+    groupes_cartes: GroupesCarte[];
   }
 
-  export interface CarteInterface {
+  export interface GroupeCarteInterface {
     success: boolean;
     data: Data;
     message: string;

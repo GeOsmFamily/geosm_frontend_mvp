@@ -19,7 +19,7 @@
         deleted_at?: any;
     }
 
-    export interface Couch {
+    export interface Couche {
         id: number;
         sous_thematique_id: number;
         nom: string;
@@ -51,7 +51,7 @@
         created_at: Date;
         updated_at: Date;
         deleted_at?: any;
-        couches: Couch[];
+        couches: Couche[];
     }
 
     export interface Thematique {

@@ -10,13 +10,14 @@ import { PrimaryPageComponent } from './sidebar-layout/sidebar-left/primary-page
 import { SecondaryPageComponent } from './sidebar-layout/sidebar-left/secondary-page/secondary-page.component';
 import { MapModule } from './sidebar-layout/map/map.module';
 import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/searchbar-layout.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [AuthLayoutComponent,SidebarLayoutComponent,NavbarLayoutComponent,BaseLayoutComponent, PrimaryPageComponent, SecondaryPageComponent,SearchbarLayoutComponent],
   imports: [
-    CommonModule,RouterModule,MaterialModule,MapModule
+    CommonModule,RouterModule,MaterialModule,MapModule,SharedModule
   ]
 })
 export class LayoutsModule { }
