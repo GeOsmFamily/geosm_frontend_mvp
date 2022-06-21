@@ -1,5 +1,8 @@
-<app-loading class="loading-apps"></app-loading>
+<ng-content *ngIf="(isLoading$ | async)=== false; else spinner"></ng-content>
+<ng-template #spinner>
+  <app-loading class="loading-apps"></app-loading>
+</ng-template>
 <div id="map" class="map">
-   <div id="scale-map"></div>
-      <div id="mouse-position-map"></div>
+  <div id="scale-map"></div>
+  <div id="mouse-position-map"></div>
 </div>

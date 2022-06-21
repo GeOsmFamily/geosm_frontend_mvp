@@ -1,3 +1,4 @@
+import { MapEffects } from './layouts/sidebar-layout/map/states/map.effects';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { setAppInjector } from './core/injectorHelper';
+import { mapFeatureKey, mapreducer } from './layouts/sidebar-layout/map/states/map.reducer';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [{ prefix: './assets/i18n/', suffix: '.json' }]);
@@ -33,8 +35,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
     BrowserAnimationsModule,
     LayoutsModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    StoreModule.forFeature(mapFeatureKey, mapreducer),
+    StoreModule.forRoot({ mapreducer }),
+    EffectsModule.forRoot([MapEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

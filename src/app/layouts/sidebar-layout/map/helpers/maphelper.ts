@@ -1,5 +1,30 @@
-import { boundingExtent, CircleStyle, Cluster, createStringXY, Fill, GeoJSON, Icon, ImageLayer, ImageWMS, LayerGroup, Map, MousePosition, RasterSource, ScaleLine, Stroke, Style, Text, TileLayer, TileWMS, transformExtent, VectorLayer, VectorSource, XYZ } from 'src/app/core/modules/openlayers';
-import { Injectable } from "@angular/core";
+import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
+import {
+  boundingExtent,
+  CircleStyle,
+  Cluster,
+  createStringXY,
+  Fill,
+  GeoJSON,
+  Icon,
+  ImageLayer,
+  ImageWMS,
+  LayerGroup,
+  Map,
+  MousePosition,
+  RasterSource,
+  ScaleLine,
+  Stroke,
+  Style,
+  Text,
+  TileLayer,
+  TileWMS,
+  transformExtent,
+  VectorLayer,
+  VectorSource,
+  XYZ
+} from 'src/app/core/modules/openlayers';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/core/services/api/api.service';
 import { AppInjector } from 'src/app/core/injectorHelper';
@@ -13,6 +38,8 @@ import { delayWhen, retryWhen, take, tap, timer } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LayersInMap } from '../models/layerinmap';
 import { ActiveLayersInterface } from '../models/activelayers';
+import { bboxPolygon, intersect, toWgs84 } from '@turf/turf';
+import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
 
 const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing'];
 
@@ -570,7 +597,7 @@ export class MapHelper {
   }
 
   getLayerGroupByNom(groupName: string): LayerGroup {
-    var groupLayer : LayerGroup | undefined;
+    var groupLayer: LayerGroup | undefined;
     this.map?.getLayers().forEach(group => {
       if (group instanceof LayerGroup) {
         if (group.get('nom') == groupName) {
@@ -579,5 +606,78 @@ export class MapHelper {
       }
     });
     return groupLayer!;
+  }
+
+  initMapProject(project: ProjectInterface) {
+    var shadowlayer = this.constructShadowLayer(project.config.roiGeojson);
+    shadowlayer.setZIndex(1000);
+    this.map?.addLayer(shadowlayer);
+
+    this.map?.getView().fit(project.config.data.instance.bbox, {
+      size: this.map.getSize(),
+      duration: 1000
+    });
+
+    this.map?.on('moveend', () => {
+      var bbox_cam = bboxPolygon(
+        //@ts-ignore
+        project.config.data.instance.bbox
+      );
+      //@ts-ignore
+      var bbox_view = bboxPolygon(this.map.getView().calculateExtent());
+
+      var bool = intersect(toWgs84(bbox_view), toWgs84(bbox_cam));
+
+      if (!bool) {
+        this.map?.getView().fit(project.config.data.instance.bbox, {
+          size: [this.map.getSize()?.[0]!, this.map.getSize()?.[1]! - 50],
+          duration: 1000
+        });
+      }
+    });
+    this.map?.updateSize();
+  }
+
+  addPrincipalMap(principalMap: PrincipalMapInterface) {
+    let groupCarte = principalMap.groupecarte;
+    let carte = principalMap.carte;
+    var type: 'wms' | 'wfs' | 'xyz' | undefined;
+    if (carte.type == 'wms') {
+      type = 'wms';
+    } else if (carte.type == 'xyz') {
+      type = 'xyz';
+    }
+    var layer = this.constructLayer({
+      nom: carte.nom,
+      type: type!,
+      type_layer: 'geosmCatalogue',
+      url: carte.url,
+      visible: true,
+      inToc: true,
+      properties: {
+        group_id: groupCarte.id,
+        couche_id: carte.id,
+        type: 'carte'
+      },
+      activeLayers: {
+        share: false,
+        metadata: true,
+        opacity: true
+      },
+      iconImagette: environment.url_services + '/' + carte.image_url,
+      descriptionSheetCapabilities: undefined!
+    });
+    this.addLayerToMap(layer!);
+  }
+
+  removePrincipalMap(principalMap: PrincipalMapInterface) {
+    var layer = this.getLayerByPropertiesCatalogueGeosm({
+      group_id: principalMap!.groupecarte.id,
+      couche_id: principalMap!.carte.id,
+      type: 'carte'
+    });
+    for (let index = 0; index < layer.length; index++) {
+      this.removeLayerToMap(layer[index]);
+    }
   }
 }
