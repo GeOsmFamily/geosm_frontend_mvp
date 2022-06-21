@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: true,
+  url_services: '',
+  apiKey: '',
+  instance_id: 1,
+  primarycolor: '#023f5f'
 };
