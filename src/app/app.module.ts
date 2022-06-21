@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { setAppInjector } from './core/injectorHelper';
 import { mapFeatureKey, mapreducer } from './layouts/sidebar-layout/map/states/map.reducer';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [{ prefix: './assets/i18n/', suffix: '.json' }]);
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LayoutsModule,
     StoreModule.forFeature(mapFeatureKey, mapreducer),
     StoreModule.forRoot({ mapreducer }),
-    EffectsModule.forRoot([MapEffects])
+    EffectsModule.forRoot([MapEffects]),
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

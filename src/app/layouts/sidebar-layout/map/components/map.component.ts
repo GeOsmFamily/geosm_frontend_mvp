@@ -3,11 +3,25 @@ import { Map, View, LayerGroup } from 'src/app/core/modules/openlayers';
 import { MapHelper } from './../helpers/maphelper';
 import { MatDrawer, MatSidenavContainer } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
-import {  Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { MapState } from '../states/map.reducer';
 import { selectIsLoading, selectProject } from '../states/map.selector';
 import { addPrincipalMap, INITMAP } from '../states/map.actions';
 import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
+import {
+  faAngleDoubleLeft,
+  faAngleLeft,
+  faAngleRight,
+  faDownload,
+  faEdit,
+  faGlobe,
+  faInfo,
+  faLayerGroup,
+  faMapMarker,
+  faMinus,
+  faPlus,
+  faRoute
+} from '@fortawesome/free-solid-svg-icons';
 var view = new View({
   center: [0, 0],
   zoom: 0,
@@ -32,13 +46,26 @@ export const map = new Map({
 export class MapComponent implements OnInit {
   isLoading$: Observable<boolean>;
   project$: Observable<ProjectInterface>;
+  faPlus = faPlus;
+  faMinus = faMinus;
+  faGlobe = faGlobe;
+  faMarker = faMapMarker;
+  faAngleLeft = faAngleLeft;
+  faAngleRight = faAngleRight;
+  faAngleDouble = faAngleDoubleLeft;
+
+  faMapLayers = faLayerGroup;
+  faEdit = faEdit;
+  faRouting = faRoute;
+  faLegend = faInfo;
+  faDownload = faDownload;
 
   @ViewChild(MatSidenavContainer, { static: true })
   sidenavContainer: MatSidenavContainer | undefined;
 
   constructor(private store: Store<MapState>) {
-    this.isLoading$ = this.store.select((selectIsLoading));
-    this.project$ = this.store.select((selectProject));
+    this.isLoading$ = this.store.select(selectIsLoading);
+    this.project$ = this.store.select(selectProject);
   }
 
   ngOnInit(): void {
