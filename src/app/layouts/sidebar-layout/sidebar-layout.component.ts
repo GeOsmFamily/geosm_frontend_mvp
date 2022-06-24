@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenavContainer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-sidebar-layout',
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarLayoutComponent {
 
-  constructor() { }
+  @ViewChild(MatSidenavContainer, { static: true })
+  sidenavContainer: MatSidenavContainer | undefined;
 
-
-
+  constructor() {}
 }

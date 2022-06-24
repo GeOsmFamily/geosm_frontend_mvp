@@ -490,7 +490,7 @@ export class MapHelper {
     return layer_to_remove;
   }
 
-  getAllLayerInMap(): Array<any> {
+  getAllLayerInMap(): Array<BaseLayer> {
     var responseLayers = Array();
     this.map?.getLayers().forEach(group => {
       responseLayers.push(group);
@@ -680,4 +680,11 @@ export class MapHelper {
       this.removeLayerToMap(layer[index]);
     }
   }
+
+  addMapZoomAnimation = (zoom: number) => {
+    this.map?.getView().animate({
+      zoom: zoom,
+      duration: 1000
+    });
+  };
 }

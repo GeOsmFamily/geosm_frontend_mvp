@@ -4,14 +4,19 @@ import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
 import { MapHelper } from '../helpers/maphelper';
 import {
   addPrincipalMap,
+  globalView,
   initMap,
   initMapFailure,
   initMapSuccess,
   principalCarte,
   principalCarteFailure,
   principalCarteSuccess,
-  removePrincipalMap
+  removePrincipalMap,
+  zoomMinus,
+  zoomPlus,
+  zoomToPoint
 } from './map.actions';
+import { Point} from '../../../../core/modules/openlayers'
 
 export const mapFeatureKey = 'map';
 
@@ -76,7 +81,32 @@ export const mapReducer = createReducer(
     var mapHelper = new MapHelper();
     mapHelper.removePrincipalMap(principalMap);
     return { ...state, principalMap: principalMap };
-  })
+  }),
+  on(zoomPlus, state => {
+    var mapHelper = new MapHelper();
+    mapHelper.addMapZoomAnimation(mapHelper.map?.getView().getZoom()! + 1);
+    return { ...state };
+  }),
+  on(zoomMinus, state => {
+    var mapHelper = new MapHelper();
+    mapHelper.addMapZoomAnimation(mapHelper.map?.getView().getZoom()! - 1);
+    return { ...state };
+  }),
+  on(globalView, (state, { project }) => {
+    var mapHelper = new MapHelper();
+    mapHelper.map?.getView().fit(project.config.data.instance.bbox, {
+      size: mapHelper.map.getSize(),
+      duration: 1000
+    });
+    return { ...state };
+  }),
+  on(zoomToPoint, (state, { point,zoom}) => {
+    var mapHelper = new MapHelper();
+
+      mapHelper.fit_view(point,zoom);
+
+    return { ...state };
+  }),
 );
 
 export function mapreducer(state: MapState | undefined, action: Action): any {

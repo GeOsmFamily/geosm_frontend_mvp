@@ -15,7 +15,6 @@
   }
 
   #mouse-position-map {
-
     background: #023f5f94;
     position: absolute;
     color: #fff;
@@ -33,4 +32,55 @@
 .loading-apps {
   position: relative;
   top: calc(50% - 80px);
+}
+
+.map-buttons {
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  padding: 0 10px;
+
+  .left-buttons-1 {
+    button {
+      margin-top: 10px;
+    }
+
+    button:hover {
+      -webkit-filter: drop-shadow(0 0 0.91rem #000);
+      filter: drop-shadow(0 0 0.91rem #000);
+    }
+  }
+
+  .left-buttons-2 {
+    position: absolute;
+    bottom: 50px;
+
+    button {
+      margin-top: 10px;
+    }
+
+    button:hover {
+      -webkit-filter: drop-shadow(0 0 0.91rem #000);
+      filter: drop-shadow(0 0 0.91rem #000);
+    }
+  }
+}
+
+.right-buttons {
+  position: absolute;
+  right: 10px;
+  top: 150px;
+  z-index: 1;
+
+  button {
+    margin-top: 10px;
+  }
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.primary-bg {
+  color: #023f5f;
 }

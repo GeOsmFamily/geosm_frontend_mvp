@@ -16,28 +16,30 @@ export class MapEffects {
   ) {}
 
   loadProject$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(mapAction.initMap),
-      switchMap(() => {
-        return forkJoin({
-          thematiqueInterface: this.thematiqueService.getThematiques(),
-          groupecarteInterface: this.carteService.getGroupeCarte(),
-          configInterface: this.configService.getConfigInstance(),
-          roi: this.configService.getRoiInstance()
-        }).pipe(
-          map(({ thematiqueInterface, groupecarteInterface, configInterface, roi }) => {
-            configInterface.roiGeojson = roi;
-            return mapAction.initMapSuccess({
-              project: {
-                thematiques: thematiqueInterface.data.thematiques,
-                groupecartes: groupecarteInterface.data.groupes_cartes,
-                config: configInterface,
-                principalMap: this.carteService.getPrincipalCarte()
-              }
-            });
-          })
-        );
-      })
+    return (
+      this.actions$.pipe(
+        ofType(mapAction.initMap),
+        switchMap(() => {
+          return forkJoin({
+            thematiqueInterface: this.thematiqueService.getThematiques(),
+            groupecarteInterface: this.carteService.getGroupeCarte(),
+            configInterface: this.configService.getConfigInstance(),
+            roi: this.configService.getRoiInstance()
+          }).pipe(
+            map(({ thematiqueInterface, groupecarteInterface, configInterface, roi }) => {
+              configInterface.roiGeojson = roi;
+              return mapAction.initMapSuccess({
+                project: {
+                  thematiques: thematiqueInterface.data.thematiques,
+                  groupecartes: groupecarteInterface.data.groupes_cartes,
+                  config: configInterface,
+                  principalMap: this.carteService.getPrincipalCarte()
+                }
+              });
+            })
+          );
+        })
+      )
     );
   });
 }
