@@ -1,43 +1,40 @@
 <h1 mat-dialog-title class="dialog-title" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
   <fa-icon class="title-icon primary-bg" [icon]="data.icon"></fa-icon>
 
-  <span class="bold primary-bg" style="font-size: 17px;">{{ data.title }}
-  </span>
+  <span class="bold primary-bg" style="font-size: 17px">{{ data.title }} </span>
 
-  <fa-icon class="close-icon primary-bg" [icon]="faClose" (click)="onNoClick()" ></fa-icon>
+  <fa-icon class="close-icon primary-bg" [icon]="faClose" (click)="onNoClick()"></fa-icon>
 </h1>
 
-<mat-dialog-content *ngIf="data.type == 'zoomto'" class="content-modal">
-<form [formGroup]="zoomToForm">
-
-    <mat-form-field style="width: 100%;">
+<mat-dialog-content *ngIf="data.type === 'zoomto'" class="content-modal">
+  <form [formGroup]="zoomToForm">
+    <mat-form-field style="width: 100%">
       <mat-select placeholder="{{ 'modal.choose_projection' | translate }}" formControlName="projection">
         <mat-option value="WGS84">WGS84</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field style="width: 100%;">
-      <input matInput placeholder="{{ 'modal.longitude' | translate }}" formControlName="longitude"
-        type="number">
+    <mat-form-field style="width: 100%">
+      <input matInput placeholder="{{ 'modal.longitude' | translate }}" formControlName="longitude" type="number" />
     </mat-form-field>
 
-    <mat-form-field style="width: 100%;">
-      <input matInput placeholder="{{ 'modal.latitude' | translate }}" formControlName="latitude"
-        type="number">
+    <mat-form-field style="width: 100%">
+      <input matInput placeholder="{{ 'modal.latitude' | translate }}" formControlName="latitude" type="number" />
     </mat-form-field>
-
-
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions *ngIf="data.type == 'zoomto'" class="actions-modal">
- <button mat-button (click)="onNoClick()" style="margin-right: 10px;">
-    {{ 'modal.cancel' | translate }}
-  </button>
+<mat-dialog-actions *ngIf="data.type === 'zoomto'" class="actions-modal">
+  <button mat-button (click)="onNoClick()" style="margin-right: 10px">{{ 'modal.cancel' | translate }}</button>
 
-  <button mat-flat-button (click)="valider()" [mat-dialog-close]="zoomToForm.value" color="primary"
-    style="color: #fff;font-size: 14px;font-weight: bold"
-    [disabled]="zoomToForm.value['longitude'] === '' || zoomToForm.value['latitude'] === '' ">
+  <button
+    mat-flat-button
+    (click)="valider()"
+    [mat-dialog-close]="zoomToForm.value"
+    color="primary"
+    style="color: #fff; font-size: 14px; font-weight: bold"
+    [disabled]="zoomToForm.value['longitude'] === '' || zoomToForm.value['latitude'] === '' "
+  >
     {{ 'modal.submit' | translate }}
   </button>
 </mat-dialog-actions>
