@@ -1,3 +1,79 @@
-<div class="navbar">
+<!--<div class="navbar align-middle flex items-center fixed top-0 left-0 right-0 flex flex-col md:flex-row shadow-lg bg-white z-20">
   <app-searchbar-layout></app-searchbar-layout>
+
+</div>-->
+
+
+
+
+
+<div class=" navbar border-none z-0 h-12 md:h-20 md:z-40 fixed top-0 left-0 right-0  md:items-center flex flex-col md:flex-row md:shadow-lg bg-white z-20 ">
+ <div class="flex flex-row w-full m-0 md:hidden h-11 ">
+    <!--<button class="flex items-center px-3 text-secondary" (click)="openSidebar()">
+      <ng-icon name="hero-menu" size="24"></ng-icon>
+    </button>-->
+    <app-searchbar-layout class="flex-1 flex items-center " ></app-searchbar-layout>
+    <!--<button class="flex items-center px-3 text-secondary border-l border-black border-opacity-10" [appMenuTriggerFor]="userMenuMobile" xPosition="after">
+      <ng-icon name="hero-user-solid" size="24"></ng-icon>
+    </button>-->
+    <!--<app-menu #userMenuMobile>
+      <button class="py-2 px-4 text-left hover:bg-slate-100" (click)="logout()" *ngIf="isAuthenticated()">{{ 'button.logout'|translate }}</button>
+      <a routerLink="/auth/login" class="py-2 px-4 text-left hover:bg-slate-100" *ngIf="!isAuthenticated()">{{ 'button.login'|translate }}</a>
+    </app-menu>-->
+  </div>
+  <!--<div class="block md:hidden fixed top-0 left-0 right-0 bottom-0 bg-black opacity-20" *ngIf="sidebarVisible"
+    (click)="closeSidebar()"></div>-->
+  <div
+    class="md:relative -translate-x-60 fixed md:translate-x-0 top-0 bottom-0 left-0 flex flex-row md:flex-row flex-1 w-60 md:w-auto md:h-20 bg-white shadow-lg md:px-5 transition-transform duration-300"
+    >
+    <div
+      class="flex flex-col md:flex-row items-center pl-4 md:p-0 after:hidden after:md:block after:h-3/4 after:mx-3 after:w-0.5 after:bg-slate-200">
+      <div class="flex">
+        <div class="mr-8 hidden  md:block ">
+
+          <app-searchbar-layout ></app-searchbar-layout>
+
+        </div>
+        <a href="" class="pr-0 pt-2 md:pt-0">
+          <img src="/assets/logos/ifdd.svg"  class="max-w-none" width="50">
+        </a>
+
+        <!--<button class="flex items-center md:hidden px-4 py-2 text-primary" (click)="closeSidebar()">
+          <ng-icon name="hero-x" size="24"></ng-icon>
+        </button>-->
+      </div>
+
+    </div>
+    <div class="flex flex-col md:flex-row flex-1 justify-between p-8 md:p-0 bg-primary md:bg-white">
+
+      <nav class="flex flex-col md:flex-row">
+        <a class="flex items-center mb-3 md:mb-0 text-xs xl:text-[13px] font-extrabold pl-1 pr-3 md:px-4 py-0.5 md:py-0 uppercase hover:bg-primary hover:text-white focus:bg-primary focus:text-white bg-white rounded-lg md:rounded-none"
+          >
+          <span> Découvrir</span>
+          <!--<img [src]="item.image" [alt]="item.label" *ngIf="!item.active" width="44" height="44" class="w-6 xl:w-12">
+          <img [src]="item.activeImage" [alt]="item.label" *ngIf="item.active" width="44" height="44" class="w-6 xl:w-12">
+          <span class="">{{ item.label }}</span>
+          <span class="inline-flex md:hidden ml-auto">
+            <ng-icon name="hero-arrow-right" strokeWidth="3" size="18" class="text-accent"></ng-icon>
+          </span>-->
+        </a>
+        <a class="flex items-center mb-3 md:mb-0 text-xs xl:text-[13px] font-extrabold pl-1 pr-3 md:px-4 py-0.5 md:py-0 uppercase hover:bg-primary hover:text-white focus:bg-primary focus:text-white bg-white rounded-lg md:rounded-none"
+        >
+        <span> A propos</span>
+
+      </a>
+      <a class="flex items-center mb-3 md:mb-0 text-xs xl:text-[13px] font-extrabold pl-1 pr-3 md:px-4 py-0.5 md:py-0 uppercase hover:bg-primary hover:text-white focus:bg-primary focus:text-white bg-white rounded-lg md:rounded-none"
+      >
+      <span> Partenaires</span>
+
+    </a>
+    <a class="flex items-center mb-3 md:mb-0 text-xs xl:text-[13px] font-extrabold pl-1 pr-3 md:px-4 py-0.5 md:py-0 uppercase hover:bg-primary hover:text-white focus:bg-primary focus:text-white bg-white rounded-lg md:rounded-none"
+    >
+    <span> Chiffres</span>
+
+  </a>
+        </nav>
+
+    </div>
+  </div>
 </div>

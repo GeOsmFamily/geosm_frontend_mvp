@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import './openlayers.scss';
 @import './assets/font/avenir-next-rounded-pro-cufonfonts-webfont/style.scss';
-@import './theme.scss';
+//@import './theme.scss';
 
 html,
 body {
