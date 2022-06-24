@@ -6,6 +6,12 @@
   <div id="scale-map"></div>
   <div id="mouse-position-map"></div>
 
+   <div id="setCoordOverlay" style="display:none">
+        <button mat-mini-fab color="primary" (click)="close_setCoordOverlay()" matTooltip="{{ 'remove' | translate }}">
+          <fa-icon [icon]="faTimes" style="color:#fff;display:none"></fa-icon>
+        </button>
+  </div>
+
   <div class="map-buttons">
     <div class="left-buttons-1">
       <div>
@@ -33,22 +39,11 @@
       </div>
 
       <div>
-        <button mat-mini-fab class="white-bg" (click)="zoomTo()" style="margin-top: 90px" matTooltip="{{ 'map_buttons.left_button.zoom_to_coordinates' | translate }}">
+        <button mat-mini-fab class="white-bg" (click)="zoomTo()" matTooltip="{{ 'map_buttons.left_button.zoom_to_coordinates' | translate }}">
           <fa-icon [icon]="faMarker" class="primary-bg"></fa-icon>
         </button>
       </div>
 
-      <div>
-        <button mat-mini-fab class="white-bg" (click)="previous_view()" matTooltip="{{ 'map_buttons.left_button.previous_view' | translate }}">
-          <fa-icon [icon]="faAngleLeft" class="primary-bg"></fa-icon>
-        </button>
-      </div>
-
-      <div>
-        <button mat-mini-fab class="white-bg" (click)="next_view()" matTooltip="{{ 'map_buttons.left_button.next_view' | translate }}">
-          <fa-icon [icon]="faAngleRight" class="primary-bg"></fa-icon>
-        </button>
-      </div>
     </div>
 
     <div class="left-buttons-2">

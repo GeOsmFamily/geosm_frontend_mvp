@@ -16,7 +16,6 @@ import {
   zoomPlus,
   zoomToPoint
 } from './map.actions';
-import { Point} from '../../../../core/modules/openlayers'
 
 export const mapFeatureKey = 'map';
 
@@ -100,13 +99,14 @@ export const mapReducer = createReducer(
     });
     return { ...state };
   }),
-  on(zoomToPoint, (state, { point,zoom}) => {
+  on(zoomToPoint, (state, { point, zoom }) => {
     var mapHelper = new MapHelper();
 
-      mapHelper.fit_view(point,zoom);
+    mapHelper.fit_view(point, zoom);
 
     return { ...state };
   }),
+
 );
 
 export function mapreducer(state: MapState | undefined, action: Action): any {

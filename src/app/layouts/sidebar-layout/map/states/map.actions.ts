@@ -29,5 +29,5 @@ export const removePrincipalMap = createAction(REMOVE_PRINCIPAL_MAP, props<{ pri
 export const zoomPlus = createAction(ZOOM_PLUS);
 export const zoomMinus = createAction(ZOOM_MINUS);
 export const globalView = createAction(GLOBAL_VIEW, props<{ project: ProjectInterface }>());
-export const zoomToPoint = createAction(ZOOM_TO_POINT, props<{ point: Point, zoom:number }>());
+export const zoomToPoint = createAction(ZOOM_TO_POINT, props<{ point: Point, zoom: number }>());
 

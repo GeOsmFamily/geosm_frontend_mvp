@@ -22,7 +22,7 @@ import {
   transformExtent,
   VectorLayer,
   VectorSource,
-  XYZ
+  XYZ,Point
 } from 'src/app/core/modules/openlayers';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -686,5 +686,9 @@ export class MapHelper {
       zoom: zoom,
       duration: 1000
     });
-  };
+  }
+
+  zoomInPoint(project: ProjectInterface, point: Point,data:any) {
+
+  }
 }

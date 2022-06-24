@@ -1,4 +1,5 @@
 {
+  "remove": "Supprimer",
   "map_buttons": {
     "left_button": {
       "toogle_left_menu": "Basculer le menu de gauche",
@@ -25,6 +26,7 @@
     "longitude": "Longitude",
     "latitude": "Latitude",
     "cancel": "Annuler",
-    "submit": "Valider"
+    "submit": "Valider",
+    "coordinates_out_country": "Désolé mais vos coordonées sont hors du pays"
   }
 }
