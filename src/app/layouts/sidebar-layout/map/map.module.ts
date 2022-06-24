@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapComponent } from './components/map.component';
@@ -11,7 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [MapComponent],
   exports: [MapComponent],
-  imports: [CommonModule, SharedModule, MaterialModule, FontAwesomeModule],
+  imports: [CommonModule, SharedModule, MaterialModule, FontAwesomeModule,TranslateModule],
   providers: [ThematiqueService, CarteService, ConfigService]
 })
 export class MapModule {}

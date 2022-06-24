@@ -1,0 +1,55 @@
+@import '../../../theme.scss';
+
+.dialog-title {
+  background-color: $primary_transparent_bg !important;
+  text-align: center !important;
+  margin-left: -24px !important;
+  margin-right: -24px !important;
+  margin-top: -24px !important;
+  margin-bottom: 0px !important;
+  padding: 6px 0px !important;
+}
+
+.primary-bg {
+  color: #023f5f;
+}
+
+.title-icon {
+  margin-left: 10px !important;
+
+  opacity: 1;
+  font-size: 18px !important;
+  margin-top: 4px !important;
+  float: left !important;
+  cursor: pointer !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.close-icon {
+  opacity: 1;
+  font-size: 18px !important;
+  margin-right: 10px !important;
+  margin-top: 4px !important;
+  margin-left: 5px !important;
+  float: right !important;
+  cursor: pointer !important;
+
+}
+
+.content-modal {
+  background-color: rgba(255, 255, 255, 0.8);
+  overflow: auto !important;
+  max-height: calc(100% - 112px) !important;
+  height: calc(100% - 112px) !important;
+  padding: 24px !important;
+
+}
+
+.actions-modal {
+  margin: 0px -24px -24px;
+  background: rgba(255, 255, 255, 0.8);
+  padding-left: 10px;
+}

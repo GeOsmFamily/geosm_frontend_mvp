@@ -37,7 +37,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     BrowserAnimationsModule,
     LayoutsModule,
     StoreModule.forFeature(mapFeatureKey, mapreducer),
-    StoreModule.forRoot({ mapreducer }),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([MapEffects]),
     FontAwesomeModule
   ],

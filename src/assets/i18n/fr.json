@@ -1,1 +1,30 @@
-{}
+{
+  "map_buttons": {
+    "left_button": {
+      "toogle_left_menu": "Basculer le menu de gauche",
+      "zoom_in": "Zoom avant",
+      "zoom_out": "Zoom arrière",
+      "global_view": "Vue globale",
+      "zoom_to_coordinates": "Zoom sur les coordonnées",
+      "next_view": "Vue suivante",
+      "previous_view": "Vue précédente",
+      "mapillary_view": "Vue Mapillary",
+      "comparator": "Comparateur"
+    },
+    "right_button": {
+      "active_layers": "Couches actives",
+      "edit_tools": "Outils d'édition",
+      "routing": "Itinéraire",
+      "legend": "Légende",
+      "download": "Télécharger"
+    }
+  },
+  "modal": {
+    "zoomto": "Zoom sur les coordonnées",
+    "choose_projection": "Choisir la projection",
+    "longitude": "Longitude",
+    "latitude": "Latitude",
+    "cancel": "Annuler",
+    "submit": "Valider"
+  }
+}
