@@ -4,11 +4,15 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-map [sidenavContainer]="sidenavContainer"></app-map>
+    <app-map [ritghtMenus]="ritghtMenus" [sidenavContainer]="sidenavContainer"></app-map>
   </mat-sidenav-content>
 
   <mat-sidenav class="sidebar-right" closed mode="side" position="end">
-<app-primary-page></app-primary-page>
+     <app-active-layers [hidden]="!getRightMenu('toc')?.active"></app-active-layers>
+     <app-map-tools [hidden]="!getRightMenu('edition')?.active"></app-map-tools>
+     <app-legend [hidden]="!getRightMenu('legend')?.active"></app-legend>
+     <app-routing [hidden]="!getRightMenu('routing')?.active"></app-routing>
+     <app-download [hidden]="!getRightMenu('download')?.active"></app-download>
   </mat-sidenav>
 
 </mat-sidenav-container>

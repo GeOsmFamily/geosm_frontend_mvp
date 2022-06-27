@@ -687,8 +687,4 @@ export class MapHelper {
       duration: 1000
     });
   }
-
-  zoomInPoint(project: ProjectInterface, point: Point,data:any) {
-
-  }
 }

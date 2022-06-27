@@ -33,6 +33,8 @@ import { transform } from 'ol/proj';
 import { bboxPolygon, booleanContains, point } from '@turf/turf';
 import * as jQuery from 'jquery';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LayersInMap } from '../models/layerinmap';
+import { RightMenuInterface } from '../../sidebar-right/interfaces/rightMenuInterface';
 var view = new View({
   center: [0, 0],
   zoom: 0,
@@ -82,7 +84,18 @@ export class MapComponent implements OnInit {
 
   @Input() sidenavContainer: MatSidenavContainer | undefined;
 
-  constructor(private store: Store<MapState>, public dialog: MatDialog, public translate: TranslateService, private _snackBar: MatSnackBar) {
+  layersInToc: Array<LayersInMap> = [];
+
+  @Input() ritghtMenus: Array<RightMenuInterface> | undefined;
+
+
+
+  constructor(
+    private store: Store<MapState>,
+    public dialog: MatDialog,
+    public translate: TranslateService,
+    private _snackBar: MatSnackBar
+  ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
   }
@@ -116,7 +129,13 @@ export class MapComponent implements OnInit {
       });
 
       map.getLayers().on('propertychange', ObjectEvent => {
-        // console.log(ObjectEvent);
+        let mapHelper = new MapHelper();
+
+        this.layersInToc = mapHelper.getAllLayersInToc();
+
+        if (this.layersInToc.length == 2 && !this.getRightMenu('toc')!.active) {
+          this.openRightMenu('toc');
+        }
       });
     });
   }
@@ -210,7 +229,7 @@ export class MapComponent implements OnInit {
                 this._snackBar.open(res.coordinates_out_country, res.cancel, {
                   duration: 5000,
                   verticalPosition: 'bottom',
-                  horizontalPosition: 'center',
+                  horizontalPosition: 'center'
                 });
               }
             });
@@ -222,5 +241,37 @@ export class MapComponent implements OnInit {
 
   close_setCoordOverlay() {
     jQuery('#setCoordOverlay').hide();
+  }
+
+  getBadgeLayers(): number {
+    return this.layersInToc.length;
+  }
+
+  getRightMenu(name: string): RightMenuInterface | undefined {
+    for (let index = 0; index < this.ritghtMenus!.length; index++) {
+      const element = this.ritghtMenus![index];
+      if (element.name == name) {
+        return element;
+      }
+    }
+    return undefined;
+  }
+
+  openRightMenu(name: string) {
+    var menu = this.getRightMenu(name);
+    if (menu?.active) {
+      this.sidenavContainer?.end?.close();
+      for (let index = 0; index < this.ritghtMenus!.length; index++) {
+        const element = this.ritghtMenus![index];
+        element.active = false;
+      }
+    } else {
+      this.sidenavContainer?.end?.open();
+      for (let index = 0; index < this.ritghtMenus!.length; index++) {
+        const element = this.ritghtMenus![index];
+        element.active = false;
+      }
+      menu!.active = true;
+    }
   }
 }

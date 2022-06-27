@@ -15,32 +15,32 @@
   <div class="map-buttons">
     <div class="left-buttons-1">
       <div>
-        <button mat-mini-fab class="white-bg" matTooltip="{{ 'map_buttons.left_button.toogle_left_menu' | translate }}" (click)="toogleLeftSidenav()">
-          <fa-icon *ngIf="!this.sidenavContainer?.start?.opened" [icon]="faAngleDoubleRight" class="primary-bg"></fa-icon>
-          <fa-icon *ngIf="this.sidenavContainer?.start?.opened" [icon]="faAngleDouble" class="primary-bg"></fa-icon>
+        <button mat-mini-fab class="white" matTooltip="{{ 'map_buttons.left_button.toogle_left_menu' | translate }}" (click)="toogleLeftSidenav()">
+          <fa-icon *ngIf="!this.sidenavContainer?.start?.opened" [icon]="faAngleDoubleRight" class="primary_bg"></fa-icon>
+          <fa-icon *ngIf="this.sidenavContainer?.start?.opened" [icon]="faAngleDouble" class="primary_bg"></fa-icon>
         </button>
       </div>
       <div>
-        <button mat-mini-fab class="white-bg" (click)="zoom_in()" style="margin-top: 30px" matTooltip="{{ 'map_buttons.left_button.zoom_in' | translate }}">
-          <fa-icon [icon]="faPlus" class="primary-bg"></fa-icon>
-        </button>
-      </div>
-
-      <div>
-        <button mat-mini-fab id="zoom-minus" class="white-bg" (click)="zoom_out()" matTooltip="{{ 'map_buttons.left_button.zoom_out' | translate }}">
-          <fa-icon [icon]="faMinus" class="primary-bg"></fa-icon>
+        <button mat-mini-fab class="white" (click)="zoom_in()" style="margin-top: 30px" matTooltip="{{ 'map_buttons.left_button.zoom_in' | translate }}">
+          <fa-icon [icon]="faPlus" class="primary_bg"></fa-icon>
         </button>
       </div>
 
       <div>
-        <button mat-mini-fab class="white-bg" (click)="global_view()" matTooltip="{{ 'map_buttons.left_button.global_view' | translate }}">
-          <fa-icon [icon]="faGlobe" class="primary-bg"></fa-icon>
+        <button mat-mini-fab id="zoom-minus" class="white" (click)="zoom_out()" matTooltip="{{ 'map_buttons.left_button.zoom_out' | translate }}">
+          <fa-icon [icon]="faMinus" class="primary_bg"></fa-icon>
         </button>
       </div>
 
       <div>
-        <button mat-mini-fab class="white-bg" (click)="zoomTo()" matTooltip="{{ 'map_buttons.left_button.zoom_to_coordinates' | translate }}">
-          <fa-icon [icon]="faMarker" class="primary-bg"></fa-icon>
+        <button mat-mini-fab class="white" (click)="global_view()" matTooltip="{{ 'map_buttons.left_button.global_view' | translate }}">
+          <fa-icon [icon]="faGlobe" class="primary_bg"></fa-icon>
+        </button>
+      </div>
+
+      <div>
+        <button mat-mini-fab class="white" (click)="zoomTo()" matTooltip="{{ 'map_buttons.left_button.zoom_to_coordinates' | translate }}">
+          <fa-icon [icon]="faMarker" class="primary_bg"></fa-icon>
         </button>
       </div>
 
@@ -48,13 +48,13 @@
 
     <div class="left-buttons-2">
       <div *ngIf="isMapillary">
-        <button class="white-bg" mat-mini-fab matTooltip="{{ 'map_buttons.left_button.mapillary_view' | translate }}">
+        <button class="white" mat-mini-fab matTooltip="{{ 'map_buttons.left_button.mapillary_view' | translate }}">
           <img src="assets/images/png/mappilary.png" style="margin-top: -5px; height: 30px" alt="" />
         </button>
       </div>
 
       <div *ngIf="isComparator">
-        <button mat-mini-fab class="white-bg" matTooltip="{{ 'map_buttons.left_button.comparator' | translate }}">
+        <button mat-mini-fab class="white" matTooltip="{{ 'map_buttons.left_button.comparator' | translate }}">
           <img src="assets/images/svg/compare.svg" style="margin-bottom: 2px; height: 23px" alt="" />
         </button>
       </div>
@@ -63,32 +63,62 @@
 
   <div class="right-buttons">
     <div>
-      <button mat-mini-fab class="white-bg" matTooltip="{{ 'map_buttons.right_button.active_layers' | translate }}">
-        <fa-icon [icon]="faMapLayers" class="primary-bg"></fa-icon>
+      <button [matBadge]="getBadgeLayers()" matBadgePosition="before" matBadgeColor="accent" (click)="openRightMenu(ritghtMenus![0].name)"  mat-mini-fab [ngClass]="{
+            primary_bg: ritghtMenus![0].active,
+            white: !ritghtMenus![0].active
+          }" matTooltip="{{ 'map_buttons.right_button.active_layers' | translate }}">
+        <fa-icon [icon]="faMapLayers" [ngClass]="{
+            primary_bg: !ritghtMenus![0].active,
+            white_bg: ritghtMenus![0].active
+          }"></fa-icon>
       </button>
     </div>
 
     <div>
-      <button mat-mini-fab class="white-bg" matTooltip="{{ 'map_buttons.right_button.edit_tools' | translate }}">
-        <fa-icon [icon]="faEdit" class="primary-bg"></fa-icon>
+      <button (click)="openRightMenu(ritghtMenus![1].name)" mat-mini-fab [ngClass]="{
+            primary_bg: ritghtMenus![1].active,
+            white: !ritghtMenus![1].active
+          }" matTooltip="{{ 'map_buttons.right_button.edit_tools' | translate }}">
+        <fa-icon [icon]="faEdit" [ngClass]="{
+            primary_bg: !ritghtMenus![1].active,
+            white_bg: ritghtMenus![1].active
+          }"></fa-icon>
       </button>
     </div>
 
     <div *ngIf="isRouting">
-      <button mat-mini-fab class="white-bg" matTooltip="{{ 'map_buttons.right_button.routing' | translate }}">
-        <fa-icon [icon]="faRouting" class="primary-bg"></fa-icon>
+      <button (click)="openRightMenu(ritghtMenus![3].name)" mat-mini-fab [ngClass]="{
+            primary_bg: ritghtMenus![3].active,
+            white: !ritghtMenus![3].active
+          }" matTooltip="{{ 'map_buttons.right_button.routing' | translate }}">
+        <fa-icon [icon]="faRouting" [ngClass]="{
+            primary_bg: !ritghtMenus![3].active,
+            white_bg: ritghtMenus![3].active
+          }"></fa-icon>
       </button>
     </div>
 
     <div>
-      <button mat-mini-fab class="white-bg" matTooltip="{{ 'map_buttons.right_button.legend' | translate }}">
-        <fa-icon [icon]="faLegend" class="primary-bg"></fa-icon>
+      <button (click)="openRightMenu(ritghtMenus![2].name)" mat-mini-fab [ngClass]="{
+            primary_bg: ritghtMenus![2].active,
+            white: !ritghtMenus![2].active
+          }" matTooltip="{{ 'map_buttons.right_button.legend' | translate }}">
+        <fa-icon [icon]="faLegend" [ngClass]="{
+            primary_bg: !ritghtMenus![2].active,
+            white_bg: ritghtMenus![2].active
+          }"></fa-icon>
       </button>
     </div>
 
     <div *ngIf="isDownload">
-      <button mat-mini-fab class="white-bg" matTooltip="{{ 'map_buttons.right_button.download' | translate }}">
-        <fa-icon [icon]="faDownload" class="primary-bg"></fa-icon>
+      <button (click)="openRightMenu(ritghtMenus![4].name)" mat-mini-fab [ngClass]="{
+            primary_bg: ritghtMenus![4].active,
+            white: !ritghtMenus![4].active
+          }" matTooltip="{{ 'map_buttons.right_button.download' | translate }}">
+        <fa-icon [icon]="faDownload" [ngClass]="{
+            primary_bg: !ritghtMenus![4].active,
+            white_bg: ritghtMenus![4].active
+          }"></fa-icon>
       </button>
     </div>
   </div>
