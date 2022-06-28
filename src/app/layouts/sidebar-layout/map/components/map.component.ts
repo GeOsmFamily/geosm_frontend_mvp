@@ -5,8 +5,8 @@ import { MatDrawer, MatSidenavContainer } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { MapState } from '../states/map.reducer';
-import { selectIsLoading, selectProject } from '../states/map.selector';
-import { addPrincipalMap, globalView, INITMAP, zoomToPoint, ZOOM_MINUS, ZOOM_PLUS } from '../states/map.actions';
+import { selectAllLayersInToc, selectIsLoading, selectProject } from '../states/map.selector';
+import { addPrincipalMap, ALL_LAYERS_IN_TOC, globalView, INITMAP, zoomToPoint, ZOOM_MINUS, ZOOM_PLUS } from '../states/map.actions';
 import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
 import {
   faAngleDoubleLeft,
@@ -25,7 +25,7 @@ import {
   faRoute,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { HistoryMap } from '../models/historymap';
+import { HistoryMap } from '../interfaces/historymap';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -33,7 +33,7 @@ import { transform } from 'ol/proj';
 import { bboxPolygon, booleanContains, point } from '@turf/turf';
 import * as jQuery from 'jquery';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LayersInMap } from '../models/layerinmap';
+import { LayersInMap } from '../interfaces/layerinmap';
 import { RightMenuInterface } from '../../sidebar-right/interfaces/rightMenuInterface';
 var view = new View({
   center: [0, 0],
@@ -84,11 +84,9 @@ export class MapComponent implements OnInit {
 
   @Input() sidenavContainer: MatSidenavContainer | undefined;
 
-  layersInToc: Array<LayersInMap> = [];
+  layersInToc$: Observable<LayersInMap[]>;
 
   @Input() ritghtMenus: Array<RightMenuInterface> | undefined;
-
-
 
   constructor(
     private store: Store<MapState>,
@@ -98,6 +96,7 @@ export class MapComponent implements OnInit {
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
+    this.layersInToc$ = this.store.select(selectAllLayersInToc);
   }
 
   ngOnInit(): void {
@@ -129,13 +128,13 @@ export class MapComponent implements OnInit {
       });
 
       map.getLayers().on('propertychange', ObjectEvent => {
-        let mapHelper = new MapHelper();
+        this.store.dispatch({ type: ALL_LAYERS_IN_TOC });
 
-        this.layersInToc = mapHelper.getAllLayersInToc();
-
-        if (this.layersInToc.length == 2 && !this.getRightMenu('toc')!.active) {
-          this.openRightMenu('toc');
-        }
+        this.layersInToc$.subscribe(layersInToc => {
+          if (layersInToc.length == 2 && !this.getRightMenu('toc')!.active) {
+            this.openRightMenu('toc');
+          }
+        });
       });
     });
   }
@@ -243,10 +242,6 @@ export class MapComponent implements OnInit {
     jQuery('#setCoordOverlay').hide();
   }
 
-  getBadgeLayers(): number {
-    return this.layersInToc.length;
-  }
-
   getRightMenu(name: string): RightMenuInterface | undefined {
     for (let index = 0; index < this.ritghtMenus!.length; index++) {
       const element = this.ritghtMenus![index];
@@ -273,5 +268,13 @@ export class MapComponent implements OnInit {
       }
       menu!.active = true;
     }
+  }
+
+  countLayersInToc(): number {
+    var count = 0;
+    this.layersInToc$.subscribe(layersInToc => {
+      count = layersInToc.length;
+    });
+    return count;
   }
 }

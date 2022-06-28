@@ -2,8 +2,11 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
 import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
 import { MapHelper } from '../helpers/maphelper';
+import { LayersInMap } from '../interfaces/layerinmap';
 import {
   addPrincipalMap,
+  allLayersInToc,
+  editLayerZindex,
   globalView,
   initMap,
   initMapFailure,
@@ -23,6 +26,7 @@ export interface MapState {
   project: ProjectInterface;
   principalMap?: PrincipalMapInterface;
   isLoading: boolean;
+  layersintoc: LayersInMap[];
 }
 
 export const initialState: MapState = {
@@ -55,7 +59,8 @@ export const initialState: MapState = {
     groupecartes: []
   },
   isLoading: false,
-  principalMap: undefined
+  principalMap: undefined,
+  layersintoc: []
 };
 
 export const mapReducer = createReducer(
@@ -106,7 +111,17 @@ export const mapReducer = createReducer(
 
     return { ...state };
   }),
+  on(allLayersInToc, state => {
+    var mapHelper = new MapHelper();
+    var layersinToc = mapHelper.getAllLayersInToc();
+    return { ...state, layersintoc: layersinToc };
+  }),
 
+  on(editLayerZindex, (state, { layer, zindex }) => {
+    var mapHelper = new MapHelper();
+    mapHelper.editZindexOfLayer(layer, zindex);
+    return { ...state };
+  })
 );
 
 export function mapreducer(state: MapState | undefined, action: Action): any {

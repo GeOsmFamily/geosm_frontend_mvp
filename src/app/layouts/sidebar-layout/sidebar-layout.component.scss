@@ -1,3 +1,5 @@
+@import '../../../theme.scss';
+
 .sidenav-container {
   width: 100%;
   height: calc(100% - 80px);
@@ -11,4 +13,28 @@
 
 .sidebar-right {
   width: 300px;
+
+  .sidebar-right-content {
+    padding: 5px;
+    padding-top: 20px;
+  }
+
+  .sidebar-right-title {
+    background-color: $primary_transparent_bg;
+    color: $primary_color;
+    font-size: 13px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 5px 0px;
+    font-weight: bold;
+    position: fixed;
+    width: 300px;
+    z-index: 2;
+    right: 0px;
+    height: 20px;
+  }
+
+  .sidebar-right-title-fake {
+    height: 20px;
+  }
 }

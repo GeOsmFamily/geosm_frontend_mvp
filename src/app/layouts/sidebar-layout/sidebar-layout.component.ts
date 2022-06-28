@@ -1,5 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Map } from 'src/app/core/modules/openlayers';
+import { Component, ViewChild } from '@angular/core';
 import { MatSidenavContainer } from '@angular/material/sidenav';
+import { map as geoportailMap } from './map/components/map.component';
 import { RightMenuInterface } from './sidebar-right/interfaces/rightMenuInterface';
 
 @Component({
@@ -10,6 +12,8 @@ import { RightMenuInterface } from './sidebar-right/interfaces/rightMenuInterfac
 export class SidebarLayoutComponent {
   @ViewChild(MatSidenavContainer, { static: true })
   sidenavContainer: MatSidenavContainer | undefined;
+
+  map: Map | undefined;
 
   ritghtMenus: Array<RightMenuInterface> = [
     {
@@ -38,24 +42,35 @@ export class SidebarLayoutComponent {
       active: false,
       enable: true,
       tooltip: 'toolpit_map_routing',
-      title: 'map_routing'
+      title: 'routing'
     },
     {
       name: 'download',
       active: false,
       enable: true,
       tooltip: 'toolpit_download_data',
-      title: 'download_data'
+      title: 'download'
     }
   ];
 
-  constructor() {}
+  constructor() {
+    this.map = geoportailMap;
+  }
 
   getRightMenu(name: string): RightMenuInterface | undefined {
     for (let index = 0; index < this.ritghtMenus!.length; index++) {
       const element = this.ritghtMenus![index];
       if (element.name == name) {
         return element;
+      }
+    }
+    return undefined;
+  }
+
+  getRightMenuActive(): RightMenuInterface | undefined {
+    for (let index = 0; index < this.ritghtMenus.length; index++) {
+      if (this.ritghtMenus[index].active) {
+        return this.ritghtMenus[index];
       }
     }
     return undefined;

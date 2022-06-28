@@ -8,11 +8,16 @@
   </mat-sidenav-content>
 
   <mat-sidenav class="sidebar-right" closed mode="side" position="end">
-     <app-active-layers [hidden]="!getRightMenu('toc')?.active"></app-active-layers>
-     <app-map-tools [hidden]="!getRightMenu('edition')?.active"></app-map-tools>
-     <app-legend [hidden]="!getRightMenu('legend')?.active"></app-legend>
-     <app-routing [hidden]="!getRightMenu('routing')?.active"></app-routing>
-     <app-download [hidden]="!getRightMenu('download')?.active"></app-download>
+    <div class="sidebar-right-title" *ngIf="getRightMenuActive()">
+      {{ "right_menu." + getRightMenuActive()?.title + ".title" | translate }}
+    </div>
+    <div class="sidebar-right-title-fake"></div>
+    <div class="sidebar-right-content">
+      <app-active-layers [map]="map" [hidden]="!getRightMenu('toc')?.active"></app-active-layers>
+      <app-map-tools [hidden]="!getRightMenu('edition')?.active"></app-map-tools>
+      <app-legend [hidden]="!getRightMenu('legend')?.active"></app-legend>
+      <app-routing [hidden]="!getRightMenu('routing')?.active"></app-routing>
+      <app-download [hidden]="!getRightMenu('download')?.active"></app-download>
+    </div>
   </mat-sidenav>
-
 </mat-sidenav-container>

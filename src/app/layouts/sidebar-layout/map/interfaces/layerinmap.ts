@@ -1,11 +1,12 @@
-import { ActiveLayersInterface } from "./activelayers";
-import { LegendInterface } from "./legend";
+import { BaseLayer } from '../../../../core/modules/openlayers';
+import { ActiveLayersInterface } from './activelayers';
+import { LegendInterface } from './legend';
 
 export interface LayersInMap {
   nom: string;
   type_layer: 'geosmCatalogue' | 'draw' | 'mesure' | 'mapillary' | 'exportData' | 'comments' | 'other' | 'routing';
   image: string;
-  properties: Object | null;
+  properties: { group_id: number; couche_id: number; type: 'couche' | 'carte' } | null;
   zIndex: number;
   visible: boolean;
   data: any;
@@ -13,7 +14,7 @@ export interface LayersInMap {
     text: string;
     bgColor: string;
   };
-  layer: any;
+  layer: BaseLayer;
   activeLayers: ActiveLayersInterface;
   legendCapabilities?: LegendInterface;
   descriptionSheetCapabilities: string;
