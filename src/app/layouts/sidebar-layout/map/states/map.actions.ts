@@ -1,8 +1,7 @@
-import { Point } from '../../../../core/modules/openlayers';
+import { Point, BaseLayer } from '../../../../core/modules/openlayers';
 import { createAction, props } from '@ngrx/store';
 import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
 import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
-import { HistoryMap } from '../models/historymap';
 
 export const INITMAP = '[Map] Init Map';
 export const INITMAP_SUCCESS = '[Map] Init Map Success';
@@ -16,7 +15,8 @@ export const ZOOM_PLUS = '[Map] Zoom Plus';
 export const ZOOM_MINUS = '[Map] Zoom Minus';
 export const GLOBAL_VIEW = '[Map] Global View';
 export const ZOOM_TO_POINT = '[Map] Zoom To Point';
-
+export const ALL_LAYERS_IN_TOC = '[Map] All Layers In Toc';
+export const EDIT_LAYER_ZINDEX = '[Map] Edit Layer Zindex';
 
 export const initMap = createAction(INITMAP);
 export const initMapSuccess = createAction(INITMAP_SUCCESS, props<{ project: ProjectInterface }>());
@@ -29,5 +29,6 @@ export const removePrincipalMap = createAction(REMOVE_PRINCIPAL_MAP, props<{ pri
 export const zoomPlus = createAction(ZOOM_PLUS);
 export const zoomMinus = createAction(ZOOM_MINUS);
 export const globalView = createAction(GLOBAL_VIEW, props<{ project: ProjectInterface }>());
-export const zoomToPoint = createAction(ZOOM_TO_POINT, props<{ point: Point, zoom:number }>());
-
+export const zoomToPoint = createAction(ZOOM_TO_POINT, props<{ point: Point; zoom: number }>());
+export const allLayersInToc = createAction(ALL_LAYERS_IN_TOC);
+export const editLayerZindex = createAction(EDIT_LAYER_ZINDEX, props<{ layer: BaseLayer; zindex: number }>());

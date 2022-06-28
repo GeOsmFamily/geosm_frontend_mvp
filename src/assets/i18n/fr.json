@@ -1,4 +1,5 @@
 {
+  "remove": "Supprimer",
   "map_buttons": {
     "left_button": {
       "toogle_left_menu": "Basculer le menu de gauche",
@@ -25,6 +26,29 @@
     "longitude": "Longitude",
     "latitude": "Latitude",
     "cancel": "Annuler",
-    "submit": "Valider"
+    "submit": "Valider",
+    "coordinates_out_country": "Désolé mais vos coordonées sont hors du pays"
+  },
+  "right_menu": {
+    "table_of_contents": {
+      "title": "Couches en cours",
+      "info_layer": "Informations sur la couche",
+      "remove_layer": "Supprimer la couche",
+      "share_layer": "Partager la couche",
+      "share_all": "Partager",
+      "remove_all": "Supprimer"
+    },
+    "tools": {
+      "title": "Outils d'édition"
+    },
+    "routing": {
+      "title": "Itinéraire"
+    },
+    "legend": {
+      "title": "Légende"
+    },
+    "download": {
+      "title": "Télécharger"
+    }
   }
 }

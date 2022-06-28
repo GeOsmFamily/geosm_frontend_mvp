@@ -22,7 +22,8 @@ import {
   transformExtent,
   VectorLayer,
   VectorSource,
-  XYZ
+  XYZ,
+  BaseLayer
 } from 'src/app/core/modules/openlayers';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -32,12 +33,11 @@ import { map as geoportailMap } from '../components/map.component';
 import * as jQuery from 'jquery';
 import { Extent } from 'ol/extent';
 import { SimpleGeometry } from 'ol/geom';
-import BaseLayer from 'ol/layer/Base';
-import { GeosmLayer } from '../models/geosmlayer';
+import { GeosmLayer } from '../interfaces/geosmlayer';
 import { delayWhen, retryWhen, take, tap, timer } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { LayersInMap } from '../models/layerinmap';
-import { ActiveLayersInterface } from '../models/activelayers';
+import { LayersInMap } from '../interfaces/layerinmap';
+import { ActiveLayersInterface } from '../interfaces/activelayers';
 import { bboxPolygon, intersect, toWgs84 } from '@turf/turf';
 import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
 
@@ -560,8 +560,6 @@ export class MapHelper {
   editZindexOfLayer(layer: BaseLayer, zIndex: number) {
     for (let index = 0; index < this.getAllLayersInToc().length; index++) {
       const layerInmap = this.getAllLayersInToc()[index].layer;
-
-      console.log(layer.getZIndex(), zIndex);
       if (layer.getZIndex() < zIndex) {
         // if the layer is going up
         if (layerInmap.getZIndex() <= zIndex) {
@@ -652,6 +650,7 @@ export class MapHelper {
       type: type!,
       type_layer: 'geosmCatalogue',
       url: carte.url,
+
       visible: true,
       inToc: true,
       properties: {
@@ -664,7 +663,7 @@ export class MapHelper {
         metadata: true,
         opacity: true
       },
-      iconImagette: environment.url_services + '/' + carte.image_url,
+      iconImagette: environment.url_services + carte.image_url,
       descriptionSheetCapabilities: undefined!
     });
     this.addLayerToMap(layer!);
