@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, from, map, Observable } from 'rxjs';
 import { Couche, Thematique, ThematiqueInterface } from 'src/app/core/interfaces/thematique-interface';
-import { environment } from 'src/environments/environment';
 import { ApiService } from '../../api/api.service';
 
 @Injectable({
@@ -13,7 +12,7 @@ export class ThematiqueService {
   public thematiques: BehaviorSubject<ThematiqueInterface> = new BehaviorSubject<ThematiqueInterface>({} as ThematiqueInterface);
 
   getThematiques(): Observable<ThematiqueInterface> {
-    return from(this.apiService.getRequest('/api/thematiques/instance/' + environment.instance_id)).pipe(
+    return from(this.apiService.getRequest('/api/thematiques')).pipe(
       map((thematiques: ThematiqueInterface) => {
         this.thematiques.next(thematiques);
         return thematiques;

@@ -39,7 +39,21 @@
       "remove_all": "Supprimer"
     },
     "tools": {
-      "title": "Outils d'édition"
+      "title": "Outils d'édition",
+      "map_tools": {
+        "draw": {
+          "title": "Dessin"
+        },
+        "measure": {
+          "title": "Mesure"
+        },
+        "comments": {
+          "title": "Commentaires"
+        },
+        "print": {
+          "title": "Impression"
+        }
+      }
     },
     "routing": {
       "title": "Itinéraire"
@@ -50,5 +64,9 @@
     "download": {
       "title": "Télécharger"
     }
+  },
+  "left_menu": {
+    "maps_background": "Fonds de Cartes",
+    "themes": "Thématiques"
   }
 }

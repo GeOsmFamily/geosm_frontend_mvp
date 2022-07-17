@@ -15,15 +15,13 @@
   <div class="map-buttons">
     <div class="left-buttons-1">
       <div>
-        <button
-          mat-mini-fab
-          class="white"
+        <img
+          src="/assets/images/svg/toogle.svg"
+          class="toogle"
           matTooltip="{{ 'map_buttons.left_button.toogle_left_menu' | translate }}"
           (click)="toogleLeftSidenav()"
-        >
-          <fa-icon *ngIf="!this.sidenavContainer?.start?.opened" [icon]="faAngleDoubleRight" class="primary_bg"></fa-icon>
-          <fa-icon *ngIf="this.sidenavContainer?.start?.opened" [icon]="faAngleDouble" class="primary_bg"></fa-icon>
-        </button>
+          alt=""
+        />
       </div>
       <div>
         <button

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, from, map, Observable } from 'rxjs';
 import { Carte, GroupeCarteInterface, GroupesCarte } from 'src/app/core/interfaces/carte-interface';
 import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
-import { environment } from 'src/environments/environment';
 import { ApiService } from '../../api/api.service';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class CarteService {
   public groupecartes: BehaviorSubject<GroupeCarteInterface> = new BehaviorSubject<GroupeCarteInterface>({} as GroupeCarteInterface);
 
   getGroupeCarte(): Observable<GroupeCarteInterface> {
-    return from(this.apiService.getRequest('/api/groupecartes/instance/' + environment.instance_id)).pipe(
+    return from(this.apiService.getRequest('/api/groupecartes')).pipe(
       map((groupecartes: GroupeCarteInterface) => {
         this.groupecartes.next(groupecartes);
         return groupecartes;

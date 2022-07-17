@@ -1,0 +1,19 @@
+.accordion-map-tools {
+  ::ng-deep {
+    .mat-expansion-panel-body {
+      padding: 7px 0px !important;
+    }
+  }
+}
+
+.mat-expansion {
+  margin-bottom: 15px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.icon {
+  width: 17.5px;
+  height: 20.4px;
+  margin-right: 10px;
+}
