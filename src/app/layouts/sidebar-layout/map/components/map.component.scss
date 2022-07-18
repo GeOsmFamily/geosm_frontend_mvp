@@ -21,7 +21,7 @@
     left: 10px;
     width: 120px;
     bottom: 9px;
-    height: 20px;
+    height: 25px;
     z-index: 1;
     padding: 3px;
     text-align: center;
@@ -77,10 +77,19 @@
   }
 }
 
-.white-bg {
+.white_bg {
+  color: white;
+}
+
+.primary_bg {
+  color: #023f5f;
+}
+
+.white {
   background-color: white;
 }
 
-.primary-bg {
-  color: #023f5f;
+.toogle {
+  margin-left: -10px;
+  margin-top: 20px;
 }

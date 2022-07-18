@@ -8,3 +8,4 @@ export const selectConfig = createSelector(selectMapState, (state: fromMap.MapSt
 export const selectGroupecartes = createSelector(selectMapState, (state: fromMap.MapState) => state.project.groupecartes);
 export const selectThematiques = createSelector(selectMapState, (state: fromMap.MapState) => state.project.thematiques);
 export const selectPrincipalMap = createSelector(selectMapState, (state: fromMap.MapState) => state.project.principalMap);
+export const selectAllLayersInToc = createSelector(selectMapState, (state: fromMap.MapState) => state.layersintoc);

@@ -37,7 +37,7 @@ export class ConfigService {
   }
 
   getExtentOfProject(projection = false): [number, number, number, number] {
-    var feature;
+    let feature;
 
     let paramsFeature = {
       dataProjection: 'EPSG:4326',
@@ -51,7 +51,7 @@ export class ConfigService {
     }
 
     if (!feature) {
-      var features = new GeoJSON().readFeatures(this.config.value.roiGeojson, paramsFeature);
+      let features = new GeoJSON().readFeatures(this.config.value.roiGeojson, paramsFeature);
       if (features.length > 0) {
         feature = features[0];
       }

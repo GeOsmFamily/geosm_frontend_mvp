@@ -1,16 +1,8 @@
 import { Map, View, Feature } from 'ol';
-import {
-  boundingExtent,
-  getCenter,
-  equals as extentEquals,
-} from 'ol/extent.js';
+import { boundingExtent, getCenter, equals as extentEquals } from 'ol/extent.js';
 import TileLayer from 'ol/layer/Tile.js';
 import { Group as LayerGroup, Vector as VectorLayer } from 'ol/layer.js';
-import {
-  transform as Transform,
-  fromLonLat,
-  transformExtent,
-} from 'ol/proj.js';
+import { transform as Transform, fromLonLat, transformExtent } from 'ol/proj.js';
 import Projection from 'ol/proj/Projection';
 import { OSM } from 'ol/source.js';
 import ImageLayer from 'ol/layer/Image.js';
@@ -29,12 +21,7 @@ import Overlay from 'ol/Overlay.js';
 import { extend as Extent, createEmpty as createEmptyExtent } from 'ol/extent';
 import Zoom from 'ol/control/Zoom';
 import Rotate from 'ol/control/Rotate';
-import {
-  defaults as defaultControls,
-  Attribution,
-  ScaleLine,
-  MousePosition,
-} from 'ol/control.js';
+import { defaults as defaultControls, Attribution, ScaleLine, MousePosition } from 'ol/control.js';
 import { createStringXY } from 'ol/coordinate';
 import Point from 'ol/geom/Point';
 import Circle from 'ol/geom/Circle';
@@ -44,18 +31,13 @@ import MultiPolygon from 'ol/geom/MultiPolygon';
 import LineString from 'ol/geom/LineString';
 import MultiLineString from 'ol/geom/MultiLineString';
 import Geometry from 'ol/geom/Geometry';
-import {
-  defaults as defaultInteractions,
-  Modify,
-  Select,
-  Snap,
-  Draw,
-} from 'ol/interaction';
+import { defaults as defaultInteractions, Modify, Select, Snap, Draw } from 'ol/interaction';
 import { unByKey } from 'ol/Observable';
 import Collection from 'ol/Collection';
 import { singleClick, click } from 'ol/events/condition';
 import XYZ from 'ol/source/XYZ';
 import { getArea, getLength } from 'ol/sphere';
+import BaseLayer from 'ol/layer/Base';
 
 export {
   fromLonLat,
@@ -119,4 +101,5 @@ export {
   ScaleLine,
   MousePosition,
   createStringXY,
+  BaseLayer
 };
