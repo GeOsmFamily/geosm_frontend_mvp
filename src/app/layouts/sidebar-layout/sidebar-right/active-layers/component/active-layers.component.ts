@@ -10,7 +10,6 @@ import { ThematiqueService } from 'src/app/core/services/geosm/thematique/themat
 import { environment } from 'src/environments/environment';
 import { LayersInMap } from '../../../map/interfaces/layerinmap';
 import { editLayerZindex } from '../../../map/states/map.actions';
-import { MapState } from '../../../map/states/map.reducer';
 import { selectAllLayersInToc } from '../../../map/states/map.selector';
 import { Map } from '../../../../../core/modules/openlayers';
 
@@ -31,20 +30,20 @@ export class ActiveLayersComponent implements OnInit {
   faDelete = faTrash;
   environment;
 
-  constructor(private store: Store<MapState>, private thematiqueService: ThematiqueService, private carteService: CarteService) {
+  constructor(private store: Store, private thematiqueService: ThematiqueService, private carteService: CarteService) {
     this.layersInToc$ = this.store.select(selectAllLayersInToc);
     this.environment = environment;
   }
 
   ngOnInit(): void {
-    this.map?.getLayers().on('propertychange', ObjectEvent => {
+    this.map?.getLayers().on('propertychange', _ObjectEvent => {
       this.getAllLayersForToc();
     });
   }
 
   drop(event: CdkDragDrop<string[]>) {
     this.layersInToc$.subscribe(layersInToc => {
-      var layer = layersInToc[event.previousIndex];
+      let layer = layersInToc[event.previousIndex];
       this.store.dispatch(editLayerZindex({ layer: layer.layer, zindex: layersInToc[event.currentIndex].zIndex }));
       moveItemInArray(layersInToc, event.previousIndex, event.currentIndex);
     });
@@ -95,7 +94,7 @@ export class ActiveLayersComponent implements OnInit {
       if (allObservableOFLayers.length > 0) {
         this.layerChange = undefined!;
         this.layerChange = observerMerge(...allObservableOFLayers);
-        this.layerChange.pipe(debounceTime(1000)).subscribe(response => {
+        this.layerChange.pipe(debounceTime(1000)).subscribe(_response => {
           this.layersInToc.sort(compare);
         });
       }
