@@ -68,5 +68,16 @@
   "left_menu": {
     "maps_background": "Fonds de Cartes",
     "themes": "Thématiques"
+  },
+  "search": {
+    "title": "Rechercher",
+    "placeholder": "Rechercher un lieu ou une couche",
+    "no_results": "Aucun résultat"
+  },
+  "navbar": {
+    "discover": "Découvrir",
+    "about": "À propos",
+    "partners": "Partenaires",
+    "numbers": "Chiffres"
   }
 }

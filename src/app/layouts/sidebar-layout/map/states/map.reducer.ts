@@ -67,7 +67,7 @@ export const mapReducer = createReducer(
   initialState,
   on(initMap, state => ({ ...state, isLoading: true })),
   on(initMapSuccess, (state, { project }) => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
     mapHelper.initMapProject(project);
 
     return { ...state, project, isLoading: false };
@@ -77,27 +77,27 @@ export const mapReducer = createReducer(
   on(principalCarteSuccess, (state, { principalMap }) => ({ ...state, principalMap: principalMap, isLoading: false })),
   on(principalCarteFailure, (state, { message }) => ({ ...state, isLoading: false, config: { ...state.project, message } })),
   on(addPrincipalMap, (state, { principalMap }) => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
     mapHelper.addPrincipalMap(principalMap);
     return { ...state, principalMap: principalMap };
   }),
   on(removePrincipalMap, (state, { principalMap }) => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
     mapHelper.removePrincipalMap(principalMap);
     return { ...state, principalMap: principalMap };
   }),
   on(zoomPlus, state => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
     mapHelper.addMapZoomAnimation(mapHelper.map?.getView().getZoom()! + 1);
     return { ...state };
   }),
   on(zoomMinus, state => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
     mapHelper.addMapZoomAnimation(mapHelper.map?.getView().getZoom()! - 1);
     return { ...state };
   }),
   on(globalView, (state, { project }) => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
     mapHelper.map?.getView().fit(project.config.data.instance.bbox, {
       size: mapHelper.map.getSize(),
       duration: 1000
@@ -105,20 +105,20 @@ export const mapReducer = createReducer(
     return { ...state };
   }),
   on(zoomToPoint, (state, { point, zoom }) => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
 
     mapHelper.fit_view(point, zoom);
 
     return { ...state };
   }),
   on(allLayersInToc, state => {
-    var mapHelper = new MapHelper();
-    var layersinToc = mapHelper.getAllLayersInToc();
+    let mapHelper = new MapHelper();
+    let layersinToc = mapHelper.getAllLayersInToc();
     return { ...state, layersintoc: layersinToc };
   }),
 
   on(editLayerZindex, (state, { layer, zindex }) => {
-    var mapHelper = new MapHelper();
+    let mapHelper = new MapHelper();
     mapHelper.editZindexOfLayer(layer, zindex);
     return { ...state };
   })
