@@ -1,13 +1,18 @@
 <div class="navbar" fxLayout="row">
   <app-searchbar-layout class="searchbar"></app-searchbar-layout>
 
-  <a href="" style="margin-top: 20px; margin-left: 30px">
-    <img src="/assets/images/svg/geosm-logo.svg" alt="" />
-  </a>
 
-  <mat-divider style="margin-left: 20px" [vertical]="true"></mat-divider>
+    <a href="" style="margin-top: 20px; margin-left: 30px" class="logo">
+      <img src="/assets/images/svg/geosm-logo.svg" alt="" />
+    </a>
 
-  <div class="menu-list" *ngFor="let menu of menuItems">
-    <a [href]="menu.link"><img [src]="menu.image" [alt]="menu.label" />{{ "navbar." + menu.label | translate }}</a>
-  </div>
+    <mat-divider style="margin-left: 20px" [vertical]="true"></mat-divider>
+
+    <div class="menu-list text-center" *ngFor="let menu of menuItems" fxLayout="column" >
+      <a [href]="menu.link">
+        <img [src]="menu.image" [alt]="menu.label" style="float:left"/>
+        <span style="float:right;line-height:3">{{ "navbar." + menu.label | translate }}</span>
+      </a>
+    </div>
+
 </div>

@@ -41,3 +41,32 @@ img {
   margin-right: 10px;
   margin-top: -3px;
 }
+.icon-menu-mobile{
+  display: none;
+}
+
+@media (max-width: 728px) {
+
+  .header-search-form {
+    width: 100vw;
+    //margin: 0 auto;
+    box-shadow: unset;
+   // z-index: 2;
+   height: 30px;
+    border: unset;
+    border-radius: unset;
+    margin: unset;
+    background-color: unset;
+    text-align: center;
+
+
+
+  }
+.icon-menu-mobile{
+  display: block;
+}
+.icon-menu{
+  display: none;
+}
+
+  }

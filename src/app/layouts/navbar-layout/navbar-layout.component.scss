@@ -34,14 +34,30 @@
   background-color: #04aa6d;
 }
 
-@media screen and (max-width: 500px) {
-  .navbar a {
-    float: none;
-    display: block;
-  }
-}
 
 .searchbar {
   margin-left: 20px;
   margin-top: 5px;
+}
+
+@media (max-width: 728px) {
+ .menu-list{
+    display: none;
+  }
+  mat-divider{
+    display: none;
+  }
+  a{
+    display: none;
+  }
+  .navbar{
+    border:none;
+    background-color: unset;
+    height: unset;
+    padding: unset;
+    margin: unset;
+  }
+  .searchbar {
+    margin:unset;
+  }
 }
