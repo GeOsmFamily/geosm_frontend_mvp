@@ -41,9 +41,7 @@ img {
   margin-right: 10px;
   margin-top: -3px;
 }
-.icon-menu-mobile{
-  display: none;
-}
+
 
 @media (max-width: 728px) {
 
@@ -64,6 +62,7 @@ img {
   }
 .icon-menu-mobile{
   display: block;
+  margin-right: 20px;
 }
 .icon-menu{
   display: none;
