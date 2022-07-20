@@ -20,7 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MapToolsComponent } from './sidebar-layout/sidebar-right/map-tools/components/map-tools.component';
-import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/components/draw/component/draw.component';
+import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/components/draw/draw.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({

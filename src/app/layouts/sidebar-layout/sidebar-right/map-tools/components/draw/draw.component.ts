@@ -2,9 +2,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Draw, Feature, Map, unByKey, VectorSource } from 'src/app/core/modules/openlayers';
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { LayersTools } from '../../../tools/layers';
+import { LayersTools } from '../../tools/layers';
 import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
-import { DrawToolInterace, ModifyToolInterface, ModifyToolTypeInterface, PropertiesFeatureInterface } from '../../../interfaces/drawTool';
+import { DrawToolInterace, ModifyToolInterface, ModifyToolTypeInterface, PropertiesFeatureInterface } from '../../interfaces/drawTool';
 import { DrawEvent } from 'ol/interaction/Draw';
 import { DataHelper } from 'src/app/core/modules/dataHelper';
 import { environment } from 'src/environments/environment';
@@ -12,6 +12,8 @@ import { SelectEvent } from 'ol/interaction/Select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as jQuery from 'jquery';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+type NewType = 'Point' | 'LineString' | 'Polygon';
 
 @Component({
   selector: 'app-draw',
@@ -80,7 +82,7 @@ export class DrawComponent implements OnInit {
     mapHelper.addLayerToMap(this.vector);
   }
 
-  toogleAddDraw(type: 'Point' | 'LineString' | 'Polygon') {
+  toogleAddDraw(type: NewType) {
     this.desactivateAllModificationTool();
     if (this.drawTools[type].active) {
       this.desactivateAllAddTool();
