@@ -7,10 +7,21 @@ import { MenuItem } from './menu-item';
   styleUrls: ['./navbar-layout.component.scss']
 })
 export class NavbarLayoutComponent {
+
+  sidebarVisible = false;
+
   constructor() {
     // constructor
   }
 
+  openSidebar(): void {
+    this.sidebarVisible = true;
+    console.log(this.sidebarVisible)
+  }
+
+  closeSidebar(): void {
+    this.sidebarVisible = false;
+  }
   menuItems: MenuItem[] = [
     {
       link: '/',

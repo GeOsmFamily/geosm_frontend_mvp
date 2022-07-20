@@ -1,13 +1,35 @@
 <div class="navbar" fxLayout="row">
+  <img class="icon-menu-mobile"  src="assets/images/svg/icon-menu.svg" alt="" (click)=" openSidebar()"   />
+
   <app-searchbar-layout class="searchbar"></app-searchbar-layout>
 
-  <a href="" style="margin-top: 20px; margin-left: 30px">
-    <img src="/assets/images/svg/geosm-logo.svg" alt="" />
-  </a>
+    <div fxLayout="row" [ngClass]="{menu: sidebarVisible}" *ngIf="sidebarVisible || !sidebarVisible" class="text-center">
+      <div fxLayout="row" class="entete">
+      <div class="clear">
+        <img  src="/assets/images/svg/icon-clear.svg" alt="" style="width:24px" (click)="closeSidebar()"/>
+
+      </div>
+      <a href=""  class="logo">
+        <img src="/assets/images/svg/geosm-logo.svg" alt="" />
+      </a>
+    </div>
+      <ng-template [ngTemplateOutlet]="MsgRef" style="background-color:red"></ng-template>
+
+    </div>
+
+</div>
+
+<ng-template #MsgRef >
+
 
   <mat-divider style="margin-left: 20px" [vertical]="true"></mat-divider>
 
-  <div class="menu-list" *ngFor="let menu of menuItems">
-    <a [href]="menu.link"><img [src]="menu.image" [alt]="menu.label" />{{ "navbar." + menu.label | translate }}</a>
+
+  <div class="menu-list text-center" *ngFor="let menu of menuItems" fxLayout="column" >
+    <a [href]="menu.link">
+      <img [src]="menu.image" [alt]="menu.label" style="float:left" class="image"/>
+      <div class="text-center text" style="float:right;line-height:3">{{ "navbar." + menu.label | translate }}</div>
+    </a>
   </div>
-</div>
+
+</ng-template>
