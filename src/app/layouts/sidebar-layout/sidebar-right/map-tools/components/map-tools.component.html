@@ -1,13 +1,13 @@
 <mat-accordion class="accordion-map-tools">
   <mat-expansion-panel class="mat-expansion" *ngFor="let tool of mapTools" [expanded]="tool.expanded" (closed)="expansionClose(tool)">
-    <app-loading></app-loading>
+    <app-loading class="accordion-draw-loading"></app-loading>
     <mat-expansion-panel-header expandedHeight="40px" collapsedHeight="40px" style="padding-left: 15px" class="primary_transparent_bg">
       <mat-panel-title>
-        <fa-icon [icon]="tool.icon" class="icon primaryColorFill"></fa-icon>
+        <fa-icon [icon]="tool.icon" class="icon primaryColor"></fa-icon>
 
         <span class="primaryColor"> {{ "right_menu.tools.map_tools." + tool.type + ".title" | translate }} </span>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <app-draw *ngIf="tool.type==='draw'"></app-draw>
+    <app-draw [map]="map" *ngIf="tool.type==='draw'"></app-draw>
   </mat-expansion-panel>
 </mat-accordion>
