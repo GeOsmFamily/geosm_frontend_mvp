@@ -22,6 +22,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MapToolsComponent } from './sidebar-layout/sidebar-right/map-tools/components/map-tools.component';
 import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/components/draw/draw.component';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { MeasureComponent } from './sidebar-layout/sidebar-right/map-tools/components/measure/measure.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ColorPickerModule } from 'ngx-color-picker';
     RoutingComponent,
     LegendComponent,
     DownloadComponent,
-    DrawComponent
+    DrawComponent,
+    MeasureComponent
   ],
   imports: [
     CommonModule,

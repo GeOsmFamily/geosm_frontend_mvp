@@ -58,7 +58,9 @@
           "save": "Valider"
         },
         "measure": {
-          "title": "Mesure"
+          "title": "Mesure",
+          "toolpit_mesure_ligne": "Mesurer une distance",
+          "toolpit_mesure_polygon": "Mesurer une surface"
         },
         "comments": {
           "title": "Commentaires"
@@ -95,6 +97,9 @@
   },
   "tools": {
     "no_draw": "Aucun Dessin sur la carte",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "continue_polygon_msg": "Cliquer pour continuer le dessin du polygone",
+    "continue_line_msg": "Cliquer pour continuer le dessin de la ligne",
+    "help_msg": "Cliquer pour commencer le dessin"
   }
 }
