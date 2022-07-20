@@ -23,6 +23,7 @@ import { MapToolsComponent } from './sidebar-layout/sidebar-right/map-tools/comp
 import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/components/draw/draw.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MeasureComponent } from './sidebar-layout/sidebar-right/map-tools/components/measure/measure.component';
+import { PrintComponent } from './sidebar-layout/sidebar-right/map-tools/components/print/print.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MeasureComponent } from './sidebar-layout/sidebar-right/map-tools/compo
     LegendComponent,
     DownloadComponent,
     DrawComponent,
-    MeasureComponent
+    MeasureComponent,
+    PrintComponent
   ],
   imports: [
     CommonModule,
