@@ -1,3 +1,5 @@
+@import '../../../theme.scss';
+
 .navbar {
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
@@ -6,6 +8,143 @@
   position: relative;
   z-index: 1030;
   height: 80px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.menu-list {
+  background-color: white;
+  overflow: hidden;
+
+}
+
+.menu-list a {
+  float: left;
+  padding: 12px;
+  color: black;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+  text-transform: uppercase;
+  height: 80px;
+}
+
+.menu-list a:hover {
+  background-color: #1d917d;
+}
+
+.active {
+  background-color: #04aa6d;
+}
+
+
+.searchbar {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.icon-menu-mobile {
+  display: none;
+  margin-left: 10px;
+}
+
+.clear {
+  visibility: hidden;
+}
+
+.logo {
+  margin-top: 20px;
+  margin-left: 30px;
+}
+
+@media (max-width: 728px) {
+
+
+  .entete {
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: white !important;
+  }
+
+  .menu {
+    background-color: #1d917d !important;
+    position: absolute;
+    float: unset !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    width: 250px;
+    height: 100vh;
+    //justify-content: center;
+    //visibility: hidden;
+
+  }
+
+  .menu-list a:hover {
+    background-color: unset;
+
+  }
+
+  .menu-list {
+    // height: 100vh;
+    background-color: #1d917d !important;
+  }
+
+  .menu-list a {
+    width: 150px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-left: 30px;
+    background-color: white;
+    //color: white;
+    padding: 15px 25px;
+    height: 40px;
+
+  }
+
+  .logo {
+
+    margin-bottom: 40px;
+    position: relative !important;
+    left: 15% !important;
+
+  }
+
+  .icon-menu-mobile {
+    display: block;
+    cursor: pointer;
+  }
+
+  .clear {
+    cursor: pointer;
+    visibility: visible;
+    padding-left: 216px;
+    margin-top: 10px;
+  }
+
+  .navbar {
+    border: none;
+    background-color: unset;
+    height: 40px;
+    padding: unset;
+    margin: unset;
+  }
+
+  .searchbar {
+    margin: unset;
+  }
+
+  .menu-list {
+    flex-direction: row !important;
+    align-content: center;
+    width: 250px;
+    margin: 0 auto;
+    float: unset
+  }
+
+  a {
+    width: 250px;
+    display: flex;
+    align-items: center;
+  }
 
 }

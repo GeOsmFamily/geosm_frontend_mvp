@@ -39,7 +39,39 @@
       "remove_all": "Supprimer"
     },
     "tools": {
-      "title": "Outils d'édition"
+      "title": "Outils d'édition",
+      "map_tools": {
+        "draw": {
+          "title": "Dessin",
+          "toolpit_delete": "Supprimer le dessin",
+          "toolpit_edit": "Editer le dessin",
+          "toolpit_edit_color": "Modifier la couleur",
+          "toolpit_edit_delete": "Supprimer une entité",
+          "toolpit_edit_geometry": "Modifier la géométrie",
+          "toolpit_edit_text": "Modifier la description",
+          "toolpit_ligne": "Dessiner une ligne",
+          "toolpit_point": "Dessiner un point",
+          "toolpit_polygone": "Dessiner un polygone",
+          "toolpit_share": "Partager le dessin",
+          "toolpit_text": "Dessiner un texte",
+          "toolpit_comment": "Ajouter un commentaire",
+          "save": "Valider"
+        },
+        "measure": {
+          "title": "Mesure",
+          "toolpit_mesure_ligne": "Mesurer une distance",
+          "toolpit_mesure_polygon": "Mesurer une surface"
+        },
+        "comments": {
+          "title": "Commentaires"
+        },
+        "print": {
+          "title": "Impression",
+          "description_pdf": "Description",
+          "title_pdf": "Titre",
+          "toolpit_print": "Imprimer"
+        }
+      }
     },
     "routing": {
       "title": "Itinéraire"
@@ -50,5 +82,27 @@
     "download": {
       "title": "Télécharger"
     }
+  },
+  "left_menu": {
+    "maps_background": "Fonds de Cartes",
+    "themes": "Thématiques"
+  },
+  "search": {
+    "title": "Rechercher",
+    "placeholder": "Rechercher un lieu ou une couche",
+    "no_results": "Aucun résultat"
+  },
+  "navbar": {
+    "discover": "Découvrir",
+    "about": "À propos",
+    "partners": "Partenaires",
+    "numbers": "Chiffres"
+  },
+  "tools": {
+    "no_draw": "Aucun Dessin sur la carte",
+    "cancel": "Annuler",
+    "continue_polygon_msg": "Cliquer pour continuer le dessin du polygone",
+    "continue_line_msg": "Cliquer pour continuer le dessin de la ligne",
+    "help_msg": "Cliquer pour commencer le dessin"
   }
 }

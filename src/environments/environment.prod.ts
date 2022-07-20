@@ -3,5 +3,7 @@ export const environment = {
   url_services: '',
   apiKey: '',
   instance_id: 1,
-  primarycolor: '#023f5f'
+  primarycolor: '#023f5f',
+  nom: '',
+  url_frontend: ''
 };

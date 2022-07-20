@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, QueryList, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, QueryList } from '@angular/core';
 import { Map, View, LayerGroup, Point, Overlay } from 'src/app/core/modules/openlayers';
 import { MapHelper } from './../helpers/maphelper';
 import { MatDrawer, MatSidenavContainer } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { MapState } from '../states/map.reducer';
 import { selectAllLayersInToc, selectIsLoading, selectProject } from '../states/map.selector';
 import { addPrincipalMap, ALL_LAYERS_IN_TOC, globalView, INITMAP, zoomToPoint, ZOOM_MINUS, ZOOM_PLUS } from '../states/map.actions';
 import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
@@ -25,7 +24,6 @@ import {
   faRoute,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { HistoryMap } from '../interfaces/historymap';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,7 +33,7 @@ import * as jQuery from 'jquery';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LayersInMap } from '../interfaces/layerinmap';
 import { RightMenuInterface } from '../../sidebar-right/interfaces/rightMenuInterface';
-var view = new View({
+let view = new View({
   center: [0, 0],
   zoom: 0,
   minZoom: 4
@@ -88,12 +86,7 @@ export class MapComponent implements OnInit {
 
   @Input() ritghtMenus: Array<RightMenuInterface> | undefined;
 
-  constructor(
-    private store: Store<MapState>,
-    public dialog: MatDialog,
-    public translate: TranslateService,
-    private _snackBar: MatSnackBar
-  ) {
+  constructor(private store: Store, public dialog: MatDialog, public translate: TranslateService, private _snackBar: MatSnackBar) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
     this.layersInToc$ = this.store.select(selectAllLayersInToc);
@@ -120,14 +113,14 @@ export class MapComponent implements OnInit {
         this.isAltimetrie = true;
       }
 
-      var drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
+      let drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
       drawers.forEach(drawer => {
         drawer.openedChange.subscribe(() => {
           map.updateSize();
         });
       });
 
-      map.getLayers().on('propertychange', ObjectEvent => {
+      map.getLayers().on('propertychange', _ObjectEvent => {
         this.store.dispatch({ type: ALL_LAYERS_IN_TOC });
 
         this.layersInToc$.subscribe(layersInToc => {
@@ -153,7 +146,7 @@ export class MapComponent implements OnInit {
 
   tooglePrincipalMapLayer() {
     this.project$.subscribe(project => {
-      var principalMap = project.principalMap;
+      let principalMap = project.principalMap;
       if (principalMap) {
         this.store.dispatch(addPrincipalMap({ principalMap }));
       }
@@ -190,38 +183,38 @@ export class MapComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(modal_result => {
         if (modal_result.statut) {
-          var result = modal_result['data'];
+          let result = modal_result['data'];
           if (result.projection == 'WGS84') {
             this.project$.subscribe(project => {
-              var coord_wgs84 = Array();
+              let coord_wgs84 = Array();
               coord_wgs84[0] = parseFloat(result.longitude);
               coord_wgs84[1] = parseFloat(result.latitude);
-              var coord = transform([coord_wgs84[0], coord_wgs84[1]], 'EPSG:4326', 'EPSG:3857');
+              let coord = transform([coord_wgs84[0], coord_wgs84[1]], 'EPSG:4326', 'EPSG:3857');
 
-              var point_geojson = point(coord);
-              var bbox_cam = bboxPolygon(
+              let point_geojson = point(coord);
+              let bbox_cam = bboxPolygon(
                 // @ts-ignore
                 project.config.data.instance.bbox
               );
 
-              var bool = booleanContains(bbox_cam, point_geojson);
+              let bool = booleanContains(bbox_cam, point_geojson);
 
               if (bool) {
                 this.store.dispatch(zoomToPoint({ point: new Point(coord), zoom: 17 }));
 
                 jQuery('#setCoordOverlay').show();
-                var setCoordOverlay = new Overlay({
+                let setCoordOverlay = new Overlay({
                   position: coord,
                   element: document.getElementById('setCoordOverlay')!
                 });
 
                 map?.addOverlay(setCoordOverlay);
 
-                jQuery('#setCoordOverlay').on('mousemove', evt => {
+                jQuery('#setCoordOverlay').on('mousemove', _evt => {
                   jQuery('#setCoordOverlay fa-icon').show();
                 });
 
-                jQuery('#setCoordOverlay').on('mouseout', evt => {
+                jQuery('#setCoordOverlay').on('mouseout', _evt => {
                   jQuery('#setCoordOverlay fa-icon').hide();
                 });
               } else {
@@ -253,7 +246,7 @@ export class MapComponent implements OnInit {
   }
 
   openRightMenu(name: string) {
-    var menu = this.getRightMenu(name);
+    let menu = this.getRightMenu(name);
     if (menu?.active) {
       this.sidenavContainer?.end?.close();
       for (let index = 0; index < this.ritghtMenus!.length; index++) {
@@ -271,7 +264,7 @@ export class MapComponent implements OnInit {
   }
 
   countLayersInToc(): number {
-    var count = 0;
+    let count = 0;
     this.layersInToc$.subscribe(layersInToc => {
       count = layersInToc.length;
     });

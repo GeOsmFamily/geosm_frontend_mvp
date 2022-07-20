@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="60" viewBox="0 0 36 60">
+    <defs>
+        <filter id="s637yrnqqa" width="144.4%" height="126.7%" x="-22.2%" y="-11.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2.5"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+            <feMorphology in="SourceAlpha" radius="1" result="shadowSpreadOuter2"/>
+            <feOffset dy="3" in="shadowSpreadOuter2" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter3"/>
+            <feGaussianBlur in="shadowOffsetOuter3" result="shadowBlurOuter3" stdDeviation="1"/>
+            <feColorMatrix in="shadowBlurOuter3" result="shadowMatrixOuter3" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+                <feMergeNode in="shadowMatrixOuter3"/>
+            </feMerge>
+        </filter>
+        <path id="u66z5foekb" d="M0 0h26c5.523 0 10 4.477 10 10v40c0 5.523-4.477 10-10 10H0V0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-400 -100) translate(400 100)">
+                    <use fill="#000" filter="url(#s637yrnqqa)" xlink:href="#u66z5foekb"/>
+                    <use fill="#E5EBEF" xlink:href="#u66z5foekb"/>
+                </g>
+                <g fill="#013F5F">
+                    <path d="M11.196 0c.212 0 .417.09.567.247.151.156.237.37.237.59 0 .222-.086.436-.237.592L8.326 5l3.437 3.571c.151.156.237.37.237.591 0 .222-.086.435-.237.591-.15.158-.355.247-.567.247-.213 0-.418-.09-.568-.247L6.631 5.591c-.15-.156-.236-.37-.236-.591 0-.222.086-.435.236-.591L10.628.247c.15-.158.355-.247.568-.247zM4.8 0c.213 0 .418.09.568.247.15.156.236.37.236.59 0 .222-.086.436-.236.592L1.93 5 5.37 8.571c.15.156.236.37.236.591 0 .222-.086.435-.236.591-.15.158-.355.247-.568.247-.213 0-.418-.09-.568-.247L.237 5.591C.086 5.435 0 5.221 0 5c0-.222.086-.435.237-.591L4.233.247C4.383.089 4.588 0 4.801 0z" transform="translate(-400 -100) translate(400 100) translate(12 25) matrix(-1 0 0 1 12 0)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

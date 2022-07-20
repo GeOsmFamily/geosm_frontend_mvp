@@ -12,14 +12,18 @@ import { SecondaryPageComponent } from './sidebar-layout/sidebar-left/secondary-
 import { MapModule } from './sidebar-layout/map/map.module';
 import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/searchbar-layout.component';
 import { SharedModule } from '../shared/shared.module';
-import { MapToolsComponent } from './sidebar-layout/sidebar-right/map-tools/map-tools.component';
 import { RoutingComponent } from './sidebar-layout/sidebar-right/routing/routing.component';
 import { LegendComponent } from './sidebar-layout/sidebar-right/legend/legend.component';
 import { DownloadComponent } from './sidebar-layout/sidebar-right/download/download.component';
 import { ActiveLayersComponent } from './sidebar-layout/sidebar-right/active-layers/component/active-layers.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MapToolsComponent } from './sidebar-layout/sidebar-right/map-tools/components/map-tools.component';
+import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/components/draw/draw.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { MeasureComponent } from './sidebar-layout/sidebar-right/map-tools/components/measure/measure.component';
+import { PrintComponent } from './sidebar-layout/sidebar-right/map-tools/components/print/print.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MapToolsComponent,
     RoutingComponent,
     LegendComponent,
-    DownloadComponent
+    DownloadComponent,
+    DrawComponent,
+    MeasureComponent,
+    PrintComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +52,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     TranslateModule,
     FontAwesomeModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ColorPickerModule
   ]
 })
 export class LayoutsModule {}

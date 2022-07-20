@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-primary-page',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./primary-page.component.scss']
 })
 export class PrimaryPageComponent {
-  constructor() {}
+  faLayer = faLayerGroup;
+  constructor() {
+    /* TODO document why this constructor is empty */
+  }
 }
