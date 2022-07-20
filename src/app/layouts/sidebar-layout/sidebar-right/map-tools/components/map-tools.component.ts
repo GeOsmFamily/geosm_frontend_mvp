@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Map } from 'src/app/core/modules/openlayers';
+import { Component, Input } from '@angular/core';
 import { faComment, faDrawPolygon, faPrint, faRulerHorizontal } from '@fortawesome/free-solid-svg-icons';
 import { MapTools } from '../interfaces/tools';
 
@@ -8,6 +9,8 @@ import { MapTools } from '../interfaces/tools';
   styleUrls: ['./map-tools.component.scss']
 })
 export class MapToolsComponent {
+  @Input() map: Map | undefined;
+
   mapTools: MapTools[] = [
     {
       title: 'Draw',
@@ -35,7 +38,9 @@ export class MapToolsComponent {
     }
   ];
 
-  constructor() {}
+  constructor() {
+    /* TODO document why this constructor is empty */
+  }
 
   expansionClose(tool: MapTools) {}
 }

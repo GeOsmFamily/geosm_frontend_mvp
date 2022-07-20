@@ -17,10 +17,11 @@ import { LegendComponent } from './sidebar-layout/sidebar-right/legend/legend.co
 import { DownloadComponent } from './sidebar-layout/sidebar-right/download/download.component';
 import { ActiveLayersComponent } from './sidebar-layout/sidebar-right/active-layers/component/active-layers.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MapToolsComponent } from './sidebar-layout/sidebar-right/map-tools/components/map-tools.component';
-import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/components/draw/draw.component';
+import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/components/draw/component/draw.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,10 @@ import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/componen
     TranslateModule,
     FontAwesomeModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ColorPickerModule
   ]
 })
 export class LayoutsModule {}
