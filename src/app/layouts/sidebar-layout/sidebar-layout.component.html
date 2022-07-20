@@ -16,7 +16,7 @@
       <app-active-layers [map]="map" [hidden]="!getRightMenu('toc')?.active"></app-active-layers>
       <app-map-tools [map]="map" [hidden]="!getRightMenu('edition')?.active"></app-map-tools>
       <app-legend [hidden]="!getRightMenu('legend')?.active"></app-legend>
-      <app-routing [hidden]="!getRightMenu('routing')?.active"></app-routing>
+      <app-routing [map]="map" [hidden]="!getRightMenu('routing')?.active"></app-routing>
       <app-download [hidden]="!getRightMenu('download')?.active"></app-download>
     </div>
   </mat-sidenav>

@@ -74,7 +74,13 @@
       }
     },
     "routing": {
-      "title": "Itinéraire"
+      "clear": "Effacer",
+      "destination": "Destination",
+      "infos_1": "Cliquer sur l'icone ",
+      "infos_2": " pour positioner sur la carte",
+      "start": "Départ",
+      "title": "Calcul d'itinéraire",
+      "passage": "Point de Passage Obligatoire ?"
     },
     "legend": {
       "title": "Légende"
@@ -104,5 +110,9 @@
     "continue_polygon_msg": "Cliquer pour continuer le dessin du polygone",
     "continue_line_msg": "Cliquer pour continuer le dessin de la ligne",
     "help_msg": "Cliquer pour commencer le dessin"
+  },
+  "notifications": {
+    "click_on_map_itineraire": "Cliquer sur la carte pour définir votre itinéraire",
+    "cancel": "Annuler"
   }
 }

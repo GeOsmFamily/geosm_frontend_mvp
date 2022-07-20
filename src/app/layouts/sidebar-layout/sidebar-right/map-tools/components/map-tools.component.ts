@@ -42,5 +42,5 @@ export class MapToolsComponent {
     /* TODO document why this constructor is empty */
   }
 
-  expansionClose(tool: MapTools) {}
+  expansionClose(_tool: MapTools) { /* TODO document why this method 'expansionClose' is empty */ }
 }
