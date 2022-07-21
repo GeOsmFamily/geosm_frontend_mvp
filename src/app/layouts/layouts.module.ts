@@ -24,6 +24,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { MeasureComponent } from './sidebar-layout/sidebar-right/map-tools/components/measure/measure.component';
 import { PrintComponent } from './sidebar-layout/sidebar-right/map-tools/components/print/print.component';
 import { RoutingComponent } from './sidebar-layout/sidebar-right/routing/component/routing.component';
+import { CommentComponent } from './sidebar-layout/sidebar-right/map-tools/components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { RoutingComponent } from './sidebar-layout/sidebar-right/routing/compone
     DownloadComponent,
     DrawComponent,
     MeasureComponent,
-    PrintComponent
+    PrintComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,

@@ -63,7 +63,8 @@
           "toolpit_mesure_polygon": "Mesurer une surface"
         },
         "comments": {
-          "title": "Commentaires"
+          "title": "Commentaires",
+          "show_comments": "Afficher les commentaires"
         },
         "print": {
           "title": "Impression",
