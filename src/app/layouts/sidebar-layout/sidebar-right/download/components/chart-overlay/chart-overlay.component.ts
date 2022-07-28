@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { faFileDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import {
   Chart,

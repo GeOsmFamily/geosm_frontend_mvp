@@ -23,7 +23,6 @@ import { ComponentHelper } from 'src/app/core/modules/componentHelper';
 import { ChartOverlayComponent } from './components/chart-overlay/chart-overlay.component';
 import { DownloadService } from './service/download.service';
 import { QgisInterface } from './interfaces/qgis';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-download',
@@ -391,7 +390,7 @@ export class DownloadComponent extends SelectLayersForDownload implements OnInit
       return 'rgb(' + r + ',' + g + ',' + b + ')';
     };
     let coloR = Array();
-    for (let i in numbers) {
+    for (let _i in numbers) {
       coloR.push(dynamicColors());
     }
 
@@ -437,9 +436,8 @@ export class DownloadComponent extends SelectLayersForDownload implements OnInit
           }
         },
 
-        onClick: (event: { target: { id: any } }) => {
-          console.log(event);
-          let name_analyse = event.target.id;
+        onClick: (_event: { target: { id: any } }) => {
+          // console.log(_event.target.id);
         }
       }
     };

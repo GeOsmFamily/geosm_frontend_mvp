@@ -1,12 +1,9 @@
-import { selectProject } from './../../../map/states/map.selector';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/internal/operators/filter';
 import { map } from 'rxjs/internal/operators/map';
 import { startWith } from 'rxjs/internal/operators/startWith';
-import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
 import { ThematiqueService } from 'src/app/core/services/geosm/thematique/thematique.service';
 import { MapHelper } from '../../../map/helpers/maphelper';
 import { LayersInMap } from '../../../map/interfaces/layerinmap';
