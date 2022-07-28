@@ -87,7 +87,18 @@
       "title": "Légende"
     },
     "download": {
-      "title": "Télécharger"
+      "title": "Télécharger",
+      "download_data": "Télécharger les données",
+      "download_image": "Télécharger les statistiques",
+      "download_layer": "Télécharger la couche",
+      "features": "Features",
+      "description": "Extraire des données spécifiques selon une emprise",
+      "data_in": "Données D'entrées",
+      "choose_layer": "Choisir une couche",
+      "choose_emprise": "Choisir une emprise",
+      "downloadCompleteDataTooltip": "Télécharger les données completes (sans intersection géographiques)",
+      "downloadCompleteData": "Export total des couches",
+      "calculate": "Calculer"
     }
   },
   "left_menu": {
@@ -115,5 +126,9 @@
   "notifications": {
     "click_on_map_itineraire": "Cliquer sur la carte pour définir votre itinéraire",
     "cancel": "Annuler"
+  },
+  "geosm": {
+    "text": "GeOsm utilise les données",
+    "text1": ""
   }
 }

@@ -1,0 +1,34 @@
+<h1 mat-dialog-title class="primaryColorBG white" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+  <em class="fa fa-download white icon_header" aria-hidden="true"></em>
+  <em class="fa fa-times-circle close" (click)="closeModal()"></em>
+  {{ 'right_menu.download.download_layer' | translate }}
+</h1>
+
+<mat-dialog-content>
+  <mat-card *ngFor="let layer of listLayers" style="margin-bottom: 15px">
+    <mat-card-header>
+      <img mat-card-avatar [src]="environment.url_services+layer.layer.logo" alt="" />
+      <mat-card-title>{{layer.nom}}</mat-card-title>
+      <mat-card-subtitle>{{layer.groupThematique.nom}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-chip-list>
+        <mat-chip> {{layer.number}} {{ 'right_menu.download.features' | translate }} </mat-chip>
+        <mat-chip class="accentColorBG white"> {{layer.empriseName}} </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+    <mat-card-actions style="text-align: right">
+      <a [href]="layer.url_gpkg" target="_blanck">
+        <button mat-flat-button class="primaryColor" style="background: rgb(0 0 0 / 0.03)">
+          {{ 'right_menu.download.title' | translate }}
+        </button>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <img src="assets/images/svg/osm.svg" width="25px" alt="" style="vertical-align: middle" />
+  {{ 'geosm.text' | translate }}
+  <a href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer"> {{ 'geosm.text1' | translate }} OpenStreetMap </a>
+</mat-dialog-actions>

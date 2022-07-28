@@ -25,6 +25,8 @@ import { MeasureComponent } from './sidebar-layout/sidebar-right/map-tools/compo
 import { PrintComponent } from './sidebar-layout/sidebar-right/map-tools/components/print/print.component';
 import { RoutingComponent } from './sidebar-layout/sidebar-right/routing/component/routing.component';
 import { CommentComponent } from './sidebar-layout/sidebar-right/map-tools/components/comment/comment.component';
+import { ListDownloadLayersComponent } from './sidebar-layout/sidebar-right/download/components/list-download-layers/list-download-layers.component';
+import { ChartOverlayComponent } from './sidebar-layout/sidebar-right/download/components/chart-overlay/chart-overlay.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { CommentComponent } from './sidebar-layout/sidebar-right/map-tools/compo
     DrawComponent,
     MeasureComponent,
     PrintComponent,
-    CommentComponent
+    CommentComponent,
+    ListDownloadLayersComponent,
+    ChartOverlayComponent
   ],
   imports: [
     CommonModule,

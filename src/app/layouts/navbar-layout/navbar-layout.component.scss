@@ -14,7 +14,6 @@
 .menu-list {
   background-color: white;
   overflow: hidden;
-
 }
 
 .menu-list a {
@@ -36,7 +35,6 @@
   background-color: #04aa6d;
 }
 
-
 .searchbar {
   margin-left: 20px;
   margin-top: 5px;
@@ -52,13 +50,10 @@
 }
 
 .logo {
-  margin-top: 20px;
-  margin-left: 30px;
+  margin-top: 15px;
 }
 
 @media (max-width: 728px) {
-
-
   .entete {
     display: flex !important;
     flex-direction: column !important;
@@ -76,12 +71,10 @@
     height: 100vh;
     //justify-content: center;
     //visibility: hidden;
-
   }
 
   .menu-list a:hover {
     background-color: unset;
-
   }
 
   .menu-list {
@@ -98,15 +91,12 @@
     //color: white;
     padding: 15px 25px;
     height: 40px;
-
   }
 
   .logo {
-
     margin-bottom: 40px;
     position: relative !important;
     left: 15% !important;
-
   }
 
   .icon-menu-mobile {
@@ -138,7 +128,7 @@
     align-content: center;
     width: 250px;
     margin: 0 auto;
-    float: unset
+    float: unset;
   }
 
   a {
@@ -146,5 +136,4 @@
     display: flex;
     align-items: center;
   }
-
 }
