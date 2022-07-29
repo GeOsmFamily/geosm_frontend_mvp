@@ -1,28 +1,32 @@
+import {
+  SearchLayerToDownloadModelInterface,
+  ResponseOfSerachLimitInterface,
+  DownloadDataModelInterface
+} from './../../interfaces/download';
+import { selectProject } from './../../../../map/states/map.selector';
+import { SelectLayersForDownload } from './../../tools/download-select-layers';
+import { LimitesInterface } from './../../interfaces/limite';
+import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
+import { ListDownloadLayersComponent } from './../list-download-layers/list-download-layers.component';
+import { ChartOverlayComponent } from './../chart-overlay/chart-overlay.component';
+import { DownloadService } from './../../service/download.service';
+import { QgisInterface } from './../../interfaces/qgis';
 import { Feature, Fill, GeoJSON, getCenter, Overlay, Stroke, Style, VectorLayer, VectorSource } from 'src/app/core/modules/openlayers';
-import { selectProject } from './../../map/states/map.selector';
 import { Component, ElementRef, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { debounceTime, filter, from, map, Observable, startWith, tap } from 'rxjs';
 import { ProjectInterface } from 'src/app/core/interfaces/project-interface';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { SelectLayersForDownload } from './tools/download-select-layers';
 import { ThematiqueService } from 'src/app/core/services/geosm/thematique/thematique.service';
-import { DownloadDataModelInterface, ResponseOfSerachLimitInterface, SearchLayerToDownloadModelInterface } from './interfaces/download';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/core/services/api/api.service';
-import { LimitesInterface } from './interfaces/limite';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { MapHelper } from '../../map/helpers/maphelper';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { DataHelper } from 'src/app/core/modules/dataHelper';
 import OverlayPositioning from 'ol/OverlayPositioning';
 import { MatDialog } from '@angular/material/dialog';
-import { ListDownloadLayersComponent } from './components/list-download-layers/list-download-layers.component';
 import { ComponentHelper } from 'src/app/core/modules/componentHelper';
-import { ChartOverlayComponent } from './components/chart-overlay/chart-overlay.component';
-import { DownloadService } from './service/download.service';
-import { QgisInterface } from './interfaces/qgis';
 
 @Component({
   selector: 'app-download',

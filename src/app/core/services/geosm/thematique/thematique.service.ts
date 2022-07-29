@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, from, map, Observable } from 'rxjs';
-import { Couche, Thematique, ThematiqueInterface } from 'src/app/core/interfaces/thematique-interface';
+import { Thematique, ThematiqueInterface } from 'src/app/core/interfaces/thematique-interface';
+import { Couche } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/couche';
 import { ApiService } from '../../api/api.service';
 
 @Injectable({

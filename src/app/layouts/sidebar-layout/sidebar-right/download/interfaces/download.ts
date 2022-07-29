@@ -1,4 +1,5 @@
-import { Couche, Thematique } from 'src/app/core/interfaces/thematique-interface';
+import { Thematique } from 'src/app/core/interfaces/thematique-interface';
+import { Couche } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/couche';
 
 export interface DownloadModelInterface {
   layers: Array<Couche>;

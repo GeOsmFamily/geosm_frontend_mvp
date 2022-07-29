@@ -41,7 +41,7 @@ import { ActiveLayersInterface } from '../interfaces/activelayers';
 import { bboxPolygon, intersect, toWgs84 } from '@turf/turf';
 import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
 
-const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing'];
+const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing', 'searchResultLayer'];
 
 @Injectable()
 export class MapHelper {

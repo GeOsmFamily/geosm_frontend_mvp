@@ -130,5 +130,9 @@
   "geosm": {
     "text": "GeOsm utilise les données",
     "text1": ""
+  },
+  "layers": {
+    "already_added": "Cette couche a déjà été ajoutée",
+    "cancel": "Annuler"
   }
 }

@@ -1,0 +1,44 @@
+<form class="header-search-form col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <img class="icon-menu" src="assets/images/svg/icon-search.svg" alt="" />
+
+  <input
+    type="text"
+    [(ngModel)]="result"
+    name="name"
+    cdkOverlayOrigin
+    (keyup)="search(getValue($event))"
+    #trigger="cdkOverlayOrigin"
+    autocomplete="off"
+    [placeholder]="'search.placeholder'|translate"
+  />
+
+  <img *ngIf="result" (click)="onClear()" class="icon-clear" src="assets/images/svg/icon-clear.svg" alt="" />
+
+  <img class="icon-person" src="assets/images/svg/icon-perm_identity.svg" alt="" />
+
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="showResults"
+    [cdkConnectedOverlayPanelClass]="getConnectedOverlayPanelClasses()"
+    [cdkConnectedOverlayWidth]="getOverlayWidth()"
+    [cdkConnectedOverlayOffsetY]="getOverlayOffset()"
+  >
+    <div class="search-result">
+      <ng-content *ngIf="(isLoading$ | async)=== false; else spinner"></ng-content>
+
+      <ng-template #spinner>
+        <app-loading> </app-loading>
+      </ng-template>
+      <div *ngFor="let result of results$ | async; let i = index;" (click)="onSelect(result)" data-test-id="place">
+        <div fxLayout="row" class="row flex-nowrap">
+          <div class="col image"><img src="{{result.logo_src}}" alt="Logo" /></div>
+          <div class="col text">
+            <span class="item_name">{{result.name}}</span><br />
+            <span class="item_categorie">{{result.details}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</form>
