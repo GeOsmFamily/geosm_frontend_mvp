@@ -31,4 +31,3 @@ export const zoomMinus = createAction(ZOOM_MINUS);
 export const globalView = createAction(GLOBAL_VIEW, props<{ project: ProjectInterface }>());
 export const zoomToPoint = createAction(ZOOM_TO_POINT, props<{ point: Point; zoom: number }>());
 export const allLayersInToc = createAction(ALL_LAYERS_IN_TOC);
-export const editLayerZindex = createAction(EDIT_LAYER_ZINDEX, props<{ layer: BaseLayer; zindex: number }>());

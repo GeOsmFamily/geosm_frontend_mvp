@@ -1,5 +1,5 @@
 <div cdkDropList style="padding-bottom: 20px" (cdkDropListDropped)="drop($event)">
-  <div *ngFor="let layer of layersInToc$ | async; " cdkDrag cdkDragLockAxis="y">
+  <div *ngFor="let layer of layersInToc; " cdkDrag cdkDragLockAxis="y">
     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
     <mat-card class="table-of-contents-card">
       <mat-chip-list style="position: absolute; top: -10px; left: 5px" *ngIf="layer.badge">
