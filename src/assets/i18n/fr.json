@@ -134,5 +134,27 @@
   "layers": {
     "already_added": "Cette couche a déjà été ajoutée",
     "cancel": "Annuler"
+  },
+  "metadata": {
+    "area": "m² de surface totale",
+    "conditions_of_use": "Condition d'utilisation :",
+    "coordinates_system": "Système de coordonnées : ",
+    "coucverture": "Couverture : ",
+    "creation_date": "Date de créaton : ",
+    "description": "Description",
+    "description_couche": "Description :",
+    "key_osm": "Eléments cartographiques OSM :",
+    "key_words": "Mots-clés : ",
+    "language": "Langue : ",
+    "lenght": "m de longueur totale",
+    "number_entite": " entité(s)",
+    "properties": "Propriétes",
+    "ressources": "Ressources",
+    "resume": "Résumé :",
+    "scale": "Echelle : ",
+    "shareholders": "Partenaires / producteurs : ",
+    "text_no_metadata": "Le résumé de cette donnée n'est pas encore disponible",
+    "title": "Fiche descriptive :",
+    "update_date": "Mise à jour: "
   }
 }

@@ -23,6 +23,33 @@ export interface SousThematique {
   thematique: Thematique[];
 }
 
+export interface Metadatas {
+  id: number;
+  carte_id?: any;
+  couche_id: number;
+  resume: string;
+  description: string;
+  zone: string;
+  epsg: string;
+  langue: string;
+  echelle: string;
+  licence: string;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at?: any;
+}
+
+export interface Tag {
+  id: number;
+  couche_id: number;
+  key: string;
+  value: string;
+  operateur: string;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at?: any;
+}
+
 export interface Couche {
   id: number;
   sous_thematique_id: number;
@@ -53,6 +80,8 @@ export interface Couche {
   updated_at: Date;
   deleted_at?: any;
   sousThematique: SousThematique[];
+  metadatas: Metadatas;
+  tags: Tag[];
   check: boolean;
 }
 

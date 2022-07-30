@@ -11,6 +11,12 @@ import { environment } from 'src/environments/environment';
 import { LayersInMap } from '../../../map/interfaces/layerinmap';
 import { Map } from '../../../../../core/modules/openlayers';
 import { MapHelper } from '../../../map/helpers/maphelper';
+import { ShareService } from 'src/app/core/services/geosm/share.service';
+import { ComponentHelper } from 'src/app/core/modules/componentHelper';
+import { Carte } from 'src/app/core/interfaces/carte-interface';
+import { Couche, Metadatas } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/couche';
+import { MatDialog } from '@angular/material/dialog';
+import { MetadataModalComponent } from './metadata-modal/metadata-modal.component';
 
 @Component({
   selector: 'app-active-layers',
@@ -28,7 +34,13 @@ export class ActiveLayersComponent implements OnInit {
   faDelete = faTrash;
   environment;
 
-  constructor(private store: Store, private thematiqueService: ThematiqueService, private carteService: CarteService) {
+  constructor(
+    private shareService: ShareService,
+    private thematiqueService: ThematiqueService,
+    private carteService: CarteService,
+    private componentHelper: ComponentHelper,
+    public dialog: MatDialog
+  ) {
     this.environment = environment;
   }
 
@@ -104,5 +116,126 @@ export class ActiveLayersComponent implements OnInit {
 
   setVisibleOfLayer(event: MatCheckboxChange, layer: LayersInMap) {
     layer.layer.setVisible(event.checked);
+  }
+
+  shareAllLayersInToc() {
+    let pteToGetParams = Array();
+    for (let index = 0; index < this.layersInToc.length; index++) {
+      const layer = this.layersInToc[index];
+      if (layer.activeLayers.share) {
+        pteToGetParams.push({
+          typeLayer: layer.properties!['type'],
+          id_layer: layer.properties!['couche_id'],
+          group_id: layer.properties!['group_id']
+        });
+      }
+    }
+    let params = this.shareService.shareLayers(pteToGetParams);
+    let url_share = environment.url_frontend + '?' + params;
+    this.componentHelper.openSocialShare(url_share, 7);
+  }
+
+  clearMap() {
+    let mapHelper = new MapHelper();
+
+    let reponseLayers: Array<LayersInMap> = mapHelper.getAllLayersInToc();
+    for (let index = 0; index < reponseLayers.length; index++) {
+      const layer = reponseLayers[index];
+      if (layer['properties']!['type'] == 'carte') {
+        let carte = this.carteService.getCarteFromIdAndGroupeCarteId(layer['properties']!['couche_id'], layer['properties']!['group_id']);
+        if (!carte!.principal) {
+          this.removeLayer(layer);
+        }
+      } else if (layer.nom == 'Mapillary') {
+        this.removeLayer(layer);
+      } else {
+        this.removeLayer(layer);
+      }
+    }
+  }
+
+  removeLayer(layer: LayersInMap) {
+    if (layer.type_layer == 'geosmCatalogue') {
+      this.removeLayerCatalogue(layer);
+    } else {
+      let mapHelper = new MapHelper();
+      mapHelper.removeLayerToMap(layer.layer);
+    }
+  }
+
+  removeLayerCatalogue(layer: LayersInMap) {
+    let mapHelper = new MapHelper();
+    if (layer['properties']!['type'] == 'carte') {
+      let carte: Carte = this.carteService.getCarteFromIdAndGroupeCarteId(layer.properties!['couche_id'], layer.properties!['group_id'])!;
+      if (carte) {
+        carte.check = false;
+      }
+    } else if (layer['properties']!['type'] == 'couche') {
+      let couche: Couche = this.thematiqueService.getCoucheFromId(layer.properties!['couche_id'])!;
+      if (couche) {
+        couche.check = false;
+      }
+    }
+
+    mapHelper.removeLayerToMap(layer.layer);
+  }
+
+  shareLayer(layer: LayersInMap) {
+    let params = this.shareService.shareLayer(layer.properties!['type'], layer.properties!['couche_id'], layer.properties!['group_id']);
+    let url_share = environment.url_frontend + '?' + params;
+    this.componentHelper.openSocialShare(url_share, 7);
+  }
+
+  openMetadata(layer: LayersInMap) {
+    let metadata: Metadatas;
+    let wms_type;
+    let carte: Carte;
+    let couche: Couche;
+    if (layer['properties']!['type'] == 'carte') {
+      carte = this.carteService.getCarteFromIdAndGroupeCarteId(layer.properties!['couche_id'], layer.properties!['group_id'])!;
+      metadata = carte!.metadatas;
+    } else if (layer['properties']!['type'] == 'couche') {
+      couche = this.thematiqueService.getCoucheFromIdCoucheAndThematiqueId(layer.properties!['couche_id'], layer.properties!['group_id'])!;
+      metadata = couche!.metadatas;
+      wms_type = couche!.wms_type;
+    }
+
+    if (this.displayMetadataLink(metadata!) || wms_type == 'osm') {
+      const MetaData = this.dialog.open(MetadataModalComponent, {
+        minWidth: '350px',
+        data: {
+          exist: true,
+          metadata: metadata!,
+          layer: couche!,
+          nom: carte! ? carte.nom : couche!.nom,
+          url_prefix: environment.url_services,
+          data: carte! ? carte : couche!
+        }
+      });
+
+      MetaData.afterClosed().subscribe(result => {
+        // Result
+      });
+    } else {
+      this.dialog.open(MetadataModalComponent, {
+        minWidth: '350px',
+        data: {
+          exist: false,
+          metadata: metadata!,
+          layer: couche!,
+          nom: carte! ? carte.nom : couche!.nom,
+          url_prefix: environment.url_services,
+          data: carte! ? carte : couche!
+        }
+      });
+    }
+  }
+
+  displayMetadataLink(metadata: Metadatas) {
+    if (Array.isArray(metadata)) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

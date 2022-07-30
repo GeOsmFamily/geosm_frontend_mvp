@@ -27,6 +27,7 @@ import { ListDownloadLayersComponent } from './sidebar-layout/sidebar-right/down
 import { ChartOverlayComponent } from './sidebar-layout/sidebar-right/download/components/chart-overlay/chart-overlay.component';
 import { DownloadComponent } from './sidebar-layout/sidebar-right/download/components/download/download.component';
 import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/component/searchbar-layout.component';
+import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-layers/component/metadata-modal/metadata-modal.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/compo
     ListDownloadLayersComponent,
     ChartOverlayComponent,
     SearchbarLayoutComponent,
-    DownloadComponent
+    DownloadComponent,
+    MetadataModalComponent
   ],
   imports: [
     CommonModule,
