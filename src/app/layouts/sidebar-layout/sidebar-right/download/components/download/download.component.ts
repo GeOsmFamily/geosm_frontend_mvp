@@ -329,7 +329,7 @@ export class DownloadComponent extends SelectLayersForDownload implements OnInit
         const layer = this.downloadModel.layers[index];
 
         let url_gpkg =
-          environment.url_qgis +
+          environment.url_carto +
           '/var/www/html/src/qgis/' +
           this.project?.config.data.instance.nom +
           '/gpkg/' +

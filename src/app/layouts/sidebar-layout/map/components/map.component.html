@@ -62,13 +62,25 @@
 
     <div class="left-buttons-2">
       <div *ngIf="isMapillary">
-        <button class="white" mat-mini-fab matTooltip="{{ 'map_buttons.left_button.mapillary_view' | translate }}">
+        <button
+          class="white"
+          mat-mini-fab
+          matTooltip="{{ 'map_buttons.left_button.mapillary_view' | translate }}"
+          (click)="toogleMapillary()"
+          [ngClass]="{'accentColorBG':modeMapillary}"
+        >
           <img src="assets/images/png/mappilary.png" style="margin-top: -5px; height: 30px" alt="" />
         </button>
       </div>
 
       <div *ngIf="isComparator">
-        <button mat-mini-fab class="white" matTooltip="{{ 'map_buttons.left_button.comparator' | translate }}">
+        <button
+          mat-mini-fab
+          class="white"
+          matTooltip="{{ 'map_buttons.left_button.comparator' | translate }}"
+          (click)="toogleCompare()"
+          [ngClass]="{'accentColorBG':modeCompare}"
+        >
           <img src="assets/images/svg/compare.svg" style="margin-bottom: 2px; height: 23px" alt="" />
         </button>
       </div>
@@ -183,5 +195,32 @@
   <div id="popup" class="ol-popup">
     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
     <div id="popup-content"></div>
+  </div>
+
+  <input
+    id="swipe"
+    type="range"
+    style="background: transparent; width: 100%; z-index: 9999999999999999999999; position: absolute; top: 45%; display: none"
+  />
+
+  <div id="mly"></div>
+  <div id="mapi"></div>
+
+  <div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+  </div>
+
+  <div id="popup_mapillary" class="back_white popup">
+    <div class="popover top" style="border-radius: 15px; display: block; top: -140px; left: -100px; text-align: center; padding: 6px">
+      <div class="arrow" style="left: 57%"></div>
+      <div class="popover-content" style="padding: 0px">
+        <div class="ol-unselectable">
+          <div>
+            <img src="" id="img_mappilary" style="height: 120px; width: 160px; border-radius: 6px" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

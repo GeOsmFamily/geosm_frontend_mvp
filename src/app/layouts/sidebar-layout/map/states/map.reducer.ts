@@ -50,7 +50,8 @@ export const initialState: MapState = {
           app_whatsapp: '',
           app_facebook: '',
           app_twitter: '',
-          bbox: []
+          bbox: [],
+          mapillary_api_key: ''
         }
       },
       roiGeojson: {}
