@@ -6,7 +6,6 @@ import { LayersInMap } from '../interfaces/layerinmap';
 import {
   addPrincipalMap,
   allLayersInToc,
-  editLayerZindex,
   globalView,
   initMap,
   initMapFailure,
@@ -115,12 +114,6 @@ export const mapReducer = createReducer(
     let mapHelper = new MapHelper();
     let layersinToc = mapHelper.getAllLayersInToc();
     return { ...state, layersintoc: layersinToc };
-  }),
-
-  on(editLayerZindex, (state, { layer, zindex }) => {
-    let mapHelper = new MapHelper();
-    mapHelper.editZindexOfLayer(layer, zindex);
-    return { ...state };
   })
 );
 

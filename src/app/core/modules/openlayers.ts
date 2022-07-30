@@ -38,6 +38,7 @@ import { singleClick, click } from 'ol/events/condition';
 import XYZ from 'ol/source/XYZ';
 import { getArea, getLength } from 'ol/sphere';
 import BaseLayer from 'ol/layer/Base';
+import { transform } from 'ol/proj';
 
 export {
   fromLonLat,
@@ -101,5 +102,6 @@ export {
   ScaleLine,
   MousePosition,
   createStringXY,
-  BaseLayer
+  BaseLayer,
+  transform
 };

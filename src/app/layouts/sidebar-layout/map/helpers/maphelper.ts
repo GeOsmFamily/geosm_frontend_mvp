@@ -41,7 +41,7 @@ import { ActiveLayersInterface } from '../interfaces/activelayers';
 import { bboxPolygon, intersect, toWgs84 } from '@turf/turf';
 import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
 
-const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing'];
+const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing', 'searchResultLayer'];
 
 @Injectable()
 export class MapHelper {
@@ -91,7 +91,7 @@ export class MapHelper {
 
   //@ts-ignore
   constructShadowLayer(geojsonLayer: Object): BaseLayer {
-    var worldGeojson = {
+    let worldGeojson = {
       type: 'FeatureCollection',
       name: 'world_shadow',
       crs: { type: 'name', properties: { name: 'urn:ogc:def:crs:EPSG::3857' } },
@@ -115,14 +115,14 @@ export class MapHelper {
       ]
     };
 
-    var featureToShadow = new GeoJSON().readFeatures(geojsonLayer, {
+    let featureToShadow = new GeoJSON().readFeatures(geojsonLayer, {
       dataProjection: 'EPSG:4326',
       featureProjection: 'EPSG:3857'
     });
 
-    var featureWorld = new GeoJSON().readFeatures(worldGeojson);
+    let featureWorld = new GeoJSON().readFeatures(worldGeojson);
 
-    var rasterSource_world = new VectorLayer({
+    let rasterSource_world = new VectorLayer({
       source: new VectorSource(),
       style: new Style({
         fill: new Fill({
@@ -131,7 +131,7 @@ export class MapHelper {
       })
     });
 
-    var rasterSource_cmr = new VectorLayer({
+    let rasterSource_cmr = new VectorLayer({
       source: new VectorSource(),
       style: new Style({
         fill: new Fill({
@@ -143,9 +143,9 @@ export class MapHelper {
     rasterSource_world.getSource()!.addFeatures(featureWorld);
     rasterSource_cmr.getSource()!.addFeatures(featureToShadow);
 
-    var raster = new RasterSource({
+    let raster = new RasterSource({
       sources: [rasterSource_world, rasterSource_cmr],
-      operation: function (pixels, data) {
+      operation: function (pixels) {
         //@ts-ignore
         if (pixels[1][3] == 0) {
           return pixels[0];
@@ -155,7 +155,7 @@ export class MapHelper {
       }
     });
 
-    var rasterLayer = new ImageLayer({
+    let rasterLayer = new ImageLayer({
       source: raster,
       className: 'map-shadow'
     });
@@ -165,7 +165,7 @@ export class MapHelper {
 
   //lister les id contenus dans un VectorSource
   public static listIdFromSource(source: VectorSource): Array<string> {
-    var response = Array();
+    let response = Array();
     for (let index = 0; index < source.getFeatures().length; index++) {
       const feat = source.getFeatures()[index];
       response.push(feat.getId());
@@ -176,17 +176,17 @@ export class MapHelper {
   //recuperer la bbox actuelle de la carte sur l'ecran
   getCurrentMapExtent() {
     try {
-      var coord_O_N = this.map?.getCoordinateFromPixel([jQuery('.mat-sidenav .sidenav-left').width()!, jQuery(window).height()!]);
-      var coord_E_S = this.map?.getCoordinateFromPixel([jQuery(window).width()!, 0]);
-      var extent_view = boundingExtent([coord_O_N!, coord_E_S!]);
+      let coord_O_N = this.map?.getCoordinateFromPixel([jQuery('.mat-sidenav .sidenav-left').width()!, jQuery(window).height()!]);
+      let coord_E_S = this.map?.getCoordinateFromPixel([jQuery(window).width()!, 0]);
+      let extent_view = boundingExtent([coord_O_N!, coord_E_S!]);
       return extent_view;
     } catch (error) {
-      var extent_view_error = this.map?.getView().calculateExtent();
+      let extent_view_error = this.map?.getView().calculateExtent();
       return extent_view_error;
     }
   }
 
-  fit_view(geom: Extent | SimpleGeometry, zoom: any, padding?: any) {
+  fit_view(geom: Extent | SimpleGeometry, zoom: any) {
     this.map?.getView().fit(geom, {
       maxZoom: zoom,
       size: this.map!.getSize(),
@@ -217,7 +217,7 @@ export class MapHelper {
       throw new Error("Layer must have a 'type_layer' properties among " + typeLayer.join(','));
     }
 
-    var zIndex = this.getMaxZindexInMap() + 1;
+    let zIndex = this.getMaxZindexInMap() + 1;
 
     if (layer.get('nom') && layer.get('type_layer')) {
       if (!layer.getZIndex()) {
@@ -234,11 +234,11 @@ export class MapHelper {
   }
 
   getMaxZindexInMap(): number {
-    var allLayers = this.map?.getLayers().getArray();
+    let allLayers = this.map?.getLayers().getArray();
 
-    var allZindex = [0];
+    let allZindex = [0];
     for (let index = 0; index < allLayers!.length; index++) {
-      var layer = allLayers![index];
+      let layer = allLayers![index];
 
       try {
         if (layer.get('inToc')) {
@@ -252,7 +252,7 @@ export class MapHelper {
   }
 
   constructLayer(couche: GeosmLayer) {
-    var layer: BaseLayer | undefined;
+    let layer: BaseLayer | undefined;
     if (couche.type == 'xyz') {
       layer = new TileLayer({
         source: new XYZ({
@@ -267,27 +267,27 @@ export class MapHelper {
         className: couche.nom + '___' + couche.type_layer
       });
     } else if (couche.type == 'wms') {
-      var wmsSourceTile = new TileWMS({
+      let wmsSourceTile = new TileWMS({
         url: couche.url,
         params: { LAYERS: couche.identifiant, TILED: true },
         serverType: 'qgis',
         crossOrigin: 'anonymous'
       });
 
-      var layerTile = new TileLayer({
+      let layerTile = new TileLayer({
         source: wmsSourceTile,
         className: couche.nom + '___' + couche.type_layer,
         minResolution: this.map?.getView().getResolutionForZoom(9)
       });
 
-      var wmsSourceImage = new ImageWMS({
+      let wmsSourceImage = new ImageWMS({
         url: couche.url!,
         params: { LAYERS: couche.identifiant, TILED: true },
         serverType: 'qgis',
         crossOrigin: 'anonymous'
       });
 
-      var layerImage = new ImageLayer({
+      let layerImage = new ImageLayer({
         source: wmsSourceImage,
 
         className: couche.nom + '___' + couche.type_layer,
@@ -298,14 +298,14 @@ export class MapHelper {
         layers: [layerTile, layerImage]
       });
     } else if (couche.type == 'wfs') {
-      var source = new VectorSource({
+      let source = new VectorSource({
         format: new GeoJSON({
           dataProjection: 'EPSG:4326',
           featureProjection: 'EPSG:3857'
         }),
-        loader: (extent, resolution, projection) => {
-          var extent_view = this.getCurrentMapExtent();
-          var url =
+        loader: () => {
+          let extent_view = this.getCurrentMapExtent();
+          let url =
             couche.url +
             '?bbox=' +
             transformExtent(extent_view!, 'EPSG:3857', 'EPSG:4326').join(',') +
@@ -317,8 +317,8 @@ export class MapHelper {
               /** retry 3 times after 2s if querry failed  */
               retryWhen(errors =>
                 errors.pipe(
-                  tap((val: HttpErrorResponse) => {}),
-                  delayWhen((val: HttpErrorResponse) => timer(2000)),
+                  tap((_val: HttpErrorResponse) => {}),
+                  delayWhen((_val: HttpErrorResponse) => timer(2000)),
                   take(3)
                 )
               )
@@ -332,7 +332,7 @@ export class MapHelper {
                   feature.set('featureId', feature.getId());
                 }
               },
-              (err: HttpErrorResponse) => {
+              (_err: HttpErrorResponse) => {
                 source.removeLoadedExtent(extent_view!);
               }
             );
@@ -352,23 +352,23 @@ export class MapHelper {
       });
 
       if (couche.cluster) {
-        var clusterSource = new Cluster({
+        let clusterSource = new Cluster({
           distance: 80,
           source: source
         });
-        var styleCache = {};
-        var styleCacheCopy = {};
+        let styleCache = {};
+        let styleCacheCopy = {};
         layer = new VectorLayer({
           source: clusterSource,
           // @ts-ignore
           style: feature => {
-            var size = feature.get('features').length;
+            let size = feature.get('features').length;
 
             if (size > 1) {
               // @ts-ignore
-              var styleDefault = styleCache[size];
+              let styleDefault = styleCache[size];
               if (!styleDefault) {
-                var radius = 10;
+                let radius = 10;
                 if (size > 99) {
                   (radius = 12), 5;
                 }
@@ -472,10 +472,10 @@ export class MapHelper {
   }
 
   getLayerByPropertiesCatalogueGeosm(properties: { group_id: number; couche_id: number; type: 'couche' | 'carte' }): Array<any> {
-    var layer_to_remove = Array();
-    var all_layers = this.getAllLayerInMap();
+    let layer_to_remove = Array();
+    let all_layers = this.getAllLayerInMap();
     for (let index = 0; index < all_layers.length; index++) {
-      var layer = all_layers[index];
+      let layer = all_layers[index];
       if (layer.get('properties')) {
         if (
           layer.get('properties')['type'] == properties.type &&
@@ -491,7 +491,7 @@ export class MapHelper {
   }
 
   getAllLayerInMap(): Array<BaseLayer> {
-    var responseLayers = Array();
+    let responseLayers = Array();
     this.map?.getLayers().forEach(group => {
       responseLayers.push(group);
     });
@@ -499,16 +499,17 @@ export class MapHelper {
   }
 
   getLayerByName(name: string, isLayerGroup: boolean = false): Array<any> {
-    var layer_to_remove = Array();
+    let layer_to_remove = Array();
+    let all_layers: Array<BaseLayer> | undefined;
 
     if (isLayerGroup) {
-      var all_layers = this.map?.getLayers().getArray();
+      all_layers = this.map?.getLayers().getArray();
     } else {
-      var all_layers = this.map?.getLayerGroup().getLayers().getArray();
+      all_layers = this.map?.getLayerGroup().getLayers().getArray();
     }
 
     for (let index = 0; index < all_layers!.length; index++) {
-      var layer = all_layers![index];
+      let layer = all_layers![index];
       if (layer.get('nom') == name) {
         layer_to_remove.push(layer);
       }
@@ -517,8 +518,8 @@ export class MapHelper {
   }
 
   getAllLayersInToc(): Array<LayersInMap> {
-    var reponseLayers: Array<LayersInMap> = [];
-    var allLayers = this.map?.getLayers().getArray();
+    let reponseLayers: Array<LayersInMap> = [];
+    let allLayers = this.map?.getLayers().getArray();
 
     for (let index = 0; index < allLayers!.length; index++) {
       const layer = allLayers![index];
@@ -531,8 +532,8 @@ export class MapHelper {
   }
 
   constructLayerInMap(layer: any): LayersInMap {
-    var data = null;
-    var activeLayers: ActiveLayersInterface = {} as ActiveLayersInterface;
+    let data = null;
+    let activeLayers: ActiveLayersInterface = {} as ActiveLayersInterface;
     if (layer.get('tocCapabilities')) {
       activeLayers.opacity = layer.get('tocCapabilities')['opacity'] != undefined ? layer.get('tocCapabilities')['opacity'] : true;
       activeLayers.share = layer.get('tocCapabilities')['share'] != undefined ? layer.get('tocCapabilities')['share'] : true;
@@ -595,7 +596,7 @@ export class MapHelper {
   }
 
   getLayerGroupByNom(groupName: string): LayerGroup {
-    var groupLayer: LayerGroup | undefined;
+    let groupLayer: LayerGroup | undefined;
     this.map?.getLayers().forEach(group => {
       if (group instanceof LayerGroup) {
         if (group.get('nom') == groupName) {
@@ -607,7 +608,7 @@ export class MapHelper {
   }
 
   initMapProject(project: ProjectInterface) {
-    var shadowlayer = this.constructShadowLayer(project.config.roiGeojson);
+    let shadowlayer = this.constructShadowLayer(project.config.roiGeojson);
     shadowlayer.setZIndex(1000);
     this.map?.addLayer(shadowlayer);
 
@@ -617,14 +618,14 @@ export class MapHelper {
     });
 
     this.map?.on('moveend', () => {
-      var bbox_cam = bboxPolygon(
+      let bbox_cam = bboxPolygon(
         //@ts-ignore
         project.config.data.instance.bbox
       );
       //@ts-ignore
-      var bbox_view = bboxPolygon(this.map.getView().calculateExtent());
+      let bbox_view = bboxPolygon(this.map.getView().calculateExtent());
 
-      var bool = intersect(toWgs84(bbox_view), toWgs84(bbox_cam));
+      let bool = intersect(toWgs84(bbox_view), toWgs84(bbox_cam));
 
       if (!bool) {
         this.map?.getView().fit(project.config.data.instance.bbox, {
@@ -639,13 +640,13 @@ export class MapHelper {
   addPrincipalMap(principalMap: PrincipalMapInterface) {
     let groupCarte = principalMap.groupecarte;
     let carte = principalMap.carte;
-    var type: 'wms' | 'wfs' | 'xyz' | undefined;
+    let type: 'wms' | 'wfs' | 'xyz' | undefined;
     if (carte.type == 'wms') {
       type = 'wms';
     } else if (carte.type == 'xyz') {
       type = 'xyz';
     }
-    var layer = this.constructLayer({
+    let layer = this.constructLayer({
       nom: carte.nom,
       type: type!,
       type_layer: 'geosmCatalogue',
@@ -670,7 +671,7 @@ export class MapHelper {
   }
 
   removePrincipalMap(principalMap: PrincipalMapInterface) {
-    var layer = this.getLayerByPropertiesCatalogueGeosm({
+    let layer = this.getLayerByPropertiesCatalogueGeosm({
       group_id: principalMap!.groupecarte.id,
       couche_id: principalMap!.carte.id,
       type: 'carte'

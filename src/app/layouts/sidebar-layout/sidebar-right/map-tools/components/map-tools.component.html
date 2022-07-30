@@ -9,6 +9,7 @@
     </mat-expansion-panel-header>
     <app-draw [map]="map" *ngIf="tool.type==='draw'"></app-draw>
     <app-measure [map]="map" *ngIf="tool.type==='measure'"></app-measure>
+    <app-comment [map]="map" *ngIf="tool.type==='comments'"></app-comment>
     <app-print [map]="map" *ngIf="tool.type==='print'"></app-print>
   </mat-expansion-panel>
 </mat-accordion>

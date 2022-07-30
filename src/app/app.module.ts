@@ -15,6 +15,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { setAppInjector } from './core/injectorHelper';
 import { mapFeatureKey, mapreducer } from './layouts/sidebar-layout/map/states/map.reducer';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { searchFeatureKey, searchreducer } from './layouts/navbar-layout/searchbar-layout/states/search.reducer';
+import { SearchEffects } from './layouts/navbar-layout/searchbar-layout/states/search.effects';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [{ prefix: './assets/i18n/', suffix: '.json' }]);
@@ -36,9 +38,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
     BrowserAnimationsModule,
     LayoutsModule,
+    StoreModule.forFeature(searchFeatureKey, searchreducer),
     StoreModule.forFeature(mapFeatureKey, mapreducer),
     StoreModule.forRoot({}, { runtimeChecks: { strictStateImmutability: false, strictActionImmutability: false } }),
-    EffectsModule.forRoot([MapEffects]),
+    EffectsModule.forRoot([MapEffects, SearchEffects]),
     FontAwesomeModule
   ],
   providers: [],

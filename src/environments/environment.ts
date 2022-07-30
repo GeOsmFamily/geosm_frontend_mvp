@@ -5,5 +5,8 @@ export const environment = {
   instance_id: 1,
   primarycolor: '#023f5f',
   nom: 'Cameroun',
-  url_frontend: 'http://localhost:4200'
+  url_frontend: 'http://localhost:4200',
+  country_code: 'CM',
+  url_carto: 'http://localhost:9090',
+  url_qgis: 'http://localhost:9091'
 };

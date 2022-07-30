@@ -10,11 +10,8 @@ import { MaterialModule } from '../core/modules/material';
 import { PrimaryPageComponent } from './sidebar-layout/sidebar-left/primary-page/primary-page.component';
 import { SecondaryPageComponent } from './sidebar-layout/sidebar-left/secondary-page/secondary-page.component';
 import { MapModule } from './sidebar-layout/map/map.module';
-import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/searchbar-layout.component';
 import { SharedModule } from '../shared/shared.module';
-import { RoutingComponent } from './sidebar-layout/sidebar-right/routing/routing.component';
 import { LegendComponent } from './sidebar-layout/sidebar-right/legend/legend.component';
-import { DownloadComponent } from './sidebar-layout/sidebar-right/download/download.component';
 import { ActiveLayersComponent } from './sidebar-layout/sidebar-right/active-layers/component/active-layers.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +21,13 @@ import { DrawComponent } from './sidebar-layout/sidebar-right/map-tools/componen
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MeasureComponent } from './sidebar-layout/sidebar-right/map-tools/components/measure/measure.component';
 import { PrintComponent } from './sidebar-layout/sidebar-right/map-tools/components/print/print.component';
+import { RoutingComponent } from './sidebar-layout/sidebar-right/routing/component/routing.component';
+import { CommentComponent } from './sidebar-layout/sidebar-right/map-tools/components/comment/comment.component';
+import { ListDownloadLayersComponent } from './sidebar-layout/sidebar-right/download/components/list-download-layers/list-download-layers.component';
+import { ChartOverlayComponent } from './sidebar-layout/sidebar-right/download/components/chart-overlay/chart-overlay.component';
+import { DownloadComponent } from './sidebar-layout/sidebar-right/download/components/download/download.component';
+import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/component/searchbar-layout.component';
+import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-layers/component/metadata-modal/metadata-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,15 +37,19 @@ import { PrintComponent } from './sidebar-layout/sidebar-right/map-tools/compone
     BaseLayoutComponent,
     PrimaryPageComponent,
     SecondaryPageComponent,
-    SearchbarLayoutComponent,
     ActiveLayersComponent,
     MapToolsComponent,
     RoutingComponent,
     LegendComponent,
-    DownloadComponent,
     DrawComponent,
     MeasureComponent,
-    PrintComponent
+    PrintComponent,
+    CommentComponent,
+    ListDownloadLayersComponent,
+    ChartOverlayComponent,
+    SearchbarLayoutComponent,
+    DownloadComponent,
+    MetadataModalComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +62,6 @@ import { PrintComponent } from './sidebar-layout/sidebar-right/map-tools/compone
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    FormsModule,
     ColorPickerModule
   ]
 })

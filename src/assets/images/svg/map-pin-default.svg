@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="40" viewBox="0 0 36 40">
+    <defs>
+        <filter id="k4tu2aflva" width="143.8%" height="138.5%" x="-21.9%" y="-13.7%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+        </filter>
+        <path id="mhko5j238b" d="M18 0c8.837 0 16 7.163 16 16 0 7.306-4.897 13.469-11.588 15.384l-2.748 4.12c-.146.22-.335.408-.555.555-.919.612-2.16.364-2.773-.555l-2.748-4.12C6.898 29.469 2 23.306 2 16 2 7.163 9.163 0 18 0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g transform="translate(-989 -584) translate(989 382) translate(0 202)">
+                        <use fill="#000" filter="url(#k4tu2aflva)" xlink:href="#mhko5j238b"/>
+                        <use fill="#FFF" xlink:href="#mhko5j238b"/>
+                    </g>
+                    <g fill="#013F5F">
+                        <path d="M13 0c1.105 0 2 .895 2 2v12c0 1.105-.895 2-2 2H3c-1.105 0-2-.895-2-2V2c0-1.105.895-2 2-2h10zM9 11H5c-.552 0-1 .448-1 1s.448 1 1 1h4c.552 0 1-.448 1-1s-.448-1-1-1zm2-4H5c-.552 0-1 .448-1 1s.448 1 1 1h6c.552 0 1-.448 1-1s-.448-1-1-1zm0-4H5c-.552 0-1 .448-1 1s.448 1 1 1h6c.552 0 1-.448 1-1s-.448-1-1-1z" transform="translate(-989 -584) translate(989 382) translate(0 202) translate(10 8)"/>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
