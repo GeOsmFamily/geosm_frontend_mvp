@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, QueryList } from '@angular/core';
-import { Map, View, LayerGroup, Point, Overlay } from 'src/app/core/modules/openlayers';
+import { Map, View, LayerGroup, Point, Overlay, BaseLayer, unByKey } from 'src/app/core/modules/openlayers';
 import { MapHelper } from './../helpers/maphelper';
 import { MatDrawer, MatSidenavContainer } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
@@ -33,6 +33,9 @@ import * as jQuery from 'jquery';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LayersInMap } from '../interfaces/layerinmap';
 import { RightMenuInterface } from '../../sidebar-right/interfaces/rightMenuInterface';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { EventsKey } from 'ol/events';
+import { ButtomSheetComponent } from './buttom-sheet/buttom-sheet.component';
 let view = new View({
   center: [0, 0],
   zoom: 0,
@@ -86,7 +89,23 @@ export class MapComponent implements OnInit {
 
   @Input() ritghtMenus: Array<RightMenuInterface> | undefined;
 
-  constructor(private store: Store, public dialog: MatDialog, public translate: TranslateService, private _snackBar: MatSnackBar) {
+  modeCompare: boolean = false;
+
+  layerInCompare = Array();
+
+  precompose: EventsKey | EventsKey[] | undefined;
+
+  postcompose: EventsKey | EventsKey[] | undefined;
+
+  swipeEvent: void | EventsKey | EventsKey[] | undefined;
+
+  constructor(
+    private store: Store,
+    public dialog: MatDialog,
+    public translate: TranslateService,
+    private _snackBar: MatSnackBar,
+    private bottomSheet: MatBottomSheet
+  ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
     this.layersInToc$ = this.store.select(selectAllLayersInToc);
@@ -269,5 +288,138 @@ export class MapComponent implements OnInit {
       count = layersInToc.length;
     });
     return count;
+  }
+
+  toogleCompare() {
+    let swipe = document.getElementById('swipe');
+    let mapHelper = new MapHelper();
+    let layerInMap = mapHelper.getAllLayersInToc();
+    if (!this.modeCompare) {
+      const buttonheet_compare = this.bottomSheet.open(ButtomSheetComponent, {
+        data: { type: 'compare', data: layerInMap }
+      });
+
+      this.modeCompare = true;
+
+      buttonheet_compare.afterDismissed().subscribe(result => {
+        if (!result) {
+          this.modeCompare = false;
+          jQuery('#swipe').hide();
+        } else {
+          jQuery('#swipe').show();
+
+          let index1 = parseFloat(result['layer1']);
+          let index2 = parseFloat(result['layer2']);
+
+          let layer1: BaseLayer;
+          let layer2: BaseLayer;
+
+          map.getLayers().forEach(layer => {
+            if (layer.get('nom') == layerInMap[index1]['nom']) {
+              layer1 = layer;
+              console.log(layer1);
+              layer.setVisible(true);
+            } else if (layer.get('nom') == layerInMap[index2]['nom']) {
+              layer2 = layer;
+              console.log(layer2);
+              layer.setVisible(true);
+            } else if (layer.get('properties')?.type == 'carte') {
+              layer.setVisible(false);
+            }
+          });
+
+          for (let i = 0; i < layerInMap.length; i++) {
+            if (
+              //@ts-ignore
+              layerInMap[i]['properties']?.type == 'carte'
+            ) {
+              layerInMap[i]['visible'] = false;
+            }
+          }
+
+          this.toogleVisibilityLayer(layerInMap[index1]);
+          this.toogleVisibilityLayer(layerInMap[index2]);
+
+          layerInMap[index1]['visible'] = true;
+          layerInMap[index2]['visible'] = true;
+
+          this.layerInCompare[0] = layerInMap[index1];
+          this.layerInCompare[1] = layerInMap[index2];
+
+          let lay1: any;
+
+          if (layer1!.getZIndex() > layer2!.getZIndex()) {
+            lay1 = layer1!;
+          } else {
+            lay1 = layer2!;
+          }
+
+          //@ts-ignore
+          this.precompose = lay1.on('prerender', function (event) {
+            let ctx = event.context;
+            //@ts-ignore
+            let width = ctx.canvas.width * (swipe!['value'] / 100);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
+            ctx.clip();
+          });
+
+          this.postcompose = lay1.on('postrender', function (event: { context: any }) {
+            let ctx = event.context;
+            ctx.restore();
+          });
+
+          this.swipeEvent = swipe?.addEventListener(
+            'input',
+            () => {
+              map.render();
+            },
+            false
+          );
+        }
+      });
+    } else {
+      this.closeModeCompare();
+    }
+  }
+
+  closeModeCompare() {
+    this.layerInCompare = Array();
+
+    unByKey(this.precompose!);
+    unByKey(this.postcompose!);
+    unByKey(this.swipeEvent!);
+
+    this.modeCompare = false;
+
+    jQuery('#swipe').hide();
+  }
+
+  toogleVisibilityLayer(data: LayersInMap) {
+    console.log(data);
+
+    if (data.visible) {
+      map.getLayers().forEach(layer => {
+        if (layer.get('nom') == data.nom) {
+          layer.setVisible(false);
+        }
+
+        if (layer.get('type') == 'mapillaryPoint' && data.nom == 'mapillary') {
+          layer.setVisible(false);
+        }
+      });
+    } else {
+      map.getLayers().forEach(layer => {
+        if (layer.get('nom') == data.nom) {
+          layer.setVisible(true);
+        }
+
+        if (layer.get('type') == 'mapillaryPoint' && data.nom == 'mapillary') {
+          layer.setVisible(true);
+        }
+      });
+    }
   }
 }

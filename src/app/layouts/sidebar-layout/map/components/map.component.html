@@ -68,7 +68,13 @@
       </div>
 
       <div *ngIf="isComparator">
-        <button mat-mini-fab class="white" matTooltip="{{ 'map_buttons.left_button.comparator' | translate }}">
+        <button
+          mat-mini-fab
+          class="white"
+          matTooltip="{{ 'map_buttons.left_button.comparator' | translate }}"
+          (click)="toogleCompare()"
+          [ngClass]="{'accentColorBG':modeCompare}"
+        >
           <img src="assets/images/svg/compare.svg" style="margin-bottom: 2px; height: 23px" alt="" />
         </button>
       </div>
@@ -184,4 +190,10 @@
     <a href="#" id="popup-closer" class="ol-popup-closer"></a>
     <div id="popup-content"></div>
   </div>
+
+  <input
+    id="swipe"
+    type="range"
+    style="background: transparent; width: 100%; z-index: 9999999999999999999999; position: absolute; top: 45%; display: none"
+  />
 </div>

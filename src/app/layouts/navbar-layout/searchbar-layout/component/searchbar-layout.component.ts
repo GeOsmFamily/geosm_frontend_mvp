@@ -11,17 +11,15 @@ import {
   VectorSource,
   Point,
   Polygon,
-  transformExtent,
   transform
 } from 'src/app/core/modules/openlayers';
-import { selectIsLoading } from './../../../sidebar-layout/map/states/map.selector';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { SearchInterface } from '../interfaces/search';
 import { SearchState } from '../states/search.reducer';
-import { selectSearch } from '../states/search.selector';
+import { selectIsLoading, selectSearch } from '../states/search.selector';
 import { searchQuery } from '../states/search.actions';
 import { LayersService } from 'src/app/core/services/geosm/layers.service';
 import { DataHelper } from 'src/app/core/modules/dataHelper';
