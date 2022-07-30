@@ -39,6 +39,10 @@ import XYZ from 'ol/source/XYZ';
 import { getArea, getLength } from 'ol/sphere';
 import BaseLayer from 'ol/layer/Base';
 import { transform } from 'ol/proj';
+import VectorTileLayer from 'ol/layer/VectorTile';
+import VectorTileSource from 'ol/source/VectorTile';
+import MVT from 'ol/format/MVT';
+import { createXYZ as CreateXYZ } from 'ol/tilegrid';
 
 export {
   fromLonLat,
@@ -103,5 +107,9 @@ export {
   MousePosition,
   createStringXY,
   BaseLayer,
-  transform
+  transform,
+  VectorTileLayer,
+  VectorTileSource,
+  MVT,
+  CreateXYZ
 };
