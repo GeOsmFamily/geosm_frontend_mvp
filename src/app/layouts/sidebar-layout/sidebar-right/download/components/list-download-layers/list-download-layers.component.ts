@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ThematiqueService } from 'src/app/core/services/geosm/thematique/thematique.service';
 import { environment } from 'src/environments/environment';
 import { DomSanitizer } from '@angular/platform-browser';
+import { faDownload, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-list-download-layers',
@@ -12,6 +13,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ListDownloadLayersComponent implements OnInit {
   environment = environment;
+  faDownload = faDownload;
+  faTimesCircle = faTimesCircle;
   constructor(
     @Inject(MAT_DIALOG_DATA) public listLayers: DownloadDataModelInterface[],
     public dialogRef: MatDialogRef<ListDownloadLayersComponent>,

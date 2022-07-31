@@ -1,6 +1,6 @@
 <h1 mat-dialog-title class="primaryColorBG white" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
-  <em class="fa fa-download white icon_header" aria-hidden="true"></em>
-  <em class="fa fa-times-circle close" (click)="closeModal()"></em>
+  <fa-icon [icon]="faDownload" class="white icon_header" aria-hidden="true"></fa-icon>
+  <fa-icon [icon]="faTimesCircle" class="close" (click)="closeModal()"></fa-icon>
   {{ 'right_menu.download.download_layer' | translate }}
 </h1>
 

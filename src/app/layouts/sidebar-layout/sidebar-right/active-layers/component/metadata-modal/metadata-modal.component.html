@@ -21,7 +21,7 @@
 
   <span class="bold primaryColor" style="font-size: 17px">{{ 'metadata.title' | translate }} {{data_metadata!.nom}} </span>
 
-  <em (click)="onNoClick()" class="fa fa-times primaryColor pointer close"></em>
+  <fa-icon [icon]="faTimes" (click)="onNoClick()" class="primaryColor pointer close"></fa-icon>
 </h1>
 
 <mat-dialog-content>

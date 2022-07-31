@@ -19,7 +19,6 @@ import {
   VectorLayer,
   CircleStyle,
   Fill,
-  Geometry,
   Text
 } from 'src/app/core/modules/openlayers';
 import { MapHelper } from './../helpers/maphelper';
@@ -46,7 +45,7 @@ import {
   faRoute,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { fromLonLat, transform } from 'ol/proj';
@@ -60,7 +59,12 @@ import { EventsKey } from 'ol/events';
 import { ButtomSheetComponent } from './buttom-sheet/buttom-sheet.component';
 import { Viewer } from 'mapillary-js';
 import { Pixel } from 'ol/pixel';
-import { FeatureLike } from 'ol/Feature';
+import { DataFromClickOnMapInterface } from '../interfaces/dataClick';
+import { DescriptiveSheetModalComponent } from './descriptive-sheet-modal/descriptive-sheet-modal.component';
+import { DescriptiveSheet } from '../interfaces/descriptiveSheet';
+import { ActivatedRoute } from '@angular/router';
+import { ShareService } from 'src/app/core/services/geosm/share.service';
+import { ComponentHelper } from 'src/app/core/modules/componentHelper';
 let view = new View({
   center: [0, 0],
   zoom: 0,
@@ -145,7 +149,10 @@ export class MapComponent implements OnInit {
     public translate: TranslateService,
     private _snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet,
-    public zone: NgZone
+    public zone: NgZone,
+    private activatedRoute: ActivatedRoute,
+    public shareService: ShareService,
+    public componentHelper:ComponentHelper
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
@@ -173,7 +180,8 @@ export class MapComponent implements OnInit {
       if (project.config.data.instance.altimetrie) {
         this.isAltimetrie = true;
       }
-
+      this.mapClicked();
+      this.handleMapParamsUrl();
       let drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
       drawers.forEach(drawer => {
         drawer.openedChange.subscribe(() => {
@@ -319,6 +327,80 @@ export class MapComponent implements OnInit {
       }
     });
   }
+
+  handleMapParamsUrl() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['layers']) {
+        let layers = params['layers'].split(';');
+        this.shareService.addLayersFromUrl(layers);
+      }
+      if (params['feature']) {
+        let parametersShared = params['feature'].split(';');
+        this.shareService.displayFeatureShared(parametersShared);
+      }
+      if (params['share'] && params['path']) {
+        let parametersShared = params['share'].split(';');
+        let parametersPath = params['path'].split(';');
+        this.shareService.displayLocationShared(parametersShared, parametersPath);
+      }
+      if (params['share'] && params['id']) {
+        let parametersShared = params['share'].split(';');
+        let parametersId = params['id'];
+        this.shareService.displayDrawShared(parametersShared, parametersId);
+      }
+    });
+  }
+
+  mapClicked() {
+    map.on('singleclick', evt => {
+      function compare(a: { getZIndex: () => number }, b: { getZIndex: () => number }) {
+        if (a.getZIndex() < b.getZIndex()) {
+          return 1;
+        }
+        if (a.getZIndex() > b.getZIndex()) {
+          return -1;
+        }
+        return 0;
+      }
+
+      this.zone.run(() => {
+        let mapHelper = new MapHelper();
+
+        mapHelper.mapHasCliked(evt, (data: DataFromClickOnMapInterface) => {
+          if (data.type == 'raster') {
+            let layers = data.data.layers.sort(compare);
+            let layerTopZindex = layers.length > 0 ? layers[0] : undefined;
+
+            if (layerTopZindex) {
+              let descriptionSheetCapabilities = layerTopZindex.get('descriptionSheetCapabilities');
+              this.componentHelper.openDescriptiveSheet(
+                descriptionSheetCapabilities,
+                mapHelper.constructLayerInMap(layerTopZindex),
+                //@ts-ignore
+                data.data.coord
+              );
+            }
+          } else if (data.type == 'vector') {
+            let layers = data.data.layers.sort(compare);
+            let layerTopZindex = layers.length > 0 ? layers[0] : undefined;
+
+            if (layerTopZindex) {
+              let descriptionSheetCapabilities = layerTopZindex.get('descriptionSheetCapabilities');
+              this.componentHelper.openDescriptiveSheet(
+                descriptionSheetCapabilities,
+                mapHelper.constructLayerInMap(layerTopZindex),
+                //@ts-ignore
+                data.data.coord,
+                data.data.feature?.getGeometry(),
+                data.data.feature?.getProperties()
+              );
+            }
+          }
+        });
+      });
+    });
+  }
+
 
   toogleLeftSidenav() {
     if (this.sidenavContainer?.start?.opened) {

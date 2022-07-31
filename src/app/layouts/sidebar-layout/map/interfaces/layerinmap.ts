@@ -1,4 +1,4 @@
-import { BaseLayer } from '../../../../core/modules/openlayers';
+import { VectorLayer } from '../../../../core/modules/openlayers';
 import { ActiveLayersInterface } from './activelayers';
 import { LegendInterface } from './legend';
 
@@ -14,7 +14,7 @@ export interface LayersInMap {
     text: string;
     bgColor: string;
   };
-  layer: BaseLayer;
+  layer: VectorLayer<any>;
   activeLayers: ActiveLayersInterface;
   legendCapabilities?: LegendInterface;
   descriptionSheetCapabilities: string;

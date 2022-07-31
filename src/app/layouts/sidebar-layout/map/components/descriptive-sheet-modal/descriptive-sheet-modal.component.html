@@ -1,0 +1,25 @@
+<h1 mat-dialog-title class="accentColorBG white" cdkDrag cdkDragRootElement=".cdk-overlay-pane" style="position: relative">
+  <div class="descriptive-sheet-header-ghost" cdkDragHandle></div>
+  <img [src]="imgSrc" alt="" srcset="" class="icon_header" style="margin-top: 4px; height: 25px" />
+  <fa-icon [icon]="faTimesCircle" class="close" (click)="closeModal()"></fa-icon>
+  <fa-icon [icon]="faArrowAlt" class="white" style="font-size: 20px" aria-hidden="true"></fa-icon>
+
+  {{ descriptiveModel.layer.nom}}
+</h1>
+
+<div mat-dialog-content style="padding-top: 5px; max-height: 250px !important" class="scroll">
+  <app-osm-sheet
+    *ngIf="descriptiveModel.type === 'osm'"
+    [descriptiveModel]="descriptiveModel"
+    (updatemMdelDescriptiveSheet)="setSescriptiveModel($event)"
+    (closeDescriptiveSheet)="closeModal()"
+  ></app-osm-sheet>
+</div>
+
+<div mat-dialog-actions class="text-center">
+  <button mat-raised-button (click)="shareFeature()"><fa-icon [icon]="faShare"></fa-icon>{{'descriptive_sheet.share' | translate}}</button>
+
+  <button mat-raised-button *ngIf="descriptiveModel.geometry" (click)="zoomOnFeatureExtent()">
+    <fa-icon [icon]="faSearch"></fa-icon> {{'descriptive_sheet.zoomTo' | translate}}
+  </button>
+</div>

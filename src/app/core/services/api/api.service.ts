@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   getRequestFromOtherHostObserver(path: string): Observable<any> {
-    return this.http.get(path, { headers: this.headers });
+    return this.http.get(path);
   }
 
   getRequestFromOtherHost(path: string): Promise<any> {

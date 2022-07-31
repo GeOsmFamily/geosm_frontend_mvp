@@ -10,9 +10,11 @@ import { MaterialModule } from 'src/app/core/modules/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ButtomSheetComponent } from './components/buttom-sheet/buttom-sheet.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DescriptiveSheetModalComponent } from './components/descriptive-sheet-modal/descriptive-sheet-modal.component';
+import { OsmSheetComponent } from './components/descriptive-sheet-modal/osm-sheet/osm-sheet.component';
 
 @NgModule({
-  declarations: [MapComponent, ButtomSheetComponent],
+  declarations: [MapComponent, ButtomSheetComponent, DescriptiveSheetModalComponent, OsmSheetComponent],
   exports: [MapComponent],
   imports: [CommonModule, SharedModule, MaterialModule, FontAwesomeModule, TranslateModule, FormsModule, ReactiveFormsModule],
   providers: [ThematiqueService, CarteService, ConfigService]

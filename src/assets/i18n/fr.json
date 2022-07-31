@@ -160,5 +160,13 @@
   "compare_maps": {
     "compare": "Comparer",
     "title": "Choisissez deux cartes : "
+  },
+  "descriptive_sheet": {
+    "share": " Partager",
+    "zoomTo": " Zoomer",
+    "displayAllAttributes": " Afficher tout",
+    "displayLesAttributes": " Afficher moins",
+    "server_error": "un problème est survenue lors du traitement des informations du serveur cartograhique",
+    "cancel": "Annuler"
   }
 }
