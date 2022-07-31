@@ -19,7 +19,6 @@ import {
   VectorLayer,
   CircleStyle,
   Fill,
-  Geometry,
   Text
 } from 'src/app/core/modules/openlayers';
 import { MapHelper } from './../helpers/maphelper';
@@ -46,7 +45,7 @@ import {
   faRoute,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { fromLonLat, transform } from 'ol/proj';
@@ -60,7 +59,9 @@ import { EventsKey } from 'ol/events';
 import { ButtomSheetComponent } from './buttom-sheet/buttom-sheet.component';
 import { Viewer } from 'mapillary-js';
 import { Pixel } from 'ol/pixel';
-import { FeatureLike } from 'ol/Feature';
+import { DataFromClickOnMapInterface } from '../interfaces/dataClick';
+import { DescriptiveSheetModalComponent } from './descriptive-sheet-modal/descriptive-sheet-modal.component';
+import { DescriptiveSheet } from '../interfaces/descriptiveSheet';
 let view = new View({
   center: [0, 0],
   zoom: 0,
@@ -173,7 +174,7 @@ export class MapComponent implements OnInit {
       if (project.config.data.instance.altimetrie) {
         this.isAltimetrie = true;
       }
-
+      this.mapClicked();
       let drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
       drawers.forEach(drawer => {
         drawer.openedChange.subscribe(() => {
@@ -317,6 +318,119 @@ export class MapComponent implements OnInit {
       if (principalMap) {
         this.store.dispatch(addPrincipalMap({ principalMap }));
       }
+    });
+  }
+
+  mapClicked() {
+    map.on('singleclick', evt => {
+      function compare(a: { getZIndex: () => number }, b: { getZIndex: () => number }) {
+        if (a.getZIndex() < b.getZIndex()) {
+          return 1;
+        }
+        if (a.getZIndex() > b.getZIndex()) {
+          return -1;
+        }
+        return 0;
+      }
+
+      this.zone.run(() => {
+        let mapHelper = new MapHelper();
+
+        mapHelper.mapHasCliked(evt, (data: DataFromClickOnMapInterface) => {
+          if (data.type == 'raster') {
+            let layers = data.data.layers.sort(compare);
+            let layerTopZindex = layers.length > 0 ? layers[0] : undefined;
+
+            if (layerTopZindex) {
+              let descriptionSheetCapabilities = layerTopZindex.get('descriptionSheetCapabilities');
+              this.openDescriptiveSheet(
+                descriptionSheetCapabilities,
+                mapHelper.constructLayerInMap(layerTopZindex),
+                //@ts-ignore
+                data.data.coord
+              );
+            }
+          } else if (data.type == 'vector') {
+            let layers = data.data.layers.sort(compare);
+            let layerTopZindex = layers.length > 0 ? layers[0] : undefined;
+
+            if (layerTopZindex) {
+              let descriptionSheetCapabilities = layerTopZindex.get('descriptionSheetCapabilities');
+              this.openDescriptiveSheet(
+                descriptionSheetCapabilities,
+                mapHelper.constructLayerInMap(layerTopZindex),
+                //@ts-ignore
+                data.data.coord,
+                data.data.feature?.getGeometry(),
+                data.data.feature?.getProperties()
+              );
+            }
+          }
+        });
+      });
+    });
+  }
+
+  openDescriptiveSheet(type: string, layer: LayersInMap, coordinates_3857: [number, number], geometry?: any, properties?: any) {
+    if (type) {
+      if (layer.layer instanceof LayerGroup) {
+        layer.layer = new MapHelper().getLayerQuerryInLayerGroup(layer.layer);
+      }
+      this.openDescriptiveSheetModal(
+        {
+          type: type,
+          layer: layer,
+          properties: properties,
+          geometry: geometry,
+          coordinates_3857: coordinates_3857
+        },
+        [],
+        () => {
+          // function
+        }
+      );
+    }
+  }
+
+  openDescriptiveSheetModal(data: DescriptiveSheet, size: Array<string> | [], callBack: Function) {
+    let position = {
+      top: '100px',
+      left: window.innerWidth < 500 ? '0px' : window.innerWidth / 2 - 400 / 2 + 'px'
+    };
+    for (let index = 0; index < this.dialog.openDialogs.length; index++) {
+      const elementDialog = this.dialog.openDialogs[index];
+
+      if (elementDialog.componentInstance instanceof DescriptiveSheetModalComponent) {
+        if (document.getElementById(elementDialog.id)) {
+          if (document.getElementById(elementDialog.id)!.parentElement) {
+            position.top = document.getElementById(elementDialog.id)!.parentElement!.getBoundingClientRect().top + 'px';
+            position.left = document.getElementById(elementDialog.id)!.parentElement!.getBoundingClientRect().left + 'px';
+          }
+        }
+
+        elementDialog.close();
+      }
+    }
+
+    let proprietes: MatDialogConfig = {
+      disableClose: false,
+      minWidth: 550,
+      maxHeight: 460,
+      width: '550px',
+      data: data,
+      hasBackdrop: false,
+      autoFocus: false,
+      position: position
+    };
+
+    if (size.length > 0) {
+      // proprietes['width']=size[0]
+      proprietes['height'] = size[1];
+    }
+    const modal = this.dialog.open(DescriptiveSheetModalComponent, proprietes);
+
+    modal.afterClosed().subscribe(async (result: any) => {
+      callBack(result);
     });
   }
 

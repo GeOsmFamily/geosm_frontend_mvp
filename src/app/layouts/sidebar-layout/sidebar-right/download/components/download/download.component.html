@@ -16,12 +16,13 @@
               <small> {{option.description}} </small>
             </mat-option>
           </mat-autocomplete>
-          <em
-            class="fa fa-trash primaryColor pointer"
+          <fa-icon
+            [icon]="faTrash"
+            class="primaryColor pointer"
             matSuffix
             style="transform: translateY(-4px)"
             (click)="removeInputInFormsLayer(i)"
-          ></em>
+          ></fa-icon>
         </mat-form-field>
       </div>
     </div>

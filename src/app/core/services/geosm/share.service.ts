@@ -23,4 +23,8 @@ export class ShareService {
   shareLayer(typeLayer: 'carte' | 'couche', id_layer: number, group_id: number): string {
     return 'layers=' + typeLayer + ',' + id_layer + ',' + group_id;
   }
+
+  shareFeature(typeLayer: 'carte' | 'couche', id_layer: number, group_id: number, coordinates: number[], featureId: number): string {
+    return 'feature=' + typeLayer + ',' + id_layer + ',' + group_id + ',' + coordinates.join(',') + ',' + featureId;
+  }
 }

@@ -1,11 +1,9 @@
 export class DataHelper {
   public static makeid(): string {
     let text = '';
-    let possible =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-    for (let i = 0; i < 5; i++)
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    for (let i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
   }
@@ -37,11 +35,7 @@ export class DataHelper {
     return all_pixels;
   }
 
-  public static isAttributesInObjectOfAnArray(
-    table: Array<any>,
-    attribute: string,
-    value: any
-  ): number {
+  public static isAttributesInObjectOfAnArray(table: Array<any>, attribute: string, value: any): number {
     let position: number;
     for (let index = 0; index < table.length; index++) {
       const element = table[index];
@@ -58,8 +52,41 @@ export class DataHelper {
       ? {
           r: parseInt(result[1], 16),
           g: parseInt(result[2], 16),
-          b: parseInt(result[3], 16),
+          b: parseInt(result[3], 16)
         }
       : null;
+  }
+
+  getFormattedArea(unit: 'sqm' | 'sqft' | 'sqkm' | 'sqmi' | 'hectar' = 'sqm', area = 0): number {
+    switch (unit) {
+      case 'sqm':
+        return area;
+      case 'sqft':
+        return this._sqmTosqft(area);
+      case 'sqkm':
+        return this._sqmTosqkm(area);
+      case 'sqmi':
+        return this._sqmTosqmi(area);
+      case 'hectar':
+        return this._sqmToHectar(area);
+      default:
+        return area;
+    }
+  }
+
+  _sqmTosqft(area: number) {
+    return area * 10.7639;
+  }
+
+  _sqmTosqkm(area: number) {
+    return area * 0.000001;
+  }
+
+  _sqmTosqmi(area: number) {
+    return area * 0.000000386102159;
+  }
+
+  _sqmToHectar(area: number) {
+    return area * 0.0001;
   }
 }

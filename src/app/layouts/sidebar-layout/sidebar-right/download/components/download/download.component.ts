@@ -27,6 +27,7 @@ import { DataHelper } from 'src/app/core/modules/dataHelper';
 import OverlayPositioning from 'ol/OverlayPositioning';
 import { MatDialog } from '@angular/material/dialog';
 import { ComponentHelper } from 'src/app/core/modules/componentHelper';
+import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-download',
@@ -58,6 +59,9 @@ export class DownloadComponent extends SelectLayersForDownload implements OnInit
   formsEmprise: FormGroup | undefined;
 
   filterEmpriseOptions: ResponseOfSerachLimitInterface[] = [];
+
+  faTimes = faTimes;
+  faTrash = faTrash;
 
   constructor(
     private store: Store,

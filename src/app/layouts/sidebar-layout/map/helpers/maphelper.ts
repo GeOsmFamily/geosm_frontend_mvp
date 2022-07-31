@@ -23,7 +23,9 @@ import {
   VectorLayer,
   VectorSource,
   XYZ,
-  BaseLayer
+  BaseLayer,
+  Point,
+  Feature
 } from 'src/app/core/modules/openlayers';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -40,6 +42,9 @@ import { LayersInMap } from '../interfaces/layerinmap';
 import { ActiveLayersInterface } from '../interfaces/activelayers';
 import { bboxPolygon, intersect, toWgs84 } from '@turf/turf';
 import { PrincipalMapInterface } from 'src/app/core/interfaces/principal-map-interface';
+import { MapBrowserEvent } from 'ol';
+import { DataFromClickOnMapInterface } from '../interfaces/dataClick';
+import { DataHelper } from 'src/app/core/modules/dataHelper';
 
 const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing', 'searchResultLayer'];
 
@@ -687,4 +692,134 @@ export class MapHelper {
       duration: 1000
     });
   };
+
+  mapHasCliked(evt: MapBrowserEvent<any>, callback: (param: DataFromClickOnMapInterface) => void) {
+    let pixel = this.map?.getEventPixel(evt.originalEvent);
+
+    let feature = this.map?.forEachFeatureAtPixel(
+      pixel!,
+      function (featureLike, _layer) {
+        return featureLike;
+      },
+      {
+        hitTolerance: 5
+      }
+    );
+
+    let layer = this.map?.forEachFeatureAtPixel(
+      pixel!,
+      function (_feature, layerSource) {
+        if (layer instanceof VectorLayer) {
+          return layerSource;
+        } else {
+          return undefined;
+        }
+      },
+      {
+        hitTolerance: 5
+      }
+    );
+
+    let layers = Array();
+
+    if (!feature) {
+      let all_pixels = new DataHelper().calcHitMatrix(evt.pixel);
+      for (let index = 0; index < all_pixels.length; index++) {
+        let un_pixel = all_pixels[index];
+        let nom_layers_load = Array();
+
+        for (let i = 0; i < layers.length; i++) {
+          nom_layers_load.push(layers[i].get('nom'));
+        }
+
+        let layers_in_pixels = this.displayFeatureInfo(un_pixel, 'nom', nom_layers_load);
+
+        for (let j = 0; j < layers_in_pixels.length; j++) {
+          layers.push(layers_in_pixels[j]);
+        }
+      }
+    }
+
+    if (layer instanceof VectorLayer && feature) {
+      if (layer.getSource() instanceof Cluster) {
+        let numberOfFeatureInCluster = this.countFeaturesInCluster(feature.get('features'));
+        if (numberOfFeatureInCluster > 1) {
+          if (Object.create(feature.getGeometry()!).getType() == 'Point') {
+            let coordinate = Object.create(feature.getGeometry()!).getCoordinates();
+            let geom = new Point(coordinate);
+            this.fit_view(geom, this.map?.getView().getZoom()! + 2);
+          }
+        } else if (numberOfFeatureInCluster == 1) {
+          let feat = this.getFeatureThatIsDisplayInCulster(feature.getProperties().features);
+          let coord = this.map?.getCoordinateFromPixel(pixel!);
+          let data_callback: DataFromClickOnMapInterface = {
+            type: 'vector',
+            data: {
+              coord: coord!,
+              layers: [layer],
+              feature: feat,
+              data: {}
+            }
+          };
+
+          callback(data_callback);
+        }
+      }
+    } else if (layers.length > 0) {
+      let coord = this.map?.getCoordinateFromPixel(pixel!);
+      let data_callback_raster: DataFromClickOnMapInterface = {
+        type: 'raster',
+        data: {
+          coord: coord!,
+          layers: layers
+        }
+      };
+      callback(data_callback_raster);
+    } else {
+      let coord = this.map?.getCoordinateFromPixel(pixel!);
+      let data_callback: DataFromClickOnMapInterface = {
+        type: 'clear',
+        data: {
+          coord: coord!,
+          layers: layers
+        }
+      };
+      callback(data_callback);
+    }
+  }
+
+  displayFeatureInfo(pixel: number[], oddLayersAttr: string, oddLayersValues: Array<string>): Array<any> {
+    let layers = Array();
+    this.map?.forEachLayerAtPixel(pixel, layer => {
+      if (layer) {
+        if (
+          (layer instanceof ImageLayer || layer instanceof TileLayer) &&
+          layer.get('descriptionSheetCapabilities') &&
+          oddLayersValues.indexOf(layer.get(oddLayersAttr)) == -1
+        ) {
+          layers.push(layer);
+        }
+      }
+    });
+
+    return layers;
+  }
+
+  countFeaturesInCluster(features: string | any[]): number {
+    let size = 0;
+    for (let index = 0; index < features.length; index++) {
+      features[index];
+      size = size + 1;
+    }
+    return size;
+  }
+
+  getFeatureThatIsDisplayInCulster(features: Array<Feature>): Feature {
+    let feature: Feature;
+    for (let index = 0; index < features.length; index++) {
+      const feat = features[index];
+      feature = feat;
+    }
+    return feature!;
+  }
 }
