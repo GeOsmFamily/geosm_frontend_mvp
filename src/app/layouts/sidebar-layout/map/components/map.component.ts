@@ -62,6 +62,9 @@ import { Pixel } from 'ol/pixel';
 import { DataFromClickOnMapInterface } from '../interfaces/dataClick';
 import { DescriptiveSheetModalComponent } from './descriptive-sheet-modal/descriptive-sheet-modal.component';
 import { DescriptiveSheet } from '../interfaces/descriptiveSheet';
+import { ActivatedRoute } from '@angular/router';
+import { ShareService } from 'src/app/core/services/geosm/share.service';
+import { ComponentHelper } from 'src/app/core/modules/componentHelper';
 let view = new View({
   center: [0, 0],
   zoom: 0,
@@ -146,7 +149,10 @@ export class MapComponent implements OnInit {
     public translate: TranslateService,
     private _snackBar: MatSnackBar,
     private bottomSheet: MatBottomSheet,
-    public zone: NgZone
+    public zone: NgZone,
+    private activatedRoute: ActivatedRoute,
+    public shareService: ShareService,
+    public componentHelper:ComponentHelper
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
@@ -175,6 +181,7 @@ export class MapComponent implements OnInit {
         this.isAltimetrie = true;
       }
       this.mapClicked();
+      this.handleMapParamsUrl();
       let drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
       drawers.forEach(drawer => {
         drawer.openedChange.subscribe(() => {
@@ -321,6 +328,29 @@ export class MapComponent implements OnInit {
     });
   }
 
+  handleMapParamsUrl() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['layers']) {
+        let layers = params['layers'].split(';');
+        this.shareService.addLayersFromUrl(layers);
+      }
+      if (params['feature']) {
+        let parametersShared = params['feature'].split(';');
+        this.shareService.displayFeatureShared(parametersShared);
+      }
+      if (params['share'] && params['path']) {
+        let parametersShared = params['share'].split(';');
+        let parametersPath = params['path'].split(';');
+        this.shareService.displayLocationShared(parametersShared, parametersPath);
+      }
+      if (params['share'] && params['id']) {
+        let parametersShared = params['share'].split(';');
+        let parametersId = params['id'];
+        this.shareService.displayDrawShared(parametersShared, parametersId);
+      }
+    });
+  }
+
   mapClicked() {
     map.on('singleclick', evt => {
       function compare(a: { getZIndex: () => number }, b: { getZIndex: () => number }) {
@@ -343,7 +373,7 @@ export class MapComponent implements OnInit {
 
             if (layerTopZindex) {
               let descriptionSheetCapabilities = layerTopZindex.get('descriptionSheetCapabilities');
-              this.openDescriptiveSheet(
+              this.componentHelper.openDescriptiveSheet(
                 descriptionSheetCapabilities,
                 mapHelper.constructLayerInMap(layerTopZindex),
                 //@ts-ignore
@@ -356,7 +386,7 @@ export class MapComponent implements OnInit {
 
             if (layerTopZindex) {
               let descriptionSheetCapabilities = layerTopZindex.get('descriptionSheetCapabilities');
-              this.openDescriptiveSheet(
+              this.componentHelper.openDescriptiveSheet(
                 descriptionSheetCapabilities,
                 mapHelper.constructLayerInMap(layerTopZindex),
                 //@ts-ignore
@@ -371,68 +401,6 @@ export class MapComponent implements OnInit {
     });
   }
 
-  openDescriptiveSheet(type: string, layer: LayersInMap, coordinates_3857: [number, number], geometry?: any, properties?: any) {
-    if (type) {
-      if (layer.layer instanceof LayerGroup) {
-        layer.layer = new MapHelper().getLayerQuerryInLayerGroup(layer.layer);
-      }
-      this.openDescriptiveSheetModal(
-        {
-          type: type,
-          layer: layer,
-          properties: properties,
-          geometry: geometry,
-          coordinates_3857: coordinates_3857
-        },
-        [],
-        () => {
-          // function
-        }
-      );
-    }
-  }
-
-  openDescriptiveSheetModal(data: DescriptiveSheet, size: Array<string> | [], callBack: Function) {
-    let position = {
-      top: '100px',
-      left: window.innerWidth < 500 ? '0px' : window.innerWidth / 2 - 400 / 2 + 'px'
-    };
-    for (let index = 0; index < this.dialog.openDialogs.length; index++) {
-      const elementDialog = this.dialog.openDialogs[index];
-
-      if (elementDialog.componentInstance instanceof DescriptiveSheetModalComponent) {
-        if (document.getElementById(elementDialog.id)) {
-          if (document.getElementById(elementDialog.id)!.parentElement) {
-            position.top = document.getElementById(elementDialog.id)!.parentElement!.getBoundingClientRect().top + 'px';
-            position.left = document.getElementById(elementDialog.id)!.parentElement!.getBoundingClientRect().left + 'px';
-          }
-        }
-
-        elementDialog.close();
-      }
-    }
-
-    let proprietes: MatDialogConfig = {
-      disableClose: false,
-      minWidth: 550,
-      maxHeight: 460,
-      width: '550px',
-      data: data,
-      hasBackdrop: false,
-      autoFocus: false,
-      position: position
-    };
-
-    if (size.length > 0) {
-      // proprietes['width']=size[0]
-      proprietes['height'] = size[1];
-    }
-    const modal = this.dialog.open(DescriptiveSheetModalComponent, proprietes);
-
-    modal.afterClosed().subscribe(async (result: any) => {
-      callBack(result);
-    });
-  }
 
   toogleLeftSidenav() {
     if (this.sidenavContainer?.start?.opened) {
