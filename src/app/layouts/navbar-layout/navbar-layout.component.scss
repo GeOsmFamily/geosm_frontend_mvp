@@ -14,9 +14,11 @@
 .menu-list {
   background-color: white;
   overflow: hidden;
+
 }
 
 .menu-list a {
+
   float: left;
   padding: 12px;
   color: black;
@@ -53,7 +55,23 @@
   margin-top: 15px;
 }
 
+.button_help{
+  border: none;
+    background-color: unset;
+
+    margin-left: 50px;
+    cursor: pointer;
+}
 @media (max-width: 728px) {
+  .button_help{
+    margin-left: unset !important;
+    margin-top: 30px;
+  }
+  .menu_container{
+    flex-direction: column !important;
+    margin-left: unset !important;
+  }
+
   .entete {
     display: flex !important;
     flex-direction: column !important;
