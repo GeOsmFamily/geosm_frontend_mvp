@@ -1,5 +1,6 @@
+import { ComponentHelper } from 'src/app/core/modules/componentHelper';
 import { TranslateService } from '@ngx-translate/core';
-import { Draw, Feature, Map, unByKey, VectorSource } from 'src/app/core/modules/openlayers';
+import { Draw, Feature, Map, unByKey, VectorSource, GeoJSON } from 'src/app/core/modules/openlayers';
 import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { LayersTools } from '../../tools/layers';
@@ -12,6 +13,8 @@ import { SelectEvent } from 'ol/interaction/Select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as jQuery from 'jquery';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { Draw as DrawModel, DrawInterface } from '../../interfaces/draw';
+import { DrawService } from '../../services/draw.service';
 
 type NewType = 'Point' | 'LineString' | 'Polygon';
 
@@ -22,7 +25,6 @@ type NewType = 'Point' | 'LineString' | 'Polygon';
 })
 export class DrawComponent implements OnInit {
   faTimes = faTimes;
-
 
   @Input() map: Map | undefined;
 
@@ -65,7 +67,14 @@ export class DrawComponent implements OnInit {
   select;
   modify;
 
-  constructor(private _ngZone: NgZone, private fb: FormBuilder, public translate: TranslateService, private _snackBar: MatSnackBar) {
+  constructor(
+    private _ngZone: NgZone,
+    private fb: FormBuilder,
+    public translate: TranslateService,
+    private _snackBar: MatSnackBar,
+    public drawService: DrawService,
+    public componentHelper: ComponentHelper
+  ) {
     let layersTools = new LayersTools();
     this.overlay = layersTools.createOverlay('overlay-draw-text');
     this.overlayColor = layersTools.createOverlay('overlay-draw-color');
@@ -156,11 +165,11 @@ export class DrawComponent implements OnInit {
       this._ngZone.run(() => {
         let drawFeature: Feature = drawEvent.feature;
         drawFeature.set('type', type);
-        let featureId = DataHelper.makeid();
+        let featureId = DataHelper.makeid(5);
         let allFeatureIds = MapHelper.listIdFromSource(this.source);
 
         while (allFeatureIds.indexOf(featureId) != -1) {
-          featureId = DataHelper.makeid();
+          featureId = DataHelper.makeid(5);
         }
 
         drawFeature.setId(featureId);
@@ -370,57 +379,47 @@ export class DrawComponent implements OnInit {
   }
 
   shareAllDraw() {
-  /*  if (this.source.getFeatures().length > 0) {
-      let dataToSendInDB: Array<ModelOfDrawDataInDBInterface> = [];
-
+    if (this.source.getFeatures().length > 0) {
+      let dataToSendInDB: Array<DrawModel> = [];
+      const code = DataHelper.makeid(8);
       for (let index = 0; index < this.source.getFeatures().length; index++) {
         const feature = this.source.getFeatures()[index];
         dataToSendInDB.push({
-          type: feature.get('type'),
-          comment: feature.get('comment') ? feature.get('comment') : '',
-          hexa_code: feature.get('color') ? feature.get('color') : this.primaryColor,
-          geom: new GeoJSON().writeGeometryObject(feature.getGeometry()!),
-          //@ts-ignore
-          geometry: feature.getGeometry()?.getCoordinates()
+          code: code,
+          type: feature.getGeometry()!.getType(),
+          description: feature.get('comment') ? feature.get('comment') : '',
+          color: feature.get('color') ? feature.get('color') : environment.primarycolor,
+          geom: JSON.stringify(new GeoJSON().writeGeometryObject(feature.getGeometry()!)),
+          created_at: new Date(),
+          updated_at: new Date()
         });
       }
-      jQuery('.accordion-draw-loading').show();
-      this.apiService
-        .post_requete('geoportail/saveDraw', {
-          donnes: dataToSendInDB
-        })
-        .then(
-          response => {
-            jQuery('.accordion-draw-loading').hide();
-            if (response['status'] == 'ok') {
-              var url_share = environment.url_frontend + '?share=draw&id=' + response['code_dessin'];
-              this.componentHelper.openSocialShare(url_share, 7);
-            } else {
-              this.translate.get('backend_error').subscribe((res: any) => {
-                this.notifier.notify('error', res);
-              });
-            }
-          },
-          error => {
-            jQuery('.accordion-draw-loading').hide();
-            this.translate.get('backend_error').subscribe((res: any) => {
-              this.notifier.notify('error', res);
+
+      this.drawService.saveDraw(dataToSendInDB).subscribe((drawInterface: DrawInterface) => {
+        if (drawInterface.success) {
+          let url_share = environment.url_frontend + '?share=draw&id=' + code;
+          this.componentHelper.openSocialShare(url_share, 7);
+        } else {
+          this.translate.get('server_error').subscribe((res: any) => {
+            this._snackBar.open(res.message, res.cancel, {
+              duration: 5000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'center'
             });
-          }
-        );
-    } else {
-      this.translate.get('tools').subscribe((res: any) => {
-        this._snackBar.open(res.map_tools.draw.no_draw, res.map_tools.draw.cancel, {
-          duration: 5000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'center'
-        });
+          });
+        }
       });
-    }*/
+    }
   }
 
   deleteleAllDraw() {
     this.source.clear();
+    let mapHelper = new MapHelper();
+    let drawLayers = mapHelper.getLayerByName('draw');
+
+    for (let index = 0; index < drawLayers.length; index++) {
+      mapHelper.removeLayerToMap(drawLayers[index]);
+    }
   }
 
   saveFormToFeaturePte() {

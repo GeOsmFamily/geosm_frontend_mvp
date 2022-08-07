@@ -367,7 +367,7 @@ export class DownloadComponent extends SelectLayersForDownload implements OnInit
   ) {
     this.closeAllChartsInMap();
 
-    let idOverlay = DataHelper.makeid();
+    let idOverlay = DataHelper.makeid(5);
 
     let layerExport = this.constructLayerToDisplayResult();
     layerExport.set('properties', { idOverlay: idOverlay });

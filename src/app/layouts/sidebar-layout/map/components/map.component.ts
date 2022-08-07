@@ -45,7 +45,7 @@ import {
   faRoute,
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { fromLonLat, transform } from 'ol/proj';
@@ -60,8 +60,6 @@ import { ButtomSheetComponent } from './buttom-sheet/buttom-sheet.component';
 import { Viewer } from 'mapillary-js';
 import { Pixel } from 'ol/pixel';
 import { DataFromClickOnMapInterface } from '../interfaces/dataClick';
-import { DescriptiveSheetModalComponent } from './descriptive-sheet-modal/descriptive-sheet-modal.component';
-import { DescriptiveSheet } from '../interfaces/descriptiveSheet';
 import { ActivatedRoute } from '@angular/router';
 import { ShareService } from 'src/app/core/services/geosm/share.service';
 import { ComponentHelper } from 'src/app/core/modules/componentHelper';
@@ -152,7 +150,7 @@ export class MapComponent implements OnInit {
     public zone: NgZone,
     private activatedRoute: ActivatedRoute,
     public shareService: ShareService,
-    public componentHelper:ComponentHelper
+    public componentHelper: ComponentHelper
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
@@ -180,8 +178,6 @@ export class MapComponent implements OnInit {
       if (project.config.data.instance.altimetrie) {
         this.isAltimetrie = true;
       }
-      this.mapClicked();
-      this.handleMapParamsUrl();
       let drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
       drawers.forEach(drawer => {
         drawer.openedChange.subscribe(() => {
@@ -199,6 +195,8 @@ export class MapComponent implements OnInit {
         });
       });
     });
+    this.mapClicked();
+    this.handleMapParamsUrl();
 
     let popup_lot = new Overlay({
       element: document.getElementById('popup_lot')!,
@@ -400,7 +398,6 @@ export class MapComponent implements OnInit {
       });
     });
   }
-
 
   toogleLeftSidenav() {
     if (this.sidenavContainer?.start?.opened) {

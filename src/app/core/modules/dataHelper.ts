@@ -1,9 +1,9 @@
 export class DataHelper {
-  public static makeid(): string {
+  public static makeid(size: number): string {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-    for (let i = 0; i < 5; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
+    for (let i = 0; i < size; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
   }

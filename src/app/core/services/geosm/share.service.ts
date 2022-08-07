@@ -1,4 +1,17 @@
-import { Feature, Point,GeoJSON, Overlay, Transform } from 'src/app/core/modules/openlayers';
+import {
+  Feature,
+  Point,
+  GeoJSON,
+  Overlay,
+  Transform,
+  Style,
+  CircleStyle,
+  Stroke,
+  Text,
+  Fill,
+  VectorSource,
+  VectorLayer
+} from 'src/app/core/modules/openlayers';
 import { Injectable } from '@angular/core';
 import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
 import { CarteService } from './carte/carte.service';
@@ -9,18 +22,29 @@ import { ComponentHelper } from '../../modules/componentHelper';
 import { ApiService } from '../api/api.service';
 import * as jQuery from 'jquery';
 import { environment } from 'src/environments/environment';
+import { DrawService } from 'src/app/layouts/sidebar-layout/sidebar-right/map-tools/services/draw.service';
+import { DataHelper } from '../../modules/dataHelper';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShareService {
+  source_draw = new VectorSource();
+
+  vector_draw = new VectorLayer();
+
   constructor(
     public thematiqueService: ThematiqueService,
     public carteService: CarteService,
     public layerService: LayersService,
     public componentHelper: ComponentHelper,
-    public apiService: ApiService
-  ) {}
+    public apiService: ApiService,
+    public drawService: DrawService
+  ) {
+    this.vector_draw = new VectorLayer({
+      source: this.source_draw
+    });
+  }
 
   shareLayers(
     layers: Array<{
@@ -67,7 +91,7 @@ export class ShareService {
               //  this.componentHelper.openGroupThematiqueSlide(groupThem);
               setTimeout(() => {
                 try {
-                  $('#couche_' + couche!.id)[0].scrollIntoView(false);
+                  jQuery('#couche_' + couche!.id)[0].scrollIntoView(false);
                 } catch (error) {}
               }, 1000);
             }
@@ -173,20 +197,20 @@ export class ShareService {
 
       mapHelper.map?.addOverlay(coord_caracteri);
 
-      $('#spinner_loading').show();
+      jQuery('#spinner_loading').show();
 
-      $('#coord_caracteristics').show();
+      jQuery('#coord_caracteristics').show();
 
-      $('#coord_caracteristics').on('mousemove', _evt => {
-        $('#coord_caracteristics .fa-times').show();
+      jQuery('#coord_caracteristics').on('mousemove', _evt => {
+        jQuery('#coord_caracteristics .fa-times').show();
 
-        $('#coord_caracteristics .fa-dot-circle').hide();
+        jQuery('#coord_caracteristics .fa-dot-circle').hide();
       });
 
-      $('#coord_caracteristics').on('mouseout', _evt => {
-        $('#coord_caracteristics .fa-times').hide();
+      jQuery('#coord_caracteristics').on('mouseout', _evt => {
+        jQuery('#coord_caracteristics .fa-times').hide();
 
-        $('#coord_caracteristics .fa-dot-circle').show();
+        jQuery('#coord_caracteristics .fa-dot-circle').show();
       });
 
       let coord_4326 = Transform(coord!, 'EPSG:3857', 'EPSG:4326');
@@ -229,6 +253,103 @@ export class ShareService {
   }
 
   displayDrawShared(parametersShared: any, parametersId: any) {
-    // functions to display draw
+    console.log(parametersId);
+    let mapHelper = new MapHelper();
+    jQuery('#spinner_loading').show();
+
+    this.drawService.getAllDrawByCode(parametersId).subscribe(results => {
+      jQuery('#spinner_loading').hide();
+
+      if (results.success) {
+        let dessins = {
+          point: Array(),
+          polygon: Array(),
+          linestring: Array(),
+          text: Array()
+        };
+
+        for (let index = 0; index < results.data.draws.length; index++) {
+          let element = results.data.draws[index];
+          let i: number;
+          if (element.type == 'Point') {
+            i = dessins['point'].length;
+            dessins['point'].push('element');
+          } else if (element.type == 'Polygon') {
+            i = dessins['polygon'].length;
+            dessins['polygon'].push(element);
+          } else if (element.type == 'LineString') {
+            i = dessins['linestring'].length;
+            dessins['linestring'].push(element);
+          }
+
+          let type_dessin = element.type;
+          let color_dessin = element.color;
+
+          let geometry = JSON.parse(element.geom);
+
+          let feature = new GeoJSON().readFeature(geometry);
+          feature.set('descripion', element.description);
+          feature.set('type', type_dessin);
+          feature.set('id', i!);
+
+          feature.setStyle(
+            new Style({
+              fill: new Fill({
+                color: [
+                  DataHelper.hexToRgb(color_dessin)!.r,
+                  DataHelper.hexToRgb(color_dessin)!.g,
+                  DataHelper.hexToRgb(color_dessin)!.b,
+                  0.7
+                ]
+              }),
+              stroke: new Stroke({
+                color: color_dessin,
+                width: 2
+              }),
+              image: new CircleStyle({
+                radius: 7,
+                stroke: new Stroke({
+                  color: color_dessin,
+                  width: 2
+                }),
+                fill: new Fill({
+                  color: [
+                    DataHelper.hexToRgb(color_dessin)!.r,
+                    DataHelper.hexToRgb(color_dessin)!.g,
+                    DataHelper.hexToRgb(color_dessin)!.b,
+                    0.7
+                  ]
+                })
+              }),
+              text: new Text({
+                font: 'bold 18px Calibri,sans-serif',
+                offsetY: 15,
+                fill: new Fill({
+                  color: color_dessin
+                }),
+                text: element.description,
+                stroke: new Stroke({ color: '#fff', width: 2 })
+              })
+            })
+          );
+
+          this.source_draw.addFeature(feature);
+        }
+
+        setTimeout(() => {
+          this.vector_draw.set('iconImagette', environment.url_frontend + '/assets/images/svg/draw.svg');
+          this.vector_draw.set('inToc', false);
+          this.vector_draw.setZIndex(1000);
+          this.vector_draw.set('name', 'draw');
+          this.vector_draw.set('nom', 'draw');
+          this.vector_draw.set('type_layer', 'draw');
+          mapHelper.addLayerToMap(this.vector_draw);
+          mapHelper.map?.getView().fit(this.source_draw.getExtent(), {
+            size: mapHelper.map.getSize(),
+            duration: 1000
+          });
+        }, 3000);
+      }
+    });
   }
 }

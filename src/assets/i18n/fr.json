@@ -168,5 +168,10 @@
     "displayLesAttributes": " Afficher moins",
     "server_error": "un problème est survenue lors du traitement des informations du serveur cartograhique",
     "cancel": "Annuler"
+  },
+  "server_error": {
+    "title": "Erreur",
+    "message": "Une erreur est survenue sur le serveur",
+    "cancel": "Annuler"
   }
 }

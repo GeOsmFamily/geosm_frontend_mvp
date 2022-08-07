@@ -698,8 +698,8 @@ export class MapHelper {
 
     let feature = this.map?.forEachFeatureAtPixel(
       pixel!,
-      function (featureLike, _layer) {
-        return featureLike;
+      function (feature, layer) {
+        return feature;
       },
       {
         hitTolerance: 5
@@ -708,9 +708,9 @@ export class MapHelper {
 
     let layer = this.map?.forEachFeatureAtPixel(
       pixel!,
-      function (_feature, layerSource) {
+      function (feature, layer) {
         if (layer instanceof VectorLayer) {
-          return layerSource;
+          return layer;
         } else {
           return undefined;
         }
