@@ -1,0 +1,52 @@
+<div class="group static flex flex-col py-3 border-neutral-200 cursor-pointer rounded-lg" [ngClass]="{'bg-primary -mx-2 px-2': selected && !lite, 'border-t': !lite, 'border px-3': lite || forceSelected, 'bg-secondary-light': (selected && lite) || categoriesSelected, 'justify-center h-24': lite || forceSelected}" *ngIf="odd" (click)="onSelected()">
+  <div class="flex items-center">
+    <img [src]="odd.logo_odd" [alt]="odd.name" [width]="logoSize" [height]="logoSize" class="rounded-md">
+    <div class="ml-3" [ngClass]="{'w-full': forceSelected, 'mr-auto': lite}">
+      <h3 class="text-xs font-bold" [ngClass]="{'text-white': selected && !lite, 'text-primary': !selected || lite || forceSelected, 'max-w-[140px]': selected && (lite||forceSelected), 'flex w-full': categoriesSelected}">
+        <span>{{ odd.name }}</span>
+        <ng-icon name="hero-check" class="ml-auto" *ngIf="categoriesSelected"></ng-icon>
+      </h3>
+      <ng-template [ngTemplateOutlet]="template" *ngIf="forceSelected"></ng-template>
+      <p *ngIf="odd.count_osc > 0 && !forceSelected" class="text-xs font-semibold lowercase" [ngClass]="{'text-neutral-300': selected, 'text-neutral-400': !selected || (selected && lite)}">
+        <span *ngIf="odd.count_osc > 1">Nombre de couches</span>
+      </p>
+    </div>
+    <div *ngIf="lite && selected" class="flex flex-col items-end">
+      <!-- <button class="p-2 mb-1 bg-primary text-white text-xs font-bold rounded-lg uppercase">{{ 'button.details'|translate }}</button> -->
+          </div>
+  </div>
+  <ng-template [ngTemplateOutlet]="template" *ngIf="selected && !lite"></ng-template>
+</div>
+
+<ng-template #template>
+  <div class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleCategories()" cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin">
+    <p class="mr-auto text-xs text-primary font-semibold">{{ getSelectPlaceholder() }}</p>
+    <span class="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary"></span>
+    <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="showCategories" [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()" (overlayOutsideClick)="toggleCategories()" (overlayKeydown)="onOverlayKeydown($event)">
+      <div class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white rounded-lg overflow-y-auto shadow-lg" *ngIf="showCategories">
+        <div class="flex items-center pb-3 border-b border-b-primary">
+          <label class="text-xs text-primary font-extrabold">
+
+            <input type="checkbox" [checked]="allSelected()" (change)="onSelectAll($event)" class="mr-3 text-primary focus:ring-primary">
+           Couches
+          </label>
+          <button class="flex items-center text-primary ml-auto" (click)="toggleCategories()">
+            <ng-icon name="hero-x" size="24"></ng-icon>
+          </button>
+        </div>
+
+        <ng-container *ngIf="categories.length !== 0">
+          <form [formGroup]="form">
+            <div *ngFor="let category of categories; let i = index;" class="py-3 border-b border-b-neutral-200" formArrayName="categories">
+              <label class="flex text-primary text-xs">
+                <input type="checkbox" (change)="onCheckboxChange($event, i)" checked [formControlName]="i" class="mr-3 text-primary focus:ring-primary">
+                {{ category.category_number }} {{ category.intitule }}
+              </label>
+            </div>
+          </form>
+        </ng-container>
+      </div>
+    </ng-template>
+  </div>
+</ng-template>

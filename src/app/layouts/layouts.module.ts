@@ -28,6 +28,7 @@ import { ChartOverlayComponent } from './sidebar-layout/sidebar-right/download/c
 import { DownloadComponent } from './sidebar-layout/sidebar-right/download/components/download/download.component';
 import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/component/searchbar-layout.component';
 import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-layers/component/metadata-modal/metadata-modal.component';
+import { ThematiquesModule } from '../thematiques/thematiques.module';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-la
     FormsModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    ColorPickerModule
+    ColorPickerModule,
+    ThematiquesModule,
   ]
 })
 export class LayoutsModule {}

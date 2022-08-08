@@ -10,6 +10,8 @@ import { SocialsharedComponent } from './socialshared/socialshared.component';
 import { ShareButtonsConfig } from 'ngx-sharebuttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { IconsModule } from './icons/icons.module';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 const customConfig: ShareButtonsConfig = {
   include: ['copy', 'facebook', 'twitter', 'linkedin', 'messenger', 'whatsapp'],
@@ -21,15 +23,22 @@ const customConfig: ShareButtonsConfig = {
 
 @NgModule({
   declarations: [LoadingComponent, ModalComponent, SocialsharedComponent],
-  exports: [LoadingComponent, ModalComponent, SocialsharedComponent],
+  exports: [LoadingComponent, ModalComponent, SocialsharedComponent, OverlayModule,
+    IconsModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   imports: [
     CommonModule,
+    FormsModule,
     MaterialModule,
     FontAwesomeModule,
     ReactiveFormsModule,
     TranslateModule,
     ShareButtonsModule.withConfig(customConfig),
-    ShareIconsModule
+    ShareIconsModule,
+    IconsModule,
+    OverlayModule
   ]
 })
 export class SharedModule {}

@@ -1,0 +1,15 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+input[type=checkbox] {
+ appearance:initial;
+ -webkit-appearance: checkbox;
+}
+
+input[type="checkbox"]:checked {
+  accent-color:black !important;
+}
+
+

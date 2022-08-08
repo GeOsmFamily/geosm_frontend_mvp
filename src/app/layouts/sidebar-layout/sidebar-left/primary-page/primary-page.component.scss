@@ -1,3 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 .user-box {
   padding: 1.2rem 1.2rem 1.6rem;
   border-bottom-color: rgba(0, 0, 0, 0.08);
@@ -12,6 +16,20 @@
   overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
+}
+
+
+.box{
+  position: relative;
+display: flex;
+flex-direction: column;
+margin-top: .75rem;
+background-color: wheat;
+border-radius: 10px;
+margin-left: 10px;
+margin-right: 10px;
+padding-left: 30px;
+padding-top: 10px;
 }
 
 .cover-image {

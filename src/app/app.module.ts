@@ -17,6 +17,7 @@ import { mapFeatureKey, mapreducer } from './layouts/sidebar-layout/map/states/m
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { searchFeatureKey, searchreducer } from './layouts/navbar-layout/searchbar-layout/states/search.reducer';
 import { SearchEffects } from './layouts/navbar-layout/searchbar-layout/states/search.effects';
+import { ThematiquesModule } from './thematiques/thematiques.module';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [{ prefix: './assets/i18n/', suffix: '.json' }]);
@@ -38,11 +39,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     }),
     BrowserAnimationsModule,
     LayoutsModule,
+    ThematiquesModule,
     StoreModule.forFeature(searchFeatureKey, searchreducer),
     StoreModule.forFeature(mapFeatureKey, mapreducer),
     StoreModule.forRoot({}, { runtimeChecks: { strictStateImmutability: false, strictActionImmutability: false } }),
     EffectsModule.forRoot([MapEffects, SearchEffects]),
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
