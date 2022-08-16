@@ -4,9 +4,11 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { finalize } from 'rxjs';
+import { ConnectableObservable, finalize } from 'rxjs';
 import { Category } from '../category';
 import { Odd } from '../odd';
+import{Thematique,SousThematique} from '../../core/interfaces/thematique-interface';
+import { Couche } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/couche';
 
 @Component({
   selector: 'app-thematique',
@@ -16,16 +18,17 @@ import { Odd } from '../odd';
 export class ThematiqueComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
-  @Input() odd!: Odd;
+  @Input() odd!: Thematique;
   @Input() selected = false;
   @Input() forceSelected = false;
-  @Input() categoriesSelected = false;
+  @Input() SousThematiquesSelected = false;
   @Input() lite = false;
-  @Output() categoriesSelection: EventEmitter<Category[]> = new EventEmitter<Category[]>();
+  @Output() couchesSelection: EventEmitter<Couche[]> = new EventEmitter<Couche[]>();
   mobileQuery: MediaQueryList;
   form: FormGroup;
-  showCategories: boolean = false;
-  categories: Category[] = [];
+  showCouches: boolean = false;
+  couches: Couche[] = [];
+  SousThematiques:SousThematique[]=[]
   loading: boolean = false;
   logoSize: number = 36;
 
@@ -40,7 +43,8 @@ export class ThematiqueComponent implements OnInit {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
     this.form = this.formBuilder.group({
-      categories: this.formBuilder.array([])
+      couches: this.formBuilder.array([])
+
     });
   }
 
@@ -50,31 +54,24 @@ export class ThematiqueComponent implements OnInit {
     }
   }
 
-  toggleCategories(): void {
-    this.showCategories = !this.showCategories;
+  toggleCouches(): void {
+    this.showCouches = !this.showCouches;
 
-    if (this.showCategories && !this.categories.length) {
-      this.getCategories();
+    if (this.showCouches && !this.couches.length) {
+      this.getSousThematiques();
     }
 
-    if (!this.showCategories) {
-      this.categoriesSelection.emit(this.getSelectedCategories());
+    if (!this.showCouches) {
+      this.couchesSelection.emit(this.getSelectedCouches());
     }
   }
 
-  getCategories(emit: boolean = false): void {
-    this.categories=[
-      { "category_number":"2.3",
-      "intitule":"uuuuuuuuuuuuuu"},
-      { "category_number":"2.3",
-      "intitule":"uuuuuuuuuuuuuu"},
-      { "category_number":"2.3",
-      "intitule":"uuuuuuuuuuuuuu"}
-
-    ];
+  getSousThematiques(emit: boolean = false): void {
+    this.SousThematiques=this.odd.sous_thematiques
+    this.couches=this.odd.sous_thematiques[0].couches
     this.initializeForm();
     if (emit) {
-      this.categoriesSelection.emit(this.getSelectedCategories());
+      this.couchesSelection.emit(this.getSelectedCouches());
     }
     this.loading = false;
 
@@ -103,29 +100,29 @@ export class ThematiqueComponent implements OnInit {
     return ['max-h-72', '-translate-y-8'];
   }
 
-  getSelectedCategories(): Category[] {
-    const selectedCategories: Category[] = [];
+  getSelectedCouches(): Couche[] {
+    const selectedCouches:Couche[] = [];
 
-    const categoriesFormControl = this.form.get('categories') as FormArray;
-    categoriesFormControl.controls.forEach((control: AbstractControl, index: number) => {
+    const couchesFormControl = this.form.get('couches') as FormArray;
+    couchesFormControl.controls.forEach((control: AbstractControl, index: number) => {
       if (control.value) {
-        selectedCategories.push(this.categories[index]);
+        selectedCouches.push(this.couches[index]);
       }
     });
 
-    return selectedCategories;
+    return selectedCouches;
   }
 
   getSelectPlaceholder(): string {
-    const selectedCategories: Category[] = this.getSelectedCategories();
-    if (this.forceSelected && selectedCategories.length === 0) {
+    const selectedCouches: Couche[] = this.getSelectedCouches();
+    if (this.forceSelected && selectedCouches.length === 0) {
       return this.i18n.instant('text.all_goal_categories', {number: this.odd.id});
     }
 
     if (!this.allSelected()) {
       const selectedTexts: string[] = [];
-      selectedCategories.forEach((category: Category) => {
-        selectedTexts.push(this.i18n.instant('text.target', {target: category.category_number}));
+      selectedCouches.forEach((category: Couche) => {
+        //selectedTexts.push(this.i18n.instant('text.target', {target: category.category_number}));
       });
 
       //return selectedTexts.join(', ');
@@ -135,29 +132,30 @@ export class ThematiqueComponent implements OnInit {
   }
 
   allSelected(): boolean {
-    return this.form.get('categories')?.value.every((value: boolean) => value);
+    return this.form.get('couches')?.value.every((value: boolean) => value);
   }
 
   initializeForm(): void {
-    const checkboxArray: FormArray = this.form.get('categories') as FormArray;
+    const checkboxArray: FormArray = this.form.get('couches') as FormArray;
     checkboxArray.clear();
-    this.categories.forEach((category: Category) => {
+    this.couches.forEach((couche: Couche) => {
       checkboxArray.push(new FormControl(true));
     })
   }
 
   onSelectAll(event: any): void {
-    const categoriesFormControl = this.form.get('categories') as FormArray;
+    const couchesFormControl = this.form.get('couches') as FormArray;
     const value = event.target?.checked || false;
 
-    categoriesFormControl.controls.forEach((control: AbstractControl) => {
+    couchesFormControl.controls.forEach((control: AbstractControl) => {
       control.setValue(value);
+
     });
   }
 
   onCheckboxChange(event: any, position: number): void {
-    const categoriesFormControl = this.form.get('categories') as FormArray;
-    categoriesFormControl.controls.forEach((control: AbstractControl, index: number) => {
+    const couchesFormControl = this.form.get('couches') as FormArray;
+  couchesFormControl.controls.forEach((control: AbstractControl, index: number) => {
       if (position === index) {
         control.setValue(control.value);
       }
@@ -166,20 +164,23 @@ export class ThematiqueComponent implements OnInit {
 
   onOverlayKeydown(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
-      this.toggleCategories();
+      this.toggleCouches();
     }
   }
 
   onSelected(): void {
-    if (this.forceSelected && this.categories.length > 0) {
-      this.categories = [];
-      this.categoriesSelection.emit(this.categories);
+    if (this.forceSelected && this.couches.length > 0) {
+      this.couches = [];
+      this.couchesSelection.emit(this.couches);
       return;
     }
 
-    if (!this.categories.length) {
-      this.getCategories(true);
+    if (!this.couches.length) {
+      this.getSousThematiques(true);
     }
   }
 
+  showHideCoucheSousThematique(){
+
+  }
 }

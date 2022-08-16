@@ -59,8 +59,8 @@
   <div *ngIf="isOpen()">
     <div class="group px-7 flex-1 max-h-[calc(100vh-116px)] md:max-h-[calc(100vh-300px)] overflow-auto">
       <!--<app-loading-lines *ngIf="loading && odds.length === 0"></app-loading-lines>-->
-      <div *ngFor="let item of odds" class="last:pb-28 last:md:pb-10">
-        <app-thematique [odd]="item" [selected]="item === selectedOdd" [lite]="false" (categoriesSelection)="onCategoriesSelection($event)" (click)="onSelectOdd(item)"></app-thematique>
+      <div *ngFor="let item of thematiques" class="last:pb-28 last:md:pb-10">
+        <app-thematique [odd]="item" [selected]="item === selectedOdd" [lite]="false" (couchesSelection)="onCouchesSelection($event)" (click)="onSelectThematique(item)"></app-thematique>
       </div>
     </div>
   </div>

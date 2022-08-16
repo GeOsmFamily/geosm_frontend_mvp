@@ -4,6 +4,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,6 @@ import { LoginComponent } from './login/login.component';
     RegisterComponent,
     LoginComponent
   ],
-  imports: [CommonModule]
+  imports: [CommonModule,AuthRoutingModule]
 })
 export class AuthModule {}
