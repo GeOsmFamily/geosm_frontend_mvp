@@ -28,8 +28,8 @@
         <div class="flex items-center pb-3 border-b border-b-primary">
           <label class="text-xs text-primary font-extrabold">
 
-            <input type="checkbox" [checked]="allSelected()" (change)="onSelectAll($event)" class="mr-3 text-primary focus:ring-primary">
-           Couches
+            <!--<input type="checkbox" [checked]="allSelected()" (change)="onSelectAll($event)" class="mr-3 text-primary focus:ring-primary">
+           Couches-->
           </label>
           <button class="flex items-center text-primary ml-auto" (click)="toggleCategories()">
             <ng-icon name="hero-x" size="24"></ng-icon>
@@ -39,6 +39,7 @@
         <ng-container *ngIf="categories.length !== 0">
           <form [formGroup]="form">
             <div *ngFor="let category of categories; let i = index;" class="py-3 border-b border-b-neutral-200" formArrayName="categories">
+
               <label class="flex text-primary text-xs">
                 <input type="checkbox" (change)="onCheckboxChange($event, i)" checked [formControlName]="i" class="mr-3 text-primary focus:ring-primary">
                 {{ category.category_number }} {{ category.intitule }}

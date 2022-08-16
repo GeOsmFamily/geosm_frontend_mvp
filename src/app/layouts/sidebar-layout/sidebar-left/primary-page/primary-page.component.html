@@ -1,8 +1,8 @@
-<!--<div class="user-box break-words">
+<div class="user-box break-words">
   <div class="cover-image"></div>
   <a href="/in/boris-gautier-tchoukouaha-420262143/" id="ember145" class="ember-view block">
     <div style="text-align: center">
-      <img
+      <!--<img
         width="64"
         src="https://media-exp2.licdn.com/dms/image/C4D03AQGkW5vvuH4KYQ/profile-displayphoto-shrink_100_100/0/1605181488764?e=1660780800&v=beta&t=9H6ftlAqlgiiasEeN9Lqlm4Oie8vNStVnLTabMjIU1E"
         alt=""
@@ -11,32 +11,48 @@
         alt="Photo de profil"
         id="ember146"
         class="profile-image entityPhoto lazy-image ember-view"
+      />-->
+      <img
+        width="64"
+        src="assets/images/png/person.png"
+        alt=""
+        loading="lazy"
+        height="60"
+        alt="Photo de profil"
+        id="ember146"
+        class="profile-image entityPhoto lazy-image ember-view"
       />
     </div>
-    <div class="t-16 t-black t-bold">Boris Gautier TCHOUKOUAHA</div>
+    <!--<div class="t-16 t-black t-bold">Boris Gautier TCHOUKOUAHA</div>-->
   </a>
-  <p class="t-12 t-black--light t-normal mt1">Software Development Engineer - Full Stack</p>
-</div>
+  <!--<p class="t-12 t-black--light t-normal mt1">Software Development Engineer - Full Stack</p>
+  -->
+  <div class="flex space-x-2 justify-center">
+    <button [routerLink]="['auth/login']" mat-raised-button color="primary" class="connectButton">Se connecter</button>
 
-<div style="text-align: center">
+  </div>
+  </div>
+
+<!--<div style="text-align: center">
   <button mat-raised-button class="white base-group-carte-btn" color="primary">{{ 'left_menu.maps_background' | translate }}</button>
-</div>
+</div>-->
 
 <h5 class="bold primaryColor primary_transparent_bg arborescence-group">
   <fa-icon [icon]="faLayer"></fa-icon>
   {{ 'left_menu.themes' | translate }}
-</h5>-->
+</h5>
 
-<div class="flex space-x-2 justify-center">
-  <button type="button" class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
-</div>
+
 <div  class=" flex flex-col mt-3 md:mt-9 bg-white rounded-lg shadow-lg" [ngClass]="{'pb-14 ': isOpen(), 'mt-2 mx-3': !isOpen()}">
-  <h2 class="flex  md:pt-4 md:pb-5 text-xs md:text-sm text-secondary  md:text-left font-semibold" [ngClass]="{'pb-4 pt-4 px-7': isOpen(), 'pb-2 pt-2 px-4': !isOpen()}">
+  <!--
+
+
+    <h2 class="flex  md:pt-4 md:pb-5 text-xs md:text-sm text-secondary  md:text-left font-semibold" [ngClass]="{'pb-4 pt-4 px-7': isOpen(), 'pb-2 pt-2 px-4': !isOpen()}">
    Filtrer
     <button *ngIf="isOpen()" class="md:hidden ml-auto text-primary" (click)="toggle()">
       <ng-icon name="hero-x" size="24"></ng-icon>
     </button>
-  </h2>
+  </h2>-->
   <button *ngIf="!isOpen()" class="text-primary" (click)="toggle()">
     <ng-icon name="hero-chevron-down" strokeWidth="3"></ng-icon>
   </button>

@@ -15,10 +15,11 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'auth',
+    path: 'auth/',
     component: AuthLayoutComponent,
     loadChildren: () => import('./core/auth/auth.module').then(m => m.AuthModule)
-  }
+  },
+
 ];
 
 @NgModule({
