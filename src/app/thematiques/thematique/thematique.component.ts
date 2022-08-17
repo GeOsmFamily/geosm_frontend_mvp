@@ -9,6 +9,7 @@ import { Category } from '../category';
 import { Odd } from '../odd';
 import{Thematique,SousThematique} from '../../core/interfaces/thematique-interface';
 import { Couche } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/couche';
+import { areaFactors } from '@turf/turf';
 
 @Component({
   selector: 'app-thematique',
@@ -18,7 +19,7 @@ import { Couche } from 'src/app/layouts/navbar-layout/searchbar-layout/interface
 export class ThematiqueComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
-  @Input() odd!: Thematique;
+  @Input() thematique!: Thematique;
   @Input() selected = false;
   @Input() forceSelected = false;
   @Input() SousThematiquesSelected = false;
@@ -31,6 +32,8 @@ export class ThematiqueComponent implements OnInit {
   SousThematiques:SousThematique[]=[]
   loading: boolean = false;
   logoSize: number = 36;
+  closeThematique=true
+  openThematique=false
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,8 +70,8 @@ export class ThematiqueComponent implements OnInit {
   }
 
   getSousThematiques(emit: boolean = false): void {
-    this.SousThematiques=this.odd.sous_thematiques
-    this.couches=this.odd.sous_thematiques[0].couches
+    this.SousThematiques=this.thematique.sous_thematiques
+    this.couches=this.thematique.sous_thematiques[0].couches
     this.initializeForm();
     if (emit) {
       this.couchesSelection.emit(this.getSelectedCouches());
@@ -116,7 +119,7 @@ export class ThematiqueComponent implements OnInit {
   getSelectPlaceholder(): string {
     const selectedCouches: Couche[] = this.getSelectedCouches();
     if (this.forceSelected && selectedCouches.length === 0) {
-      return this.i18n.instant('text.all_goal_categories', {number: this.odd.id});
+      return this.i18n.instant('text.all_goal_categories', {number: this.thematique.id});
     }
 
     if (!this.allSelected()) {
@@ -128,7 +131,7 @@ export class ThematiqueComponent implements OnInit {
       //return selectedTexts.join(', ');
     }
 
-    return this.i18n.instant('text.all_goal_categories', {number: this.odd.id});
+    return this.i18n.instant('text.all_goal_categories', {number: this.thematique.id});
   }
 
   allSelected(): boolean {
@@ -169,6 +172,7 @@ export class ThematiqueComponent implements OnInit {
   }
 
   onSelected(): void {
+
     if (this.forceSelected && this.couches.length > 0) {
       this.couches = [];
       this.couchesSelection.emit(this.couches);
@@ -182,5 +186,19 @@ export class ThematiqueComponent implements OnInit {
 
   showHideCoucheSousThematique(){
 
-  }
+
+if(this.thematique.open && this.closeThematique){
+
+  this.closeThematique=false
+  alert(this.closeThematique)
+}else
+    this.closeThematique=true
+
+
+  if(!this.thematique.open && !this.openThematique){
+
+    this.openThematique=true
+  }else
+      this.openThematique=false
+    }
 }

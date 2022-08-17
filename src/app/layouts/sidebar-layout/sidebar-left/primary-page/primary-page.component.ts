@@ -38,6 +38,23 @@ export class PrimaryPageComponent implements OnInit{
   ngOnInit(){
     console.log(thematiques)
     this.thematiques=thematiques.data.thematiques
+
+
+    for(let i=0;i<this.thematiques.length;i++){
+        let nbCouches=0
+        for(let j=0;j<this.thematiques[i].sous_thematiques.length;j++){
+          nbCouches+=this.thematiques[i].sous_thematiques[j].couches.length
+        }
+        if(i==0){
+        this.thematiques[i]["open"]=true
+        }
+        else{
+        this.thematiques[i]["open"]=false
+
+        }
+        this.thematiques[i]["nbCouches"]=nbCouches
+    }
+    console.log(this.thematiques)
   }
   isOpen(): boolean {
     if (this.mobileQuery?.matches) {

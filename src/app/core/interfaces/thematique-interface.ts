@@ -23,6 +23,8 @@ export interface Thematique {
   created_at: Date;
   updated_at: Date;
   deleted_at?: any;
+  nbCouches?:number;
+  open?:boolean;
   sous_thematiques: SousThematique[];
 }
 

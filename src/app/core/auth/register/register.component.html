@@ -3,20 +3,21 @@
     <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
       <div class="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
         <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          src="assets/images/svg/log_in.svg"
           class="w-full"
           alt="Phone image"
         />
       </div>
       <div class="md:w-8/12 lg:w-5/12 lg:ml-20">
-        <form>
+        <form [formGroup]="form" (submit)="onSubmit()">
 
            <!-- name input -->
            <div class="mb-6">
             <input
               type="text"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Nom"
+              [placeholder]="'register.name'|translate"
+              name="nom" formControlName="nom"
             />
           </div>
 
@@ -26,7 +27,8 @@
             <input
               type="text"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Email address"
+              [placeholder]="'register.email'|translate"
+              name="email" formControlName="email"
             />
           </div>
 
@@ -35,7 +37,8 @@
             <input
               type="text"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Téléphone"
+              [placeholder]="'register.phone'|translate"
+              name="phone" formControlName="phone"
             />
           </div>
 
@@ -45,7 +48,8 @@
             <input
               type="password"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Password"
+              [placeholder]="'register.password'|translate"
+              name="password" formControlName="password"
             />
           </div>
 
@@ -54,16 +58,18 @@
             <input
               type="password"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              placeholder="Confirm password"
-            />
+              [placeholder]="'register.passwordConfirm'|translate"
+              name="c_password" formControlName="c_password"
+              />
           </div>
 
           <div class="flex justify-between items-center mb-6">
 
             <a
+            routerLink="/auth/login"
               href="#!"
               class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-              >Déjà inscrit?</a
+              >{{'register.registeredAlready'| translate}}</a
             >
           </div>
 
@@ -74,7 +80,7 @@
             data-mdb-ripple="true"
             data-mdb-ripple-color="light"
           >
-            Créer un compte
+          {{'register.createAccount' | translate}}
           </button>
 
 

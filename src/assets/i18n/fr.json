@@ -168,5 +168,33 @@
     "displayLesAttributes": " Afficher moins",
     "server_error": "un problème est survenue lors du traitement des informations du serveur cartograhique",
     "cancel": "Annuler"
+  },
+  "login":{
+    "email":"Adresse email",
+    "password":"Mot de passe",
+    "forgotPassword":"Mot de passe oublié?",
+    "signIn":"Se connecter",
+    "signWithFacebook":"Continuer avec Facebook",
+    "signWithGmail":"Continuer avec Gmail",
+    "signWithOpenstreetMap":"Continuer avec OpenStreetMap",
+    "or":"Ou"
+  },
+  "register":{
+    "name":"Nom",
+    "email":"Adresse email",
+    "phone":"Téléphone",
+    "password":"Mot de passe",
+    "passwordConfirm":"Confirmer le mot de passe",
+    "registeredAlready":"Déjà inscrit?",
+    "createAccount":"Créer un compte"
+  },
+  "resetPassword":{
+    "password":"Mot de passe",
+    "passwordConfirm":"Confirmer le mot de passe",
+    "submit":"Soumettre"
+  },
+  "forgotPassword":{
+    "email":"Adresse email",
+    "submit":"Soumettre"
   }
 }

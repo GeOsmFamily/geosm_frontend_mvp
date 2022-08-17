@@ -43,7 +43,7 @@
 </h5>
 
 
-<div  class=" flex flex-col mt-3 md:mt-9 bg-white rounded-lg shadow-lg" [ngClass]="{'pb-14 ': isOpen(), 'mt-2 mx-3': !isOpen()}">
+<div  class=" flex flex-col mt-7 md:mt-9 bg-white rounded-lg shadow-lg shadow-black" [ngClass]="{'pb-14 ': isOpen(), 'mt-2 mx-3': !isOpen()}">
   <!--
 
 
@@ -60,7 +60,7 @@
     <div class="group px-7 flex-1 max-h-[calc(100vh-116px)] md:max-h-[calc(100vh-300px)] overflow-auto">
       <!--<app-loading-lines *ngIf="loading && odds.length === 0"></app-loading-lines>-->
       <div *ngFor="let item of thematiques" class="last:pb-28 last:md:pb-10">
-        <app-thematique [odd]="item" [selected]="item === selectedOdd" [lite]="false" (couchesSelection)="onCouchesSelection($event)" (click)="onSelectThematique(item)"></app-thematique>
+        <app-thematique [thematique]="item" [selected]="item === selectedOdd" [lite]="false" (couchesSelection)="onCouchesSelection($event)" (click)="onSelectThematique(item)"></app-thematique>
       </div>
     </div>
   </div>

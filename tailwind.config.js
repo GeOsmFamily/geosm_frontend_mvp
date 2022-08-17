@@ -5,6 +5,9 @@ module.exports = {
     './src/**/*.{html,ts}'
   ],
   theme: {
+    minWidth: {
+      '1/2': '50%',
+    },
     extend: {
       backgroundImage: {
         'hero-pattern': "url('/assets/images/hero.png')",
@@ -14,7 +17,7 @@ module.exports = {
       },
       colors: {
         ...defaultTheme.colors,
-        primary: '#255033',
+        primary: '#023f5f',
         accent: '#fdcd01',
         secondary: '#70af85',
         'secondary-light': '#ecf8ed'
