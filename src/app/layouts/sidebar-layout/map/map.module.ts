@@ -12,9 +12,10 @@ import { ButtomSheetComponent } from './components/buttom-sheet/buttom-sheet.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DescriptiveSheetModalComponent } from './components/descriptive-sheet-modal/descriptive-sheet-modal.component';
 import { OsmSheetComponent } from './components/descriptive-sheet-modal/osm-sheet/osm-sheet.component';
+import { CaracteristiqueLieuModalComponent } from './components/caracteristique-lieu-modal/caracteristique-lieu-modal.component';
 
 @NgModule({
-  declarations: [MapComponent, ButtomSheetComponent, DescriptiveSheetModalComponent, OsmSheetComponent],
+  declarations: [MapComponent, ButtomSheetComponent, DescriptiveSheetModalComponent, OsmSheetComponent, CaracteristiqueLieuModalComponent],
   exports: [MapComponent],
   imports: [CommonModule, SharedModule, MaterialModule, FontAwesomeModule, TranslateModule, FormsModule, ReactiveFormsModule],
   providers: [ThematiqueService, CarteService, ConfigService]

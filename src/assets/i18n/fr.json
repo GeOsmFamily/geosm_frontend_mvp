@@ -173,5 +173,20 @@
     "title": "Erreur",
     "message": "Une erreur est survenue sur le serveur",
     "cancel": "Annuler"
+  },
+  "menu_contextuel": {
+    "ajouter_geosignet": "Ajouter un géosignet sur ce lieu",
+    "caracteristique": "Caractéristiques du lieu",
+    "commenter": "Commenter ce lieu",
+    "partager": "Partager ce lieu",
+    "voir_geosignet": "Vos géosignets"
+  },
+  "caracteristiques_lieu": {
+    "altitude": "Altitude",
+    "fermer": "Fermer",
+    "partager": "Partager ce lieu",
+    "titre": "Caractéristiques du lieu",
+    "titre_coord": "Coordonnées (WGS84)",
+    "zoomer": "Zoomer dessus"
   }
 }

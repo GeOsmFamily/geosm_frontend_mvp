@@ -2,6 +2,25 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
 @include mat-core();
 
+.item_right {
+  padding: 5px 10px 5px 15px;
+}
+
+.item_right:hover {
+  background: #023f5f;
+  color: #fff;
+}
+
+.item_right:hover span svg * {
+  fill: #fff !important;
+}
+
+::ng-deep .sh-context-menu--item:hover,
+.sh-context-menu--item__sub-active {
+  background: transparent !important;
+  color: #023f5f !important;
+}
+
 input[type='range'] {
   -webkit-appearance: none;
   margin: 10px 0;
