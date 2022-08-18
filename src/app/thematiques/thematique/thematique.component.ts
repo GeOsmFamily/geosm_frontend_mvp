@@ -184,21 +184,5 @@ export class ThematiqueComponent implements OnInit {
     }
   }
 
-  showHideCoucheSousThematique(){
 
-
-if(this.thematique.open && this.closeThematique){
-
-  this.closeThematique=false
-  alert(this.closeThematique)
-}else
-    this.closeThematique=true
-
-
-  if(!this.thematique.open && !this.openThematique){
-
-    this.openThematique=true
-  }else
-      this.openThematique=false
-    }
 }

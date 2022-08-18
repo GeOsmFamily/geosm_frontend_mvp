@@ -42,17 +42,27 @@ export class PrimaryPageComponent implements OnInit{
 
     for(let i=0;i<this.thematiques.length;i++){
         let nbCouches=0
+        let nomCoucheSousThematique=""
         for(let j=0;j<this.thematiques[i].sous_thematiques.length;j++){
           nbCouches+=this.thematiques[i].sous_thematiques[j].couches.length
-        }
-        if(i==0){
-        this.thematiques[i]["open"]=true
-        }
-        else{
-        this.thematiques[i]["open"]=false
+          if(j==0){
+            this.thematiques[i].sous_thematiques[j]["open"]=true
+            }
+            else{
+              this.thematiques[i].sous_thematiques[j]["open"]=false
 
-        }
+            }
+            for(let k=0;k<this.thematiques[i].sous_thematiques[j].couches.length;k++){
+              if(k<2){
+                nomCoucheSousThematique=nomCoucheSousThematique+this.thematiques[i].sous_thematiques[j].couches[k].nom+","
+
+              }
+            }
+
+      }
+
         this.thematiques[i]["nbCouches"]=nbCouches
+        this.thematiques[i]["nomSousThem"]=nomCoucheSousThematique
     }
     console.log(this.thematiques)
   }

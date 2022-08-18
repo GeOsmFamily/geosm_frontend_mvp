@@ -1,0 +1,33 @@
+<div class="flex items-center pb-3 border-b ">
+  <label class="text-xs text-primary font-extrabold">
+
+    <span>{{sousThematique?.nom}}</span>
+
+  </label>
+  <button class="flex items-center text-primary ml-auto" (click)="showHideCoucheSousThematique()">
+    <ng-icon name="hero-chevron-down" strokeWidth="3"></ng-icon>
+
+  </button>
+</div>
+
+<div *ngIf="sousThematique?.open" [ngClass]="{'hidden': !closeThematique && sousThematique?.open, 'block': closeThematique && openThematique }">
+
+  <div *ngFor="let couche of sousThematique?.couches" class="py-3 border-b border-b-neutral-200">
+
+    <label class="flex text-primary text-xs">
+      <input type="checkbox"  checked=false  class="mr-3 text-primary focus:ring-primary">
+      {{ couche.nom }}
+                  </label>
+    </div>
+</div>
+
+<div *ngIf="!sousThematique?.open" [ngClass]="{'hidden': !openThematique && !sousThematique?.open, 'block': closeThematique && !sousThematique?.open}">
+
+  <div *ngFor="let couche of sousThematique?.couches" class="py-3 border-b border-b-neutral-200">
+
+    <label class="flex text-primary text-xs">
+      <input type="checkbox"  checked=false  class="mr-3 text-primary focus:ring-primary">
+      {{ couche.nom }}
+                  </label>
+    </div>
+</div>

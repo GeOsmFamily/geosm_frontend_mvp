@@ -9,6 +9,7 @@ export interface SousThematique {
   created_at: Date;
   updated_at: Date;
   deleted_at?: any;
+  open?:boolean;
   couches: Couche[];
 }
 
@@ -24,7 +25,8 @@ export interface Thematique {
   updated_at: Date;
   deleted_at?: any;
   nbCouches?:number;
-  open?:boolean;
+  nomSousThem?:string;
+
   sous_thematiques: SousThematique[];
 }
 

@@ -22,7 +22,7 @@
 <ng-template #template>
   <div class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleCouches()" cdkOverlayOrigin
   #trigger="cdkOverlayOrigin">
-    <p class="mr-auto text-xs text-primary font-semibold">Sous-thématiques</p>
+    <p class="truncate... mr-auto text-xs text-primary font-semibold">{{thematique.nomSousThem}} </p>
     <span class="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary"></span>
     <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="showCouches" [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"  (overlayKeydown)="onOverlayKeydown($event)">
       <div class="px-10 pt-5 md:px-3 md:pt-3 bg-white rounded-lg overflow-y-auto shadow-lg" *ngIf="showCouches">
@@ -36,28 +36,7 @@
         <ng-container *ngIf="SousThematiques.length !== 0">
           <form [formGroup]="form">
             <div *ngFor="let sousThematique of SousThematiques;" class="py-3 border-b border-b-neutral-200">
-              <div class="flex items-center pb-3 border-b ">
-                <label class="text-xs text-primary font-extrabold">
-
-                  <span>{{sousThematique.nom}}</span>
-
-                </label>
-                <button class="flex items-center text-primary ml-auto" (click)="showHideCoucheSousThematique()">
-                  <ng-icon name="hero-chevron-down" strokeWidth="3"></ng-icon>
-
-                </button>
-              </div>
-
-              <div [ngClass]="{'hidden': !closeThematique && !openThematique, 'block': closeThematique || !openThematique}">
-
-                <div *ngFor="let couche of sousThematique.couches" class="py-3 border-b border-b-neutral-200">
-
-                  <label class="flex text-primary text-xs">
-                    <input type="checkbox"  checked=false  class="mr-3 text-primary focus:ring-primary">
-                    {{ couche.nom }}
-                                </label>
-                  </div>
-              </div>
+            <app-sous-thematique [sousThematique]="sousThematique"></app-sous-thematique>
 
 
             </div>
