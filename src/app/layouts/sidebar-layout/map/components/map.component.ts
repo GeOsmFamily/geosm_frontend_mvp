@@ -1,4 +1,4 @@
-import { Component, Input, NgZone, OnInit, QueryList } from '@angular/core';
+import { Component, Input, NgZone, OnInit, QueryList, ViewChild } from '@angular/core';
 import {
   Map,
   View,
@@ -33,6 +33,7 @@ import {
   faAngleDoubleRight,
   faAngleLeft,
   faAngleRight,
+  faDotCircle,
   faDownload,
   faEdit,
   faGlobe,
@@ -60,11 +61,14 @@ import { ButtomSheetComponent } from './buttom-sheet/buttom-sheet.component';
 import { Viewer } from 'mapillary-js';
 import { Pixel } from 'ol/pixel';
 import { DataFromClickOnMapInterface } from '../interfaces/dataClick';
-import { DescriptiveSheetModalComponent } from './descriptive-sheet-modal/descriptive-sheet-modal.component';
-import { DescriptiveSheet } from '../interfaces/descriptiveSheet';
 import { ActivatedRoute } from '@angular/router';
 import { ShareService } from 'src/app/core/services/geosm/share.service';
 import { ComponentHelper } from 'src/app/core/modules/componentHelper';
+import { MatMenuTrigger } from '@angular/material/menu';
+import { Coordinate } from 'ol/coordinate';
+import { CaracteristicSheet } from 'src/app/core/interfaces/caracteristicSheet';
+import { DescriptiveSheetModalComponent } from './descriptive-sheet-modal/descriptive-sheet-modal.component';
+import { CaracteristiqueLieuModalComponent } from './caracteristique-lieu-modal/caracteristique-lieu-modal.component';
 let view = new View({
   center: [0, 0],
   zoom: 0,
@@ -112,6 +116,7 @@ export class MapComponent implements OnInit {
   faDownload = faDownload;
 
   faTimes = faTimes;
+  faDotCircle = faDotCircle;
 
   @Input() sidenavContainer: MatSidenavContainer | undefined;
 
@@ -143,6 +148,21 @@ export class MapComponent implements OnInit {
 
   previewPointMapillary: any;
 
+  @ViewChild(MatMenuTrigger)
+  contextMenu: MatMenuTrigger | undefined;
+
+  contextMenuPosition = { x: '0px', y: '0px' };
+
+  listItems = Array();
+
+  coordinatesContextMenu: Coordinate | undefined;
+
+  zoomContextMenu: number | undefined;
+
+  caracteristicsPoint = { display: false };
+
+  url_share: any;
+
   constructor(
     private store: Store,
     public dialog: MatDialog,
@@ -152,7 +172,7 @@ export class MapComponent implements OnInit {
     public zone: NgZone,
     private activatedRoute: ActivatedRoute,
     public shareService: ShareService,
-    public componentHelper:ComponentHelper
+    public componentHelper: ComponentHelper
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
@@ -160,6 +180,7 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initialiseContextMenu();
     this.initializeMap();
     this.store.dispatch({ type: INITMAP });
 
@@ -180,8 +201,6 @@ export class MapComponent implements OnInit {
       if (project.config.data.instance.altimetrie) {
         this.isAltimetrie = true;
       }
-      this.mapClicked();
-      this.handleMapParamsUrl();
       let drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
       drawers.forEach(drawer => {
         drawer.openedChange.subscribe(() => {
@@ -199,6 +218,8 @@ export class MapComponent implements OnInit {
         });
       });
     });
+    this.mapClicked();
+    this.handleMapParamsUrl();
 
     let popup_lot = new Overlay({
       element: document.getElementById('popup_lot')!,
@@ -307,6 +328,10 @@ export class MapComponent implements OnInit {
     });
   }
 
+  onSelectedContextMenuItem(selectedMenuItemId: number): void {
+    alert('You chose the option with id ' + selectedMenuItemId);
+  }
+
   initializeMap() {
     map.setTarget('map');
     map.updateSize();
@@ -400,7 +425,6 @@ export class MapComponent implements OnInit {
       });
     });
   }
-
 
   toogleLeftSidenav() {
     if (this.sidenavContainer?.start?.opened) {
@@ -1064,5 +1088,154 @@ export class MapComponent implements OnInit {
     window.addEventListener('resize', () => {
       this.mly?.remove();
     });
+  }
+
+  onContextMenu(event: any) {
+    event.preventDefault();
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu!.menu.focusFirstItem('mouse');
+    this.contextMenu!.openMenu();
+
+    let coord = map.getCoordinateFromPixel([event.layerX, event.layerY]);
+    this.coordinatesContextMenu = coord;
+    this.zoomContextMenu = map.getView().getZoom();
+  }
+
+  callFunction(index: number) {
+    let func = this.listItems[index]['click'];
+
+    eval(func + '();');
+  }
+
+  initialiseContextMenu() {
+    this.translate.get('menu_contextuel', { value: 'caracteristique' }).subscribe((res: any) => {
+      this.listItems[0] = {
+        name: res.caracteristique,
+        icon: 1,
+        click: 'this.getInfoOnPoint'
+      };
+
+      this.listItems[1] = {
+        name: res.partager,
+        icon: 2,
+        click: 'this.shareLocation'
+      };
+
+      this.listItems[2] = {
+        name: res.commenter,
+        icon: 3,
+        click: 'this.openModalComment'
+      };
+
+      this.listItems[3] = {
+        name: res.ajouter_geosignet,
+        icon: 4,
+        click: 'this.addGeoSignets'
+      };
+
+      this.listItems[4] = {
+        name: res.voir_geosignet,
+        icon: 5,
+        click: 'this.listGeoSignets'
+      };
+    });
+  }
+
+  getInfoOnPoint() {
+    let coord = this.coordinatesContextMenu;
+
+    jQuery('#coord_caracteristics').show();
+
+    this.openCaracteristic({
+      properties: this.caracteristicsPoint,
+      geometry: coord,
+      map: map,
+      url_share: this.url_share
+    });
+
+    let coord_caracteri = new Overlay({
+      position: coord,
+      element: document.getElementById('coord_caracteristics')!
+    });
+
+    map?.addOverlay(coord_caracteri);
+
+    jQuery('#coord_caracteristics').on('mousemove', _evt => {
+      jQuery('#coord_caracteristics .fa-times').show();
+
+      jQuery('#coord_caracteristics .fa-dot-circle').hide();
+    });
+
+    jQuery('#coord_caracteristics').on('mouseout', _evt => {
+      jQuery('#coord_caracteristics .fa-times').hide();
+
+      jQuery('#coord_caracteristics .fa-dot-circle').show();
+    });
+
+    let coord_4326 = transform(coord!, 'EPSG:3857', 'EPSG:4326');
+
+    //@ts-ignore
+    this.caracteristicsPoint['adresse'] = false;
+    //@ts-ignore
+    this.caracteristicsPoint['position'] = false;
+    //@ts-ignore
+    this.caracteristicsPoint['coord'] = coord_4326[0].toFixed(4) + ' , ' + coord_4326[1].toFixed(4);
+
+    let geocodeOsm =
+      'https://nominatim.openstreetmap.org/reverse?format=json&lat=' +
+      coord_4326[1] +
+      '&lon=' +
+      coord_4326[0] +
+      '&zoom=18&addressdetails=1';
+    //@ts-ignore
+    this.caracteristicsPoint['lieu_dit'] = false;
+    jQuery.get(geocodeOsm, data => {
+      let name = data.display_name.split(',')[0];
+      let osm_url = 'https://www.openstreetmap.org/' + data.osm_type + '/' + data.osm_id;
+      //@ts-ignore
+      this.caracteristicsPoint['lieu_dit'] = name;
+      //@ts-ignore
+      this.caracteristicsPoint['url_osm'] = osm_url;
+    });
+  }
+
+  openCaracteristic(data: CaracteristicSheet) {
+    let position = {
+      top: '100px',
+      left: window.innerWidth < 500 ? '0px' : window.innerWidth / 2 - 400 / 2 + 'px'
+    };
+    for (let index = 0; index < this.dialog.openDialogs.length; index++) {
+      const elementDialog = this.dialog.openDialogs[index];
+
+      if (elementDialog.componentInstance instanceof CaracteristiqueLieuModalComponent) {
+        if (document.getElementById(elementDialog.id)) {
+          if (document.getElementById(elementDialog.id)?.parentElement) {
+            position.top = document.getElementById(elementDialog.id)?.parentElement?.getBoundingClientRect().top + 'px';
+            position.left = document.getElementById(elementDialog.id)?.parentElement?.getBoundingClientRect().left + 'px';
+          }
+        }
+
+        elementDialog.close();
+      }
+    }
+
+    let proprietes: MatDialogConfig = {
+      disableClose: false,
+      minWidth: 450,
+      maxHeight: 460,
+      width: '400px',
+      data: data,
+      hasBackdrop: false,
+      autoFocus: false,
+      position: position
+    };
+
+    this.dialog.open(CaracteristiqueLieuModalComponent, proprietes);
+  }
+
+  close_caracteristique() {
+    this.caracteristicsPoint['display'] = false;
+    jQuery('#coord_caracteristics').hide();
   }
 }
