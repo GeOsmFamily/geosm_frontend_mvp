@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
-  url_services: 'http://localhost:8000',
-  apiKey: '8mkFGhvKuysxqXPZ5JUPrXFRzZ9KabS0H5uCYYtdmEe3itjC5FotjFy5PAvM9gAF',
+  url_services: 'https://bamakoservices.geosm.org',
+  apiKey: 'sT28H3QgNc92eNf2a5Vhc0niR8XfGLqzUAvgAuGfh1arv8F7vhMmrvx3skysy0cY',
   instance_id: 1,
   primarycolor: '#023f5f',
-  nom: 'Cameroun',
+  nom: 'Bamako',
   url_frontend: 'http://localhost:4200',
-  country_code: 'CM',
-  url_carto: 'http://localhost:9090',
-  url_qgis: 'http://localhost:9091'
+  country_code: 'ML',
+  url_carto: 'https://carto.geosm.org',
+  url_qgis: 'https://qgis.geosm.org'
 };
