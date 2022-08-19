@@ -9,17 +9,45 @@
         />
       </div>
       <div class="md:w-8/12 lg:w-5/12 lg:ml-20">
-        <form [formGroup]="form" (submit)="onSubmit()">
+        <form [formGroup]="registerForm" (submit)="onSubmit()">
 
-           <!-- name input -->
+           <!-- last name input -->
            <div class="mb-6">
             <input
               type="text"
               class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              [placeholder]="'register.name'|translate"
-              name="nom" formControlName="nom"
+              [placeholder]="'register.lastName'|translate"
+              name="lastName" formControlName="lastName"
+            />
+            <div *ngIf="submitted && f.lastName.errors">
+              <div *ngIf="f.lastName.errors.required"style="color:red">
+                    lastName required
+              </div>
+            </div>
+          </div>
+
+
+            <!-- first name input -->
+            <div class="mb-6">
+              <input
+                type="text"
+                class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                [placeholder]="'register.firstName'|translate"
+                name="firstName" formControlName="firstName"
+              />
+            </div>
+
+              <!-- titre input -->
+           <div class="mb-6">
+            <input
+              type="text"
+              class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              [placeholder]="'register.titre'|translate"
+              name="titre" formControlName="titre"
             />
           </div>
+
+
 
 
           <!-- Email input -->
@@ -67,7 +95,7 @@
 
             <a
             routerLink="/auth/login"
-              href="#!"
+
               class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
               >{{'register.registeredAlready'| translate}}</a
             >

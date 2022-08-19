@@ -18,6 +18,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { searchFeatureKey, searchreducer } from './layouts/navbar-layout/searchbar-layout/states/search.reducer';
 import { SearchEffects } from './layouts/navbar-layout/searchbar-layout/states/search.effects';
 import { ThematiquesModule } from './thematiques/thematiques.module';
+import { NotifierModule } from 'angular-notifier';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { authFeatureKey, authreducer } from './core/auth/states/auth.reducer';
+import { AuthEffects } from './core/auth/states/auth.effects';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [{ prefix: './assets/i18n/', suffix: '.json' }]);
@@ -43,11 +47,45 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     StoreModule.forFeature(searchFeatureKey, searchreducer),
     StoreModule.forFeature(mapFeatureKey, mapreducer),
     StoreModule.forRoot({}, { runtimeChecks: { strictStateImmutability: false, strictActionImmutability: false } }),
-    EffectsModule.forRoot([MapEffects, SearchEffects]),
+    EffectsModule.forRoot([MapEffects, SearchEffects,AuthEffects]),
+    StoreModule.forFeature(authFeatureKey, authreducer),
+
     FontAwesomeModule,
-    SharedModule
+    SharedModule,
+
+    NotifierModule.withConfig({
+      position: {
+        horizontal: {
+          position: 'right',
+          distance: 12
+        },
+
+        vertical: {
+          position: 'top',
+          distance: 12,
+          gap: 10
+        }
+      }
+    })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('415511598213-s1gpbe2ch3bt1pv6p8jrd01m1nhj1fp6.apps.googleusercontent.com')
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('551433395941902')
+          }
+        ]
+      } as SocialAuthServiceConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

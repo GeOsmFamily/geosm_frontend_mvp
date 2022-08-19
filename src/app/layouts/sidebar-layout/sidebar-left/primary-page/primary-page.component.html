@@ -14,7 +14,7 @@
       />-->
       <img
         width="64"
-        src="assets/images/png/person.png"
+        src="assets/images/svg/PROFIL.svg"
         alt=""
         loading="lazy"
         height="60"
@@ -23,12 +23,24 @@
         class="profile-image entityPhoto lazy-image ember-view"
       />
     </div>
-    <!--<div class="t-16 t-black t-bold">Boris Gautier TCHOUKOUAHA</div>-->
+    <div class="t-16 t-black t-bold" *ngIf="(user$|async)">{{(user$|async)!.first_name}} {{(user$|async)!.last_name}}</div>
   </a>
-  <!--<p class="t-12 t-black--light t-normal mt1">Software Development Engineer - Full Stack</p>
-  -->
-  <div class="flex space-x-2 justify-center">
-    <button [routerLink]="['auth/login']" mat-raised-button color="primary" class="connectButton">Se connecter</button>
+  <p class="t-12 t-black--light t-normal mt1" *ngIf="(user$|async)">{{(user$|async)!.titre}}</p>
+
+  <div class="flex space-x-2 justify-center" *ngIf="(user$|async)===undefined">
+    <button [routerLink]="['auth/login']" mat-raised-button color="primary" class="connectButton" >Se connecter</button>
+
+  </div>
+  <div style="margin-top:20px">
+    <h2><span>OU</span></h2>
+  </div>
+  <div class="flex space-x-2 justify-center" >
+    <img class="logo" src="assets/images/svg/facebook.svg" type="button"/>
+    <img class="logo" src="assets/images/svg/google_icon.svg" type="button"/>
+    <img class="logo" src="assets/images/svg/osm.svg" type="button"/>
+  </div>
+  <div class="flex space-x-2 justify-center" *ngIf="(user$|async)">
+    <button (click)="logout()" mat-raised-button color="primary" class="connectButton" >Se déconnecter</button>
 
   </div>
   </div>

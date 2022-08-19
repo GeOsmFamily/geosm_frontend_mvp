@@ -54,3 +54,7 @@ input {
 .ng-touched.ng-invalid {
   border-color: theme('colors.red.500');
 }
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
