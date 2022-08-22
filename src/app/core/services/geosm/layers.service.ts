@@ -20,6 +20,7 @@ export class LayersService {
   ) {}
 
   addLayerCarte(carte: Carte) {
+    console.log(carte);
     let groupCarte = this.carteService.getGroupeCarteByCarteId(carte.id);
 
     let mapHelper = new MapHelper();
@@ -41,12 +42,13 @@ export class LayersService {
       let layer = mapHelper.constructLayer({
         nom: carte.nom,
         type: type!,
+        identifiant: carte.identifiant,
         type_layer: 'geosmCatalogue',
         url: carte.url,
         visible: true,
         inToc: true,
         properties: {
-          group_id: groupCarte?.id,
+          group_id: groupCarte?.id!,
           couche_id: carte.id,
           type: 'carte'
         },

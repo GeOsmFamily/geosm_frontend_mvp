@@ -20,7 +20,7 @@ export interface GeosmLayer {
   icon?: string;
   iconImagette?: string;
   url?: string;
-  identifiant?: string;
+  identifiant: string;
   activeLayers?: ActiveLayersInterface;
   legendCapabilities?: LegendInterface;
   properties:
@@ -29,7 +29,6 @@ export interface GeosmLayer {
         couche_id: number;
         type: 'couche' | 'carte';
       }
-    | null
-    | Object;
+    | null;
   descriptionSheetCapabilities: string;
 }

@@ -25,7 +25,8 @@ import {
   XYZ,
   BaseLayer,
   Point,
-  Feature
+  Feature,
+  OSM
 } from 'src/app/core/modules/openlayers';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -258,6 +259,7 @@ export class MapHelper {
 
   constructLayer(couche: GeosmLayer) {
     let layer: BaseLayer | undefined;
+
     if (couche.type == 'xyz') {
       layer = new TileLayer({
         source: new XYZ({
@@ -272,36 +274,39 @@ export class MapHelper {
         className: couche.nom + '___' + couche.type_layer
       });
     } else if (couche.type == 'wms') {
-      let wmsSourceTile = new TileWMS({
-        url: couche.url,
-        params: { LAYERS: couche.identifiant, TILED: true },
-        serverType: 'qgis',
-        crossOrigin: 'anonymous'
-      });
 
-      let layerTile = new TileLayer({
-        source: wmsSourceTile,
-        className: couche.nom + '___' + couche.type_layer,
-        minResolution: this.map?.getView().getResolutionForZoom(9)
-      });
+let wmsSourceTile = new TileWMS({
+  url: couche.url,
+  params: { LAYERS: couche.identifiant, TILED: true },
+  serverType: 'qgis',
+  crossOrigin: 'anonymous'
+});
 
-      let wmsSourceImage = new ImageWMS({
-        url: couche.url!,
-        params: { LAYERS: couche.identifiant, TILED: true },
-        serverType: 'qgis',
-        crossOrigin: 'anonymous'
-      });
+let layerTile = new TileLayer({
+  source: wmsSourceTile,
+  className: couche.nom + '___' + couche.type_layer,
+  minResolution: this.map?.getView().getResolutionForZoom(9)
+});
 
-      let layerImage = new ImageLayer({
-        source: wmsSourceImage,
+let wmsSourceImage = new ImageWMS({
+  url: couche.url!,
+  params: { LAYERS: couche.identifiant, TILED: true },
+  serverType: 'qgis',
+  crossOrigin: 'anonymous'
+});
 
-        className: couche.nom + '___' + couche.type_layer,
-        maxResolution: this.map?.getView().getResolutionForZoom(9)
-      });
+let layerImage = new ImageLayer({
+  source: wmsSourceImage,
 
-      layer = new LayerGroup({
-        layers: [layerTile, layerImage]
-      });
+  className: couche.nom + '___' + couche.type_layer,
+  maxResolution: this.map?.getView().getResolutionForZoom(9)
+});
+
+layer = new LayerGroup({
+  layers: [layerTile, layerImage]
+});
+
+
     } else if (couche.type == 'wfs') {
       let source = new VectorSource({
         format: new GeoJSON({
@@ -656,6 +661,7 @@ export class MapHelper {
       type: type!,
       type_layer: 'geosmCatalogue',
       url: carte.url,
+      identifiant: carte.identifiant,
 
       visible: true,
       inToc: true,
