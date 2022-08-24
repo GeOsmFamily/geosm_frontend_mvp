@@ -52,13 +52,25 @@ export class PrimaryPageComponent {
 
     }
   ]
+  ouvrages=['Puit','Pompe','Forage','Latrines']
 
   listDepartements= new Map<string,any>([])
   listComunes= new Map<string,any[]>([])
+
+
+
+//sélection de l'utilisateur
   syndicat:any|undefined
-listeSyndicats:any
   departement:string|undefined
+  commune:string|undefined
+  ouvrage:string|undefined
+
+  //variables liées à ngModel, permettant de récupérer le choix de l'utilisateur
   nbdepartement:any
+  nbCommune:string[]|undefined
+  nbOuvrage:string[]|undefined
+  listeSyndicats:any
+
   list:string[]|undefined
   constructor() {
     /* TODO document why this constructor is empty */
@@ -69,15 +81,18 @@ listeSyndicats:any
 
 
       for(let i=0;i<this.data[index].Communes.length;i++){
-        commune.push({'nom':this.data[index].Communes[i]})
+        commune.push(this.data[index].Communes[i].nomCommune)
+        console.log(commune[i])
       }
       this.listComunes.set(""+key,commune)
+      console.log(this.listComunes)
       this.listDepartements.set(""+key,departement)
     }
     console.log("rrr"+this.syndicat)
-    this.listeSyndicats=Array.from(this.listDepartements.keys())
-    this.nbdepartement=Array.from(this.listComunes.keys())
-console.log("eeeeeee ="+ this.listDepartements.keys())
+    //this.listeSyndicats=Array.from(this.listDepartements.keys())
+    //this.nbdepartement=Array.from(this.listComunes.keys())
+
+console.log("eeeeeee ="+ this.listComunes.keys())
   }
 
 
@@ -94,7 +109,7 @@ console.log()
   }
 
   getCommunes():any[]|undefined{
-    return this.listComunes.get(this.departement!)
+    return this.listComunes.get(this.syndicat!)
   }
 alerat(){
   alert(this.syndicat)
@@ -102,13 +117,28 @@ alerat(){
 onGroupsChange(selectedPizzas: string[]) {
   console.log(selectedPizzas);
   this.syndicat=selectedPizzas[0]
-  this.list?.push(this.listDepartements.get(this.syndicat!))
-  alert("rr = "+this.listDepartements.get(this.syndicat!))
-  console.log(this.listDepartements.get(this.syndicat!)+  "yyy")
+
+  //alert("rr = "+this.listDepartements.get(this.syndicat!))
+  //console.log(this.listDepartements.get(this.syndicat!)+  "yyy")
+  console.log(this.syndicat)
 }
 onDepartementChange(selectedPizzas: string[]) {
   console.log(selectedPizzas);
 
   this.departement=selectedPizzas[0]
+  console.log(this.departement)
+}
+onCommuneChange(selectedPizzas: string[]) {
+  console.log(selectedPizzas);
+
+  this.commune=selectedPizzas[0]
+  console.log(this.commune)
+}
+
+onOuvrageChange(selectedPizzas: string[]) {
+  console.log(selectedPizzas);
+
+  this.ouvrage=selectedPizzas[0]
+  console.log(this.ouvrage)
 }
 }

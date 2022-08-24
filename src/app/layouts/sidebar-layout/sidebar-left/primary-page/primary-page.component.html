@@ -7,7 +7,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div style="margin-top: 15px;">
-      <mat-selection-list [(ngModel)]="listeSyndicats" (ngModelChange)="onGroupsChange($event)"  >
+      <mat-selection-list   multiple="false" multi="false" [(ngModel)]="listeSyndicats" (ngModelChange)="onGroupsChange($event)"  >
         <!-- <mat-list-option> -->
           <mat-list-option (click)="alerat()" *ngFor="let syndicats of getSyndicats()" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
            [value]="syndicats" >
@@ -21,7 +21,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 
-<mat-accordion  multi="true" class="couche-thematique" style="margin-top: 20px">
+<mat-accordion *ngIf="syndicat" multi="true" class="couche-thematique" style="margin-top: 20px">
   <mat-expansion-panel class="couche-thematique-panel"
     expanded="true">
     <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
@@ -30,7 +30,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div style="margin-top: 15px;">
-      <mat-selection-list [(ngModel)]="nbdepartement" (ngModelChange)="onDepartementChange($event)" >
+      <mat-selection-list  multiple="false" [(ngModel)]="nbdepartement" (ngModelChange)="onDepartementChange($event)" >
         <!-- <mat-list-option> -->
           <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
            [value]="this.listDepartements.get(this.syndicat!)" >
@@ -45,7 +45,7 @@
 </mat-accordion>
 
 
-<mat-accordion multi="true" class="couche-thematique">
+<mat-accordion *ngIf="departement" multi="true" class="couche-thematique">
   <mat-expansion-panel class="couche-thematique-panel"
     expanded="true">
     <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
@@ -54,183 +54,19 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div style="margin-top: 15px;">
-      <mat-selection-list  >
+      <mat-selection-list  multiple="false" [(ngModel)]="nbCommune" (ngModelChange)="onCommuneChange($event)">
         <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-           [value]="" >
+          <mat-list-option  *ngFor="let communes of getCommunes()"[matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+           [value]="communes" >
           <img class="couche-img" src="" mat-list-icon  alt="" />
 
-          <div mat-line class="couche-title">BIBEMI</div>
+          <div mat-line class="couche-title">{{communes}}</div>
         </mat-list-option>
       </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-selection-list >
-            <!-- <mat-list-option> -->
-              <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
 
-              <div mat-line class="couche-title">LAGDO</div>
-            </mat-list-option>
-          </mat-selection-list>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
 
-              <div mat-line class="couche-title">GAROUA 2</div>
-            </mat-list-option>
-      </mat-selection-list>
 
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
 
-              <div mat-line class="couche-title">GAROUA 1</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">TOUROUA</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">BARNDAKE</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">GAROUA 3</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">PITOA</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">NGONG</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">GASHIGA</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">BASHEO</div>
-            </mat-list-option>
-      </mat-selection-list>
-
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">DEMBO</div>
-            </mat-list-option>
-      </mat-selection-list>
-
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">FIGUIL</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">GUIDER</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">MAYO OULO</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">MADINGRING</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">TOUBORO</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">TCHOLIRE</div>
-            </mat-list-option>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">REY BOUBA</div>
-            </mat-list-option>
-      </mat-selection-list>
     </div>
   </mat-expansion-panel>
 </mat-accordion>
@@ -243,46 +79,16 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div style="margin-top: 15px;">
-      <mat-selection-list  >
+      <mat-selection-list  multiple="false" [(ngModel)]="nbOuvrage" (ngModelChange)="onOuvrageChange($event)">
         <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-           [value]="" >
+          <mat-list-option  *ngFor="let ouvrage of ouvrages" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+           [value]="ouvrage" >
           <img class="couche-img" src="" mat-list-icon  alt="" />
 
-          <div mat-line class="couche-title">Puits</div>
+          <div mat-line class="couche-title">{{ouvrage}}</div>
         </mat-list-option>
       </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-selection-list >
-            <!-- <mat-list-option> -->
-              <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
 
-              <div mat-line class="couche-title">Forages</div>
-            </mat-list-option>
-          </mat-selection-list>
-      </mat-selection-list>
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">Pompes</div>
-            </mat-list-option>
-      </mat-selection-list>
-
-      <mat-selection-list >
-        <!-- <mat-list-option> -->
-          <mat-list-option [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-               [value]="" [selected]="">
-              <img class="couche-img" src="" mat-list-icon  alt="" />
-
-              <div mat-line class="couche-title">Latrines</div>
-            </mat-list-option>
-      </mat-selection-list>
     </div>
   </mat-expansion-panel>
 </mat-accordion>
