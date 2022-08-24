@@ -9,7 +9,7 @@
     <div style="margin-top: 15px;">
       <mat-selection-list   multiple="false" multi="false" [(ngModel)]="listeSyndicats" (ngModelChange)="onGroupsChange($event)"  >
         <!-- <mat-list-option> -->
-          <mat-list-option (click)="alerat()" *ngFor="let syndicats of getSyndicats()" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+          <mat-list-option  *ngFor="let syndicats of getSyndicats()" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
            [value]="syndicats" >
           <img class="couche-img" src="" mat-list-icon  alt="" />
 

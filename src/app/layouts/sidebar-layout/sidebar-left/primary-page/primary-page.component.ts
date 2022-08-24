@@ -82,23 +82,21 @@ export class PrimaryPageComponent {
 
       for(let i=0;i<this.data[index].Communes.length;i++){
         commune.push(this.data[index].Communes[i].nomCommune)
-        console.log(commune[i])
+    //    console.log(commune[i])
       }
       this.listComunes.set(""+key,commune)
-      console.log(this.listComunes)
+  //    console.log(this.listComunes)
       this.listDepartements.set(""+key,departement)
     }
-    console.log("rrr"+this.syndicat)
+    //console.log("rrr"+this.syndicat)
     //this.listeSyndicats=Array.from(this.listDepartements.keys())
     //this.nbdepartement=Array.from(this.listComunes.keys())
 
-console.log("eeeeeee ="+ this.listComunes.keys())
+//console.log("eeeeeee ="+ this.listComunes.keys())
   }
 
 
-  ngOnInit(){
-console.log()
-    }
+
 
   getSyndicats():string[]{
     return Array.from(this.listDepartements.keys())
@@ -111,34 +109,32 @@ console.log()
   getCommunes():any[]|undefined{
     return this.listComunes.get(this.syndicat!)
   }
-alerat(){
-  alert(this.syndicat)
-}
+
 onGroupsChange(selectedPizzas: string[]) {
-  console.log(selectedPizzas);
+  //console.log(selectedPizzas);
   this.syndicat=selectedPizzas[0]
 
   //alert("rr = "+this.listDepartements.get(this.syndicat!))
   //console.log(this.listDepartements.get(this.syndicat!)+  "yyy")
-  console.log(this.syndicat)
+  //console.log(this.syndicat)
 }
 onDepartementChange(selectedPizzas: string[]) {
-  console.log(selectedPizzas);
+  //console.log(selectedPizzas);
 
   this.departement=selectedPizzas[0]
-  console.log(this.departement)
+  //console.log(this.departement)
 }
 onCommuneChange(selectedPizzas: string[]) {
-  console.log(selectedPizzas);
+  //console.log(selectedPizzas);
 
   this.commune=selectedPizzas[0]
-  console.log(this.commune)
+  //console.log(this.commune)
 }
 
 onOuvrageChange(selectedPizzas: string[]) {
-  console.log(selectedPizzas);
+  //console.log(selectedPizzas);
 
   this.ouvrage=selectedPizzas[0]
-  console.log(this.ouvrage)
+  //console.log(this.ouvrage)
 }
 }
