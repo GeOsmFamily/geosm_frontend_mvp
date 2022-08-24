@@ -29,6 +29,7 @@ import { DownloadComponent } from './sidebar-layout/sidebar-right/download/compo
 import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/component/searchbar-layout.component';
 import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-layers/component/metadata-modal/metadata-modal.component';
 import { SectionComponent } from './sidebar-layout/sidebar-left/section/section.component';
+import { FicheOuvrageComponent } from './sidebar-layout/sidebar-left/fiche-ouvrage/fiche-ouvrage.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { SectionComponent } from './sidebar-layout/sidebar-left/section/section.
     SearchbarLayoutComponent,
     DownloadComponent,
     MetadataModalComponent,
-    SectionComponent
+    SectionComponent,
+    FicheOuvrageComponent
   ],
   imports: [
     CommonModule,

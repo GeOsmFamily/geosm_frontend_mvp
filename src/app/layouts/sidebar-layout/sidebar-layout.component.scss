@@ -39,3 +39,8 @@
     height: 20px;
   }
 }
+
+
+.app-primary-page:-webkit-scrollbar {
+  width: unset;
+}

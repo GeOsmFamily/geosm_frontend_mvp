@@ -43,3 +43,7 @@ body {
 input {
   background: transparent !important;
 }
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}

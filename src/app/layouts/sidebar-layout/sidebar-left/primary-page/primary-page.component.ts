@@ -12,6 +12,7 @@ export class PrimaryPageComponent {
   faLayer = faLayerGroup;
 
   data=[
+
     {
       "nomSyndicat":"SYNCOBE",
       "nomDepartement":"BENOUE",
@@ -54,22 +55,36 @@ export class PrimaryPageComponent {
   ]
   ouvrages=['Puit','Pompe','Forage','Latrines']
 
+  questions=[
+      "Ouvrages en bon état",
+      "Ouvrages endommagés",
+      "Ouvrages en bon état et non foctionnels",
+      "Ouvrages en bon état et fonctionnels",
+      "Ouvrages en bon état, fonctionnels mais eau de mauvaise qualité",
+      "Ouvrages en bon état, non fonctionnels mais eau de bonne qualité",
+      "Ouvrages ayant un comité de gestion fonctionel",
+      "Ouvrages en bon état et non fonctionnels ayant un comité de gestion",
+      "Ouvrages en bon état et fonctionnels n'ayant aucun comité de gestion",
+
+  ]
+  selectedIndex: number | undefined;
+
   listDepartements= new Map<string,any>([])
   listComunes= new Map<string,any[]>([])
 
 
 
 //sélection de l'utilisateur
-  syndicat:any|undefined
+  syndicat="Tous les syndicats"
   departement:string|undefined
-  commune:string|undefined
-  ouvrage:string|undefined
+  commune="Toutes les communes"
+  ouvrage="Tous les ouvrages"
 
   //variables liées à ngModel, permettant de récupérer le choix de l'utilisateur
   nbdepartement:any
-  nbCommune:string[]|undefined
-  nbOuvrage:string[]|undefined
-  listeSyndicats:any
+  nbCommune=["Toutes les communes"]
+  nbOuvrage=["Tous les ouvrages"]
+  listeSyndicats=["Tous les Syndicats"]
 
   list:string[]|undefined
   constructor() {
@@ -93,7 +108,9 @@ export class PrimaryPageComponent {
     //this.nbdepartement=Array.from(this.listComunes.keys())
 
 //console.log("eeeeeee ="+ this.listComunes.keys())
-  }
+
+      //this.onGroupsChange(this.listeSyndicats)
+}
 
 
 
@@ -112,29 +129,59 @@ export class PrimaryPageComponent {
 
 onGroupsChange(selectedPizzas: string[]) {
   //console.log(selectedPizzas);
-  this.syndicat=selectedPizzas[0]
 
+
+  if(selectedPizzas[0]=="Tout"){
+    this.syndicat="Tous les syndicats"
+  }
+  else{
+    this.syndicat=selectedPizzas[0]
+  }
   //alert("rr = "+this.listDepartements.get(this.syndicat!))
   //console.log(this.listDepartements.get(this.syndicat!)+  "yyy")
   //console.log(this.syndicat)
 }
 onDepartementChange(selectedPizzas: string[]) {
   //console.log(selectedPizzas);
+  if(selectedPizzas[0]=="Tout"){
+    this.departement="Tous les départements"
+  }
+  else{
+    this.departement=selectedPizzas[0]
+  }
 
-  this.departement=selectedPizzas[0]
   //console.log(this.departement)
 }
 onCommuneChange(selectedPizzas: string[]) {
   //console.log(selectedPizzas);
+  if(selectedPizzas[0]=="Tout"){
+    this.commune="Toutes les communes"
+  }
+  else{
+    this.commune=selectedPizzas[0]
+  }
 
-  this.commune=selectedPizzas[0]
   //console.log(this.commune)
 }
 
 onOuvrageChange(selectedPizzas: string[]) {
   //console.log(selectedPizzas);
+  if(selectedPizzas[0]=="Tout"){
+    this.ouvrage="Tous les ouvrages"
+  }
+  else{
+    this.ouvrage=selectedPizzas[0]
+  }
 
-  this.ouvrage=selectedPizzas[0]
   //console.log(this.ouvrage)
 }
+
+
+
+changeSelection(event:any, index:any) {
+  this.selectedIndex = event.target.checked ? index : undefined;
+  console.log(this.questions[this.selectedIndex!])
+  // do your logic here...
+}
+
 }
