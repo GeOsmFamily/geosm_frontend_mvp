@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, ViewChild } from '@angular/core';
 import { MatListOption, MatSelectionList } from '@angular/material/list';
@@ -72,7 +73,11 @@ export class PrimaryPageComponent {
   listDepartements= new Map<string,any>([])
   listComunes= new Map<string,any[]>([])
 
-
+  showSyndicats=false
+  showCommunes=false
+  showOuvrages=false
+  form:FormGroup
+  forceSelected = false;
 
 //sélection de l'utilisateur
   syndicat="Tous les syndicats"
@@ -87,7 +92,7 @@ export class PrimaryPageComponent {
   listeSyndicats=["Tous les Syndicats"]
 
   list:string[]|undefined
-  constructor() {
+  constructor( private formBuilder: FormBuilder,) {
     /* TODO document why this constructor is empty */
     for(let index=0;index<this.data.length;index++){
       var key=this.data[index].nomSyndicat
@@ -110,10 +115,20 @@ export class PrimaryPageComponent {
 //console.log("eeeeeee ="+ this.listComunes.keys())
 
       //this.onGroupsChange(this.listeSyndicats)
+      this.form = this.formBuilder.group({
+
+      });
 }
 
 
+getCdkConnectedOverlayPanelClasses(): string[] {
 
+
+  return ['max-h-72', '-translate-y-8'];
+}
+toggleSyndicats(){
+  this.showSyndicats=!this.showSyndicats
+}
 
   getSyndicats():string[]{
     return Array.from(this.listDepartements.keys())
@@ -181,6 +196,11 @@ onOuvrageChange(selectedPizzas: string[]) {
 changeSelection(event:any, index:any) {
   this.selectedIndex = event.target.checked ? index : undefined;
   console.log(this.questions[this.selectedIndex!])
+  // do your logic here...
+}
+changeSyndicat(event:any, index:any) {
+  this.selectedIndex = event.target.checked ? index : undefined;
+  this.syndicat=this.getSyndicats()[this.selectedIndex!]
   // do your logic here...
 }
 
