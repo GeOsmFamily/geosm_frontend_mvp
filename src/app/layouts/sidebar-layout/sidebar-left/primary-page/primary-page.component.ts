@@ -73,6 +73,7 @@ export class PrimaryPageComponent {
       "Ouvrages en bon état, non fonctionnels mais eau de bonne qualité",
       "Ouvrages ayant un comité de gestion fonctionel",
       "Ouvrages en bon état et non fonctionnels ayant un comité de gestion",
+      "Ouvrages en bon état et non fonctionnels n'ayant aucun comité de gestion",
       "Ouvrages en bon état et fonctionnels n'ayant aucun comité de gestion",
 
   ]

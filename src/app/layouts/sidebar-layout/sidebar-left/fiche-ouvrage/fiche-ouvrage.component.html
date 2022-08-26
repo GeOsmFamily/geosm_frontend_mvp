@@ -1,4 +1,4 @@
-<div style="overflow-x:hidden;overflow-y:scroll;height:100vh;background-color:white;position:relative;left:370px;width:400px;z-index:20">
+<div style="overflow-x:hidden;overflow-y:auto;height:calc(100vh-80);top:0;background-color:white;position:fixed;left:370px;width:400px;z-index:20">
   <!--<div class="flex flex-col p-5 bg-neutral-100">
     <div class="flex items-center">
       <div class="flex flex-wrap">
@@ -24,7 +24,7 @@
     <button style=" display: flex;
     justify-content: center;
     align-items: center; z-index:20;color: white;
-        " class="closeb">
+        " class="closeb" (click)="closeFiche()">
       <img class="img-fluid clear-logo" src="assets/images/svg/icon-clear.svg" alt="fermer" />
 
     </button>
