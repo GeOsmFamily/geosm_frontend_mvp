@@ -1,64 +1,223 @@
-<div class="fiche" style="background-color: #fff;color:black; overflow-x: hidden; overflow-y: scroll; height: 100vh;">
-  <!-- Photo de l'entreprise-->
-  <div class="parent " style="width: 100%;">
+<div style="overflow-x:hidden;overflow-y:scroll;height:100vh;background-color:white;position:relative;left:370px;width:400px;z-index:20">
+  <!--<div class="flex flex-col p-5 bg-neutral-100">
+    <div class="flex items-center">
+      <div class="flex flex-wrap">
+        <img [src]="odd.logo_odd" [alt]="odd.name" *ngFor="let odd of odds" class="mr-3 rounded-md mb-1" width="36" height="36">
+      </div>
+      <button class="flex items-center ml-auto text-primary" (click)="onHide()">
+        <ng-icon name="hero-x" strokeWidth="3" size="20"></ng-icon>
+      </button>
+    </div>
+    <h3 class="mt-4 mb-3 text-xl text-primary font-bold">{{ osc.name }}</h3>
+    <div class="flex items-center">
+      <span class="text-secondary font-medium">{{ osc.abbreviation }}</span>
+      <button (click)="onShowMap()" class="block md:hidden ml-auto px-3 py-2 bg-primary text-white text-xs font-extrabold rounded-lg uppercase">{{ 'button.show_map'|translate }}</button>
+    </div>
+  </div>-->
+  <div class="parent " class="w-full">
     <!-- <img class="img-fluid " src="assets/resto.jpg" style="width: 101%; height: 130px;" alt="photo entreprise"/>
-   -
-    <ngb-carousel>
-      <ng-template ngbSlide *ngFor="let image of images">-->
-        <div class="picsum-img-wrapper">
-          <img src="" alt="image" style="width: 100%;height: 250px;" class="img-fluid">
-        </div>
+   -->
 
-     <!-- </ng-template>
+          <img src="https://www.journaldugeek.com/content/uploads/2020/02/eau-puits-jardin-640x427.jpg" alt="" style="width: 100%;height: 250px;" class="">
 
-    </ngb-carousel>-->
 
     <button style=" display: flex;
     justify-content: center;
     align-items: center; z-index:20;color: white;
-        " class="closeb" >
-      <img class="img-fluid clear-logo" src="assets/icon/icon-clear.svg" alt="fermer" />
+        " class="closeb">
+      <img class="img-fluid clear-logo" src="assets/images/svg/icon-clear.svg" alt="fermer" />
 
     </button>
   </div>
-
-  <!-- Localisation de l'ouvrage-->
-
-
-
-  <mat-accordion  multi="true" class="couche-thematique" style="margin-top: 20px">
-    <mat-expansion-panel class="couche-thematique-panel"
-      expanded="true">
-      <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
-        <mat-panel-title>
-          Localisation de l'ouvrage
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div style="margin-top: 15px;">
-        <mat-list>
-
-          <mat-list-item >
-
-            <div mat-line>Syndicat: nom du syndicat</div>
-            <div mat-line>Département: nom du département </div>
-            <div mat-line>Commune: nom de la commune </div>
-            <div mat-line>Village: nom du village </div>
-            <div mat-line>Localisation: coordonnées X et Y </div>
-            <div mat-line>Numéro de référence: nom du village </div>
-          </mat-list-item>
-
-        </mat-list>
-
-
+  <div class="px-5">
+    <!--<div class="flex justify-between py-4 border-b border-neutral-200">
+      <div class="flex flex-col items-center text-primary text-xs" *ngIf="osc.site_web">
+        <a [href]="osc.site_web" class="flex items-center p-1.5 border rounded-md text-primary border-primary hover:bg-primary focus:bg-primary hover:text-white focus:text-white" target="blank">
+          <ng-icon name="hero-globe" size="24"></ng-icon>
+        </a>
+        <span class="mt-1.5">{{ 'link.website'|translate }}</span>
       </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+      <div class="flex flex-col items-center text-primary text-xs" *ngIf="osc.email_osc">
+        <a [href]="'mailto:' + osc.email_osc" class="flex items-center p-1.5 border rounded-md text-primary border-primary hover:bg-primary focus:bg-primary hover:text-white focus:text-white">
+          <ng-icon name="ion-mail" size="24"></ng-icon>
+        </a>
+        <span class="mt-1.5">{{ 'link.mail'|translate }}</span>
+      </div>
+      <div class="flex flex-col items-center text-primary text-xs" *ngIf="osc.telephone">
+        <a [href]="'tel:' + osc.telephone" class="flex items-center p-1.5 border rounded-md text-primary border-primary hover:bg-primary focus:bg-primary hover:text-white focus:text-white">
+          <ng-icon name="ion-call" size="24"></ng-icon>
+        </a>
+        <span class="mt-1.5">{{ 'link.phone'|translate }}</span>
+      </div>
+      <div class="flex flex-col items-center text-primary text-xs">
+        <button  class="flex items-center p-1.5 border rounded-md text-primary border-primary hover:bg-primary focus:bg-primary hover:text-white focus:text-white" [appMenuTriggerFor]="shareMenu" [xPosition]="'after'" [yPosition]="'below'">
+          <ng-icon name="hero-share" size="24"></ng-icon>
+        </button>
+        <span class="mt-1.5">{{ 'link.share'|translate }}</span>
+        <app-menu #shareMenu>
+          <div class="flex flex-row">
+            <button [url]="absoluteUrl" shareButton="facebook" aria-label="Partager sur Facebook">
+              <img src="/assets/logos/facebook.png" alt="">
+            </button>
+            <button [url]="absoluteUrl" shareButton="twitter" aria-label="Partager sur Twitter">
+              <img src="/assets/logos/twitter.png" alt="">
+            </button>
+            <button [url]="absoluteUrl" shareButton="linkedin" aria-label="Partager sur LinkedIn">
+              <img src="/assets/logos/linkedin.png" alt="">
+            </button>
+            <button [url]="absoluteUrl" shareButton="whatsapp" aria-label="Partager sur Whatsapp">
+              <img src="/assets/logos/whatsapp.png" alt="">
+            </button>
+          </div>
+        </app-menu>
+      </div>
+    </div>-->
 
 
-  <!-- Identification de l'ouvrage-->
+    <div class="py-4 border-b border-neutral-200">
+      <span  class="text-secondary font-semibold mb-2 titre ">Localisation</span>
 
 
-  <!-- Qualité del'eau-->
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Syndicat </span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
 
-  <!--Entretien de l'ouvrage-->
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Département </span>
+        <span class="ml-auto">MAYO-REY</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Commune </span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Village</span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Quartier/localité </span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Coordonnées GPS </span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Numéro de référence</span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Nom de l'ouvrage </span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Date de collecte </span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+
+    </div>
+
+    <div class="py-4 border-b border-neutral-200">
+      <span class="text-secondary font-semibold mb-2 titre">Identification de l'ouvrage</span>
+
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Type d'ouvrage</span>
+        <span class="ml-auto">Puits</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Date de mise en oeuvre</span>
+        <span class="ml-auto">Juin 2010</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Source de financement</span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Maître d'ouvrage</span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Maître d'oeuvre</span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Etat de l'ouvrage </span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+
+
+
+    </div>
+
+
+
+    <div class="py-4 border-b border-neutral-200">
+      <span class="text-secondary font-semibold mb-2 titre">Qualité de l'eau</span>
+
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Quantité suffisante</span>
+        <span class="ml-auto">Puits</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Qualité de l'eau</span>
+        <span class="ml-auto">Juin 2010</span>
+      </div>
+
+      <div class="flex  mb-2 text-primary" >
+        <span class="ml-1 text-sm font-bold">Source de pollution</span>
+        <span class="ml-auto">SYDECOMAR</span>
+      </div>
+   </div>
+
+
+   <div class="py-4 border-b border-neutral-200">
+    <span class="text-secondary font-semibold mb-2 titre">Entretien</span>
+
+
+    <div class="flex  mb-2 text-primary" >
+      <span class="ml-1 text-sm font-bold">Existence d'un comité de gestion</span>
+      <span class="ml-auto">Puits</span>
+    </div>
+
+    <div class="flex  mb-2 text-primary" >
+      <span class="ml-1 text-sm font-bold">Statut légal</span>
+      <span class="ml-auto">Juin 2010</span>
+    </div>
+
+    <div class="flex  mb-2 text-primary" >
+      <span class="ml-1 text-sm font-bold">Nom du comité</span>
+      <span class="ml-auto">SYDECOMAR</span>
+    </div>
+    <div class="flex  mb-2 text-primary" >
+      <span class="ml-1 text-sm font-bold">Nom du point focal</span>
+      <span class="ml-auto">SYDECOMAR</span>
+    </div>
+    <div class="flex  mb-2 text-primary" >
+      <span class="ml-1 text-sm font-bold">Contact du point focal</span>
+      <span class="ml-auto">SYDECOMAR</span>
+    </div>
+
+
+
+
+  </div>
+
+    <div class="py-4 border-b border-neutral-200">
+      <span class="text-secondary font-semibold mb-2 titre">Commentaires</span>
+      <div [innerText]="text1" class="text-sm"></div>
+    </div>
+
+  </div>
 </div>

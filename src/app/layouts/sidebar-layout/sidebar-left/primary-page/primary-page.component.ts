@@ -15,6 +15,14 @@ export class PrimaryPageComponent {
   data=[
 
     {
+      "nomSyndicat":"Tous les syndicats",
+      "nomDepartement":"Tous les départements",
+      "Communes":[ {"nomCommune":"Toutes les communes"},
+
+     ]
+
+    },
+    {
       "nomSyndicat":"SYNCOBE",
       "nomDepartement":"BENOUE",
       "Communes":[ {"nomCommune":"BIBEMI"},
@@ -69,6 +77,9 @@ export class PrimaryPageComponent {
 
   ]
   selectedIndex: number | undefined;
+  selectedCommune: number | undefined;
+  selectedOuvrage:number|undefined
+  selectedSyndicat:number|undefined
 
   listDepartements= new Map<string,any>([])
   listComunes= new Map<string,any[]>([])
@@ -80,7 +91,7 @@ export class PrimaryPageComponent {
   forceSelected = false;
 
 //sélection de l'utilisateur
-  syndicat="Tous les syndicats"
+  syndicat:string|undefined
   departement:string|undefined
   commune="Toutes les communes"
   ouvrage="Tous les ouvrages"
@@ -130,6 +141,13 @@ toggleSyndicats(){
   this.showSyndicats=!this.showSyndicats
 }
 
+toggleCommunes(){
+  this.showCommunes=!this.showCommunes
+}
+
+toggleOuvrages(){
+  this.showOuvrages=!this.showOuvrages
+}
   getSyndicats():string[]{
     return Array.from(this.listDepartements.keys())
   }
@@ -199,9 +217,22 @@ changeSelection(event:any, index:any) {
   // do your logic here...
 }
 changeSyndicat(event:any, index:any) {
-  this.selectedIndex = event.target.checked ? index : undefined;
-  this.syndicat=this.getSyndicats()[this.selectedIndex!]
-  // do your logic here...
+
+  this.selectedSyndicat = event.target.checked ? index : undefined;
+  this.syndicat=this.getSyndicats()[this.selectedSyndicat!]
+  console.log(event.target.check)
+}
+
+changeCommune(event:any, index:any) {
+  this.selectedCommune = event.target.checked ? index : undefined;
+  this.commune=this.getCommunes()![this.selectedCommune!]
+
+}
+
+changeOuvrage(event:any, index:any) {
+  this.selectedOuvrage = event.target.checked ? index : undefined;
+  this.ouvrage=this.ouvrages  [this.selectedOuvrage!]
+
 }
 
 }

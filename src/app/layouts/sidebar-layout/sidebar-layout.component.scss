@@ -4,12 +4,15 @@
   width: 100%;
   height: calc(100% - 80px);
   background-color: white;
+
 }
 
 .sidebar-left {
   width: 370px;
   background-color: #023F5F;
   padding: 20px;
+  position: absolute;
+
 }
 
 .sidebar-right {

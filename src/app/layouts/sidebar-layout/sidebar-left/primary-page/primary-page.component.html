@@ -1,12 +1,14 @@
 
-<div class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleSyndicats()" cdkOverlayOrigin
+<div style="height:50px" class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger text-lg" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleSyndicats()" cdkOverlayOrigin
 #trigger="cdkOverlayOrigin">
-  <p class="mr-auto text-xs text-primary font-semibold">Choisir un syndicat</p>
+  <p class="mr-auto text-sm text-primary font-semibold" *ngIf="syndicat === undefined">Choisir un syndicat</p>
+  <p class="mr-auto text-sm text-primary font-semibold" *ngIf="syndicat">{{syndicat}}</p>
+
   <span class="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary"></span>
   <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="trigger" [cdkConnectedOverlayOpen]="showSyndicats" [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"  >
-    <div class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white rounded-lg overflow-y-auto shadow-lg" *ngIf="showSyndicats">
+    <div class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white  overflow-y-auto shadow-lg" *ngIf="showSyndicats">
       <div class="flex items-center pb-3 border-b border-b-primary">
-        <label class="text-xs text-primary font-extrabold">
+        <label class="text-sm text-primary font-extrabold">
         kkkkkkkkkkkkk
         </label>
         <button class="flex items-center text-primary ml-auto" (click)="toggleSyndicats()">
@@ -15,15 +17,113 @@
       </div>
 
       <ng-container *ngIf="getSyndicats().length !== 0">
-        <form [formGroup]="form">
-          <div *ngFor="let category of getSyndicats(); let i = index;" class="py-3 border-b border-b-neutral-200" >
-            <label class="flex text-primary text-xs">
-              <input type="checkbox" (change)="changeSyndicat($event, i)"   class="mr-3 text-primary focus:ring-primary">
+
+          <div  *ngFor="let category of getSyndicats(); let i = index;" class="py-3 border-b border-b-neutral-200" >
+            <label class="flex text-primary text-sm">
+              <input type="checkbox"  (change)="changeSyndicat($event, i)"   class="mr-3 text-primary focus:ring-primary">
               {{ category }}
             </label>
           </div>
-        </form>
+
       </ng-container>
     </div>
   </ng-template>
 </div>
+
+
+
+
+<div style="height:50px" class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleCommunes()" cdkOverlayOrigin
+#triggerCommunes="cdkOverlayOrigin">
+  <p class="mr-auto text-sm text-primary font-semibold" *ngIf="commune === undefined">Choisir une commune</p>
+  <p class="mr-auto text-sm text-primary font-semibold" *ngIf="commune">{{commune}}</p>
+
+  <span class="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary"></span>
+  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="triggerCommunes" [cdkConnectedOverlayOpen]="showCommunes" [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"  >
+    <div class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white  overflow-y-auto shadow-lg" *ngIf="showCommunes">
+      <div class="flex items-center pb-3 border-b border-b-primary">
+        <label class="text-sm text-primary font-extrabold">
+        kkkkkkkkkkkkk
+        </label>
+        <button class="flex items-center text-primary ml-auto" (click)="toggleCommunes()">
+          <!--<ng-icon name="hero-x" size="24"></ng-icon>-->
+        </button>
+      </div>
+
+      <ng-container *ngIf="getCommunes()!.length !== 0">
+
+          <div  *ngFor="let category of getCommunes(); let i = index;" class="py-3 border-b border-b-neutral-200" >
+            <label class="flex text-primary text-sm">
+              <input type="checkbox"  (change)="changeCommune($event, i)"   class="mr-3 text-primary focus:ring-primary">
+              {{ category }}
+            </label>
+          </div>
+
+      </ng-container>
+    </div>
+  </ng-template>
+</div>
+
+
+
+<div style="height:50px" class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleOuvrages()" cdkOverlayOrigin
+#triggerOuvrages="cdkOverlayOrigin">
+  <p class="mr-auto text-sm text-primary font-semibold" *ngIf="ouvrage=== undefined">Choisir une ouvrage</p>
+  <p class="mr-auto text- text-primary font-semibold" *ngIf="ouvrage">{{ouvrage}}</p>
+
+  <span class="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary"></span>
+  <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="triggerOuvrages" [cdkConnectedOverlayOpen]="showOuvrages" [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"  >
+    <div class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white  overflow-y-auto shadow-lg" *ngIf="showOuvrages">
+      <div class="flex items-center pb-3 border-b border-b-primary">
+        <label class="text-sm text-primary font-extrabold">
+        kkkkkkkkkkkkk
+        </label>
+        <button class="flex items-center text-primary ml-auto" (click)="toggleOuvrages()">
+          <!--<ng-icon name="hero-x" size="24"></ng-icon>-->
+        </button>
+      </div>
+
+      <ng-container *ngIf="ouvrages.length !== 0">
+
+          <div  *ngFor="let category of ouvrages; let i = index;" class="py-3 border-b border-b-neutral-200" >
+            <label class="flex text-primary text-sm">
+              <input type="checkbox"  (change)="changeOuvrage($event, i)"   class="mr-3 text-primary focus:ring-primary">
+              {{ category }}
+            </label>
+          </div>
+
+      </ng-container>
+    </div>
+  </ng-template>
+</div>
+
+
+<div  style="margin-top:20px" class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white  overflow-y-auto shadow-lg">
+  <div class="flex items-center pb-3 border-b border-b-primary">
+    <label class="text-sm text-primary font-extrabold">
+    kkkkkkkkkkkkk
+    </label>
+    <button class="flex items-center text-primary ml-auto">
+      <!--<fa-icon name="hero-x" size="24"></fa-icon>-->
+    </button>
+  </div>
+
+  <ng-container *ngIf="ouvrages.length !== 0">
+
+      <div  *ngFor="let category of questions; let i = index;" class="py-3 border-b border-b-neutral-200" >
+        <label class="flex text-primary text-sm">
+          <input type="checkbox"  (change)="changeSelection($event, i)"   class="mr-3 text-primary focus:ring-primary">
+          {{ category }}
+        </label>
+      </div>
+
+  </ng-container>
+
+
+
+</div>
+
+
+
+
+

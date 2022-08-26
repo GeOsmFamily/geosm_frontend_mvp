@@ -1,9 +1,13 @@
-<mat-sidenav-container class="sidenav-container" #sidenavContainer>
+<mat-sidenav-container class="sidenav-container " #sidenavContainer >
+
+
   <mat-sidenav class="sidebar-left" opened mode="side" position="start">
     <app-primary-page></app-primary-page>
+    <app-fiche-ouvrage></app-fiche-ouvrage>
+
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content >
     <app-map [ritghtMenus]="ritghtMenus" [sidenavContainer]="sidenavContainer"></app-map>
   </mat-sidenav-content>
 
