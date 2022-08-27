@@ -1,103 +1,14 @@
-.user-box {
-  padding: 1.2rem 1.2rem 1.6rem;
-  border-bottom-color: rgba(0, 0, 0, 0.08);
-  border-bottom: 3px solid rgba(0, 0, 0, 0.08);
-  width: 300px;
-  margin: 0 auto;
-  margin-top: 10px;
-  background-color: white;
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-.break-words {
-  overflow-wrap: break-word !important;
-  word-wrap: break-word !important;
-  word-break: break-word !important;
-}
 
-.cover-image {
-  background-position: center;
-  background-size: cover;
-  display: block;
-  height: 96.25px;
-  margin: -20px -12px -12px -12px;
-  background-image: url(https://media-exp2.licdn.com/dms/image/C4D16AQHloTjzzWgexw/profile-displaybackgroundimage-shrink_200_800/0/1609433426546?e=1660780800&v=beta&t=WJXz90-Q_WB-A4O88piFVkPT18ZWNGB4DN95aeql3_c);
-}
 
-.profile-image {
-  margin: -38px auto 1.2rem;
-  border: 2px solid #fff;
-  background-color: #fff;
-}
+input[type=checkbox] {
+  appearance:initial;
+  -webkit-appearance: checkbox;
+ }
 
-.entityPhoto {
-  width: 80px;
-  height: 80px;
-  box-sizing: border-box;
-  background-clip: content-box;
-  border: 1px solid transparent;
-  border-radius: 49.9%;
-}
-
-.t-black {
-  color: #000;
-}
-
-.t-16 {
-  font-size: 14px;
-  line-height: 1.5;
-  text-align: center;
-}
-
-.t-bold {
-  font-weight: 600;
-}
-
-.mt1 {
-  margin-top: 4px !important;
-}
-
-.t-black--light {
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.t-12 {
-  font-size: 15px;
-  line-height: 1.33333;
-  text-align: center;
-}
-
-.t-normal {
-  font-weight: 400;
-}
-
-a {
-  text-decoration: none;
-}
-
-.bold {
-  font-weight: bold !important;
-}
-
-.arborescence-group {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  padding: 5px;
-  margin-left: -6px;
-  width: 95%;
-  border-radius: 0px 15px 15px 0px;
-  text-align: center;
-  display: flow-root;
-  text-transform: uppercase;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-size: 14px;
-}
-
-.base-group-carte-btn {
-  width: 70%;
-  margin-top: 15px;
-  text-align: center;
-}
-
-mat-expansion-panel{
-  margin-bottom: 20px;
-}
+ input[type="checkbox"]:checked {
+   accent-color:black !important;
+ }

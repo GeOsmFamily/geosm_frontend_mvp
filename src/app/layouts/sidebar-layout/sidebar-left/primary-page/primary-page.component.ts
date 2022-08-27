@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { PradecService } from 'src/app/core/services/geosm/pradec/pradec.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, ViewChild } from '@angular/core';
@@ -36,6 +37,14 @@ export class PrimaryPageComponent {
 
   data=[
 
+    {
+      "nomSyndicat":"Tous les syndicats",
+      "nomDepartement":"Tous les départements",
+      "Communes":[ {"nomCommune":"Toutes les communes"},
+
+     ]
+
+    },
     {
       "nomSyndicat":"SYNCOBE",
       "nomDepartement":"BENOUE",
@@ -87,18 +96,26 @@ export class PrimaryPageComponent {
       "Ouvrages en bon état, non fonctionnels mais eau de bonne qualité",
       "Ouvrages ayant un comité de gestion fonctionel",
       "Ouvrages en bon état et non fonctionnels ayant un comité de gestion",
+      "Ouvrages en bon état et non fonctionnels n'ayant aucun comité de gestion",
       "Ouvrages en bon état et fonctionnels n'ayant aucun comité de gestion",
 
   ]
   selectedIndex: number | undefined;
+  selectedCommune: number | undefined;
+  selectedOuvrage:number|undefined
+  selectedSyndicat:number|undefined
 
   listDepartements= new Map<string,any>([])
   listComunes= new Map<string,any[]>([])
 
-
+  showSyndicats=false
+  showCommunes=false
+  showOuvrages=false
+  form:FormGroup
+  forceSelected = false;
 
 //sélection de l'utilisateur
-  syndicat="Tous les syndicats"
+  syndicat:string|undefined
   departement:string|undefined
   commune="Toutes les communes"
   ouvrage="Tous les ouvrages"
