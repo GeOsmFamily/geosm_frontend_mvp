@@ -42,7 +42,7 @@
 
   <span class="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary"></span>
   <ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="triggerCommunes" [cdkConnectedOverlayOpen]="showCommunes" [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"  >
-    <div style="width:350px" class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white  overflow-y-auto shadow-lg" *ngIf="showCommunes">
+    <div style="width:350px; height: 200px;" class="max-w-sm px-10 pt-5 md:px-3 md:pt-3 bg-white  overflow-y-auto shadow-lg" *ngIf="showCommunes">
       <div class="flex items-center pb-3 border-b border-b-primary">
         <label class="text-sm text-primary font-extrabold">
 
@@ -71,7 +71,7 @@
 
 <div style="height:50px" class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleOuvrages()" cdkOverlayOrigin
 #triggerOuvrages="cdkOverlayOrigin">
-  <p class="mr-auto text-sm text-primary font-semibold" *ngIf="auxi=== undefined">Choisir une ouvrage</p>
+  <p class="mr-auto text-sm text-primary font-semibold" *ngIf="auxi=== undefined">Choisir un ouvrage</p>
   <p class="mr-auto text- text-primary font-semibold" *ngIf="auxi">{{auxi}}</p>
 
   <span class="w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary"></span>

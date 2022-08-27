@@ -11,7 +11,7 @@
   width: 370px;
   background-color: #023F5F;
   padding: 20px;
-position: absolute;
+  position: absolute;
 
 }
 
@@ -48,3 +48,6 @@ app-primary-page:-webkit-scrollbar {
   width: unset;
 }
 
+app-fiche-ouvrage {
+  display: none;
+}

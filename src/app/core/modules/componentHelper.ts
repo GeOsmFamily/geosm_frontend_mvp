@@ -5,6 +5,7 @@ import { DescriptiveSheetModalComponent } from 'src/app/layouts/sidebar-layout/m
 import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
 import { DescriptiveSheet } from 'src/app/layouts/sidebar-layout/map/interfaces/descriptiveSheet';
 import { LayersInMap } from 'src/app/layouts/sidebar-layout/map/interfaces/layerinmap';
+import { FicheOuvrageComponent } from 'src/app/layouts/sidebar-layout/sidebar-left/fiche-ouvrage/fiche-ouvrage.component';
 import { SocialsharedComponent } from 'src/app/shared/socialshared/socialshared.component';
 import { CaracteristicSheet } from '../interfaces/caracteristicSheet';
 import { LayerGroup } from './openlayers';
@@ -13,6 +14,7 @@ import { LayerGroup } from './openlayers';
   providedIn: 'root'
 })
 export class ComponentHelper {
+  ficheouvrageComponent: FicheOuvrageComponent | undefined;
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector,
@@ -67,7 +69,7 @@ export class ComponentHelper {
   }
 
   openDescriptiveSheetModal(data: DescriptiveSheet, size: Array<string> | [], callBack: Function) {
-    let position = {
+    /* let position = {
       top: '100px',
       left: window.innerWidth < 500 ? '0px' : window.innerWidth / 2 - 400 / 2 + 'px'
     };
@@ -105,7 +107,15 @@ export class ComponentHelper {
 
     modal.afterClosed().subscribe(async (result: any) => {
       callBack(result);
-    });
+    });*/
+
+    this.ficheouvrageComponent?.open(data);
+  }
+
+  setComponent(component: string, comp: any) {
+    if (component == 'FicheOuvrageComponent') {
+      this.ficheouvrageComponent = comp;
+    }
   }
 
   openCaracteristic(data: CaracteristicSheet) {
@@ -139,6 +149,6 @@ export class ComponentHelper {
       position: position
     };
 
-  //  this.dialog.open(CaracteristiquesLieuModalComponent, proprietes);
+    //  this.dialog.open(CaracteristiquesLieuModalComponent, proprietes);
   }
 }

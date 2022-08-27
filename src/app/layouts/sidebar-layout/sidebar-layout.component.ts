@@ -3,6 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSidenavContainer } from '@angular/material/sidenav';
 import { map as geoportailMap } from './map/components/map.component';
 import { RightMenuInterface } from './sidebar-right/interfaces/rightMenuInterface';
+import { FicheOuvrageComponent } from './sidebar-left/fiche-ouvrage/fiche-ouvrage.component';
+import { ComponentHelper } from 'src/app/core/modules/componentHelper';
 
 @Component({
   selector: 'app-sidebar-layout',
@@ -12,6 +14,9 @@ import { RightMenuInterface } from './sidebar-right/interfaces/rightMenuInterfac
 export class SidebarLayoutComponent {
   @ViewChild(MatSidenavContainer, { static: true })
   sidenavContainer: MatSidenavContainer | undefined;
+
+  @ViewChild(FicheOuvrageComponent, { static: true })
+  ficheOuvrageComponent: FicheOuvrageComponent | undefined;
 
   map: Map | undefined;
 
@@ -53,8 +58,13 @@ export class SidebarLayoutComponent {
     }
   ];
 
-  constructor() {
+  constructor(public componentHelper:ComponentHelper) {
     this.map = geoportailMap;
+  }
+
+  // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
+  ngAfterViewInit() {
+    this.componentHelper.setComponent('FicheOuvrageComponent', this.ficheOuvrageComponent);
   }
 
   getRightMenu(name: string): RightMenuInterface | undefined {

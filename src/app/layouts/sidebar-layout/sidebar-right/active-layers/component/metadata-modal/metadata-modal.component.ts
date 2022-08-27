@@ -15,16 +15,19 @@ export class MetadataModalComponent implements OnInit {
   faTimes = faTimes;
   url_geojson: string | undefined;
 
+  url_excel: string | undefined;
+
   constructor(public dialogRef: MatDialogRef<MetadataModalComponent>, @Inject(MAT_DIALOG_DATA) public data: MetaDataInterface) {}
 
   ngOnInit(): void {
     this.url_prefix = this.data['url_prefix'];
 
-
     this.data_metadata = this.data;
     console.log(this.data_metadata);
 
-    this.url_geojson = '/assets/datas/'+ this.data_metadata?.layer.identifiant + '.geojson';
+    this.url_geojson = '/assets/datas/' + this.data_metadata?.layer.identifiant + '.geojson';
+
+    this.url_excel = '/assets/datas/' + this.data_metadata?.layer.identifiant + '.xlsx';
   }
 
   onNoClick(): void {

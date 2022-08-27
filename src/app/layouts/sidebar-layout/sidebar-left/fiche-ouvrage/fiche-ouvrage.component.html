@@ -1,4 +1,4 @@
-<div *ngIf="on" style="overflow-y: scroll;
+<div *ngIf="data!" style="overflow-y: scroll;
 height:100vh ;top:0;background-color:white;position:fixed;left:370px;width:400px;z-index:20
 ">
   <!--<div class="flex flex-col p-5 bg-neutral-100">
@@ -20,7 +20,7 @@ height:100vh ;top:0;background-color:white;position:fixed;left:370px;width:400px
     <!-- <img class="img-fluid " src="assets/resto.jpg" style="width: 101%; height: 130px;" alt="photo entreprise"/>
    -->
 
-          <img src="https://www.journaldugeek.com/content/uploads/2020/02/eau-puits-jardin-640x427.jpg" alt="" style="width: 100%;height: 250px;" class="">
+          <img [src]="data!.properties.photourl" alt="" style="width: 100%;height: 250px;" class="">
 
 
     <button style=" display: flex;
@@ -77,84 +77,84 @@ height:100vh ;top:0;background-color:white;position:fixed;left:370px;width:400px
 
 
     <div class="py-4 border-b border-neutral-200">
-      <span  class="text-secondary font-semibold mb-2 titre ">Localisation</span>
+      <span style="color: #023f5f;"  class="text-secondary font-semibold mb-2 titre ">Localisation</span>
 
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Syndicat </span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.nomsyndicat }}</span>
       </div>
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Département </span>
-        <span class="ml-auto">MAYO-REY</span>
+        <span class="ml-auto">{{ data!.properties.nomdepartement }}</span>
       </div>
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Commune </span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.nomcommune }}</span>
       </div>
-      <div class="flex  mb-2 text-primary" >
+      <div *ngIf="data!.properties.village" class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Village</span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.village }}</span>
       </div>
-      <div class="flex  mb-2 text-primary" >
+      <div *ngIf="data!.properties.nomlocalite" class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Quartier/localité </span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.nomlocalite }}</span>
       </div>
 
-      <div class="flex  mb-2 text-primary" >
+      <!--div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Coordonnées GPS </span>
         <span class="ml-auto">SYDECOMAR</span>
-      </div>
+      </!-div-->
 
-      <div class="flex  mb-2 text-primary" >
+      <div *ngIf="data!.properties.numeroreferenceouvrage" class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Numéro de référence</span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.numeroreferenceouvrage }}</span>
       </div>
 
-      <div class="flex  mb-2 text-primary" >
+      <div *ngIf="data!.properties.nomouvrage" class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Nom de l'ouvrage </span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.nomouvrage }}</span>
       </div>
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Date de collecte </span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.datecollecte }}</span>
       </div>
 
     </div>
 
     <div class="py-4 border-b border-neutral-200">
-      <span class="text-secondary font-semibold mb-2 titre">Identification de l'ouvrage</span>
+      <span style="color: #023f5f;" class="text-secondary font-semibold mb-2 titre">Identification de l'ouvrage</span>
 
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Type d'ouvrage</span>
-        <span class="ml-auto">Puits</span>
+        <span class="ml-auto">{{ data!.properties.typeeau }}</span>
       </div>
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Date de mise en oeuvre</span>
-        <span class="ml-auto">Juin 2010</span>
+        <span class="ml-auto"> {{ data!.properties.datemiseoeuvre }} </span>
       </div>
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Source de financement</span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.sourcefinancement }}</span>
       </div>
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Maître d'ouvrage</span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.maitreouvrage }}</span>
       </div>
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Maître d'oeuvre</span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.maitreoeuvre }}</span>
       </div>
 
       <div class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Etat de l'ouvrage </span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.etat }}</span>
       </div>
 
 
@@ -164,51 +164,51 @@ height:100vh ;top:0;background-color:white;position:fixed;left:370px;width:400px
 
 
     <div class="py-4 border-b border-neutral-200">
-      <span class="text-secondary font-semibold mb-2 titre">Qualité de l'eau</span>
+      <span style="color: #023f5f;" class="text-secondary font-semibold mb-2 titre">Qualité de l'eau</span>
 
 
-      <div class="flex  mb-2 text-primary" >
+      <div *ngIf="data!.properties.quantitesuffisanteeau" class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Quantité suffisante</span>
-        <span class="ml-auto">Puits</span>
+        <span class="ml-auto">{{ data!.properties.quantitesuffisanteeau }}</span>
       </div>
 
-      <div class="flex  mb-2 text-primary" >
+      <div *ngIf="data!.properties.qualiteeau" class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Qualité de l'eau</span>
-        <span class="ml-auto">Juin 2010</span>
+        <span class="ml-auto">{{ data!.properties.qualiteeau }}</span>
       </div>
 
-      <div class="flex  mb-2 text-primary" >
+      <div *ngIf="data!.properties.sourcepollution" class="flex  mb-2 text-primary" >
         <span class="ml-1 text-sm font-bold">Source de pollution</span>
-        <span class="ml-auto">SYDECOMAR</span>
+        <span class="ml-auto">{{ data!.properties.sourcepollution }}</span>
       </div>
    </div>
 
 
    <div class="py-4 border-b border-neutral-200">
-    <span class="text-secondary font-semibold mb-2 titre">Entretien</span>
+    <span style="color: #023f5f;" class="text-secondary font-semibold mb-2 titre">Entretien</span>
 
 
     <div class="flex  mb-2 text-primary" >
       <span class="ml-1 text-sm font-bold">Existence d'un comité de gestion</span>
-      <span class="ml-auto">Puits</span>
+      <span class="ml-auto">{{ data!.properties.existencecomitegestion }}</span>
     </div>
 
-    <div class="flex  mb-2 text-primary" >
+    <div *ngIf="data!.properties.statutlegal" class="flex  mb-2 text-primary" >
       <span class="ml-1 text-sm font-bold">Statut légal</span>
-      <span class="ml-auto">Juin 2010</span>
+      <span class="ml-auto">{{ data!.properties.statutlegal }}</span>
     </div>
 
-    <div class="flex  mb-2 text-primary" >
+    <div *ngIf="data!.properties.nomcomite" class="flex  mb-2 text-primary" >
       <span class="ml-1 text-sm font-bold">Nom du comité</span>
-      <span class="ml-auto">SYDECOMAR</span>
+      <span class="ml-auto">{{ data!.properties.nomcomite }}</span>
     </div>
-    <div class="flex  mb-2 text-primary" >
+    <div *ngIf="data!.properties.nompointfocal" class="flex  mb-2 text-primary" >
       <span class="ml-1 text-sm font-bold">Nom du point focal</span>
-      <span class="ml-auto">SYDECOMAR</span>
+      <span class="ml-auto">{{ data!.properties.nompointfocal }}</span>
     </div>
-    <div class="flex  mb-2 text-primary" >
+    <div *ngIf="data!.properties.contactpointfocal" class="flex  mb-2 text-primary" >
       <span class="ml-1 text-sm font-bold">Contact du point focal</span>
-      <span class="ml-auto">SYDECOMAR</span>
+      <span class="ml-auto">{{ data!.properties.contactpointfocal }}</span>
     </div>
 
 
@@ -217,7 +217,7 @@ height:100vh ;top:0;background-color:white;position:fixed;left:370px;width:400px
   </div>
 
     <div class="py-4 border-b border-neutral-200">
-      <span class="text-secondary font-semibold mb-2 titre">Commentaires</span>
+      <span style="color: #023f5f;" class="text-secondary font-semibold mb-2 titre">Commentaires</span>
       <div [innerText]="text1" class="text-sm"></div>
     </div>
 
