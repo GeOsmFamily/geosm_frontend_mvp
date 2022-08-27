@@ -9,6 +9,7 @@
 .sidebar-left {
   width: 370px;
   background-color: white;
+  padding: 20px;
 }
 
 .sidebar-right {
@@ -37,4 +38,9 @@
   .sidebar-right-title-fake {
     height: 20px;
   }
+}
+
+
+.app-primary-page:-webkit-scrollbar {
+  width: unset;
 }

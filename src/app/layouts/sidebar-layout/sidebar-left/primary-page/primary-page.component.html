@@ -1,28 +1,104 @@
-<div class="user-box break-words">
-  <div class="cover-image"></div>
-  <a href="/in/boris-gautier-tchoukouaha-420262143/" id="ember145" class="ember-view block">
-    <div style="text-align: center">
-      <img
-        width="64"
-        src="https://media-exp2.licdn.com/dms/image/C4D03AQGkW5vvuH4KYQ/profile-displayphoto-shrink_100_100/0/1605181488764?e=1660780800&v=beta&t=9H6ftlAqlgiiasEeN9Lqlm4Oie8vNStVnLTabMjIU1E"
-        alt=""
-        loading="lazy"
-        height="64"
-        alt="Photo de profil"
-        id="ember146"
-        class="profile-image entityPhoto lazy-image ember-view"
-      />
-    </div>
-    <div class="t-16 t-black t-bold">Boris Gautier TCHOUKOUAHA</div>
-  </a>
-  <p class="t-12 t-black--light t-normal mt1">Software Development Engineer - Full Stack</p>
-</div>
+<mat-accordion multi="true" class="couche-thematique">
+  <mat-expansion-panel class="couche-thematique-panel"
+    expanded="true">
+    <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
+      <mat-panel-title>
+        {{syndicat}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div style="margin-top: 15px;">
+      <mat-selection-list   multiple="false" multi="false" [(ngModel)]="listeSyndicats" (ngModelChange)="onGroupsChange($event)"  >
+        <!-- <mat-list-option> -->
+          <mat-list-option [selected]="listeSyndicats!==undefined" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+          [value]="'Tout'" >
+         <img class="couche-img" src="" mat-list-icon  alt="" />
 
-<div style="text-align: center">
-  <button mat-raised-button class="white base-group-carte-btn" color="primary">{{ 'left_menu.maps_background' | translate }}</button>
-</div>
+         <div mat-line class="couche-title" >Tous les syndicats</div>
+       </mat-list-option>
+          <mat-list-option  *ngFor="let syndicats of getSyndicats()" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+           [value]="syndicats" >
+          <img class="couche-img" src="" mat-list-icon  alt="" />
+
+          <div mat-line class="couche-title" >{{syndicats}}</div>
+        </mat-list-option>
+
+      </mat-selection-list>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<mat-accordion *ngIf="syndicat" multi="true" class="couche-thematique">
+  <mat-expansion-panel class="couche-thematique-panel"
+    expanded="true">
+    <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
+      <mat-panel-title>
+        {{commune}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div style="margin-top: 15px;">
+      <mat-selection-list  multiple="false" [(ngModel)]="nbCommune" (ngModelChange)="onCommuneChange($event)">
+        <!-- <mat-list-option> -->
+          <mat-list-option  [selected]="nbCommune!==undefined"[matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+          [value]="'Tout'" >
+         <img class="couche-img" src="" mat-list-icon  alt="" />
+
+         <div mat-line class="couche-title" >Toutes les Communes</div>
+       </mat-list-option>
+          <mat-list-option  *ngFor="let communes of getCommunes()"[matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+           [value]="communes" >
+          <img class="couche-img" src="" mat-list-icon  alt="" />
+
+          <div mat-line class="couche-title">{{communes}}</div>
+        </mat-list-option>
+      </mat-selection-list>
+
+
+
+
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-accordion multi="true" class="couche-thematique">
+  <mat-expansion-panel class="couche-thematique-panel"
+    expanded="true">
+    <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
+      <mat-panel-title>
+        {{ouvrage}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div style="margin-top: 15px;">
+      <mat-selection-list  multiple="false" [(ngModel)]="nbOuvrage" (ngModelChange)="onOuvrageChange($event)">
+        <!-- <mat-list-option> -->
+          <mat-list-option [selected]="nbOuvrage!==undefined" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+          [value]="'Tout'" >
+         <img class="couche-img" src="" mat-list-icon  alt="" />
+
+         <div mat-line class="couche-title" >Tous les ouvrages</div>
+       </mat-list-option>
+          <mat-list-option  *ngFor="let ouvrage of ouvrages" [matTooltip]="'nom'" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+           [value]="ouvrage" >
+          <img class="couche-img" src="" mat-list-icon  alt="" />
+
+          <div mat-line class="couche-title">{{ouvrage}}</div>
+        </mat-list-option>
+      </mat-selection-list>
+
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
 
 <h5 class="bold primaryColor primary_transparent_bg arborescence-group">
-  <fa-icon [icon]="faLayer"></fa-icon>
-  {{ 'left_menu.themes' | translate }}
+
+  Questions
 </h5>
+<div class="form-check" *ngFor="let question of questions; let index = index">
+  <label fxLayout="row" class="form-check-label text-break" style="cursor:pointer">
+
+    <span fxFlex=" column">{{ question }}</span>
+    <input  class="form-check-input" type="checkbox" [ngModel]="selectedIndex === index"
+        (change)="changeSelection($event, index)" />
+
+</label>
+<mat-divider style="margin-bottom:20px"></mat-divider>
+</div>

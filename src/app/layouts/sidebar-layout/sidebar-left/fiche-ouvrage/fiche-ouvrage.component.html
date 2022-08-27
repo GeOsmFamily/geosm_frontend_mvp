@@ -1,0 +1,64 @@
+<div class="fiche" style="background-color: #fff;color:black; overflow-x: hidden; overflow-y: scroll; height: 100vh;">
+  <!-- Photo de l'entreprise-->
+  <div class="parent " style="width: 100%;">
+    <!-- <img class="img-fluid " src="assets/resto.jpg" style="width: 101%; height: 130px;" alt="photo entreprise"/>
+   -
+    <ngb-carousel>
+      <ng-template ngbSlide *ngFor="let image of images">-->
+        <div class="picsum-img-wrapper">
+          <img src="" alt="image" style="width: 100%;height: 250px;" class="img-fluid">
+        </div>
+
+     <!-- </ng-template>
+
+    </ngb-carousel>-->
+
+    <button style=" display: flex;
+    justify-content: center;
+    align-items: center; z-index:20;color: white;
+        " class="closeb" >
+      <img class="img-fluid clear-logo" src="assets/icon/icon-clear.svg" alt="fermer" />
+
+    </button>
+  </div>
+
+  <!-- Localisation de l'ouvrage-->
+
+
+
+  <mat-accordion  multi="true" class="couche-thematique" style="margin-top: 20px">
+    <mat-expansion-panel class="couche-thematique-panel"
+      expanded="true">
+      <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
+        <mat-panel-title>
+          Localisation de l'ouvrage
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div style="margin-top: 15px;">
+        <mat-list>
+
+          <mat-list-item >
+
+            <div mat-line>Syndicat: nom du syndicat</div>
+            <div mat-line>Département: nom du département </div>
+            <div mat-line>Commune: nom de la commune </div>
+            <div mat-line>Village: nom du village </div>
+            <div mat-line>Localisation: coordonnées X et Y </div>
+            <div mat-line>Numéro de référence: nom du village </div>
+          </mat-list-item>
+
+        </mat-list>
+
+
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+
+  <!-- Identification de l'ouvrage-->
+
+
+  <!-- Qualité del'eau-->
+
+  <!--Entretien de l'ouvrage-->
+</div>
