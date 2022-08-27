@@ -62,7 +62,7 @@ export class PrimaryPageComponent {
 
     }
   ]
-  ouvrages=['Puit','Pompe','Forage','Latrines']
+  ouvrages=['Puits','Pompes','Forages','Latrines']
 
   questions=[
       "Ouvrages en bon état",
@@ -82,6 +82,11 @@ export class PrimaryPageComponent {
   selectedOuvrage:number|undefined
   selectedSyndicat:number|undefined
 
+
+  ouvrageChecked?:string
+  syndicatChecked?:string
+  communeChecked?:string
+  questionChecked?:string
   listDepartements= new Map<string,any>([])
   listComunes= new Map<string,any[]>([])
 
@@ -95,12 +100,12 @@ export class PrimaryPageComponent {
   syndicat:string|undefined
   departement:string|undefined
   commune="Toutes les communes"
-  ouvrage="Tous les ouvrages"
+  ouvrage:string|undefined
 
   //variables liées à ngModel, permettant de récupérer le choix de l'utilisateur
   nbdepartement:any
   nbCommune=["Toutes les communes"]
-  nbOuvrage=["Tous les ouvrages"]
+ // nbOuvrage=["Tous les ouvrages"]
   listeSyndicats=["Tous les Syndicats"]
 
   list:string[]|undefined
@@ -200,14 +205,11 @@ onCommuneChange(selectedPizzas: string[]) {
 
 onOuvrageChange(selectedPizzas: string[]) {
   //console.log(selectedPizzas);
-  if(selectedPizzas[0]=="Tout"){
-    this.ouvrage="Tous les ouvrages"
-  }
-  else{
+    console.log("hello")
     this.ouvrage=selectedPizzas[0]
-  }
 
-  //console.log(this.ouvrage)
+
+  console.log(this.ouvrage)
 }
 
 
@@ -221,7 +223,7 @@ changeSyndicat(event:any, index:any) {
 
   this.selectedSyndicat = event.target.checked ? index : undefined;
   this.syndicat=this.getSyndicats()[this.selectedSyndicat!]
-  console.log(event.target.check)
+  console.log( this.syndicat)
 }
 
 changeCommune(event:any, index:any) {
@@ -232,8 +234,51 @@ changeCommune(event:any, index:any) {
 
 changeOuvrage(event:any, index:any) {
   this.selectedOuvrage = event.target.checked ? index : undefined;
-  this.ouvrage=this.ouvrages  [this.selectedOuvrage!]
 
+  this.ouvrage=this.ouvrages[this.selectedOuvrage!]
+console.log(this.ouvrage)
+}
+
+selectCheckBoxSyndicat(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.syndicatChecked === targetType) {
+    this.syndicatChecked ="";
+    return;
+  }
+
+  this.syndicatChecked = list[index] ;
+}
+
+
+selectCheckBoxCommune(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.communeChecked === targetType) {
+    this.communeChecked ="";
+
+  }
+
+  this.communeChecked = list[index] ;
+}
+
+selectCheckBoxOuvrage(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.ouvrageChecked === targetType) {
+    this.ouvrageChecked ="";
+
+  }
+
+  this.ouvrageChecked = list[index] ;
+}
+
+selectCheckBoxQuestion(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.questionChecked === targetType) {
+    this.questionChecked ="";
+    return;
+  }
+
+  this.questionChecked = list[index] ;
 }
 
 }
+
