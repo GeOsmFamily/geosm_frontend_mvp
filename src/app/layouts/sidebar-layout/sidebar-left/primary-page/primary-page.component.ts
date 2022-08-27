@@ -101,6 +101,7 @@ export class PrimaryPageComponent {
   departement:string|undefined
   commune="Toutes les communes"
   ouvrage:string|undefined
+  auxi:string|undefined
 
   //variables liées à ngModel, permettant de récupérer le choix de l'utilisateur
   nbdepartement:any
@@ -235,7 +236,20 @@ changeCommune(event:any, index:any) {
 changeOuvrage(event:any, index:any) {
   this.selectedOuvrage = event.target.checked ? index : undefined;
 
-  this.ouvrage=this.ouvrages[this.selectedOuvrage!]
+  if(this.ouvrages[this.selectedOuvrage!] == "Puits"){
+      this.ouvrage="Puit"
+  }
+  else if(this.ouvrages[this.selectedOuvrage!] == "Forages"){
+      this.ouvrage="Forage"
+  }
+  else if(this.ouvrages[this.selectedOuvrage!] == "Pompes"){
+      this.ouvrage="Pompe"
+  }
+  else{
+    this.ouvrage="Latrines"
+  }
+
+  this.auxi=this.ouvrages[this.selectedOuvrage!]
 console.log(this.ouvrage)
 }
 
