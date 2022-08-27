@@ -4,7 +4,7 @@
   width: 100%;
   height: calc(100% - 80px);
   background-color: white;
-
+  position: absolute;
 }
 
 .sidebar-left {
@@ -44,6 +44,7 @@ position: absolute;
 }
 
 
-.app-primary-page:-webkit-scrollbar {
+app-primary-page:-webkit-scrollbar {
   width: unset;
 }
+

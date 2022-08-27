@@ -47,3 +47,8 @@ input {
 .mat-drawer-inner-container::-webkit-scrollbar {
   display: none;
 }
+
+
+*::-webkit-scrollbar {
+  width: 10px;               /* width of the entire scrollbar */
+}

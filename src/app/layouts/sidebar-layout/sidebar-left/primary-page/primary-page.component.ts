@@ -77,7 +77,7 @@ export class PrimaryPageComponent {
       Communes: [{ nomCommune: 'MADINGRING' }, { nomCommune: 'TOUBORO' }, { nomCommune: 'TCHOLIRE' }, { nomCommune: 'REY BOUBA' }]
     }
   ];
-  ouvrages = ['Puit', 'Pompe', 'Forage', 'Latrines'];
+  ouvrages = ['Puits', 'Pompes', 'Forages', 'Latrines'];
 
   questions = [
     'Ouvrages en bon état',
@@ -96,12 +96,13 @@ export class PrimaryPageComponent {
   selectedOuvrage: number | undefined;
   selectedSyndicat: number | undefined;
 
-  ouvrageChecked?: string;
-  syndicatChecked?: string;
-  communeChecked?: string;
-  questionChecked?: string;
-  listDepartements = new Map<string, any>([]);
-  listComunes = new Map<string, any[]>([]);
+
+  ouvrageChecked?:string
+  syndicatChecked?:string
+  communeChecked?:string
+  questionChecked?:string
+  listDepartements= new Map<string,any>([])
+  listComunes= new Map<string,any[]>([])
 
   showSyndicats = false;
   showCommunes = false;
@@ -109,18 +110,18 @@ export class PrimaryPageComponent {
   form: FormGroup;
   forceSelected = false;
 
-  //sélection de l'utilisateur
-  syndicat: string | undefined;
-  departement: string | undefined;
-  commune = 'Toutes les communes';
-  ouvrage: string | undefined;
-  auxi: string | undefined;
+//sélection de l'utilisateur
+  syndicat:string|undefined
+  departement:string|undefined
+  commune="Toutes les communes"
+  ouvrage:string|undefined
+  auxi:string|undefined
 
   //variables liées à ngModel, permettant de récupérer le choix de l'utilisateur
-  nbdepartement: any;
-  nbCommune = ['Toutes les communes'];
-  // nbOuvrage=["Tous les ouvrages"]
-  listeSyndicats = ['Tous les Syndicats'];
+  nbdepartement:any
+  nbCommune=["Toutes les communes"]
+ // nbOuvrage=["Tous les ouvrages"]
+  listeSyndicats=["Tous les Syndicats"]
 
   list: string[] | undefined;
   results$: Observable<SearchInterface[]>;
@@ -151,191 +152,167 @@ export class PrimaryPageComponent {
 
     //console.log("eeeeeee ="+ this.listComunes.keys())
 
-    //this.onGroupsChange(this.listeSyndicats)
-    this.form = this.formBuilder.group({});
-  }
+      //this.onGroupsChange(this.listeSyndicats)
+      this.form = this.formBuilder.group({
 
-  getCdkConnectedOverlayPanelClasses(): string[] {
-    return ['max-h-72', '-translate-y-8'];
-  }
-  toggleSyndicats() {
-    this.showSyndicats = !this.showSyndicats;
-  }
-
-  toggleCommunes() {
-    this.showCommunes = !this.showCommunes;
-  }
-
-  toggleOuvrages() {
-    this.showOuvrages = !this.showOuvrages;
-  }
-  getSyndicats(): string[] {
-    return Array.from(this.listDepartements.keys());
-  }
-
-  getDepartements(): any[] {
-    return this.listDepartements.get(this.syndicat!);
-  }
-
-  getCommunes(): any[] | undefined {
-    return this.listComunes.get(this.syndicat!);
-  }
-
-  onDepartementChange(selectedPizzas: string[]) {
-    //console.log(selectedPizzas);
-    if (selectedPizzas[0] == 'Tout') {
-      this.departement = 'Tous les départements';
-    } else {
-      this.departement = selectedPizzas[0];
-    }
-
-    //console.log(this.departement)
-  }
-  onCommuneChange(selectedPizzas: string[]) {
-    //console.log(selectedPizzas);
-    if (selectedPizzas[0] == 'Tout') {
-      this.commune = 'Toutes les communes';
-    } else {
-      this.commune = selectedPizzas[0];
-    }
-
-    //console.log(this.commune)
-  }
-
-  onOuvrageChange(selectedPizzas: string[]) {
-    //console.log(selectedPizzas);
-    console.log('hello');
-    this.ouvrage = selectedPizzas[0];
-
-    console.log(this.ouvrage);
-  }
-
-  changeSelection(event: any, index: any) {
-    this.selectedIndex = event.target.checked ? index : undefined;
-    console.log(this.questions[this.selectedIndex!]);
-    this.searchData(0);
-  }
-  changeSyndicat(event: any, index: any) {
-    this.selectedSyndicat = event.target.checked ? index : undefined;
-    this.syndicat = this.getSyndicats()[this.selectedSyndicat!];
-    console.log(this.syndicat);
-  }
-
-  changeCommune(event: any, index: any) {
-    this.selectedCommune = event.target.checked ? index : undefined;
-    this.commune = this.getCommunes()![this.selectedCommune!];
-  }
-
-  changeOuvrage(event: any, index: any) {
-    this.selectedOuvrage = event.target.checked ? index : undefined;
-
-    if (this.ouvrages[this.selectedOuvrage!] == 'Puits') {
-      this.ouvrage = 'Puit';
-    } else if (this.ouvrages[this.selectedOuvrage!] == 'Forages') {
-      this.ouvrage = 'Forage';
-    } else if (this.ouvrages[this.selectedOuvrage!] == 'Pompes') {
-      this.ouvrage = 'Pompe';
-    } else {
-      this.ouvrage = 'Latrines';
-    }
-
-    this.auxi = this.ouvrages[this.selectedOuvrage!];
-    console.log(this.ouvrage);
-  }
-
-  selectCheckBoxSyndicat(targetType: any, index: number, list: any) {
-    // If the checkbox was already checked, clear the currentlyChecked variable
-    if (this.syndicatChecked === targetType) {
-      this.syndicatChecked = '';
-      return;
-    }
-
-    this.syndicatChecked = list[index];
-  }
-
-  selectCheckBoxCommune(targetType: any, index: number, list: any) {
-    // If the checkbox was already checked, clear the currentlyChecked variable
-    if (this.communeChecked === targetType) {
-      this.communeChecked = '';
-    }
-
-    this.communeChecked = list[index];
-  }
-
-  selectCheckBoxOuvrage(targetType: any, index: number, list: any) {
-    // If the checkbox was already checked, clear the currentlyChecked variable
-    if (this.ouvrageChecked === targetType) {
-      this.ouvrageChecked = '';
-    }
-
-    this.ouvrageChecked = list[index];
-  }
-
-  selectCheckBoxQuestion(targetType: any, index: number, list: any) {
-    // If the checkbox was already checked, clear the currentlyChecked variable
-    if (this.questionChecked === targetType) {
-      this.questionChecked = '';
-      return;
-    }
-
-    this.questionChecked = list[index];
-  }
-
-  onGroupsChange(selectedPizzas: string[]) {
-    if (selectedPizzas[0] == 'Tout') {
-      this.syndicat = 'Tout';
-      let mapHelper = new MapHelper();
-      let searchResultLayer = mapHelper.getLayerByName('searchResultLayer')[0];
-      searchResultLayer.getSource().clear();
-    } else {
-      this.syndicat = selectedPizzas[0];
-
-      if (this.syndicat == 'SYNCOBE') {
-        this.selectNominatim('benoue');
-      } else if (this.syndicat == 'SYNCOMALOU') {
-        this.selectNominatim('mayo-louti');
-      } else if (this.syndicat == 'SYDECOMAR') {
-        this.selectNominatim('mayo-rey');
-      }
-    }
-  }
-
-  selectNominatim(query: string) {
-    this.searchService.searchNominatim(query).subscribe((results: any) => {
-      let mapHelper = new MapHelper();
-
-      let searchResultLayer = mapHelper.getLayerByName('searchResultLayer')[0];
-
-      let feature = new Feature();
-      /*   let textLabel = results[0].name;
-
-        feature.set('textLabel', textLabel);*/
-      let extent: Extent;
-      if (results[0].geometry.type == 'Point') {
-        let coordinates = transform(results[0].geometry.coordinates, 'EPSG:4326', 'EPSG:3857');
-        feature.setGeometry(new Point(coordinates));
-        extent = new Point(coordinates).getExtent();
-      } else if (results[0].geometry.type == 'Polygon') {
-        for (let index = 0; index < results[0].geometry.coordinates[0].length; index++) {
-          const element = results[0].geometry.coordinates[0][index];
-          results[0].geometry.coordinates[0][index] = transform(element, 'EPSG:4326', 'EPSG:3857');
-        }
-        feature.setGeometry(new Polygon(results[0].geometry.coordinates));
-        extent = new Polygon(results[0].geometry.coordinates).getExtent();
-      }
-
-      searchResultLayer.getSource().clear();
-
-      searchResultLayer.getSource().addFeature(feature);
-
-      mapHelper.fit_view(extent!, 16);
-    });
-  }
-
-  searchData(question: number) {
-    this.store.dispatch(searchQuery({ query: "touttoutpompeq1" }));
-    this.results$.subscribe(results => {
-    this.layerService.addLayerCouche(results[0].couche!);
-    });
-  }
+      });
 }
+
+
+getCdkConnectedOverlayPanelClasses(): string[] {
+
+
+  return ['max-h-72', '-translate-y-8'];
+}
+toggleSyndicats(){
+  this.showSyndicats=!this.showSyndicats
+}
+
+toggleCommunes(){
+  this.showCommunes=!this.showCommunes
+}
+
+toggleOuvrages(){
+  this.showOuvrages=!this.showOuvrages
+}
+  getSyndicats():string[]{
+    return Array.from(this.listDepartements.keys())
+  }
+
+  getDepartements():any[]{
+      return this.listDepartements.get(this.syndicat!)
+  }
+
+  getCommunes():any[]|undefined{
+    return this.listComunes.get(this.syndicat!)
+  }
+
+onGroupsChange(selectedPizzas: string[]) {
+  //console.log(selectedPizzas);
+
+
+  if(selectedPizzas[0]=="Tout"){
+    this.syndicat="Tous les syndicats"
+  }
+  else{
+    this.syndicat=selectedPizzas[0]
+  }
+  //alert("rr = "+this.listDepartements.get(this.syndicat!))
+  //console.log(this.listDepartements.get(this.syndicat!)+  "yyy")
+  //console.log(this.syndicat)
+}
+onDepartementChange(selectedPizzas: string[]) {
+  //console.log(selectedPizzas);
+  if(selectedPizzas[0]=="Tout"){
+    this.departement="Tous les départements"
+  }
+  else{
+    this.departement=selectedPizzas[0]
+  }
+
+  //console.log(this.departement)
+}
+onCommuneChange(selectedPizzas: string[]) {
+  //console.log(selectedPizzas);
+  if(selectedPizzas[0]=="Tout"){
+    this.commune="Toutes les communes"
+  }
+  else{
+    this.commune=selectedPizzas[0]
+  }
+
+  //console.log(this.commune)
+}
+
+onOuvrageChange(selectedPizzas: string[]) {
+  //console.log(selectedPizzas);
+    console.log("hello")
+    this.ouvrage=selectedPizzas[0]
+
+
+  console.log(this.ouvrage)
+}
+
+
+
+changeSelection(event:any, index:any) {
+  this.selectedIndex = event.target.checked ? index : undefined;
+  console.log(this.questions[this.selectedIndex!])
+  // do your logic here...
+}
+changeSyndicat(event:any, index:any) {
+
+  this.selectedSyndicat = event.target.checked ? index : undefined;
+  this.syndicat=this.getSyndicats()[this.selectedSyndicat!]
+  console.log( this.syndicat)
+}
+
+changeCommune(event:any, index:any) {
+  this.selectedCommune = event.target.checked ? index : undefined;
+  this.commune=this.getCommunes()![this.selectedCommune!]
+
+}
+
+changeOuvrage(event:any, index:any) {
+  this.selectedOuvrage = event.target.checked ? index : undefined;
+
+  if(this.ouvrages[this.selectedOuvrage!] == "Puits"){
+      this.ouvrage="Puit"
+  }
+  else if(this.ouvrages[this.selectedOuvrage!] == "Forages"){
+      this.ouvrage="Forage"
+  }
+  else if(this.ouvrages[this.selectedOuvrage!] == "Pompes"){
+      this.ouvrage="Pompe"
+  }
+  else{
+    this.ouvrage="Latrines"
+  }
+
+  this.auxi=this.ouvrages[this.selectedOuvrage!]
+console.log(this.ouvrage)
+}
+
+selectCheckBoxSyndicat(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.syndicatChecked === targetType) {
+    this.syndicatChecked ="";
+    return;
+  }
+
+  this.syndicatChecked = list[index] ;
+}
+
+
+selectCheckBoxCommune(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.communeChecked === targetType) {
+    this.communeChecked ="";
+
+  }
+
+  this.communeChecked = list[index] ;
+}
+
+selectCheckBoxOuvrage(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.ouvrageChecked === targetType) {
+    this.ouvrageChecked ="";
+
+  }
+
+  this.ouvrageChecked = list[index] ;
+}
+
+selectCheckBoxQuestion(targetType: any, index:number,list:any) {
+  // If the checkbox was already checked, clear the currentlyChecked variable
+  if(this.questionChecked === targetType) {
+    this.questionChecked ="";
+    return;
+  }
+
+  this.questionChecked = list[index] ;
+}
+
+}
+
