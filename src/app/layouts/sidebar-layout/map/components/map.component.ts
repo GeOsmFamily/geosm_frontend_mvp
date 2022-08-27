@@ -50,7 +50,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ModalComponent } from 'src/app/shared/modal/modal.component';
 import { TranslateService } from '@ngx-translate/core';
 import { fromLonLat, transform } from 'ol/proj';
-import { bboxPolygon, booleanContains, point } from '@turf/turf';
+import { BBox, bboxPolygon, booleanContains, point } from '@turf/turf';
 import * as jQuery from 'jquery';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LayersInMap } from '../interfaces/layerinmap';
@@ -184,21 +184,21 @@ export class MapComponent implements OnInit {
     this.initializeMap();
     this.store.dispatch({ type: INITMAP });
 
-    this.project$.subscribe(project => {
+    this.project$.subscribe((project: ProjectInterface | undefined) => {
       this.project = project;
-      if (project.config.data.instance.mapillary) {
+      if (project!.config.data.instance.mapillary) {
         this.isMapillary = true;
       }
-      if (project.config.data.instance.comparator) {
+      if (project!.config.data.instance.comparator) {
         this.isComparator = true;
       }
-      if (project.config.data.instance.download) {
+      if (project!.config.data.instance.download) {
         this.isDownload = true;
       }
-      if (project.config.data.instance.routing) {
+      if (project!.config.data.instance.routing) {
         this.isRouting = true;
       }
-      if (project.config.data.instance.altimetrie) {
+      if (project!.config.data.instance.altimetrie) {
         this.isAltimetrie = true;
       }
       let drawers: QueryList<MatDrawer> = this.sidenavContainer?._drawers!;
@@ -211,7 +211,7 @@ export class MapComponent implements OnInit {
       map.getLayers().on('propertychange', _ObjectEvent => {
         this.store.dispatch({ type: ALL_LAYERS_IN_TOC });
 
-        this.layersInToc$.subscribe(layersInToc => {
+        this.layersInToc$.subscribe((layersInToc: string | any[]) => {
           if (layersInToc.length == 2 && !this.getRightMenu('toc')!.active) {
             this.openRightMenu('toc');
           }
@@ -345,7 +345,7 @@ export class MapComponent implements OnInit {
   }
 
   tooglePrincipalMapLayer() {
-    this.project$.subscribe(project => {
+    this.project$.subscribe((project: { principalMap: any; }) => {
       let principalMap = project.principalMap;
       if (principalMap) {
         this.store.dispatch(addPrincipalMap({ principalMap }));
@@ -354,7 +354,7 @@ export class MapComponent implements OnInit {
   }
 
   handleMapParamsUrl() {
-    this.activatedRoute.queryParams.subscribe(params => {
+    this.activatedRoute.queryParams.subscribe((params: { [x: string]: any; }) => {
       if (params['layers']) {
         let layers = params['layers'].split(';');
         this.shareService.addLayersFromUrl(layers);
@@ -450,7 +450,7 @@ export class MapComponent implements OnInit {
   }
 
   global_view() {
-    this.project$.subscribe(project => {
+    this.project$.subscribe((project: any) => {
       this.store.dispatch(globalView({ project }));
     });
   }
@@ -462,11 +462,11 @@ export class MapComponent implements OnInit {
         data: { icon: faInfoCircle, title: res.zoomto, type: 'zoomto' }
       });
 
-      dialogRef.afterClosed().subscribe(modal_result => {
+      dialogRef.afterClosed().subscribe((modal_result: { [x: string]: any; statut: any; }) => {
         if (modal_result.statut) {
           let result = modal_result['data'];
           if (result.projection == 'WGS84') {
-            this.project$.subscribe(project => {
+            this.project$.subscribe((project) => {
               let coord_wgs84 = Array();
               coord_wgs84[0] = parseFloat(result.longitude);
               coord_wgs84[1] = parseFloat(result.latitude);
@@ -546,7 +546,7 @@ export class MapComponent implements OnInit {
 
   countLayersInToc(): number {
     let count = 0;
-    this.layersInToc$.subscribe(layersInToc => {
+    this.layersInToc$.subscribe((layersInToc: string | any[]) => {
       count = layersInToc.length;
     });
     return count;
@@ -563,7 +563,7 @@ export class MapComponent implements OnInit {
 
       this.modeCompare = true;
 
-      buttonheet_compare.afterDismissed().subscribe(result => {
+      buttonheet_compare.afterDismissed().subscribe((result: { [x: string]: string; }) => {
         if (!result) {
           this.modeCompare = false;
           jQuery('#swipe').hide();
