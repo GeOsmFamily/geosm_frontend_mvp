@@ -68,9 +68,9 @@ export class SearchbarLayoutComponent implements OnInit {
 
       let color = '#ade36b';
       return new Style({
-        fill: new Fill({
+      /*  fill: new Fill({
           color: [DataHelper.hexToRgb(color)!.r, DataHelper.hexToRgb(color)!.g, DataHelper.hexToRgb(color)!.b, 0.5]
-        }),
+        }),*/
         stroke: new Stroke({
           color: environment.primarycolor,
           width: 6

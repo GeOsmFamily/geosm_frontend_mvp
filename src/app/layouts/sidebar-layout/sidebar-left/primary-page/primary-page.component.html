@@ -93,7 +93,7 @@
   Questions
 </h5>
 <div class="form-check" *ngFor="let question of questions; let index = index">
-  <label fxLayout="row" class="form-check-label text-break" style="cursor:pointer">
+  <label  fxLayout="row" class="form-check-label text-break" style="cursor:pointer">
 
     <span fxFlex=" column">{{ question }}</span>
     <input  class="form-check-input" type="checkbox" [ngModel]="selectedIndex === index"

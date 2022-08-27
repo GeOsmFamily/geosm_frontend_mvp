@@ -69,6 +69,7 @@ export class DescriptiveSheetModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.descriptiveModel);
     this.initialiseHightLightMap();
 
     if (this.descriptiveModel?.layer?.properties!['type'] == 'couche') {

@@ -4,31 +4,29 @@
   }
 
   export interface Crs {
-    type: string;
+    typeeau: string;
     properties: Properties;
   }
 
   export interface Geometry {
-    type: string;
+    typeeau: string;
     coordinates: number[];
   }
 
   export interface Properties2 {
+    id: number;
     nomsyndicat: string;
     nomdepartement: string;
-    nomcommunebe: string;
-    nomcommunemr: string;
-    nomcommuneml?: any;
+    nomcommune: string;
     nomlocalite: string;
     latitude: string;
     longitude: string;
     numeroreferenceouvrage: string;
     nomouvrage: string;
     datecollecte: string;
-    typeouvrage: string;
-    typepointeau: string;
-    etatpointeau: string;
-    etatlatrine?: any;
+    typeeau: string;
+    etat: string;
+    descriptionetatouvrage?: any;
     fontionnel: string;
     datemiseoeuvre: string;
     sourcefinancement: string;
@@ -38,25 +36,28 @@
     quantitesuffisanteeau: string;
     qualiteeau: string;
     etateau: string;
+    descriptionautresourcepollution: string;
     sourcepollution: string;
     existencecomitegestion: string;
     statutlegal: string;
-    nomcomite: string;
+    nomcomite?: any;
     nompointfocal: string;
     contactpointfocal: string;
     commentaire: string;
     nomvillage?: any;
+    icon?: any;
   }
 
   export interface Feature {
-    type: string;
+    typeeau: string;
     geometry: Geometry;
     properties: Properties2;
   }
 
   export interface PradecInterface {
-    type: string;
+    typeeau: string;
     name: string;
     crs: Crs;
     features: Feature[];
   }
+

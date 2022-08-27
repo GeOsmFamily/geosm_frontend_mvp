@@ -9,8 +9,8 @@ import { ApiService } from '../../api/api.service';
 export class PradecService {
   constructor(public apiService: ApiService) {}
 
-  searchOuvrages(nomsyndicat?: string, nomdepartement?:string,nomcommune?:string,typeouvrage?:string,typepointeau?:string): Observable<PradecInterface> {
-    return from(this.apiService.postRequest('/api/ouvragesglobalsearch', {"nomsyndicat":nomsyndicat,"nomdepartement":nomdepartement,"nomcommune":nomcommune,"typeouvrage":typeouvrage,"typepointeau":typepointeau})).pipe(
+  searchOuvrages(nomsyndicat?: string,nomcommune?:string,typeeau?:string,question?:number): Observable<PradecInterface> {
+    return from(this.apiService.postRequest('/api/ouvragesglobalsearch', {"nomsyndicat":nomsyndicat,"nomcommune":nomcommune,"typeeau":typeeau,"question":question})).pipe(
       map((pradec: PradecInterface) => {
         return pradec;
       }),

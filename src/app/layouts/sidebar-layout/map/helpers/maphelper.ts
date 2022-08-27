@@ -47,7 +47,7 @@ import { MapBrowserEvent } from 'ol';
 import { DataFromClickOnMapInterface } from '../interfaces/dataClick';
 import { DataHelper } from 'src/app/core/modules/dataHelper';
 
-const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing', 'searchResultLayer'];
+const typeLayer = ['geosmCatalogue', 'draw', 'mesure', 'mapillary', 'exportData', 'comments', 'other', 'routing', 'searchResultLayer','pradec'];
 
 @Injectable()
 export class MapHelper {

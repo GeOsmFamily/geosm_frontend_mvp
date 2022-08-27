@@ -5,8 +5,8 @@ import { LegendInterface } from "./legend";
 export interface GeosmLayer {
   nom: string;
   inToc: boolean;
-  type_layer: 'geosmCatalogue' | 'draw' | 'mesure' | 'mapillary' | 'exportData' | 'other' | 'comments' | 'routing';
-  type: 'wfs' | 'wms' | 'xyz';
+  type_layer: 'geosmCatalogue' | 'draw' | 'mesure' | 'mapillary' | 'exportData' | 'other' | 'comments' | 'routing' | 'pradec';
+  type: 'wfs' | 'wms' | 'xyz' | 'geojson' ;
   crs?: string;
   visible: boolean;
   strategy?: 'bbox' | 'all';
@@ -31,4 +31,8 @@ export interface GeosmLayer {
       }
     | null;
   descriptionSheetCapabilities: string;
+  nomsyndicat?: string;
+  nomcommune?: string;
+  typeeau?: string;
+  question?: string;
 }
