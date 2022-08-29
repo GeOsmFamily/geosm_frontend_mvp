@@ -1,5 +1,5 @@
 <div *ngIf="data!" style="overflow-y: scroll;
-height:100vh ;top:0;background-color:white;position:fixed;left:370px;width:400px;z-index:20
+height:100% ;top:0;background-color:white;position:fixed;left:370px;width:400px; margin-top:80px;z-index:20
 ">
   <!--<div class="flex flex-col p-5 bg-neutral-100">
     <div class="flex items-center">
@@ -216,10 +216,12 @@ height:100vh ;top:0;background-color:white;position:fixed;left:370px;width:400px
 
   </div>
 
-    <div class="py-4 border-b border-neutral-200">
+    <div  class="py-4 border-b border-neutral-200">
       <span style="color: #023f5f;" class="text-secondary font-semibold mb-2 titre">Commentaires</span>
       <div [innerText]="text1" class="text-sm"></div>
     </div>
+
+    <div style="margin-bottom: 150px;"></div>
 
   </div>
 </div>

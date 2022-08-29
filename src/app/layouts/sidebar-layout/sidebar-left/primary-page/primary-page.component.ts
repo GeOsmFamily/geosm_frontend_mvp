@@ -33,6 +33,7 @@ import { Observable } from 'rxjs';
 import { SearchInterface } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/search';
 import { selectSearch } from 'src/app/layouts/navbar-layout/searchbar-layout/states/search.selector';
 import { searchQuery } from 'src/app/layouts/navbar-layout/searchbar-layout/states/search.actions';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-primary-page',
@@ -86,9 +87,9 @@ export class PrimaryPageComponent {
     'Ouvrages en bon état et fonctionnels',
     'Ouvrages en bon état, fonctionnels mais eau de mauvaise qualité',
     'Ouvrages en bon état, non fonctionnels mais eau de bonne qualité',
-    'Ouvrages ayant un comité de gestion fonctionel',
+    'Ouvrages ayant un comité de gestion formel',
+    'Ouvrages ayant un comité de gestion informel',
     'Ouvrages en bon état et non fonctionnels ayant un comité de gestion',
-    "Ouvrages en bon état et non fonctionnels n'ayant aucun comité de gestion",
     "Ouvrages en bon état et fonctionnels n'ayant aucun comité de gestion"
   ];
   selectedIndex: number | undefined;
@@ -129,7 +130,8 @@ export class PrimaryPageComponent {
     private formBuilder: FormBuilder,
     public searchService: SearchService,
     public pradecService: PradecService,
-    public layerService: LayersService
+    public layerService: LayersService,
+    private _snackBar: MatSnackBar
   ) {
     this.results$ = this.store.pipe(select(selectSearch));
     for (let index = 0; index < this.data.length; index++) {
@@ -183,7 +185,6 @@ export class PrimaryPageComponent {
     return this.listComunes.get(this.syndicat!);
   }
 
-
   selectNominatim(query: string) {
     this.searchService.searchNominatim(query).subscribe(results => {
       let mapHelper = new MapHelper();
@@ -215,10 +216,6 @@ export class PrimaryPageComponent {
     });
   }
 
-
-
-
-
   changeSelection(event: any, index: any) {
     if(this.syndicat && this.commune && this.ouvrage)
       this.selectedIndex = event.target.checked ? index : undefined;
@@ -229,27 +226,25 @@ export class PrimaryPageComponent {
   changeSyndicat(event: any, index: any) {
     this.selectedSyndicat = event.target.checked ? index : undefined;
     this.syndicat = this.getSyndicats()[this.selectedSyndicat!];
-if (this.syndicat == 'Tous les syndicats') {
-  let mapHelper = new MapHelper();
-  let searchResultLayer = mapHelper.getLayerByName('searchResultLayer')[0];
-  searchResultLayer.getSource().clear();
-} else {
-
-  if (this.syndicat == 'SYNCOBE') {
-    this.selectNominatim('benoue');
-  } else if (this.syndicat == 'SYNCOMALOU') {
-    this.selectNominatim('mayo-louti');
-  } else if (this.syndicat == 'SYDECOMAR') {
-    this.selectNominatim('mayo-rey');
-  }
-}
+    if (this.syndicat == 'Tous les syndicats') {
+      let mapHelper = new MapHelper();
+      let searchResultLayer = mapHelper.getLayerByName('searchResultLayer')[0];
+      searchResultLayer.getSource().clear();
+    } else {
+      if (this.syndicat == 'SYNCOBE') {
+        this.selectNominatim('benoue');
+      } else if (this.syndicat == 'SYNCOMALOU') {
+        this.selectNominatim('mayo-louti');
+      } else if (this.syndicat == 'SYDECOMAR') {
+        this.selectNominatim('mayo-rey');
+      }
+    }
     console.log(this.syndicat);
   }
 
   changeCommune(event: any, index: any) {
     this.selectedCommune = event.target.checked ? index : undefined;
     this.commune = this.getCommunes()![this.selectedCommune!];
-
   }
 
   changeOuvrage(event: any, index: any) {
@@ -315,24 +310,28 @@ if (this.syndicat == 'Tous les syndicats') {
   searchData(question: number) {
     let string: string;
     if (this.syndicat == 'Tous les syndicats') {
-       string = 'tout' + 'tout' + this.ouvrage + 'q' + question;
-
-
+      string = 'tout' + 'tout' + this.ouvrage + 'q' + question;
     } else {
-
-       string = this.syndicat + this.commune + this.ouvrage + 'q' + question;
-
+      string = this.syndicat + this.commune + this.ouvrage + 'q' + question;
     }
-   // this.store.dispatch(searchQuery({ query: string.toLowerCase() }));
+    // this.store.dispatch(searchQuery({ query: string.toLowerCase() }));
 
-   /* this.results$.pipe(results => {
+    /* this.results$.pipe(results => {
         this.layerService.addLayerCouche(results[0].couche!);
     });*/
 
-    this.searchService.searchCouches(string.toLowerCase()).subscribe(results => {
-      this.layerService.addLayerCouche(results[0].couche!);
-    });
+    this.searchService.searchCouches(string.toLowerCase().replace(' ', '')).subscribe(results => {
+      if (results[0]) {
 
+      this.layerService.addLayerCouche(results[0].couche!);
+      } else {
+        this._snackBar.open("Aucune données pour cette requete", "Annuler", {
+          duration: 5000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center'
+        });
+      }
+    });
   }
 }
 
