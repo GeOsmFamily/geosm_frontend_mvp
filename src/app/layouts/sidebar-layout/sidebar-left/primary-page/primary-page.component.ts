@@ -163,7 +163,9 @@ export class PrimaryPageComponent {
   }
 
   toggleCommunes() {
+   if(this.syndicat){
     this.showCommunes = !this.showCommunes;
+   }
   }
 
   toggleOuvrages() {
@@ -218,7 +220,9 @@ export class PrimaryPageComponent {
 
 
   changeSelection(event: any, index: any) {
-    this.selectedIndex = event.target.checked ? index : undefined;
+    if(this.syndicat && this.commune && this.ouvrage)
+      this.selectedIndex = event.target.checked ? index : undefined;
+
     console.log(this.questions[this.selectedIndex!]);
     this.searchData(this.selectedIndex! + 1);
   }
@@ -295,12 +299,17 @@ if (this.syndicat == 'Tous les syndicats') {
 
   selectCheckBoxQuestion(targetType: any, index: number, list: any) {
     // If the checkbox was already checked, clear the currentlyChecked variable
-    if (this.questionChecked === targetType) {
-      this.questionChecked = '';
-      return;
-    }
 
-    this.questionChecked = list[index];
+
+
+
+      if (this.questionChecked === targetType ) {
+        this.questionChecked = '';
+        return;
+      }
+
+      this.questionChecked = list[index];
+
   }
 
   searchData(question: number) {
