@@ -7,6 +7,14 @@ import { Router } from '@angular/router';
 import{Thematique,SousThematique} from '../../../../core/interfaces/thematique-interface';
 import thematiques from '../../../../../assets/geosm.json';
 import { Couche } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/couche';
+import { StorageService } from 'src/app/core/services/api/storage.service';
+import { User } from 'src/app/core/auth/interfaces/auth';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { NotifierService } from 'angular-notifier';
+import { AuthState } from 'src/app/core/auth/states/auth.reducer';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { selectIsLoginSuccess, selectUser } from 'src/app/core/auth/states/auth.selector';
 
 
 @Component({
@@ -24,17 +32,29 @@ export class PrimaryPageComponent implements OnInit{
   thematiques:any
   selectedOdd: Thematique | null = null;
   selectedCouches:  Couche[] = [];
+  user$: Observable<User | undefined>;
+  isLoginSuccess$: Observable<boolean | undefined>;
 
-  constructor( private router: Router,media: MediaMatcher,private changeDetectorRef: ChangeDetectorRef,) {
+  private readonly notifier!: NotifierService;
+
+  constructor(  private store: Store<AuthState>, notifierService: NotifierService, private storageService:StorageService,private router: Router,media: MediaMatcher,private changeDetectorRef: ChangeDetectorRef,private authservice:AuthService) {
 
     this.mobileQuery = media.matchMedia('(max-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addEventListener('change', this._mobileQueryListener);
     /* TODO document why this constructor is empty */
 
+    this.notifier = notifierService;
+
+    this.user$ = this.store.pipe(select(selectUser));
+    this.isLoginSuccess$ = this.store.pipe(select(selectIsLoginSuccess));
+
+
+
 
 
   }
+
   ngOnInit(){
     console.log(thematiques)
     this.thematiques=thematiques.data.thematiques
@@ -94,5 +114,22 @@ export class PrimaryPageComponent implements OnInit{
 
   goToLoginPage(){
     this.router.navigate(['auth/register']);
+  }
+
+
+  logout(){
+    //this.notifier.notify('success', 'Connexion réussie');
+    this.authservice.logout().subscribe(response => {
+      console.log(response)
+      if (response.success) {
+        this.notifier.notify('success', 'Déconnexion réussie');
+        window.location.reload();
+      }
+      else{
+         this.notifier.notify('error', 'Echec déconnexion');
+
+      }
+    });
+
   }
 }

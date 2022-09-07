@@ -7,10 +7,14 @@
     "signWithFacebook":"Continue with Facebook",
     "signWithGmail":"Continue with Google",
     "signWithOpenstreetMap":"Continue with OpenStreetMap",
-    "ou":"Or"
+    "ou":"Or",
+    "createAccount":"Create an account"
   },
   "register":{
-    "name":"Name",
+    "lastName":"Last name",
+    "firstName":"First name",
+    "titre":"Title",
+
     "email":"Email address",
     "phone":"Phone number",
     "password":"Password",
