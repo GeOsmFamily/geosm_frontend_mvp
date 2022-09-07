@@ -1,4 +1,4 @@
-<div class="navbar" fxLayout="row">
+<div class="navbar" fxLayout="row" style="position:fixed; width:100vw">
   <img class="icon-menu-mobile" src="assets/images/svg/icon-menu.svg" alt="" (click)=" openSidebar()" />
 
   <app-searchbar-layout class="searchbar"></app-searchbar-layout>
@@ -21,7 +21,7 @@
 
   <div fxLayout="row" style="margin-left:30px" class="menu_container">
     <div class="menu-list " *ngFor="let menu of menuItems" fxLayout="column">
-      <a [href]="menu.link">
+      <a [routerLink]="menu.link">
         <img [src]="menu.image" [alt]="menu.label" style="float: left" class="image" />
         <div class=" text" style="float: right; line-height: 3">{{ "navbar." + menu.label | translate }}</div>
       </a>

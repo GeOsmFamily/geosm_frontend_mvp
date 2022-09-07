@@ -19,7 +19,7 @@ module.exports = {
         ...defaultTheme.colors,
         primary: '#023f5f',
         accent: '#fdcd01',
-        secondary: '#70af85',
+        secondary: '#023f5f ',
         'secondary-light': '#ecf8ed'
       }
     }
