@@ -1,3 +1,4 @@
+import { LayersService } from 'src/app/core/services/geosm/layers.service';
 import { Component, Input, NgZone, OnInit, QueryList, ViewChild } from '@angular/core';
 import {
   Map,
@@ -40,6 +41,7 @@ import {
   faInfo,
   faInfoCircle,
   faLayerGroup,
+  faMap,
   faMapMarker,
   faMinus,
   faPlus,
@@ -69,6 +71,7 @@ import { Coordinate } from 'ol/coordinate';
 import { CaracteristicSheet } from 'src/app/core/interfaces/caracteristicSheet';
 import { DescriptiveSheetModalComponent } from './descriptive-sheet-modal/descriptive-sheet-modal.component';
 import { CaracteristiqueLieuModalComponent } from './caracteristique-lieu-modal/caracteristique-lieu-modal.component';
+import { CarteService } from 'src/app/core/services/geosm/carte/carte.service';
 let view = new View({
   center: [0, 0],
   zoom: 0,
@@ -117,6 +120,7 @@ export class MapComponent implements OnInit {
 
   faTimes = faTimes;
   faDotCircle = faDotCircle;
+  faLayers = faMap
 
   @Input() sidenavContainer: MatSidenavContainer | undefined;
 
@@ -163,6 +167,7 @@ export class MapComponent implements OnInit {
 
   url_share: any;
 
+
   constructor(
     private store: Store,
     public dialog: MatDialog,
@@ -172,7 +177,9 @@ export class MapComponent implements OnInit {
     public zone: NgZone,
     private activatedRoute: ActivatedRoute,
     public shareService: ShareService,
-    public componentHelper: ComponentHelper
+    public componentHelper: ComponentHelper,
+    public carteService: CarteService,
+    public layerService: LayersService
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
@@ -510,6 +517,11 @@ export class MapComponent implements OnInit {
         }
       });
     });
+  }
+
+  changeLayer() {
+    let carte = this.carteService.getCarteById(4);
+    this.layerService.addLayerCarte(carte!);
   }
 
   close_setCoordOverlay() {
