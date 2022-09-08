@@ -8,7 +8,7 @@
   border-bottom: 3px solid rgba(0, 0, 0, 0.08);
   width: 300px;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 100px;
   background-color: white;
 }
 
@@ -19,17 +19,17 @@
 }
 
 
-.box{
+.box {
   position: relative;
-display: flex;
-flex-direction: column;
-margin-top: .75rem;
-background-color: wheat;
-border-radius: 10px;
-margin-left: 10px;
-margin-right: 10px;
-padding-left: 30px;
-padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: .75rem;
+  background-color: wheat;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 30px;
+  padding-top: 10px;
 }
 
 .cover-image {
@@ -117,9 +117,9 @@ a {
 }
 
 
-.connectButton{
+.connectButton {
   width: 150px;
-  height:40px;
+  height: 40px;
   color: white;
   margin-top: 10px;
 }
@@ -134,12 +134,12 @@ h2 {
 }
 
 h2 span {
-   background:#fff;
-   padding:0 10px;
+  background: #fff;
+  padding: 0 10px;
 }
 
-.logo{
+.logo {
   width: 24px;
-  height:24px;
+  height: 24px;
   cursor: pointer;
 }

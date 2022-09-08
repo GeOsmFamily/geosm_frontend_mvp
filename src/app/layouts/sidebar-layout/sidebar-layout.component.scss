@@ -2,7 +2,7 @@
 
 .sidenav-container {
   width: 100%;
-  height: calc(100% - 80px);
+  height: calc(100%);
   background-color: white;
 }
 
@@ -15,6 +15,7 @@
 
 .sidebar-right {
   width: 300px;
+  margin-top: 80px;
 
   .sidebar-right-content {
     padding: 5px;
