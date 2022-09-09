@@ -177,10 +177,14 @@
     "signWithFacebook": "Continuer avec Facebook",
     "signWithGmail": "Continuer avec Google",
     "signWithOpenstreetMap": "Continuer avec OpenStreetMap",
-    "or": "Ou"
+    "or": "Ou",
+    "createAccount": "Créer un compte"
+
   },
   "register": {
-    "name": "Nom",
+    "firstName": "Prénom",
+    "lastName":"Nom",
+    "titre":"Titre",
     "email": "Adresse email",
     "phone": "Téléphone",
     "password": "Mot de passe",

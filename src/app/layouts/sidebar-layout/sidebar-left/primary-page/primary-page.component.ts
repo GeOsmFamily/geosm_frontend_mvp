@@ -15,6 +15,8 @@ import { AuthState } from 'src/app/core/auth/states/auth.reducer';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectIsLoginSuccess, selectUser } from 'src/app/core/auth/states/auth.selector';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
+import { loginFacebook, loginGoogle } from 'src/app/core/auth/states/auth.actions';
 
 
 @Component({
@@ -37,7 +39,7 @@ export class PrimaryPageComponent implements OnInit{
 
   private readonly notifier!: NotifierService;
 
-  constructor(  private store: Store<AuthState>, notifierService: NotifierService, private storageService:StorageService,private router: Router,media: MediaMatcher,private changeDetectorRef: ChangeDetectorRef,private authservice:AuthService) {
+  constructor(  private store: Store<AuthState>, notifierService: NotifierService, private storageService:StorageService,private router: Router,media: MediaMatcher,private changeDetectorRef: ChangeDetectorRef,private authservice:AuthService, private socialAuthService: SocialAuthService) {
 
     this.mobileQuery = media.matchMedia('(max-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -131,5 +133,36 @@ export class PrimaryPageComponent implements OnInit{
       }
     });
 
+  }
+
+
+  loginFacebook() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(user => {
+
+      this.store.dispatch(loginFacebook({ token: user.authToken }));
+      this.isLoginSuccess$.subscribe(isLoginSuccess => {
+        if (isLoginSuccess) {
+          this.notifier.notify('success', 'Connexion réussie');
+          this.router.navigate(['/']);
+        }
+      });
+    });
+  }
+
+  loginGoogle() {
+    this.socialAuthService
+      .signIn(GoogleLoginProvider.PROVIDER_ID, {
+        scope: 'profile email'
+      })
+      .then(user => {
+        //this.submitted = true;
+        this.store.dispatch(loginGoogle({ token: user.authToken }));
+        this.isLoginSuccess$.subscribe(isLoginSuccess => {
+          if (isLoginSuccess) {
+            this.notifier.notify('success', 'Connexion réussie');
+            this.router.navigate(['/']);
+          }
+        });
+      });
   }
 }
