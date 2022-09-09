@@ -29,9 +29,11 @@
   height: 80px;
 }
 
-.menu-list a:hover {
+.menu-list a:hover{
   background-color: #1d917d;
 }
+
+
 
 .active {
   background-color: #04aa6d;
@@ -53,6 +55,7 @@
 
 .logo {
   margin-top: 15px;
+  margin-left: 100px;
 }
 
 .button_help {
@@ -156,4 +159,10 @@
     display: flex;
     align-items: center;
   }
+}
+
+
+
+.menu-active{
+  background-color:  #1d917d;
 }

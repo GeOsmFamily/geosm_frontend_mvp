@@ -11,7 +11,12 @@
 
     </div>
     <ng-template [ngTemplateOutlet]="MsgRef" ></ng-template>
+
   </div>
+
+  <a fxLayoutGap="30px" href="" class="logo">
+    <img src="/assets/images/png/bamako.png" style="margin-left:100px;height: 40px; width: 90px" alt="" />
+  </a>
 </div>
 
 <ng-template #MsgRef>
@@ -19,7 +24,7 @@
 
   <div fxLayout="row" style="margin-left:30px" class="menu_container">
     <div class="menu-list " *ngFor="let menu of menuItems" fxLayout="column">
-      <a [routerLink]="menu.link">
+      <a [routerLink]="menu.link" [routerLinkActive]="['menu-active']" [routerLinkActiveOptions]="{ exact: true }" >
         <img [src]="menu.image" [alt]="menu.label" style="float: left" class="image" />
         <div class=" text" style="float: right; line-height: 3">{{ "navbar." + menu.label | translate }}</div>
       </a>
