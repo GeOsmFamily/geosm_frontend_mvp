@@ -2,17 +2,20 @@
 
 .sidenav-container {
   width: 100%;
-  height: calc(100% - 80px);
+  height: calc(100%);
   background-color: white;
 }
 
 .sidebar-left {
   width: 370px;
   background-color: white;
+  padding: 10px;
+  //background-color: grey;
 }
 
 .sidebar-right {
   width: 300px;
+  margin-top: 80px;
 
   .sidebar-right-content {
     padding: 5px;
@@ -37,4 +40,8 @@
   .sidebar-right-title-fake {
     height: 20px;
   }
+}
+
+.app-primary-page:-webkit-scrollbar {
+  width: 0px;
 }

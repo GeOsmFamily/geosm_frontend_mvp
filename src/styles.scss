@@ -1,14 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '@angular/cdk/overlay-prebuilt.css';
 @import './openlayers.scss';
 @import './assets/font/avenir-next-rounded-pro-cufonfonts-webfont/style.scss';
 @import './theme.scss';
 @import '~ngx-sharebuttons/themes/circles/circles-dark-theme';
 
+
+*::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: white;        /* color of the tracking area */
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: lightgray;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid white;  /* creates padding around scroll thumb */
+}
+
 html,
 body {
   height: 100%;
-  overflow: hidden;
+ // overflow: hidden;
 }
 
 body {
@@ -42,4 +59,18 @@ body {
 
 input {
   background: transparent !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: lightgray;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid white;  /* creates padding around scroll thumb */
+}
+
+.ng-touched.ng-invalid {
+  border-color: theme('colors.red.500');
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
 }

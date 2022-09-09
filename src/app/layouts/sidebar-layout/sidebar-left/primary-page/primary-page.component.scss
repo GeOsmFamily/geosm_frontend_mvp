@@ -1,10 +1,14 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 .user-box {
   padding: 1.2rem 1.2rem 1.6rem;
   border-bottom-color: rgba(0, 0, 0, 0.08);
   border-bottom: 3px solid rgba(0, 0, 0, 0.08);
   width: 300px;
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 100px;
   background-color: white;
 }
 
@@ -14,13 +18,27 @@
   word-break: break-word !important;
 }
 
+
+.box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: .75rem;
+  background-color: wheat;
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
 .cover-image {
   background-position: center;
   background-size: cover;
   display: block;
   height: 96.25px;
   margin: -20px -12px -12px -12px;
-  background-image: url(https://media-exp2.licdn.com/dms/image/C4D16AQHloTjzzWgexw/profile-displaybackgroundimage-shrink_200_800/0/1609433426546?e=1660780800&v=beta&t=WJXz90-Q_WB-A4O88piFVkPT18ZWNGB4DN95aeql3_c);
+  background-image: url('^assets/images/svg/BACKGROUND.svg');
 }
 
 .profile-image {
@@ -30,8 +48,8 @@
 }
 
 .entityPhoto {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   box-sizing: border-box;
   background-clip: content-box;
   border: 1px solid transparent;
@@ -96,4 +114,32 @@ a {
   width: 70%;
   margin-top: 15px;
   text-align: center;
+}
+
+
+.connectButton {
+  width: 150px;
+  height: 40px;
+  color: white;
+  margin-top: 10px;
+}
+
+
+h2 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid rgb(204, 203, 203);
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+h2 span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }

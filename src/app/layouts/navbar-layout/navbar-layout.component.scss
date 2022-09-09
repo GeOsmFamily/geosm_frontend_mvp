@@ -14,9 +14,11 @@
 .menu-list {
   background-color: white;
   overflow: hidden;
+
 }
 
 .menu-list a {
+
   float: left;
   padding: 12px;
   color: black;
@@ -27,9 +29,11 @@
   height: 80px;
 }
 
-.menu-list a:hover {
+.menu-list a:hover{
   background-color: #1d917d;
 }
+
+
 
 .active {
   background-color: #04aa6d;
@@ -51,9 +55,28 @@
 
 .logo {
   margin-top: 15px;
+  margin-left: 100px;
+}
+
+.button_help {
+  border: none;
+  background-color: unset;
+
+  margin-left: 50px;
+  cursor: pointer;
 }
 
 @media (max-width: 728px) {
+  .button_help {
+    margin-left: unset !important;
+    margin-top: 30px;
+  }
+
+  .menu_container {
+    flex-direction: column !important;
+    margin-left: unset !important;
+  }
+
   .entete {
     display: flex !important;
     flex-direction: column !important;
@@ -136,4 +159,10 @@
     display: flex;
     align-items: center;
   }
+}
+
+
+
+.menu-active{
+  background-color:  #1d917d;
 }

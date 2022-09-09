@@ -2,7 +2,7 @@
   <div class="cover-image"></div>
   <a href="/in/boris-gautier-tchoukouaha-420262143/" id="ember145" class="ember-view block">
     <div style="text-align: center">
-      <img
+      <!--<img
         width="64"
         src="https://media-exp2.licdn.com/dms/image/C4D03AQGkW5vvuH4KYQ/profile-displayphoto-shrink_100_100/0/1605181488764?e=1660780800&v=beta&t=9H6ftlAqlgiiasEeN9Lqlm4Oie8vNStVnLTabMjIU1E"
         alt=""
@@ -11,18 +11,82 @@
         alt="Photo de profil"
         id="ember146"
         class="profile-image entityPhoto lazy-image ember-view"
+      />-->
+      <img *ngIf="!(user$|async)"
+        width="64"
+        src="assets/images/svg/PROFIL.svg"
+        alt=""
+        loading="lazy"
+        height="60"
+        alt="Photo de profil"
+        id="ember146"
+        class="profile-image entityPhoto lazy-image ember-view"
       />
-    </div>
-    <div class="t-16 t-black t-bold">Boris Gautier TCHOUKOUAHA</div>
-  </a>
-  <p class="t-12 t-black--light t-normal mt1">Software Development Engineer - Full Stack</p>
-</div>
 
-<div style="text-align: center">
+      <img *ngIf="(user$|async)"
+      width="64"
+      src="{{(user$|async)!.imageProfil}}"
+      alt=""
+      loading="lazy"
+      height="60"
+      alt="Photo de profil"
+      id="ember146"
+      class="profile-image entityPhoto lazy-image ember-view"
+    />
+    </div>
+    <div class="t-16 t-black t-bold" *ngIf="(user$|async)">{{(user$|async)!.first_name}} {{(user$|async)!.last_name}}</div>
+  </a>
+  <p class="t-12 t-black--light t-normal mt1" *ngIf="(user$|async)">{{(user$|async)!.titre}}</p>
+
+  <div class="flex space-x-2 justify-center" *ngIf="(user$|async)===undefined">
+    <button [routerLink]="['auth/login']" mat-raised-button color="primary" class="connectButton" >Se connecter</button>
+
+  </div>
+  <div style="margin-top:20px">
+    <h2><span>OU</span></h2>
+  </div>
+  <div class="flex space-x-2 justify-center" >
+    <img class="logo" src="assets/images/svg/facebook.svg" type="button" (click)="loginFacebook()" />
+    <img class="logo" src="assets/images/svg/google_icon.svg" type="button" (click)="loginGoogle()"/>
+    <img class="logo" src="assets/images/svg/osm.svg" type="button"/>
+  </div>
+  <div class="flex space-x-2 justify-center" *ngIf="(user$|async)">
+    <button (click)="logout()" mat-raised-button color="primary" class="connectButton" >Se déconnecter</button>
+
+  </div>
+  </div>
+
+<!--<div style="text-align: center">
   <button mat-raised-button class="white base-group-carte-btn" color="primary">{{ 'left_menu.maps_background' | translate }}</button>
-</div>
+</div>-->
 
 <h5 class="bold primaryColor primary_transparent_bg arborescence-group">
   <fa-icon [icon]="faLayer"></fa-icon>
   {{ 'left_menu.themes' | translate }}
 </h5>
+
+
+<div  class=" flex flex-col mt-7 md:mt-9 bg-white rounded-lg shadow-lg shadow-black" [ngClass]="{'pb-14 ': isOpen(), 'mt-2 mx-3': !isOpen()}">
+  <!--
+
+
+    <h2 class="flex  md:pt-4 md:pb-5 text-xs md:text-sm text-secondary  md:text-left font-semibold" [ngClass]="{'pb-4 pt-4 px-7': isOpen(), 'pb-2 pt-2 px-4': !isOpen()}">
+   Filtrer
+    <button *ngIf="isOpen()" class="md:hidden ml-auto text-primary" (click)="toggle()">
+      <ng-icon name="hero-x" size="24"></ng-icon>
+    </button>
+  </h2>-->
+  <button *ngIf="!isOpen()" class="text-primary" (click)="toggle()">
+    <ng-icon name="hero-chevron-down" strokeWidth="3"></ng-icon>
+  </button>
+  <div *ngIf="isOpen()">
+    <div class="group px-7 flex-1 max-h-[calc(100vh-116px)] md:max-h-[calc(100vh-300px)] overflow-auto">
+      <!--<app-loading-lines *ngIf="loading && odds.length === 0"></app-loading-lines>-->
+      <div *ngFor="let item of thematiques" class="last:pb-28 last:md:pb-10">
+        <app-thematique [thematique]="item" [selected]="item === selectedOdd" [lite]="false" (couchesSelection)="onCouchesSelection($event)" (click)="onSelectThematique(item)"></app-thematique>
+      </div>
+    </div>
+  </div>
+
+</div>
+

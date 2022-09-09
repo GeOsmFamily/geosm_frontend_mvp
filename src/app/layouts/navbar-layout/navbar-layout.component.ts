@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Event, NavigationEnd,Router } from '@angular/router';
 import { MenuItem } from './menu-item';
 
 @Component({
@@ -10,14 +11,16 @@ export class NavbarLayoutComponent {
 
   sidebarVisible = false;
 
-  constructor() {
+  constructor( private router: Router) {
     // constructor
   }
+
 
   openSidebar(): void {
     this.sidebarVisible = true;
     console.log(this.sidebarVisible)
   }
+
 
   closeSidebar(): void {
     this.sidebarVisible = false;
@@ -26,29 +29,29 @@ export class NavbarLayoutComponent {
     {
       link: '/',
       label: 'discover',
-      image: '/assets/images/svg/menu/discover.svg',
-      activeImage: '/assets/images/svg/menu/discover-active.svg',
+      image: 'assets/images/svg/menu/discover.svg',
+      activeImage: 'assets/images/svg/menu/discover-active.svg',
       active: false
     },
     {
       link: '/about',
       label: 'about',
-      image: '/assets/images/svg/menu/about.svg',
-      activeImage: '/assets/images/svg/menu/about-active.svg',
+      image: 'assets/images/svg/menu/about.svg',
+      activeImage: 'assets/images/svg/menu/about-active.svg',
       active: false
     },
     {
       link: '/partners',
       label: 'partners',
-      image: '/assets/images/svg/menu/partners.svg',
-      activeImage: '/assets/images/svg/menu/partners-active.svg',
+      image: 'assets/images/svg/menu/partners.svg',
+      activeImage: 'assets/images/svg/menu/partners-active.svg',
       active: false
     },
     {
       link: '/numbers',
       label: 'numbers',
-      image: '/assets/images/svg/menu/numbers.svg',
-      activeImage: '/assets/images/svg/menu/numbers-active.svg',
+      image: 'assets/images/svg/menu/numbers.svg',
+      activeImage: 'assets/images/svg/menu/numbers-active.svg',
       active: false
     }
   ];

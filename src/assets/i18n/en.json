@@ -1,1 +1,34 @@
-{}
+{
+  "login":{
+    "email":"Email address",
+    "password":"Password",
+    "forgotPassword":"Forgot password",
+    "signIn":"Sign in",
+    "signWithFacebook":"Continue with Facebook",
+    "signWithGmail":"Continue with Google",
+    "signWithOpenstreetMap":"Continue with OpenStreetMap",
+    "ou":"Or",
+    "createAccount":"Create an account"
+  },
+  "register":{
+    "lastName":"Last name",
+    "firstName":"First name",
+    "titre":"Title",
+    "email":"Email address",
+    "phone":"Phone number",
+    "password":"Password",
+    "passwordConfirm":"Confirm password",
+    "registeredAlready":"Already registered?",
+    "createAccount":"Create an account"
+  },
+  "resetPassword":{
+    "password":"Password",
+    "passwordConfirm":"Confirm password",
+    "submit":"Submit"
+  },
+  "forgotPassword":{
+    "email":"Email address",
+    "submit":"Submit"
+  }
+
+}
