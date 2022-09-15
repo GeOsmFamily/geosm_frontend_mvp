@@ -35,7 +35,7 @@
 
 
 
-<div *ngIf="syndicat" style="height:50px" class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleCommunes()" cdkOverlayOrigin
+<div  style="height:50px" class="flex items-center w-full h-8 mt-3 px-3 bg-white trigger" [ngClass]="{'rounded-lg border-none': !forceSelected, 'border border-neutral-200 rounded-md': forceSelected}" (click)="toggleCommunes()" cdkOverlayOrigin
 #triggerCommunes="cdkOverlayOrigin">
   <p class="mr-auto text-sm text-primary font-semibold" *ngIf="commune === undefined">Choisir une commune</p>
   <p class="mr-auto text-sm text-primary font-semibold" *ngIf="commune">{{commune}}</p>
@@ -116,7 +116,7 @@
 
       <div  *ngFor="let category of questions; let i = index;" class="py-3 border-b border-b-neutral-200" >
         <label class="flex text-primary text-sm">
-          <input type="checkbox" [checked]="questionChecked === category" (click)="selectCheckBoxQuestion(category,i,questions)"  (change)="changeSelection($event, i)"   class="mr-3 text-primary focus:ring-primary">
+          <input type="checkbox" [checked]=" questionChecked === category " (click)="selectCheckBoxQuestion(category,i,questions)"  (change)="changeSelection($event, i)"   class="mr-3 text-primary focus:ring-primary">
           {{ category }}
         </label>
       </div>
