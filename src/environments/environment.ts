@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
-  url_services: 'https://bamakoservices.geosm.org',
-  apiKey: 'sT28H3QgNc92eNf2a5Vhc0niR8XfGLqzUAvgAuGfh1arv8F7vhMmrvx3skysy0cY',
+  url_services: 'https://bamakoservices.position.cm',
+  apiKey: 'BfWFhHRoTMMaSaJN3goz14dnYtcpmgjdyR276IEcI0ItLHhGgff0zlxGbqgVAh2g',
   instance_id: 1,
   primarycolor: '#023f5f',
   nom: 'Bamako',
-  url_frontend: 'http://localhost:4200',
+  url_frontend: 'https://bamako.position.cm',
   country_code: 'ML',
-  url_carto: 'https://carto.geosm.org',
-  url_qgis: 'https://qgis.geosm.org'
+  url_carto: 'https://carto.position.cm',
+  url_qgis: 'https://qgis.position.cm'
 };

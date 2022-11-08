@@ -268,7 +268,7 @@ export class MapHelper {
           minZoom: couche.minzoom,
           crossOrigin: 'anonymous',
           attributionsCollapsible: false,
-          attributions: ' © contributeurs <a target="_blank" href="https://www.openstreetmap.org/copyright"> OpenStreetMap </a> '
+          attributions: 'By <a href="https://api.whatsapp.com/send?phone=694698607&text=" target="_blank">GeOsm Family</a>,<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> Contributors'
         }),
 
         className: couche.nom + '___' + couche.type_layer
