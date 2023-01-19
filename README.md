@@ -3,10 +3,11 @@
 ## Installation
 
 ```sh
-$ git clone https://github.com/GeOsmFamily/geosm_frontend_mvp.git frontend
+$ git clone -b bamako https://github.com/GeOsmFamily/geosm_frontend_mvp.git frontend
 $ cd frontend
 $ npm install
 ```
+
 ```sh
 export const environment = {
   production: true,
@@ -33,4 +34,3 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
