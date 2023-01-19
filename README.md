@@ -6,6 +6,7 @@
 $ git clone -b bamako https://github.com/GeOsmFamily/geosm_frontend_mvp.git frontend
 $ cd frontend
 $ npm install
+$ npx ng serve --open
 ```
 
 ```sh
