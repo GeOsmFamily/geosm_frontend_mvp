@@ -119,8 +119,8 @@ export class SelectLayersForDownload {
   getAllLayersDownlodable(): Array<SearchLayerToDownloadModelInterface> {
     let response: SearchLayerToDownloadModelInterface[] = [];
 
-    for (let iThematique = 0; iThematique < this.thematiqueService.getAllThematiques().length; iThematique++) {
-      const groupThematique = this.thematiqueService.getAllThematiques()[iThematique];
+    for (let iThematique = 0; iThematique < this.thematiqueService.getAllThematiques()!.length; iThematique++) {
+      const groupThematique = this.thematiqueService.getAllThematiques()![iThematique];
 
       for (let index = 0; index < groupThematique.sous_thematiques.length; index++) {
         const sous_thematique = groupThematique.sous_thematiques[index];

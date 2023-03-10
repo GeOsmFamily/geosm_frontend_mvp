@@ -24,7 +24,7 @@ export class ThematiqueService {
     );
   }
 
-  getAllThematiques(): Thematique[] {
+  getAllThematiques(): Thematique[] | undefined {
     return this.thematiques.getValue().data.thematiques;
   }
 

@@ -1,0 +1,13 @@
+<div class="border_red menu-thematiques-child text-center" [ngClass]="{ primaryColorBG: !thematique!.color }"
+  [ngStyle]="{ 'background-color': thematique!.color }" [matTooltip]="thematique!.nom">
+
+
+  <img src="{{ url_prefix + thematique!.image_src }}" class="img-responsive menu-thematiques-child-logo" alt="" />
+</div>
+<div class="text-center menu-thematiques-child-title">
+  <mat-list-item>
+    <p class="black">
+      {{ thematique!.nom }}
+    </p>
+  </mat-list-item>
+</div>

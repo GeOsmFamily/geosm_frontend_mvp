@@ -8,11 +8,14 @@ import { LayersInMap } from 'src/app/layouts/sidebar-layout/map/interfaces/layer
 import { SocialsharedComponent } from 'src/app/shared/socialshared/socialshared.component';
 import { CaracteristicSheet } from '../interfaces/caracteristicSheet';
 import { LayerGroup } from './openlayers';
+import { Thematique } from '../interfaces/thematique-interface';
+import { SecondaryPageComponent } from 'src/app/layouts/sidebar-layout/sidebar-left/secondary-page/secondary-page.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComponentHelper {
+  secondaryPage: SecondaryPageComponent | undefined;
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private injector: Injector,
@@ -139,6 +142,21 @@ export class ComponentHelper {
       position: position
     };
 
-  //  this.dialog.open(CaracteristiquesLieuModalComponent, proprietes);
+    //  this.dialog.open(CaracteristiquesLieuModalComponent, proprietes);
+  }
+
+  openGroupThematiqueSlide(thematique: Thematique) {
+    
+    this.secondaryPage?.setThematique(thematique);
+     console.log(20);
+    this.secondaryPage?.open();
+    console.log(30)
+   
+  }
+
+  setComponent(component: string, comp: any) {
+    if (component == 'SecondaryPageComponent') {
+      this.secondaryPage = comp;
+    }
   }
 }

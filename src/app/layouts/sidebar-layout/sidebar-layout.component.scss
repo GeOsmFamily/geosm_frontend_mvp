@@ -9,6 +9,18 @@
 .sidebar-left {
   width: 370px;
   background-color: white;
+
+  app-secondary-page {
+    position: absolute;
+    left: -370px;
+    top: 0px;
+    bottom: 0px;
+    width: 370px;
+    transition: 0.5s;
+    background: #fff;
+    z-index: 9;
+    overflow-y: auto;
+  }
 }
 
 .sidebar-right {

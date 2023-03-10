@@ -1,0 +1,7 @@
+<mat-list-option [matTooltip]="couche!.nom" matTooltipClass="couche-toolipt" matTooltipPosition="right"
+  [disabled]="disabled_couche(couche!)" [value]="couche" [selected]="couche!.check">
+  
+  <img class="couche-img" src="{{ url_prefix + couche!.logo }}" mat-list-icon *ngIf="couche!.logo === null" alt="" />
+
+  <div mat-line class="couche-title">{{ couche!.nom }}</div>
+</mat-list-option>

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { Thematique } from 'src/app/core/interfaces/thematique-interface';
+import { ComponentHelper } from 'src/app/core/modules/componentHelper';
+import { ThematiqueService } from 'src/app/core/services/geosm/thematique/thematique.service';
 
 @Component({
   selector: 'app-primary-page',
@@ -8,7 +11,12 @@ import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 })
 export class PrimaryPageComponent {
   faLayer = faLayerGroup;
-  constructor() {
+  constructor(public thematiqueService: ThematiqueService,public componentHelper:ComponentHelper) {
     /* TODO document why this constructor is empty */
+  }
+
+  openThematiqueSlide(thematique: Thematique) {
+    console.log(10)
+    this.componentHelper.openGroupThematiqueSlide(thematique);
   }
 }

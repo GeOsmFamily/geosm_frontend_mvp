@@ -28,6 +28,9 @@ import { ChartOverlayComponent } from './sidebar-layout/sidebar-right/download/c
 import { DownloadComponent } from './sidebar-layout/sidebar-right/download/components/download/download.component';
 import { SearchbarLayoutComponent } from './navbar-layout/searchbar-layout/component/searchbar-layout.component';
 import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-layers/component/metadata-modal/metadata-modal.component';
+import { ThematiquesComponent } from './sidebar-layout/sidebar-left/primary-page/thematiques/thematiques.component';
+import { ListCouchesComponent } from './sidebar-layout/sidebar-left/secondary-page/list-couches/list-couches.component';
+import { CoucheComponent } from './sidebar-layout/sidebar-left/secondary-page/list-couches/couche/couche.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-la
     ChartOverlayComponent,
     SearchbarLayoutComponent,
     DownloadComponent,
-    MetadataModalComponent
+    MetadataModalComponent,
+    ThematiquesComponent,
+    ListCouchesComponent,
+    CoucheComponent
   ],
   imports: [
     CommonModule,

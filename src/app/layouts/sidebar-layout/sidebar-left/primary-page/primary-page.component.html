@@ -26,3 +26,15 @@
   <fa-icon [icon]="faLayer"></fa-icon>
   {{ 'left_menu.themes' | translate }}
 </h5>
+
+
+
+<div class="arborescence-thematique" *ngFor="
+    let thematique of thematiqueService.getAllThematiques()!
+      
+  ">
+
+  <app-thematiques (click)="openThematiqueSlide(thematique)" class="pointer"
+    [thematique]="thematique"></app-thematiques>
+</div>
+

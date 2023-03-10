@@ -97,3 +97,17 @@ a {
   margin-top: 15px;
   text-align: center;
 }
+
+.arborescence-thematique {
+  float: left;
+  display: block;
+  position: relative;
+  width: 33.33333333%;
+  margin-bottom: 31px;
+
+  app-thematiques {
+    display: block;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}

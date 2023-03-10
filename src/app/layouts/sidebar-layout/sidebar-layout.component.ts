@@ -1,15 +1,17 @@
 import { Map } from 'src/app/core/modules/openlayers';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenavContainer } from '@angular/material/sidenav';
 import { map as geoportailMap } from './map/components/map.component';
 import { RightMenuInterface } from './sidebar-right/interfaces/rightMenuInterface';
+import { SecondaryPageComponent } from './sidebar-left/secondary-page/secondary-page.component';
+import { ComponentHelper } from 'src/app/core/modules/componentHelper';
 
 @Component({
   selector: 'app-sidebar-layout',
   templateUrl: './sidebar-layout.component.html',
   styleUrls: ['./sidebar-layout.component.scss']
 })
-export class SidebarLayoutComponent {
+export class SidebarLayoutComponent implements OnInit {
   @ViewChild(MatSidenavContainer, { static: true })
   sidenavContainer: MatSidenavContainer | undefined;
 
@@ -53,8 +55,19 @@ export class SidebarLayoutComponent {
     }
   ];
 
-  constructor() {
+  @ViewChild(SecondaryPageComponent, { static: true })
+  secondaryPage: SecondaryPageComponent | undefined;
+
+  constructor(public componentHelper: ComponentHelper) {
     this.map = geoportailMap;
+  }
+  ngOnInit(): void {
+  }
+
+  // eslint-disable-next-line @angular-eslint/use-lifecycle-interface
+  ngAfterViewInit() {
+    console.log(this.secondaryPage)
+    this.componentHelper.setComponent('SecondaryPageComponent', this.secondaryPage);
   }
 
   getRightMenu(name: string): RightMenuInterface | undefined {
