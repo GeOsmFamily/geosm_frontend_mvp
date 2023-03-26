@@ -1,3 +1,46 @@
+<div  [ngClass]="{ primaryColorBG: !thematique!.color }"
+  [matTooltip]="thematique!.nom" style="display:flex;flex-direction:column; align-items: flex-start;
+  justify-content: center;
+  margin-left: 20px;    padding-top: .75rem;
+  padding-bottom: .75rem;     border-top: 1px solid grey;border-radius: 5px;margin-right: 20px;">
+
+      <div style="display:flex">
+        <div style="width:40px;height:40px" class="border_red menu-thematiques-child text-center" [ngClass]="{ primaryColorBG: !thematique!.color }"
+                     [ngStyle]="{ 'background-color': thematique!.color }" [matTooltip]="thematique!.nom">
+
+                   <img src="{{ url_prefix + thematique!.image_src }}" class="" alt="" style="max-width: 100%;
+                   height: auto;" />
+        </div>
+
+        <div class="ml-3"  style="display:flex; flex-direction:column;margin-left:10px">
+          <mat-list-item>
+            <h3 class="black" style="margin:unset;font-weight:bold">
+              {{ thematique!.nom }}
+            </h3>
+
+          </mat-list-item>
+          <p >
+            <span *ngIf="thematique!.sous_thematiques[0].couches!.length > 1">{{ thematique!.sous_thematiques[0].couches.length}} couches</span>
+            <span *ngIf="thematique!.sous_thematiques[0].couches!.length === 1">{{ thematique!.sous_thematiques[0].couches.length }} couche</span>
+          </p>
+          <!-- <span >
+            10 couches
+        </span>
+        -->
+        </div>
+
+      </div>
+
+ </div>
+
+
+
+
+
+
+
+
+ <!--
 <div class="border_red menu-thematiques-child text-center" [ngClass]="{ primaryColorBG: !thematique!.color }"
   [ngStyle]="{ 'background-color': thematique!.color }" [matTooltip]="thematique!.nom">
 
@@ -11,3 +54,4 @@
     </p>
   </mat-list-item>
 </div>
+-->

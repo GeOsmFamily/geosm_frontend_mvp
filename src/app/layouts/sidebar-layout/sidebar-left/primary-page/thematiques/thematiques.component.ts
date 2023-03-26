@@ -19,5 +19,6 @@ export class ThematiquesComponent implements OnInit {
 
   ngOnInit(): void {
     this.lenght = this.thematiqueService.getAllThematiques()!.length;
+    console.log(this.thematiqueService.getAllThematiques());
   }
 }

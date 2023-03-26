@@ -16,7 +16,7 @@ export class CoucheComponent implements OnInit {
   url_prefix = environment.url_services;
 
   constructor(public layersService: LayersService) { }
-  
+
   ngOnInit(): void {
   }
 

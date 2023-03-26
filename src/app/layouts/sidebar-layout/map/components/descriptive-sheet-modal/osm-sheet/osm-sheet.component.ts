@@ -215,6 +215,7 @@ export class OsmSheetComponent implements OnInit {
                 let geometry = features[0].getGeometry();
                 this.descriptiveModel!.properties = properties;
                 this.descriptiveModel!.geometry = geometry;
+                console.log(properties);
                 this.updatemMdelDescriptiveSheet.emit(this.descriptiveModel);
 
                 this.formatFeatureAttributes();

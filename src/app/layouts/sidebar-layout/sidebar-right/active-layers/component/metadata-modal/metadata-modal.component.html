@@ -88,8 +88,11 @@
               <th class="text-center primaryColor" style="font-weight: normal !important; font-size: 14px">
                 {{ 'metadata.creation_date' | translate }}
               </th>
-              <th style="padding-left: 10px; font-weight: normal">{{data_metadata!.metadata.created_at}}</th>
-            </tr>
+              <!-- <th style="padding-left: 10px; font-weight: normal">{{data_metadata!.metadata.created_at}}</th>
+              -->
+              <th style="padding-left: 10px; font-weight: normal"></th>
+
+              </tr>
           </mat-list-item>
 
           <mat-divider *ngIf="data_metadata!.metadata.updated_at"></mat-divider>
@@ -98,7 +101,9 @@
               <th class="text-center primaryColor" style="font-weight: normal !important; width: 100px; font-size: 14px">
                 {{ 'metadata.update_date' | translate }}
               </th>
-              <th style="padding-left: 10px; font-weight: normal">{{data_metadata!.metadata.updated_at}}</th>
+              <!--<th style="padding-left: 10px; font-weight: normal">{{data_metadata!.metadata.updated_at}}</th>
+              -->
+                <th style="padding-left: 10px; font-weight: normal"></th>
             </tr>
           </mat-list-item>
 
@@ -125,7 +130,8 @@
         <mat-list>
           <mat-list-item style="height: auto; padding: 10px 0px" *ngIf="data_metadata!.layer.tags">
             <th class="text-center primaryColor" style="font-weight: normal !important; font-size: 14px">
-              {{ 'metadata.key_osm' | translate }}
+              <!-- {{ 'metadata.key_osm' | translate }}-->
+              Eléments cartographiques Eneo
             </th>
             <th style="padding-left: 10px; font-weight: normal">
               <span *ngIf="!data_metadata!.layer.mode_sql">
@@ -188,6 +194,7 @@
   </mat-tab-group>
 </mat-dialog-content>
 
+<!--
 <div mat-dialog-actions>
   <div>
     <img src="assets/images/svg/osm.svg" width="25px" alt="" srcset="" />
@@ -195,3 +202,4 @@
     <a href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer"> OpenStreetMap </a>
   </div>
 </div>
+-->

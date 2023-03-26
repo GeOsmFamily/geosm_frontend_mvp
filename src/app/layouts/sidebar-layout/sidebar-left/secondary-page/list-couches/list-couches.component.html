@@ -1,18 +1,15 @@
 <ng-container *ngIf="thematique!.sous_thematiques">
-  <mat-accordion multi="true" class="couche-thematique">
-    <mat-expansion-panel class="couche-thematique-panel"
+  <mat-accordion multi="true" class="couche-thematique ">
+    <mat-expansion-panel class="couche-thematique-panel mat-elevation-z0"
       *ngFor="let sous_thematique of thematique!.sous_thematiques" expanded="true">
-      <mat-expansion-panel-header class="accentColorBG" collapsedHeight="45px" expandedHeight="45px">
-        <mat-panel-title>
-          {{ sous_thematique.nom }}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+
       <div style="margin-top: 15px;">
         <mat-selection-list (selectionChange)="coucheSelected($event)">
           <!-- <mat-list-option> -->
           <app-couche *ngFor="let couche of sous_thematique.couches" id="{{ 'couche_' + couche.id }}"
             [couche]="couche"></app-couche>
         </mat-selection-list>
+
       </div>
     </mat-expansion-panel>
   </mat-accordion>

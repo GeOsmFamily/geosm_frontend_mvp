@@ -1,5 +1,5 @@
-<ng-container *ngIf="activeGroup">
-  <div class="sidenav-left-second-header-ghost"></div>
+<ng-container *ngIf="activeGroup" style="overflow:scroll">
+  <div style="position:fixed" >
   <div class=" black sidenav-left-second-header white" [ngClass]="{'primaryColorBG': !activeGroup.color}"
     [ngStyle]="{'background-color': activeGroup.color}">
 
@@ -13,4 +13,5 @@
   </div>
   <app-list-couches class="scroll" *ngIf="thematique!" [thematique]="thematique">
   </app-list-couches>
+</div>
 </ng-container>

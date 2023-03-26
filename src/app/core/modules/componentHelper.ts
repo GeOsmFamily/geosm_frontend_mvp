@@ -10,11 +10,13 @@ import { CaracteristicSheet } from '../interfaces/caracteristicSheet';
 import { LayerGroup } from './openlayers';
 import { Thematique } from '../interfaces/thematique-interface';
 import { SecondaryPageComponent } from 'src/app/layouts/sidebar-layout/sidebar-left/secondary-page/secondary-page.component';
+import { FicheComponent } from 'src/app/layouts/sidebar-layout/sidebar-left/fiche/fiche.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComponentHelper {
+  ficheComponent: FicheComponent | undefined;
   secondaryPage: SecondaryPageComponent | undefined;
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
@@ -91,7 +93,7 @@ export class ComponentHelper {
 
     let proprietes: MatDialogConfig = {
       disableClose: false,
-      minWidth: 550,
+      minWidth: 650,
       maxHeight: 460,
       width: '550px',
       data: data,
@@ -109,7 +111,11 @@ export class ComponentHelper {
     modal.afterClosed().subscribe(async (result: any) => {
       callBack(result);
     });
+    console.log(data);
+
+    //this.ficheComponent?.open(data);
   }
+
 
   openCaracteristic(data: CaracteristicSheet) {
     let position = {
@@ -146,17 +152,21 @@ export class ComponentHelper {
   }
 
   openGroupThematiqueSlide(thematique: Thematique) {
-    
+
     this.secondaryPage?.setThematique(thematique);
      console.log(20);
     this.secondaryPage?.open();
     console.log(30)
-   
+
   }
 
   setComponent(component: string, comp: any) {
     if (component == 'SecondaryPageComponent') {
       this.secondaryPage = comp;
+    }
+    if(component == 'FicheComponent')
+    {
+      this.ficheComponent =comp;
     }
   }
 }

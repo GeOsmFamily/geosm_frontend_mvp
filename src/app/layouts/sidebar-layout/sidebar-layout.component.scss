@@ -11,15 +11,28 @@
   background-color: white;
 
   app-secondary-page {
-    position: absolute;
+    position: fixed;
     left: -370px;
-    top: 0px;
+    top: 80px;
     bottom: 0px;
     width: 370px;
     transition: 0.5s;
     background: #fff;
     z-index: 9;
     overflow-y: auto;
+    height: 100vh;
+  }
+  app-fiche {
+    position: absolute;
+    left: -370px;
+    top: 0px;
+    bottom: 0px;
+    //width: 310px;
+    transition: 0.5s;
+    background: #fff;
+    z-index: 2;
+    //overflow-y: auto;
+    margin-right: 0px;
   }
 }
 
@@ -49,4 +62,8 @@
   .sidebar-right-title-fake {
     height: 20px;
   }
+
+
 }
+
+

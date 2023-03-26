@@ -29,6 +29,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { MatIconModule } from "@angular/material/icon";
+
 @NgModule({
   exports: [
     A11yModule,
@@ -60,7 +62,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatBottomSheetModule,
-    OverlayModule
+    OverlayModule,
+    MatIconModule
   ]
 })
 export class MaterialModule {}

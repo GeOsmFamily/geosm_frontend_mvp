@@ -13,6 +13,9 @@
   word-wrap: break-word !important;
   word-break: break-word !important;
 }
+.connectButton{
+   color: white;
+}
 
 .cover-image {
   background-position: center;
@@ -20,8 +23,15 @@
   display: block;
   height: 96.25px;
   margin: -20px -12px -12px -12px;
-  background-image: url(https://media-exp2.licdn.com/dms/image/C4D16AQHloTjzzWgexw/profile-displaybackgroundimage-shrink_200_800/0/1609433426546?e=1660780800&v=beta&t=WJXz90-Q_WB-A4O88piFVkPT18ZWNGB4DN95aeql3_c);
+  background-image: url('^assets/images/svg/BACKGROUND.svg');
 }
+
+.logo {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
 
 .profile-image {
   margin: -38px auto 1.2rem;
@@ -106,8 +116,15 @@ a {
   margin-bottom: 31px;
 
   app-thematiques {
-    display: block;
+   // display: block;
     padding-right: 15px;
     padding-left: 15px;
+
   }
+}
+
+
+::ng-deep .mat-drawer-inner-container {
+  overflow: unset !important;
+
 }

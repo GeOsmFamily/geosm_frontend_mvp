@@ -39,5 +39,6 @@ export class SecondaryPageComponent {
   open() {
     console.log(40)
     $('app-secondary-page').css('left', '0px');
+
   }
 }

@@ -1,7 +1,10 @@
 <mat-list-option [matTooltip]="couche!.nom" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-  [disabled]="disabled_couche(couche!)" [value]="couche" [selected]="couche!.check">
-  
-  <img class="couche-img" src="{{ url_prefix + couche!.logo }}" mat-list-icon *ngIf="couche!.logo === null" alt="" />
+  [disabled]="disabled_couche(couche!)" [value]="couche" [selected]="couche!.check" checkboxPosition="before">
 
-  <div mat-line class="couche-title">{{ couche!.nom }}</div>
+
+
+  <div mat-line class="couche-title">
+    <img class="couche-img" src="{{ url_prefix + couche!.logo }}"  alt="" />
+    <span>{{ couche!.nom }}</span>
+  </div>
 </mat-list-option>

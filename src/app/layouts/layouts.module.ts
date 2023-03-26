@@ -31,6 +31,7 @@ import { MetadataModalComponent } from './sidebar-layout/sidebar-right/active-la
 import { ThematiquesComponent } from './sidebar-layout/sidebar-left/primary-page/thematiques/thematiques.component';
 import { ListCouchesComponent } from './sidebar-layout/sidebar-left/secondary-page/list-couches/list-couches.component';
 import { CoucheComponent } from './sidebar-layout/sidebar-left/secondary-page/list-couches/couche/couche.component';
+import { FicheComponent } from './sidebar-layout/sidebar-left/fiche/fiche.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { CoucheComponent } from './sidebar-layout/sidebar-left/secondary-page/li
     MetadataModalComponent,
     ThematiquesComponent,
     ListCouchesComponent,
-    CoucheComponent
+    CoucheComponent,
+    FicheComponent
   ],
   imports: [
     CommonModule,

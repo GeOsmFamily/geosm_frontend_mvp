@@ -96,6 +96,7 @@ export class LayersService {
         }
 
         let pathImg = couche.logo;
+        console.log("toto :"+ pathImg)
         console.log(couche);
         let layer = mapHelper.constructLayer({
           nom: couche.nom,

@@ -31,7 +31,9 @@ export class PrintTool {
       if (titre != '') {
         doc.text('Titre de la carte : ' + titre + '', 35, 170);
       } else {
-        doc.text('Carte du GéoPortail - GeOsm - ' + environment.nom.toUpperCase(), 35, 170);
+        //doc.text('Carte du GéoPortail - GeOsm - ' + environment.nom.toUpperCase(), 35, 170);
+
+        doc.text('Impression du GéoPortail', 35, 170);
       }
       doc.setFontSize(25);
       doc.setTextColor(28, 172, 119);
