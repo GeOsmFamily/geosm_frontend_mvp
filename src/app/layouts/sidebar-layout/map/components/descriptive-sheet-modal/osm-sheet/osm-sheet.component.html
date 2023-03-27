@@ -10,8 +10,8 @@
 
 
 
-<ng-container *ngIf="listAttributes && listAttributes.length > 0" style="margin-top: 10px"  >
-  <div class="descriptive-sheet-body-header-btn"  *ngIf="(descriptiveModel!.properties.COORD_X != null
+<ng-container *ngIf="listAttributes && listAttributes.length > 0" >
+  <div class="descriptive-sheet-body-header-btn" style="margin-top: 20px"   *ngIf="(descriptiveModel!.properties.COORD_X != null
     || descriptiveModel!.properties.X_COORD != null)">
 
 
@@ -20,7 +20,7 @@
     <div
       fxLayout="row"
       class="descriptive-sheet-body"
-      style="margin-bottom: 5px"
+      style="margin-top: 5px"
       *ngIf="!configTagsOsm![attribute.field] || configTagsOsm![attribute.field].display"
     >
       <div fxFlex="38%" class="attribute">
@@ -55,7 +55,7 @@
 
 
   </div>
-
+<div style="margin-top: 10px" >
   <div fxLayout class="descriptive-sheet-body" style="margin-bottom: 5px" *ngIf="descriptiveModel!.properties.agent">
     <div fxFlex="35%" class="attribute">Agent :</div>
     <div fxFlex class="attribute-value">{{descriptiveModel!.properties.agent}}</div>
@@ -223,6 +223,7 @@
 
     </div>
   </div>
+</div>
 
 
 
