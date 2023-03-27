@@ -39,6 +39,7 @@ import {
   faInfo,
   faInfoCircle,
   faLayerGroup,
+  faMap,
   faMapMarker,
   faMinus,
   faPlus,
@@ -65,6 +66,8 @@ import { DescriptiveSheet } from '../interfaces/descriptiveSheet';
 import { ActivatedRoute } from '@angular/router';
 import { ShareService } from 'src/app/core/services/geosm/share.service';
 import { ComponentHelper } from 'src/app/core/modules/componentHelper';
+import { CarteService } from 'src/app/core/services/geosm/carte/carte.service';
+import { LayersService } from 'src/app/core/services/geosm/layers.service';
 let view = new View({
   center: [0, 0],
   zoom: 0,
@@ -113,6 +116,8 @@ export class MapComponent implements OnInit {
 
   faTimes = faTimes;
 
+  faLayers = faMap;
+
   @Input() sidenavContainer: MatSidenavContainer | undefined;
 
   layersInToc$: Observable<LayersInMap[]>;
@@ -152,7 +157,9 @@ export class MapComponent implements OnInit {
     public zone: NgZone,
     private activatedRoute: ActivatedRoute,
     public shareService: ShareService,
-    public componentHelper:ComponentHelper
+    public componentHelper:ComponentHelper,
+    public carteService: CarteService,
+    public layerService: LayersService
   ) {
     this.isLoading$ = this.store.select(selectIsLoading);
     this.project$ = this.store.select(selectProject);
@@ -399,6 +406,11 @@ export class MapComponent implements OnInit {
         });
       });
     });
+  }
+
+  changeLayer() {
+    let carte = this.carteService.getCarteById(4);
+    this.layerService.addLayerCarte(carte!);
   }
 
 

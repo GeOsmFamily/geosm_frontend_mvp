@@ -72,6 +72,7 @@ export class DescriptiveSheetModalComponent implements OnInit {
     this.initialiseHightLightMap();
 
     if (this.descriptiveModel?.layer?.properties!['type'] == 'couche') {
+      console.log(this.descriptiveModel.layer.properties)
       this.imgSrc =
         environment.url_services + this.thematiqueService.getCoucheFromId(this.descriptiveModel.layer.properties['couche_id'])!.logo;
     } else if (this.descriptiveModel?.layer?.properties!['type'] == 'carte') {

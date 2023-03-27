@@ -6,10 +6,14 @@
 
       <div style="display:flex">
         <div style="width:40px;height:40px" class="border_red menu-thematiques-child text-center" [ngClass]="{ primaryColorBG: !thematique!.color }"
-                     [ngStyle]="{ 'background-color': thematique!.color }" [matTooltip]="thematique!.nom">
+                     [matTooltip]="thematique!.nom">
 
-                   <img src="{{ url_prefix + thematique!.image_src }}" class="" alt="" style="max-width: 100%;
+
+
+                   <img *ngIf="thematique!.nom != 'Données SIG Eneo'" src="{{ url_prefix + thematique!.image_src }}" class="" alt="" style="max-width: 100%;
                    height: auto;" />
+                   <img *ngIf="thematique!.nom == 'Données SIG Eneo'" src="{{ url_prefix + thematique!.image_src }}" class="" alt="" style="max-width: 100%;
+                   height: auto;border-radius: 49.9%;" />
         </div>
 
         <div class="ml-3"  style="display:flex; flex-direction:column;margin-left:10px">
@@ -20,8 +24,8 @@
 
           </mat-list-item>
           <p >
-            <span *ngIf="thematique!.sous_thematiques[0].couches!.length > 1">{{ thematique!.sous_thematiques[0].couches.length}} couches</span>
-            <span *ngIf="thematique!.sous_thematiques[0].couches!.length === 1">{{ thematique!.sous_thematiques[0].couches.length }} couche</span>
+            <span *ngIf="thematique!.sous_thematiques[0]!.couches!.length > 1">{{ thematique!.sous_thematiques[0].couches!.length}} couches</span>
+            <span *ngIf="thematique!.sous_thematiques[0]!.couches!.length === 1">{{ thematique!.sous_thematiques[0].couches!.length }} couche</span>
           </p>
           <!-- <span >
             10 couches

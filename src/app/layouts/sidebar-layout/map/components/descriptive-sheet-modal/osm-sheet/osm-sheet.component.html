@@ -4,75 +4,55 @@
   </mat-chip-list>
 </div>
 
+
+
+
+
+
+
 <ng-container *ngIf="listAttributes && listAttributes.length > 0">
-  <div class="text-center descriptive-sheet-body-header-btn" style="margin-top: 10px">
-    <button
-      [matTooltip]="'OpenStreetMap'"
-      mat-mini-fab
-      class="descriptive-sheet-body-header-btn-osm"
-      *ngIf="osmUrl"
-      (click)="openUrl(osmUrl)"
+  <div class="descriptive-sheet-body-header-btn" style="margin-top: 10px">
+
+
+<ng-container *ngFor="let attribute of listAttributes;let i = index">
+  <ng-container *ngIf="i <= initialNumberOfAttributes">
+    <div
+      fxLayout="row"
+      class="descriptive-sheet-body"
+      style="margin-bottom: 5px"
+      *ngIf="!configTagsOsm![attribute.field] || configTagsOsm![attribute.field].display"
     >
-      <img src="assets/images/svg/descriptive-sheet/Logo_mono.svg" alt="" srcset="" style="margin-top: -6px; height: 25px" />
-    </button>
+      <div fxFlex="38%" class="attribute">
+        {{ attribute.field| translate }}
+      </div>
 
-    <ng-container *ngFor="let attribute of listAttributes;let i = index">
-      <ng-container *ngIf="configTagsOsm![attribute.field] && configTagsOsm![attribute.field].header">
-        <button
-          [matTooltip]="attribute.field| translate"
-          mat-mini-fab
-          *ngIf="configTagsOsm![attribute.field].header === 'wikipedia'"
-          (click)="openUrl(configTagsOsm![attribute.field].prefix + attribute.value)"
-        >
-          <img src="assets/images/svg/descriptive-sheet/wikipedia.svg" alt="" srcset="" style="height: 25px" />
-        </button>
+        <div fxFlex class="attribute-value" *ngIf="!configTagsOsm![attribute.field] || configTagsOsm![attribute.field].display">
+          <div *ngIf="!configTagsOsm![attribute.field]" [innerHTML]="attribute.value"></div>
+        </div>
 
-        <button
-          [matTooltip]="attribute.field| translate"
-          mat-mini-fab
-          *ngIf="configTagsOsm![attribute.field].header === 'wikidata'"
-          (click)="openUrl(configTagsOsm![attribute.field].prefix + attribute.value)"
-        >
-          <img src="assets/images/svg/descriptive-sheet/wikidata-logo.svg" alt="" srcset="" style="height: 19px" />
-        </button>
-
-        <button
-          [matTooltip]="attribute.field| translate"
-          mat-mini-fab
-          *ngIf="configTagsOsm![attribute.field].header === 'website'"
-          (click)="openUrl(configTagsOsm![attribute.field].prefix + attribute.value)"
-        >
-          <fa-icon [icon]="faGlobe" class="accentColor" style="font-size: 20px; margin-top: -2px" aria-hidden="true"></fa-icon>
-        </button>
-
-        <button
-          [matTooltip]="attribute.field| translate"
-          mat-mini-fab
-          *ngIf="configTagsOsm![attribute.field].header === 'wikimedia'"
-          (click)="openUrl(configTagsOsm![attribute.field].prefix + attribute.value)"
-        >
-          <img src="assets/images/svg/descriptive-sheet/commons-logo.svg" alt="" srcset="" style="height: 25px" />
-        </button>
-
-        <button
-          [matTooltip]=" attribute.field| translate"
-          mat-mini-fab
-          *ngIf="configTagsOsm![attribute.field].header === 'email'"
-          (click)="alertValue( attribute.value)"
-        >
-          <fa-icon [icon]="faAt" class="accentColor" style="font-size: 20px; margin-top: -2px" aria-hidden="true"></fa-icon>
-        </button>
-
-        <button
-          [matTooltip]="attribute.field| translate"
-          mat-mini-fab
-          *ngIf="configTagsOsm![attribute.field].header === 'tel'"
-          (click)="alertValue( attribute.value)"
-        >
-          <fa-icon [icon]="faPhone" class="accentColor" style="font-size: 20px; margin-top: -2px" aria-hidden="true"></fa-icon>
-        </button>
+    </div>
       </ng-container>
     </ng-container>
+
+    <ng-container *ngIf="listAttributes.length > 5">
+      <a
+        class="descriptive-sheet-body-display-attributes-number pointer"
+        (click)="initialNumberOfAttributes = listAttributes.length+1"
+        *ngIf="initialNumberOfAttributes < listAttributes.length"
+      >
+        {{'descriptive_sheet.displayAllAttributes' | translate}}
+      </a>
+      <a
+        class="descriptive-sheet-body-display-attributes-number pointer"
+        (click)="initialNumberOfAttributes = 3"
+        *ngIf="initialNumberOfAttributes >= listAttributes.length"
+      >
+        {{'descriptive_sheet.displayLesAttributes' | translate}}
+      </a>
+    </ng-container>
+
+
+
   </div>
 
   <div fxLayout class="descriptive-sheet-body" style="margin-bottom: 5px" *ngIf="descriptiveModel!.properties.agent">

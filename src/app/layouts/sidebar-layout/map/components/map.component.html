@@ -61,6 +61,11 @@
     </div>
 
     <div class="left-buttons-2">
+      <div>
+        <button mat-mini-fab class="white" (click)="changeLayer()" matTooltip="Image Aérienne">
+          <fa-icon [icon]="faLayers" class="primary_bg"></fa-icon>
+        </button>
+      </div>
       <div *ngIf="isMapillary">
         <button
           class="white"
