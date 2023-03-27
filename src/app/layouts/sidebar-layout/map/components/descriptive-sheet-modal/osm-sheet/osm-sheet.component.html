@@ -10,8 +10,9 @@
 
 
 
-<ng-container *ngIf="listAttributes && listAttributes.length > 0">
-  <div class="descriptive-sheet-body-header-btn" style="margin-top: 10px">
+<ng-container *ngIf="listAttributes && listAttributes.length > 0" style="margin-top: 10px"  >
+  <div class="descriptive-sheet-body-header-btn"  *ngIf="(descriptiveModel!.properties.COORD_X != null
+    || descriptiveModel!.properties.X_COORD != null)">
 
 
 <ng-container *ngFor="let attribute of listAttributes;let i = index">
