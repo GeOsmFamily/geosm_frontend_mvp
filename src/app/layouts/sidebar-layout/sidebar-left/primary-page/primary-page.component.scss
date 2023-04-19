@@ -12,3 +12,15 @@ input[type=checkbox] {
  input[type="checkbox"]:checked {
    accent-color:black !important;
  }
+
+
+*::-webkit-scrollbar {
+   width: 5px;               /* width of the entire scrollbar */
+ }
+
+
+ *::-webkit-scrollbar-thumb {
+  background-color: gray;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+ // border: 3px solid orange;  /* creates padding around scroll thumb */
+}

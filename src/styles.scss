@@ -8,7 +8,9 @@
 html,
 body {
   height: 100%;
-  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
+ // overflow: hidden;
 }
 
 body {
@@ -50,5 +52,5 @@ input {
 
 
 *::-webkit-scrollbar {
-  width: 10px;               /* width of the entire scrollbar */
+ // width: 100px;               /* width of the entire scrollbar */
 }

@@ -29,11 +29,12 @@ import { Extent } from 'ol/extent';
 import { PradecInterface } from 'src/app/core/interfaces/pradec';
 import { select, Store } from '@ngrx/store';
 import { SearchState } from 'src/app/layouts/navbar-layout/searchbar-layout/states/search.reducer';
-import { Observable } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { SearchInterface } from 'src/app/layouts/navbar-layout/searchbar-layout/interfaces/search';
 import { selectSearch } from 'src/app/layouts/navbar-layout/searchbar-layout/states/search.selector';
 import { searchQuery } from 'src/app/layouts/navbar-layout/searchbar-layout/states/search.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfigService } from 'src/app/core/services/geosm/config/config.service';
 
 @Component({
   selector: 'app-primary-page',
@@ -43,54 +44,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class PrimaryPageComponent {
   faLayer = faLayerGroup;
 
-  data = [
-    {
-      nomSyndicat: 'Tous les syndicats',
-      nomDepartement: 'Tous les départements',
-      Communes: [{ nomCommune: 'Toutes les communes' }]
-    },
-    {
-      nomSyndicat: 'SYNCOBE',
-      nomDepartement: 'BENOUE',
-      Communes: [
-        { nomCommune: 'BIBEMI' },
-        { nomCommune: 'LAGDO' },
-        { nomCommune: 'GAROUA 2' },
-        { nomCommune: 'GAROUA 1' },
-        { nomCommune: 'TOUROUA' },
-        { nomCommune: 'BARNDAKE' },
-        { nomCommune: 'GAROUA 3' },
-        { nomCommune: 'PITOA' },
-        { nomCommune: 'NGONG' },
-        { nomCommune: 'GASHIGA' },
-        { nomCommune: 'BASHEO' },
-        { nomCommune: 'DEMBO' }
-      ]
-    },
-    {
-      nomSyndicat: 'SYNCOMALOU',
-      nomDepartement: 'MAYO-LOUTI',
-      Communes: [{ nomCommune: 'FIGUIL' }, { nomCommune: 'GUIDER' }, { nomCommune: 'MAYO OULO' }]
-    },
-    {
-      nomSyndicat: 'SYDECOMAR',
-      nomDepartement: 'MAYO REY',
-      Communes: [{ nomCommune: 'MADINGRING' }, { nomCommune: 'TOUBORO' }, { nomCommune: 'TCHOLIRE' }, { nomCommune: 'REY BOUBA' }]
-    }
-  ];
-  ouvrages = ['Puits', 'Pompes', 'Forages', 'Latrines'];
 
   questions = [
-    'Ouvrages en bon état',
-    'Ouvrages endommagés',
-    'Ouvrages en bon état et non foctionnels',
-    'Ouvrages en bon état et fonctionnels',
-    'Ouvrages en bon état, fonctionnels mais eau de mauvaise qualité',
-    'Ouvrages en bon état, non fonctionnels mais eau de bonne qualité',
-    'Ouvrages ayant un comité de gestion formel',
-    'Ouvrages ayant un comité de gestion informel',
-    'Ouvrages en bon état et non fonctionnels ayant un comité de gestion',
-    "Ouvrages en bon état et fonctionnels n'ayant aucun comité de gestion"
+    'Question 1',
+   'Question 2',
+   'Question3',
+   'Question 4',
+   'Question 5',
+   'Question 6',
+   'Question 7'
   ];
   selectedIndex: number | undefined;
   selectedCommune: number | undefined;
@@ -113,7 +75,7 @@ export class PrimaryPageComponent {
   //sélection de l'utilisateur
   syndicat: string | undefined;
   departement: string | undefined;
-  commune = 'Toutes les communes';
+  commune  : string | undefined;
   ouvrage: string | undefined;
   auxi: string | undefined;
 
@@ -125,36 +87,41 @@ export class PrimaryPageComponent {
 
   list: string[] | undefined;
   results$: Observable<SearchInterface[]>;
+  cameroun:any
+
+
+  regions:any
+  departements:any
+  communes:any
+
   constructor(
     private store: Store<SearchState>,
     private formBuilder: FormBuilder,
     public searchService: SearchService,
     public pradecService: PradecService,
     public layerService: LayersService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private apiService:ApiService
   ) {
-    this.results$ = this.store.pipe(select(selectSearch));
-    for (let index = 0; index < this.data.length; index++) {
-      let key = this.data[index].nomSyndicat;
-      let departement = this.data[index].nomDepartement;
-      let commune = [];
 
-      for (let i = 0; i < this.data[index].Communes.length; i++) {
-        commune.push(this.data[index].Communes[i].nomCommune);
-        //    console.log(commune[i])
+    this.apiService.getRequestFromOtherHost('/assets/limites/cameroun.geojson').then(response => {
+      if (response) {
+        this.cameroun=response
+
+       let region=this.cameroun.features.map((x:any )=> x.properties.NAME_1 )
+       this.regions = [...new Set(['Toutes les régions']), ...new Set(region)];
+
+
+      } else {
+        throw new Error();
       }
-      this.listComunes.set('' + key, commune);
-      //    console.log(this.listComunes)
-      this.listDepartements.set('' + key, departement);
-    }
-    //console.log("rrr"+this.syndicat)
-    //this.listeSyndicats=Array.from(this.listDepartements.keys())
-    //this.nbdepartement=Array.from(this.listComunes.keys())
+    })
+    .catch(error => console.log('catch block in getData function'));
 
-    //console.log("eeeeeee ="+ this.listComunes.keys())
 
-    //this.onGroupsChange(this.listeSyndicats)
-    this.form = this.formBuilder.group({});
+    this.results$ = this.store.pipe(select(selectSearch));
+
+       this.form = this.formBuilder.group({});
   }
 
   getCdkConnectedOverlayPanelClasses(): string[] {
@@ -171,7 +138,9 @@ export class PrimaryPageComponent {
   }
 
   toggleOuvrages() {
+    if(this.commune){
     this.showOuvrages = !this.showOuvrages;
+    }
   }
   getSyndicats(): string[] {
     return Array.from(this.listDepartements.keys());
@@ -225,7 +194,18 @@ export class PrimaryPageComponent {
   }
   changeSyndicat(event: any, index: any) {
     this.selectedSyndicat = event.target.checked ? index : undefined;
-    this.syndicat = this.getSyndicats()[this.selectedSyndicat!];
+    this.syndicat = this.regions[this.selectedSyndicat!];
+    this.toggleSyndicats()
+
+    if(this.syndicat !== 'Toutes les régions')
+      this.selectNominatim(this.syndicat!);
+    else{
+      this.selectNominatim('cameroun')
+    }
+    //select departement of a specific region
+
+
+    this.departements=[...new Set(this.cameroun.features.map((x:any )=> x.properties.NAME_1 == this.syndicat ? x.properties.NAME_2:'' ))]
     if (this.syndicat == 'Tous les syndicats') {
       let mapHelper = new MapHelper();
       let searchResultLayer = mapHelper.getLayerByName('searchResultLayer')[0];
@@ -244,31 +224,36 @@ export class PrimaryPageComponent {
 
   changeCommune(event: any, index: any) {
     this.selectedCommune = event.target.checked ? index : undefined;
-    this.commune = this.getCommunes()![this.selectedCommune!];
+    this.commune = this.departements![this.selectedCommune!];
+    this.toggleCommunes()
+    this.selectNominatim(this.commune!)
+
+
+    //select departement of a specific commune
+
+
+    this.communes=[...new Set(this.cameroun.features.map((x:any )=> x.properties.NAME_2 == this.commune ? x.properties.NAME_3:'' ))]
+
   }
 
   changeOuvrage(event: any, index: any) {
     this.selectedOuvrage = event.target.checked ? index : undefined;
 
-    if (this.ouvrages[this.selectedOuvrage!] == 'Puits') {
-      this.ouvrage = 'Puit';
-    } else if (this.ouvrages[this.selectedOuvrage!] == 'Forages') {
-      this.ouvrage = 'Forage';
-    } else if (this.ouvrages[this.selectedOuvrage!] == 'Pompes') {
-      this.ouvrage = 'Pompe';
-    } else {
-      this.ouvrage = 'Latrines';
-    }
 
-    this.auxi = this.ouvrages[this.selectedOuvrage!];
-    console.log(this.ouvrage);
+
+    this.auxi = this.communes[this.selectedOuvrage!];
+    this.toggleOuvrages()
+    this.selectNominatim(this.auxi!)
+
   }
 
   selectCheckBoxSyndicat(targetType: any, index: number, list: any) {
     // If the checkbox was already checked, clear the currentlyChecked variable
+
     if (this.syndicatChecked === targetType) {
+
       this.syndicatChecked = '';
-      return;
+
     }
 
     this.syndicatChecked = list[index];
@@ -312,7 +297,7 @@ export class PrimaryPageComponent {
     if (this.syndicat == 'Tous les syndicats') {
       string = 'tout' + 'tout' + this.ouvrage + 'q' + question;
     } else {
-      string = this.syndicat + this.commune + this.ouvrage + 'q' + question;
+      string = this.syndicat! + this.commune + this.ouvrage + 'q' + question;
     }
     // this.store.dispatch(searchQuery({ query: string.toLowerCase() }));
 
