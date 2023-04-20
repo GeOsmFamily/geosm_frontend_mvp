@@ -108,7 +108,7 @@ export class PrimaryPageComponent {
       if (response) {
         this.cameroun=response
 
-       let region=this.cameroun.features.map((x:any )=> x.properties.NAME_1 )
+       let region=this.cameroun.map((x:any )=> x.Column1 )
        this.regions = [...new Set(['Toutes les régions']), ...new Set(region)];
 
 
@@ -205,7 +205,7 @@ export class PrimaryPageComponent {
     //select departement of a specific region
 
 
-    this.departements=[...new Set(this.cameroun.features.map((x:any )=> x.properties.NAME_1 == this.syndicat ? x.properties.NAME_2:'' ))]
+    this.departements=[...new Set(this.cameroun.map((x:any )=> x.Column1 == this.syndicat ? x.Column2:'' ))]
     if (this.syndicat == 'Tous les syndicats') {
       let mapHelper = new MapHelper();
       let searchResultLayer = mapHelper.getLayerByName('searchResultLayer')[0];
@@ -219,7 +219,7 @@ export class PrimaryPageComponent {
         this.selectNominatim('mayo-rey');
       }
     }
-    console.log(this.syndicat);
+
   }
 
   changeCommune(event: any, index: any) {
@@ -232,7 +232,7 @@ export class PrimaryPageComponent {
     //select departement of a specific commune
 
 
-    this.communes=[...new Set(this.cameroun.features.map((x:any )=> x.properties.NAME_2 == this.commune ? x.properties.NAME_3:'' ))]
+    this.communes=[...new Set(this.cameroun.map((x:any )=> x.Column2 == this.commune ? x.Column3:'' ))]
 
   }
 
