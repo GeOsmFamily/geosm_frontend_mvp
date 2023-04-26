@@ -16,6 +16,7 @@
       [cdkConnectedOverlayOrigin]="trigger"
       [cdkConnectedOverlayOpen]="showSyndicats "
       [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"
+      (overlayOutsideClick)="toggleSyndicats()"
     >
       <div
         style="width: 300px; height: 200px; overflow-y: scroll"
@@ -65,6 +66,7 @@
       [cdkConnectedOverlayOrigin]="triggerCommunes"
       [cdkConnectedOverlayOpen]="showCommunes"
       [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"
+      (overlayOutsideClick)="toggleCommunes()"
     >
       <div
         style="width: 320px; height: 200px"
@@ -114,6 +116,7 @@
       [cdkConnectedOverlayOrigin]="triggerOuvrages"
       [cdkConnectedOverlayOpen]="showOuvrages"
       [cdkConnectedOverlayPanelClass]="getCdkConnectedOverlayPanelClasses()"
+      (overlayOutsideClick)="toggleOuvrages()"
     >
       <div
         style="width: 320px; height: 200px"
