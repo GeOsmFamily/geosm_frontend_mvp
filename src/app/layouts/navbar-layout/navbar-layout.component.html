@@ -8,7 +8,6 @@
       <div class="clear">
         <img src="/assets/images/svg/icon-clear.svg" alt="" style="width: 24px" (click)="closeSidebar()" />
       </div>
-
     </div>
     <ng-template [ngTemplateOutlet]="MsgRef" style="background-color: red"></ng-template>
   </div>
@@ -17,17 +16,16 @@
 <ng-template #MsgRef>
   <mat-divider style="margin-left: 20px" [vertical]="true"></mat-divider>
 
-  <div style="display:flex;flex-direction:row;margin-left: 30px;">
-
+  <div style="display: flex; flex-direction: row; margin-left: 30px">
     <div class="menu-list text-center" *ngFor="let menu of menuItems" fxLayout="column">
-      <a >
+      <a>
         <img [src]="menu.image" [alt]="menu.label" style="float: left" class="image" />
         <div class="text-center text" style="float: right; line-height: 3">{{ "navbar." + menu.label | translate }}</div>
       </a>
     </div>
-</div>
+  </div>
   <a href="" class="logo">
-    <img src="/assets/images/jpg/eneo.jpg" style="height: 40px; width: 90px;position: absolute;
-    top: 10px; right: 50px; margin-right:40px" alt="" />
+    <!--<img src="/assets/images/jpg/eneo.jpg" style="height: 40px; width: 90px;position: absolute;
+    top: 10px; right: 50px; margin-right:40px" alt="" />-->
   </a>
 </ng-template>

@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  url_services: 'https://eneoservices.position.cm',
-  apiKey: 'GKbSQ0BBm1PHiZO0M4nITAl3Wb1KH6Hp8bR7Lwb8haDedZQzKWKcD64lC2TtstKk',
+  url_services: 'https://bamakoservices.position.cm',
+  apiKey: 'vGhKBs2fR7GbdBZTjZUQsTGQPAj8RUzPdLXGnNnlUZpFsyEE8xAgFhBxnFqYpUH9',
   instance_id: 1,
   primarycolor: '#023f5f',
   nom: 'eneo',
