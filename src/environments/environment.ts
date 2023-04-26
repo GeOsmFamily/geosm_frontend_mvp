@@ -4,9 +4,9 @@ export const environment = {
   apiKey: 'vGhKBs2fR7GbdBZTjZUQsTGQPAj8RUzPdLXGnNnlUZpFsyEE8xAgFhBxnFqYpUH9',
   instance_id: 1,
   primarycolor: '#023f5f',
-  nom: 'Pradec',
+  nom: 'urbanisme',
   url_frontend: 'http://localhost:4200',
   country_code: 'CM',
-  url_carto: 'https://carto.geosm.org',
-  url_qgis: 'https://qgis.geosm.org'
+  url_carto: 'https://carto.position.cm',
+  url_qgis: 'https://qgis.position.cm'
 };
