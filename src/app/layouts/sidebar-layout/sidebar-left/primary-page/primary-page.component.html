@@ -1,8 +1,8 @@
 <div class="user-box break-words">
   <div class="cover-image"></div>
 
-    <div style="text-align: center">
-      <!--<img
+  <div style="text-align: center">
+    <!--<img
         width="64"
         src="https://media-exp2.licdn.com/dms/image/C4D03AQGkW5vvuH4KYQ/profile-displayphoto-shrink_100_100/0/1605181488764?e=1660780800&v=beta&t=9H6ftlAqlgiiasEeN9Lqlm4Oie8vNStVnLTabMjIU1E"
         alt=""
@@ -12,33 +12,27 @@
         id="ember146"
         class="profile-image entityPhoto lazy-image ember-view"
       />-->
-      <img
-        width="64"
-        src="assets/images/svg/PROFIL.svg"
-        alt=""
-        loading="lazy"
-        height="60"
-        alt="Photo de profil"
-        id="ember146"
-        class="profile-image entityPhoto lazy-image ember-view"
-      />
-      <div class="flex space-x-2 justify-center">
-        <button mat-raised-button color="primary" class="connectButton" >Se connecter</button>
-
-      </div>
-
+    <img
+      width="64"
+      src="assets/images/svg/PROFIL.svg"
+      alt=""
+      loading="lazy"
+      height="60"
+      alt="Photo de profil"
+      id="ember146"
+      class="profile-image entityPhoto lazy-image ember-view"
+    />
+    <div class="flex space-x-2 justify-center">
+      <button mat-raised-button color="primary" class="connectButton">Se connecter</button>
     </div>
-
   </div>
+</div>
 
 <!--
 <div style="text-align: center">
   <button mat-raised-button class="white base-group-carte-btn" color="primary">{{ 'left_menu.maps_background' | translate }}</button>
 </div>
 -->
-
-
-
 
 <!--
 <div style="text-align: center">
@@ -51,11 +45,6 @@
   {{ 'left_menu.themes' | translate }}
 </h5>
 
-
-
 <div class="" *ngFor="let thematique of thematiqueService.getAllThematiques()!">
-
-  <app-thematiques (click)="openThematiqueSlide(thematique)" class="pointer"
-    [thematique]="thematique"></app-thematiques>
+  <app-thematiques (click)="openThematiqueSlide(thematique)" class="pointer" [thematique]="thematique"></app-thematiques>
 </div>
-
