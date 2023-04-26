@@ -17,12 +17,11 @@ export class SearchEffects {
       distinctUntilChanged(),
       switchMap(({ query }) => {
         return forkJoin({
-          couches: this.searchService.searchCouches(query),
           nominatim: this.searchService.searchNominatim(query)
         }).pipe(
-          map(({ couches, nominatim }) => {
+          map(({ nominatim }) => {
             return searchAction.searchSuccess({
-              results: [...couches, ...nominatim]
+              results: [...nominatim]
             });
           }),
           catchError(error => of(searchAction.searchFailure({ message: error })))
