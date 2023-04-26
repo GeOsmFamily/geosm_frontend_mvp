@@ -15,10 +15,14 @@ export class ThematiquesComponent implements OnInit {
 
   @Input() thematique: Thematique | undefined;
 
+  thematiques: Thematique[] | undefined;
+
   constructor(private thematiqueService: ThematiqueService) {}
 
   ngOnInit(): void {
-    this.lenght = this.thematiqueService.getAllThematiques()!.length;
-    console.log(this.thematiqueService.getAllThematiques());
+    this.thematiqueService.getThematiques().subscribe((result) => {
+      this.lenght = result.data.thematiques.length
+
+    })
   }
 }

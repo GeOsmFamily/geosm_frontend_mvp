@@ -45,6 +45,6 @@
   {{ 'left_menu.themes' | translate }}
 </h5>
 
-<div class="" *ngFor="let thematique of thematiqueService.getAllThematiques()!">
+<div class="" *ngFor="let thematique of thematiques">
   <app-thematiques (click)="openThematiqueSlide(thematique)" class="pointer" [thematique]="thematique"></app-thematiques>
 </div>

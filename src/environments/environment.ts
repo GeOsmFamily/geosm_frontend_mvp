@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   url_services: 'https://bamakoservices.position.cm',
   apiKey: 'RGpKEijHA8iGA0HP252kk9JxKVeq0Yt5zjakBCWheOoWbvKjrulsAG9now0kWh46',
   instance_id: 1,

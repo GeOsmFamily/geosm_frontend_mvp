@@ -25,7 +25,7 @@ export class ThematiqueService {
   }
 
   getAllThematiques(): Thematique[] | undefined {
-    return this.thematiques.getValue().data.thematiques;
+    return this.thematiques.getValue().data.thematiques ?? [];
   }
 
   getThematiqueFromIdCouche(idCouche: number): Thematique | null {
