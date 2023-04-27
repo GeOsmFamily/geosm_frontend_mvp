@@ -69,6 +69,10 @@ export class OsmSheetComponent implements OnInit {
   faAt = faAt;
   faLink = faLink;
 
+
+  key:string[]=[]
+  values:string[]=[]
+
   constructor(public apiService: ApiService, public translate: TranslateService, public snackbar: MatSnackBar) {}
 
   ngOnDestroy(): void {
@@ -79,6 +83,8 @@ export class OsmSheetComponent implements OnInit {
   }
 
   async ngOnInit() {
+    console.log(this.descriptiveModel)
+
     await this.apiService.getRequestFromOtherHost('/assets/data/config_tags.json').then(response => {
       this.configTagsOsm = response;
     });
@@ -107,6 +113,21 @@ export class OsmSheetComponent implements OnInit {
   }
 
   formatFeatureAttributes() {
+
+
+    for (var k in this.descriptiveModel?.properties) {
+      if (this.descriptiveModel?.properties.hasOwnProperty(k)) {
+        this.values.push(this.descriptiveModel?.properties[k]);
+        this.key.push(k)
+      }
+  }
+
+      this.descriptiveModel?.properties.forEach((value: any, key: any) => {
+
+        console.log(key+ " "+value); // 0, 1, 2
+
+    });
+
     this.listAttributes = [];
 
     if (this.descriptiveModel?.properties['name']) {
@@ -153,6 +174,8 @@ export class OsmSheetComponent implements OnInit {
     }
 
     for (const key in this.descriptiveModel?.properties) {
+
+
       if (
         this.descriptiveModel?.properties.hasOwnProperty(key) &&
         this.descriptiveModel.properties[key] &&

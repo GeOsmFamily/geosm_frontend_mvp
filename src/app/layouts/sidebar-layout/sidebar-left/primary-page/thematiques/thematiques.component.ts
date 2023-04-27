@@ -15,7 +15,7 @@ export class ThematiquesComponent implements OnInit {
 
   @Input() thematique: Thematique | undefined;
 
-  thematiques: Thematique[] | undefined;
+  thematiques: Thematique[] =[];
 
   constructor(private thematiqueService: ThematiqueService) {}
 
