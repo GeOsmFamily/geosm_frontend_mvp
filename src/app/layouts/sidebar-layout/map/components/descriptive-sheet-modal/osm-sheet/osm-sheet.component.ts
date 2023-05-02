@@ -247,11 +247,11 @@ export class OsmSheetComponent implements OnInit {
               }
             } catch (error) {
               this.translate.get('dscriptive_sheet').subscribe((res: any) => {
-                this.snackbar.open(res.server_error, res.cancel, {
+               ;/* this.snackbar.open(res.server_error, res.cancel, {
                   duration: 5000,
                   verticalPosition: 'bottom',
                   horizontalPosition: 'center'
-                });
+                });*/
               });
             }
           },

@@ -5,7 +5,7 @@
 .sidenav-left-second-header {
   height: 55px;
   padding-top: 15px;
-  position: fixed;
+
   top: 80px;
   left: 0px;
   z-index: 9;
@@ -41,8 +41,9 @@ app-list-couches {
   padding: 5px;
   padding-top: 20px;
   display: block;
-  overflow-y: auto;
-  height: calc(100% - 80px);
-  position: fixed;
-  margin-top: 30px;
+  //overflow-y: auto;
+  //height: calc(100% - 80px);
+padding-bottom: 20px;
 }
+
+
