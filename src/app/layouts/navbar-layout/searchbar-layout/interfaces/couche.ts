@@ -55,6 +55,7 @@ export interface Couche {
   sous_thematique_id: number;
   nom: string;
   nom_en: string;
+  description:string;
   geometry: string;
   schema_table_name: string;
   remplir_color: string;
