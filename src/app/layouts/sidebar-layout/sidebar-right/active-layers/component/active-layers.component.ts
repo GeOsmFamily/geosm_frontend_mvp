@@ -51,11 +51,14 @@ export class ActiveLayersComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    if (this.layersInToc[event.previousIndex].zIndex != 1) {
+    
     let layer = this.layersInToc[event.previousIndex];
     let mapHelper = new MapHelper();
     mapHelper.editZindexOfLayer(layer.layer, this.layersInToc[event.currentIndex].zIndex);
     moveItemInArray(this.layersInToc, event.previousIndex, event.currentIndex);
     this.getAllLayersForToc();
+    }
   }
 
   getAllLayersForToc() {
