@@ -11,16 +11,16 @@
   background-color: white;
 
   app-secondary-page {
-    position: fixed;
+    position: absolute;
     left: -370px;
-    top: 80px;
+    top:0px;
     bottom: 0px;
     width: 370px;
     transition: 0.5s;
     background: #fff;
     z-index: 9;
-    overflow-y: auto;
-    height: 100vh;
+
+    //height: 100vh;
   }
   app-fiche {
     position: absolute;
@@ -64,6 +64,11 @@
   }
 
 
+
 }
 
 
+::ng-deep  .mat-drawer{
+  overflow-y: auto !important ;
+  overflow-x: hidden !important;
+}

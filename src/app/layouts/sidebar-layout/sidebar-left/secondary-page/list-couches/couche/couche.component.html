@@ -1,10 +1,14 @@
-<mat-list-option [matTooltip]="couche!.nom" matTooltipClass="couche-toolipt" matTooltipPosition="right"
-  [disabled]="disabled_couche(couche!)" [value]="couche" [selected]="couche!.check" checkboxPosition="before">
-
-
-
+<mat-list-option
+  [matTooltip]="couche!.nom_en"
+  matTooltipClass="couche-toolipt"
+  matTooltipPosition="right"
+  [disabled]="disabled_couche(couche!)"
+  [value]="couche"
+  [selected]="couche!.check"
+  checkboxPosition="before"
+>
   <div mat-line class="couche-title">
-    <img class="couche-img" src="{{ url_prefix + couche!.logo }}"  alt="" />
-    <span>{{ couche!.nom }}</span>
+    <img class="couche-img" src="{{ url_prefix + couche!.logo }}" alt="" />
+    <span>{{ couche!.nom_en }}</span>
   </div>
 </mat-list-option>

@@ -32,6 +32,7 @@ import { ThematiquesComponent } from './sidebar-layout/sidebar-left/primary-page
 import { ListCouchesComponent } from './sidebar-layout/sidebar-left/secondary-page/list-couches/list-couches.component';
 import { CoucheComponent } from './sidebar-layout/sidebar-left/secondary-page/list-couches/couche/couche.component';
 import { FicheComponent } from './sidebar-layout/sidebar-left/fiche/fiche.component';
+import { PageLayoutComponent } from './page-layout/page-layout.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FicheComponent } from './sidebar-layout/sidebar-left/fiche/fiche.compon
     ThematiquesComponent,
     ListCouchesComponent,
     CoucheComponent,
-    FicheComponent
+    FicheComponent,
+    PageLayoutComponent
   ],
   imports: [
     CommonModule,

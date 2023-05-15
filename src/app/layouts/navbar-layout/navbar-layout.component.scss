@@ -60,7 +60,13 @@
     flex-direction: column !important;
     background-color: white !important;
   }
-
+.menu-list{
+  flex-direction: row !important;
+}
+.menu-container{
+  flex-direction: column !important;
+  margin-left: unset !important;
+}
   .menu {
     background-color: #1d917d !important;
     position: absolute;

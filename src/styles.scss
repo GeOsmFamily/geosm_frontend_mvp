@@ -8,14 +8,19 @@
 html,
 body {
   height: 100%;
-  overflow: hidden;
-  overscroll-behavior: contain;
+  overflow-x: hidden;
+
 }
 ::-webkit-scrollbar {
-  width: 0;  /* Remove scrollbar space */
+  width: 5px;  /* Remove scrollbar space */
   background: transparent;  /* Optional: just make scrollbar invisible */
+  overflow-x: hidden;
   }
-
+  ::-webkit-scrollbar-thumb {
+    background-color: gray;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+   // border: 3px solid orange;  /* creates padding around scroll thumb */
+  }
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
@@ -40,6 +45,7 @@ body {
 ::ng-deep .mat-dialog-container {
   padding: 0px !important;
 }
+
 
 .mat-primary .mat-slider-thumb-label-text {
   color: #fff !important;

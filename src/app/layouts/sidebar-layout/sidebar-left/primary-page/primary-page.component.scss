@@ -9,7 +9,7 @@
 }
 
 .break-words {
-  overflow-wrap: break-word !important;
+ // overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
 }
@@ -125,6 +125,6 @@ a {
 
 
 ::ng-deep .mat-drawer-inner-container {
-  overflow: unset !important;
+  overflow-x: hidden !important;
 
 }
