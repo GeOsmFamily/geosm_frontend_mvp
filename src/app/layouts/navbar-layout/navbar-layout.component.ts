@@ -31,22 +31,22 @@ export class NavbarLayoutComponent {
       active: false
     },
     {
-      link: '/about',
-      label: 'about',
+      link: '/a-propos',
+      label: 'a-propos',
       image: '/assets/images/svg/menu/about.svg',
       activeImage: '/assets/images/svg/menu/about-active.svg',
       active: false
     },
     {
-      link: '/partners',
-      label: 'partners',
+      link: '/partenaires',
+      label: 'partenaires',
       image: '/assets/images/svg/menu/partners.svg',
       activeImage: '/assets/images/svg/menu/partners-active.svg',
       active: false
     },
     {
-      link: '/numbers',
-      label: 'numbers',
+      link: '/chiffres',
+      label: 'chiffres',
       image: '/assets/images/svg/menu/numbers.svg',
       activeImage: '/assets/images/svg/menu/numbers-active.svg',
       active: false
