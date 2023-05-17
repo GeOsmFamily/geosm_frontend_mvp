@@ -2,7 +2,6 @@
   <mat-sidenav class="sidebar-left" opened mode="side" position="start">
     <app-primary-page></app-primary-page>
     <app-secondary-page></app-secondary-page>
-    <app-fiche></app-fiche>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -17,7 +16,7 @@
     <div class="sidebar-right-content">
       <app-active-layers [map]="map" [hidden]="!getRightMenu('toc')?.active"></app-active-layers>
       <app-map-tools [map]="map" [hidden]="!getRightMenu('edition')?.active"></app-map-tools>
-      <app-legend [map]="map"  [hidden]="!getRightMenu('legend')?.active"></app-legend>
+      <app-legend [map]="map" [hidden]="!getRightMenu('legend')?.active"></app-legend>
       <app-routing [map]="map" [hidden]="!getRightMenu('routing')?.active"></app-routing>
       <app-download [hidden]="!getRightMenu('download')?.active"></app-download>
     </div>

@@ -25,7 +25,7 @@ export class NavbarLayoutComponent {
   menuItems: MenuItem[] = [
     {
       link: '/',
-      label: 'discover',
+      label: 'Découvrir',
       image: '/assets/images/svg/menu/discover.svg',
       activeImage: '/assets/images/svg/menu/discover-active.svg',
       active: false

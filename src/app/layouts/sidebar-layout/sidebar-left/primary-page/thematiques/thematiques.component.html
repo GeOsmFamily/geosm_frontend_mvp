@@ -1,6 +1,5 @@
 <div
   [ngClass]="{ primaryColorBG: !thematique!.color }"
-  [matTooltip]="thematique!.nom"
   style="
     display: flex;
     flex-direction: column;
@@ -19,7 +18,6 @@
       style="width: 40px; height: 40px"
       class="border_red menu-thematiques-child text-center"
       [ngClass]="{ primaryColorBG: !thematique!.color }"
-      [matTooltip]="thematique!.nom"
     >
       <img
         *ngIf="thematique!.nom != 'Données SIG Eneo'"

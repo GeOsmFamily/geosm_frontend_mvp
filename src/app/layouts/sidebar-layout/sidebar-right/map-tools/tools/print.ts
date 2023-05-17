@@ -33,7 +33,7 @@ export class PrintTool {
       } else {
         //doc.text('Carte du GéoPortail - GeOsm - ' + environment.nom.toUpperCase(), 35, 170);
 
-        doc.text('Impression du GéoPortail', 35, 170);
+        doc.text('GéoPortail Bamako', 35, 170);
       }
       doc.setFontSize(25);
       doc.setTextColor(28, 172, 119);
