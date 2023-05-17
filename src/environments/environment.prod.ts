@@ -5,7 +5,7 @@ export const environment = {
   instance_id: 1,
   primarycolor: '#023f5f',
   nom: 'bamako',
-  url_frontend: 'http://localhost:4200',
+  url_frontend: 'https://bamako.position.cm',
   country_code: 'ML',
   url_carto: 'https://carto.position.cm',
   url_qgis: 'https://qgis.position.cm'
