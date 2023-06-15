@@ -20,14 +20,14 @@
       [ngClass]="{ primaryColorBG: !thematique!.color }"
     >
       <img
-        *ngIf="thematique!.nom != 'Données SIG Eneo'"
+        *ngIf="thematique!.nom != 'Données SIG Bamako'"
         src="{{ url_prefix + thematique!.image_src }}"
         class=""
         alt=""
         style="max-width: 100%; height: auto"
       />
       <img
-        *ngIf="thematique!.nom == 'Données SIG Eneo'"
+        *ngIf="thematique!.nom == 'Données SIG Bamako'"
         src="{{ url_prefix + thematique!.image_src }}"
         class=""
         alt=""
