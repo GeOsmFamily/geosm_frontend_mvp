@@ -1,12 +1,12 @@
 export const environment = {
   production: false,
-  url_services: 'https://bamakoservices.position.cm',
-  apiKey: 'RGpKEijHA8iGA0HP252kk9JxKVeq0Yt5zjakBCWheOoWbvKjrulsAG9now0kWh46',
+  url_services: 'https://cuyservices.position.cm',
+  apiKey: 'hliZSZ0hAFu3WT4whtSk3LBpncG1LoUGcgUXoJEXwlBpLL8jrvbJvQanlh79XhVC',
   instance_id: 1,
   primarycolor: '#023f5f',
-  nom: 'bamako',
+  nom: 'cuy',
   url_frontend: 'http://localhost:4200',
-  country_code: 'ML',
+  country_code: 'CM',
   url_carto: 'https://carto.position.cm',
   url_qgis: 'https://qgis.position.cm'
 };

@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-$ git clone -b bamako https://github.com/GeOsmFamily/geosm_frontend_mvp.git frontend
+$ git clone -b cuy https://github.com/GeOsmFamily/geosm_frontend_mvp.git frontend
 $ cd frontend
 $ npm install
 $ npx ng serve --open
@@ -12,11 +12,11 @@ $ npx ng serve --open
 ```sh
 export const environment = {
   production: true,
-  url_services: 'https://bamakoservices.position.cm',
+  url_services: 'https://cuyservices.position.cm',
   apiKey: 'RGpKEijHA8iGA0HP252kk9JxKVeq0Yt5zjakBCWheOoWbvKjrulsAG9now0kWh46',
   instance_id: 1,
   primarycolor: '#023f5f',
-  nom: 'bamako',
+  nom: 'cuy',
   url_frontend: 'http://localhost:4200',
   country_code: 'ML',
   url_carto: 'https://carto.position.cm',
