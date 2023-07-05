@@ -38,6 +38,7 @@ export class LayersService {
         });
       });
     } else {
+
       let layer = mapHelper.constructLayer({
         nom: carte.nom,
         type: type!,
@@ -78,8 +79,10 @@ export class LayersService {
 
   addLayerCouche(couche: Couche) {
     let mapHelper = new MapHelper();
+
     let groupThematique = this.thematiqueService.getThematiqueFromIdCouche(couche.id);
     if (mapHelper.getLayerByName(couche.nom).length > 0) {
+
       this.translate.get('layers').subscribe((res: any) => {
         this.snackbar.open(res.already_added, res.cancel, {
           duration: 3000,
@@ -96,30 +99,33 @@ export class LayersService {
         }
 
         let pathImg = couche.logo;
-        console.log("toto :"+ pathImg)
-        console.log(couche);
-        let layer = mapHelper.constructLayer({
-          nom: couche.nom,
-          type: couche.service_carto == 'wms' ? 'wms' : 'wfs',
-          identifiant: couche.identifiant,
-          type_layer: 'geosmCatalogue',
-          url: couche.qgis_url,
-          visible: true,
-          inToc: true,
-          properties: {
-            group_id: groupThematique!.id,
-            couche_id: couche.id,
-            type: 'couche'
-          },
-          iconImagette: environment.url_services + pathImg,
-          icon: environment.url_services + couche.logo,
-          cluster: true,
-          size: size,
-          legendCapabilities: {
-            useCartoServer: true
-          },
-          descriptionSheetCapabilities: couche.wms_type
-        });
+
+
+           let layer = mapHelper.constructLayer({
+            nom: couche.nom,
+            type: couche.service_carto == 'wms' ? 'wms' : 'wfs',
+            identifiant: couche.identifiant,
+            type_layer: 'geosmCatalogue',
+            url: couche.qgis_url,
+            visible: true,
+            inToc: true,
+            properties: {
+              group_id: groupThematique!.id,
+              couche_id: couche.id,
+              type: 'couche'
+            },
+            iconImagette: environment.url_services + pathImg,
+            icon: environment.url_services + couche.logo,
+            cluster: true,
+            size: size,
+            legendCapabilities: {
+              useCartoServer: true
+            },
+            descriptionSheetCapabilities: couche.wms_type
+          });
+
+
+
         mapHelper.addLayerToMap(layer!);
         couche.check = true;
       });

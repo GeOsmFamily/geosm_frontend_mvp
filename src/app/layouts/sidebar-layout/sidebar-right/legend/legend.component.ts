@@ -20,6 +20,7 @@ export class LegendComponent implements OnInit {
 
   layersInTocWithLegend: Array<LayersInMap> = [];
 
+  layer:any
   constructor(
     private store: Store,
     public domSanitizer: DomSanitizer,
@@ -47,18 +48,29 @@ export class LegendComponent implements OnInit {
               let couche = this.thematiqueService.getCoucheFromId(layerProp['properties']!['couche_id']);
               url = couche ? couche.qgis_url : undefined;
               identifiant = couche ? couche.identifiant : undefined;
+              this.layer=couche
             } else if (layerProp['properties']!['type'] == 'carte') {
               let carte = this.carteService.getCarteById(layerProp['properties']!['couche_id']);
               url = carte ? carte.url : undefined;
               identifiant = carte! ? carte.identifiant : undefined;
             }
             if (url && identifiant) {
-              let legendUrl =
-                url +
-                '&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=' +
-                identifiant +
-                '&STYLE=default&SLD_VERSION=1.1.0&LAYERTITLE=false&RULELABEL=true';
-              layerProp.legendCapabilities.urlImg = legendUrl.trim();
+
+let legendUrl:any
+if(this.layer.nom === "Inondation_10ans"){
+
+  legendUrl="https://wxs-preprod.sogefi.io/?map=/nas/qgis/int/hauteur_q10.qgs&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=Hauteurs_Q10_2022&FORMAT=image/png;%20mode=8bit"
+}
+else{
+
+  legendUrl =
+  url +
+  '&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetLegendGraphic&FORMAT=image%2Fpng&TRANSPARENT=true&LAYERS=' +
+  identifiant +
+  '&STYLE=default&SLD_VERSION=1.1.0&LAYERTITLE=false&RULELABEL=true';
+
+}
+                           layerProp.legendCapabilities.urlImg = legendUrl.trim();
             }
           }
 
