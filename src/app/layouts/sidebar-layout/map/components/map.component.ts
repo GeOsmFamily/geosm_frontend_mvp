@@ -409,7 +409,7 @@ export class MapComponent implements OnInit {
   }
 
   changeLayer() {
-    let carte = this.carteService.getCarteById(7);
+    let carte = this.carteService.getCarteById(4);
     this.layerService.addLayerCarte(carte!);
   }
 
