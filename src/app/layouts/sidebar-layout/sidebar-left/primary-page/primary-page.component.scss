@@ -9,12 +9,13 @@
 }
 
 .break-words {
- // overflow-wrap: break-word !important;
+  // overflow-wrap: break-word !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
 }
-.connectButton{
-   color: white;
+
+.connectButton {
+  color: white;
 }
 
 .cover-image {
@@ -23,7 +24,7 @@
   display: block;
   height: 96.25px;
   margin: -20px -12px -12px -12px;
-  background-image: url('^assets/images/svg/BACKGROUND.svg');
+  background-image: url('^assets/images/png/BACKGROUND2.png');
 }
 
 .logo {
@@ -116,7 +117,7 @@ a {
   margin-bottom: 31px;
 
   app-thematiques {
-   // display: block;
+    // display: block;
     padding-right: 15px;
     padding-left: 15px;
 
