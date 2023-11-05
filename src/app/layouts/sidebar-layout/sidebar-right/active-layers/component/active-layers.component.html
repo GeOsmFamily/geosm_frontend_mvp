@@ -3,7 +3,8 @@
     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
     <mat-card class="table-of-contents-card">
       <mat-chip-list style="position: absolute; top: -10px; left: 5px" *ngIf="layer.badge">
-        <mat-chip style="padding: 5px 5px; min-height: 20px; font-size: 11px" class="white" [ngStyle]="{'background': layer.badge.bgColor}">
+        <mat-chip style="padding: 5px 5px; min-height: 20px; font-size: 11px" class="white"
+          [ngStyle]="{'background': layer.badge.bgColor}">
           {{layer.badge.text}}
         </mat-chip>
       </mat-chip-list>
@@ -14,46 +15,26 @@
 
       <mat-card-content>
         <p>
-          <fa-icon
-            [icon]="faInfo"
-            class="primary pointer"
+          <fa-icon [icon]="faInfo" class="primary pointer"
             *ngIf="layer.activeLayers.metadata && layer.nom !=='Mapillary' && layer.properties!.type !== 'carte'  "
-            (click)="openMetadata(layer)"
-            style="margin-right: 10px; font-size: 17px"
-            matTooltip="{{ 'right_menu.table_of_contents.info_layer' | translate }}"
-          ></fa-icon>
+            (click)="openMetadata(layer)" style="margin-right: 10px; font-size: 17px"
+            matTooltip="{{ 'right_menu.table_of_contents.info_layer' | translate }}"></fa-icon>
 
-          <fa-icon
-            [icon]="faShare"
-            class="primary pointer"
-            *ngIf="layer.activeLayers.share && layer.nom !=='Mapillary'"
-            (click)="shareLayer(layer)"
-            matTooltip="{{ 'right_menu.table_of_contents.share_layer' | translate }}"
-            style="margin-right: 10px; font-size: 15px"
-          ></fa-icon>
+          <fa-icon [icon]="faShare" class="primary pointer" *ngIf="layer.activeLayers.share && layer.nom !=='Mapillary'"
+            (click)="shareLayer(layer)" matTooltip="{{ 'right_menu.table_of_contents.share_layer' | translate }}"
+            style="margin-right: 10px; font-size: 15px"></fa-icon>
 
-          <fa-icon
-            [icon]="faDelete"
-            class="primary pointer"
-            (click)="removeLayer(layer)"
+          <fa-icon [icon]="faDelete" *ngIf="layer.nom!=='GeOsm'" class="primary pointer" (click)="removeLayer(layer)"
             matTooltip="{{ 'right_menu.table_of_contents.remove_layer' | translate }}"
-            style="font-size: 15px; color: rgb(242, 79, 79)"
-          ></fa-icon>
+            style="font-size: 15px; color: rgb(242, 79, 79)"></fa-icon>
         </p>
 
-        <mat-slider
-          *ngIf="layer.activeLayers.opacity"
-          (change)="setOpactiyOfLayer($event,layer)"
-          style="width: 100%"
-          [max]="100"
-          [min]="0"
-          color="primary"
-          [thumbLabel]="true"
-          [value]="layer.layer.getOpacity()*100"
-        ></mat-slider>
+        <mat-slider *ngIf="layer.activeLayers.opacity" (change)="setOpactiyOfLayer($event,layer)" style="width: 100%"
+          [max]="100" [min]="0" color="primary" [thumbLabel]="true" [value]="layer.layer.getOpacity()*100"></mat-slider>
       </mat-card-content>
       <mat-card-actions>
-        <mat-checkbox labelPosition="after" color="primary" [(ngModel)]="layer.visible" (change)="setVisibleOfLayer($event,layer)">
+        <mat-checkbox labelPosition="after" color="primary" [(ngModel)]="layer.visible"
+          (change)="setVisibleOfLayer($event,layer)">
           <span style="text-overflow: ellipsis">{{layer.nom}}</span>
         </mat-checkbox>
       </mat-card-actions>
@@ -63,13 +44,8 @@
 
 <div class="table-of-contents-footer primary_bg">
   <div fxLayout="row" style="height: 100%">
-    <div
-      fxFlex="50%"
-      style="padding: 5px"
-      matTooltip="{{ 'right_menu.table_of_contents.share_all' | translate }}"
-      class="pointer"
-      (click)="shareAllLayersInToc()"
-    >
+    <div fxFlex="50%" style="padding: 5px" matTooltip="{{ 'right_menu.table_of_contents.share_all' | translate }}"
+      class="pointer" (click)="shareAllLayersInToc()">
       <div class="text-center" style="height: 50%">
         <fa-icon [icon]="faShare" class="white" style="font-size: 20px"></fa-icon>
       </div>
@@ -78,13 +54,8 @@
       </div>
     </div>
 
-    <div
-      fxFlex="50%"
-      style="padding: 5px"
-      class="pointer"
-      matTooltip="{{ 'right_menu.table_of_contents.remove_all' | translate }}"
-      (click)="clearMap()"
-    >
+    <div fxFlex="50%" style="padding: 5px" class="pointer"
+      matTooltip="{{ 'right_menu.table_of_contents.remove_all' | translate }}" (click)="clearMap()">
       <div class="text-center" style="height: 50%">
         <fa-icon [icon]="faDelete" class="pointer white" style="font-size: 20px"></fa-icon>
       </div>

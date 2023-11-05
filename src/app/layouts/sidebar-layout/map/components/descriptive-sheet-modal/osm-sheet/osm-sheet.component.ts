@@ -69,7 +69,7 @@ export class OsmSheetComponent implements OnInit {
   faAt = faAt;
   faLink = faLink;
 
-
+  transcriptedText:any;
   key:string[]=[]
   values:string[]=[]
 
@@ -88,7 +88,9 @@ export class OsmSheetComponent implements OnInit {
     await this.apiService.getRequestFromOtherHost('/assets/data/config_tags.json').then(response => {
       this.configTagsOsm = response;
     });
-
+    await this.apiService.getRequestFromOtherHost('/assets/data/transcripted_key.json').then(response => {
+      this.transcriptedText = response;
+    });
     if (this.descriptiveModel?.properties) {
       this.formatFeatureAttributes();
     } else {
