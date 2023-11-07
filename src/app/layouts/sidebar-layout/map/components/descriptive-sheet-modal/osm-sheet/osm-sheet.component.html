@@ -10,7 +10,7 @@
       <ng-container *ngFor="let k of key">
         <div style="margin-bottom: 20px"  *ngIf="descriptiveModel!.properties[k] && transcriptedText[k.trim().toLowerCase()]!==undefined">
           <div>
-            <div fxFlex="35%" class="attribute">{{transcriptedText[k.trim().toLowerCase()]}}:</div>
+            <div fxFlex="35%" class="attribute" >{{transcriptedText[k.trim().toLowerCase()]}}:</div>
             <div fxFlex class="attribute-value">{{descriptiveModel!.properties[k]}}</div>
           </div>
         </div>  

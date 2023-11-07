@@ -8,7 +8,9 @@
     text-align: left;
     padding-left: 60px;
     position: absolute;
-
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    word-break: break-all;
     .attribute-two-points {
       position: absolute;
       top: calc(50% - 10px);
