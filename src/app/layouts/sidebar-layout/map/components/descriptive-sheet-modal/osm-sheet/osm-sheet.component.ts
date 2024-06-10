@@ -290,7 +290,7 @@ export class OsmSheetComponent implements OnInit {
     if (this.osmId) {
       this.loading.osmUrl = true;
       let url =
-        'https://nominatim.openstreetmap.org/lookup?osm_ids=R' +
+        'https://nominatim.position.cm/lookup?osm_ids=R' +
         Math.abs(this.osmId) +
         ',W' +
         Math.abs(this.osmId) +

@@ -134,7 +134,7 @@ export class DownloadComponent extends SelectLayersForDownload implements OnInit
         map(value => {
           return from(
             this.apiService.getRequestFromOtherHost(
-              'https://nominatim.openstreetmap.org/search?q=' +
+              'https://nominatim.position.cm/search?q=' +
                 value.toString() +
                 '&format=geojson&&polygon_geojson=1&addressdetails=1&countrycodes=' +
                 environment.country_code

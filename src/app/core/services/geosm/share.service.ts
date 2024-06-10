@@ -201,7 +201,7 @@ export class ShareService {
       caracteristicsPoint['coord'] = coord_4326[0].toFixed(4) + ' , ' + coord_4326[1].toFixed(4);
 
       let geocodeOsm =
-        'https://nominatim.openstreetmap.org/reverse?format=json&lat=' +
+        'https://nominatim.position.cm/reverse?format=json&lat=' +
         coord_4326[1] +
         '&lon=' +
         coord_4326[0] +

@@ -15,7 +15,7 @@ export class SearchService {
   searchNominatim(query: string): Observable<SearchInterface[]> {
     return from(
       this.apiService.getRequestFromOtherHost(
-        'https://nominatim.openstreetmap.org/search?q=' +
+        'https://nominatim.position.cm/search?q=' +
           query +
           '&format=geojson&polygon_geojson=1&addressdetails=1&countrycodes=' +
           environment.country_code

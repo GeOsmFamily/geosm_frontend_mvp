@@ -13,7 +13,7 @@ export class RoutingService {
   nominatimReverse(lat: string, lon: string): Observable<NominatimReverse> {
     return from(
       this.apiService.getRequestFromOtherHost(
-        'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lon + '&zoom=18&addressdetails=1'
+        'https://nominatim.position.cm/reverse?format=json&lat=' + lat + '&lon=' + lon + '&zoom=18&addressdetails=1'
       )
     ).pipe(
       map((response: NominatimReverse) => {
@@ -34,7 +34,7 @@ export class RoutingService {
     }
     return from(
       this.apiService.getRequestFromOtherHost(
-        'https://router.project-osrm.org/route/v1/driving/' + param + '?overview=full'
+        'https://routing.position.cm/route/v1/driving/' + param + '?overview=full'
       )
     ).pipe(
       map((route: Route) => {

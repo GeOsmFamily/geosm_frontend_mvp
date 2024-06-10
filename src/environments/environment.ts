@@ -1,10 +1,10 @@
 export const environment = {
   production: false,
-  url_services: 'https://womangueservices.position.cm',
-  apiKey: '4QkQiEBga54Y22Xbkw8WyKOJNqhIxeH1gdw5VoIKM2FF28Q8qieVCceau4wf5Hz7',
+  url_services: 'https://camerounservices.position.cm',
+  apiKey: 'd3G6KNuMSo77Nn5BKUVOPErcckLcWN1TF9tmqZtT9LLKnZUHTOT9TSFtRfDUzB5m',
   instance_id: 1,
   primarycolor: '#023f5f',
-  nom: 'womangue',
+  nom: 'cameroun',
   url_frontend: 'http://localhost:4200',
   country_code: 'CM',
   url_carto: 'https://carto.position.cm',
