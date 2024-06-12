@@ -12,10 +12,10 @@
       "type": "administrative",
       "importance": 0.35000999999999993,
       "addresstype": "town",
-      "name": "Soa",
-      "display_name": "Soa, Méfou-et-Afamba, Région du Centre, Cameroun",
+      "name": "adc",
+      "display_name": "adc, Méfou-et-Afamba, Région du Centre, Cameroun",
       "address": {
-        "town": "Soa",
+        "town": "adc",
         "county": "Méfou-et-Afamba",
         "state": "Région du Centre",
         "ISO3166-2-lvl4": "CM-CE",
