@@ -4,11 +4,14 @@
   background-color: #fff;
   border-bottom: 1px solid #e5e5e5;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-  padding: 0;
+  padding: 0px 16px 0px 0px;
   position: relative;
   z-index: 1030;
   height: 80px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .menu-list {
@@ -60,22 +63,21 @@
     flex-direction: column !important;
     background-color: white !important;
   }
-.menu-list{
-  flex-direction: row !important;
-}
-.menu-container{
-  flex-direction: column !important;
-  margin-left: unset !important;
-}
+  .menu-list{
+    flex-direction: row !important;
+  }
+  .menu-container{
+    flex-direction: column !important;
+    margin-left: unset !important;
+  }
   .menu {
     background-color: #1d917d !important;
     position: absolute;
     float: unset !important;
-
     display: flex !important;
     flex-direction: column !important;
     width: 250px;
-    height: 100vh;
+    height: 100dvh;
     //justify-content: center;
     //visibility: hidden;
   }
@@ -124,6 +126,8 @@
     height: 40px;
     padding: unset;
     margin: unset;
+    align-items: normal;
+    justify-content: normal;
   }
 
   .searchbar {
@@ -142,5 +146,60 @@
     width: 250px;
     display: flex;
     align-items: center;
+  }
+  #place-container{
+    margin-top: 80px !important;
+    flex-direction: column;
+    align-items: start !important;
+    gap: 4px !important;
+    padding-inline: 16px;
+
+    select{
+      width: 100%
+    }
+  }
+   .adc-logo{
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 55px;
+  } 
+}
+
+.adc-logo{
+  display: flex;
+  align-items: center;
+  img{
+    height: 40px;
+  }
+}
+
+#place-container{
+  margin-top: 8px;
+  font-size: 18px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  h3{
+    font-weight: 500;
+    font-size: 16px;
+    display: block;
+    margin: 0px;
+  }
+}
+
+#adc-place{
+  font-size: 16px;
+  outline:none;
+  margin-right: 54px;
+  padding: 5px 20px 5px 13px;
+  box-sizing: border-box;
+  font-weight: 500;
+  border-radius: 4px;
+  color: black;
+  option{
+      background-color: transparent;
+      color:black;
+      padding: 8px ;
   }
 }

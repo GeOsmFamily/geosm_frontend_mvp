@@ -8,6 +8,37 @@ import { MenuItem } from './menu-item';
 })
 export class NavbarLayoutComponent {
 
+  places:any[]=[
+    
+    {
+      name:'Nsimalen',
+      id:7
+    },
+    {
+      name:'Bamenda',
+      id:1
+    },
+    {
+      name:'Bertoua',
+      id:2
+    },
+    {
+      name:'Douala',
+      id:3
+    },
+    {
+      name:'Garoua',
+      id:4
+    },
+    {
+      name:'Maroua-Salak',
+      id:5
+    },
+    {
+      name:'Ngaoudéré',
+      id:6
+    }
+  ];
   sidebarVisible = false;
 
   constructor() {
@@ -16,12 +47,17 @@ export class NavbarLayoutComponent {
 
   openSidebar(): void {
     this.sidebarVisible = true;
-    console.log(this.sidebarVisible)
   }
 
   closeSidebar(): void {
     this.sidebarVisible = false;
   }
+
+  setPlace(event: any){
+    console.log(event.target.value);
+   // this.translateService.setDefaultLang(event.target.value);
+  }
+
   menuItems: MenuItem[] = [
     {
       link: '/',

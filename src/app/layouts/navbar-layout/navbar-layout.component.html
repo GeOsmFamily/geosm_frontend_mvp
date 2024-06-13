@@ -9,12 +9,13 @@
         <img src="/assets/images/svg/icon-clear.svg" alt="" style="width: 24px" (click)="closeSidebar()" />
       </div>
     </div>
-    <ng-template [ngTemplateOutlet]="MsgRef" style="background-color: red"></ng-template>
+    <ng-template [ngTemplateOutlet]="MsgRef" ></ng-template>
   </div>
 </div>
 
 <ng-template #MsgRef>
-  <mat-divider style="margin-left: 20px" [vertical]="true"></mat-divider>
+  <!-- <mat-divider style="margin-left: 20px" [vertical]="true"></mat-divider>
+  
 
   <div style="display: flex; flex-direction: row; margin-left: 30px" class="menu-container">
     <div class="menu-list text-center" *ngFor="let menu of menuItems" fxLayout="column">
@@ -23,6 +24,16 @@
         <div class="text-center text" style="float: right; line-height: 3">{{ menu.label | translate }}</div>
       </a>
     </div>
+  </div>  -->
+  <div id="place-container" class="flex  bottom-0  w-full justify-center items-center">
+    <h3>Selectionner un site</h3>
+    <select class="font-bold" value="0" name="adc-place" id="adc-place" (change)="setPlace($event)">
+        <option [value]="place.id" *ngFor="let place of places">{{place.name}}</option>
+    </select>
+  </div>
+
+  <div class="adc-logo" >
+    <img src="../../../assets/images/png/Logo-ADC.png" alt="logo-adc">
   </div>
 
 </ng-template>
