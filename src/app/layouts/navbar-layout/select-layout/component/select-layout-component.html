@@ -1,0 +1,6 @@
+<div id="place-container" class="flex  bottom-0  w-full justify-center items-center">
+    <h3>Selectionner un site</h3>
+    <select class="font-bold" value="0" name="adc-place" id="adc-place" (change)="setPlace($event)">
+        <option [value]="place.id" *ngFor="let place of places">{{place.name}}</option>
+    </select>
+</div>

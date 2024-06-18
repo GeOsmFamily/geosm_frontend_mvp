@@ -1,0 +1,44 @@
+@media (max-width: 728px) {
+    #place-container{
+        margin-top: 80px !important;
+        flex-direction: column;
+        align-items: start !important;
+        gap: 4px !important;
+        padding-inline: 16px;
+    
+        select{
+          width: 100%
+        }
+      }
+}
+
+#place-container{
+    margin-top: 8px;
+    font-size: 18px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    h3{
+      font-weight: 500;
+      font-size: 16px;
+      display: block;
+      margin: 0px;
+    }
+  }
+
+  
+#adc-place{
+    font-size: 16px;
+    outline:none;
+    margin-right: 54px;
+    padding: 5px 20px 5px 13px;
+    box-sizing: border-box;
+    font-weight: 500;
+    border-radius: 4px;
+    color: black;
+    option{
+        background-color: transparent;
+        color:black;
+        padding: 8px ;
+    }
+  }

@@ -33,6 +33,7 @@ import { ListCouchesComponent } from './sidebar-layout/sidebar-left/secondary-pa
 import { CoucheComponent } from './sidebar-layout/sidebar-left/secondary-page/list-couches/couche/couche.component';
 import { FicheComponent } from './sidebar-layout/sidebar-left/fiche/fiche.component';
 import { PageLayoutComponent } from './page-layout/page-layout.component';
+import { SelectLayoutComponent } from './navbar-layout/select-layout/component/select-layout-component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { PageLayoutComponent } from './page-layout/page-layout.component';
     ListDownloadLayersComponent,
     ChartOverlayComponent,
     SearchbarLayoutComponent,
+    SelectLayoutComponent,
     DownloadComponent,
     MetadataModalComponent,
     ThematiquesComponent,
