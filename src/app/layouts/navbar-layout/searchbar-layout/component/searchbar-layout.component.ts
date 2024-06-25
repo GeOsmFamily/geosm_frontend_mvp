@@ -25,7 +25,6 @@ import { LayersService } from 'src/app/core/services/geosm/layers.service';
 import { DataHelper } from 'src/app/core/modules/dataHelper';
 import { environment } from 'src/environments/environment';
 import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
-import { transformWithProjections } from 'ol/proj';
 
 @Component({
   selector: 'app-searchbar-layout',
@@ -99,6 +98,7 @@ export class SearchbarLayoutComponent implements OnInit {
     this.results$ = this.store.pipe(select(selectSearch));
     this.isLoading$ = this.store.pipe(select(selectIsLoading));
   }
+
   ngOnInit(): void {
     this.initialiseSearchResultLayer();
   }
@@ -116,15 +116,11 @@ export class SearchbarLayoutComponent implements OnInit {
       mapHelper.getLayerByName('searchResultLayer')[0].getSource().clear();
     }
   }
-
+  
   search(name: string): void {
     this.showResults = name.length >= 3;
     this.searchText$.next(name);
     this.store.dispatch(searchQuery({ query: name }));
-
-    this.results$.subscribe(results => {
-      console.log(results);
-    });
   }
 
   getValue(event: Event): string {
@@ -132,6 +128,7 @@ export class SearchbarLayoutComponent implements OnInit {
   }
 
   onSelect(result: SearchInterface): void {
+
     this.result = `${result.name}`;
     this.showResults = false;
     this.selected.emit(result);
@@ -148,11 +145,7 @@ export class SearchbarLayoutComponent implements OnInit {
     this.selected.emit(null);
 
     let mapHelper = new MapHelper();
-    if (mapHelper.getLayerByName('searchResultLayer').length > 0) {
-      let searchResultLayer = mapHelper.getLayerByName('searchResultLayer')[0];
-
-      searchResultLayer.getSource().clear();
-    }
+    mapHelper.clearLayerOnMap('searchResultLayer');
   }
 
   getConnectedOverlayPanelClasses(): string[] {
@@ -184,7 +177,7 @@ export class SearchbarLayoutComponent implements OnInit {
   }
 
   selectNominatim(result: SearchInterface) {
-    result;
+    console.log('the result: ',result);
     let mapHelper = new MapHelper();
 
     if (mapHelper.getLayerByName('searchResultLayer').length > 0) {
@@ -206,12 +199,12 @@ export class SearchbarLayoutComponent implements OnInit {
         }
         feature.setGeometry(new Polygon(result.geometry.coordinates));
         extent = new Polygon(result.geometry.coordinates).getExtent();
-      }
 
+      }
       searchResultLayer.getSource().clear();
 
       searchResultLayer.getSource().addFeature(feature);
-
+      
       mapHelper.fit_view(extent!, 16);
     }
   }

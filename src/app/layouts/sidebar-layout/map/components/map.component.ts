@@ -440,6 +440,9 @@ export class MapComponent implements OnInit {
   global_view() {
     this.project$.subscribe(project => {
       this.store.dispatch(globalView({ project }));
+      let mapHelper = new MapHelper();
+      mapHelper.clearLayerOnMap('airpodLayer');
+      mapHelper.clearLayerOnMap('searchResultLayer');
     });
   }
 

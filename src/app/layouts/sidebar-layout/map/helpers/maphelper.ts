@@ -822,4 +822,11 @@ export class MapHelper {
     }
     return feature!;
   }
+
+  clearLayerOnMap(myLayerName: string){
+    if (this.getLayerByName(myLayerName).length > 0) {
+      let airpodLayer = this.getLayerByName(myLayerName)[0];
+      airpodLayer.getSource().clear();
+    }
+  }
 }
