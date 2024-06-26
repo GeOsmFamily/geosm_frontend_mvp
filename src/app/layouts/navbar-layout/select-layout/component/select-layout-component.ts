@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataHelper } from 'src/app/core/modules/dataHelper';
 import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
 import { environment } from 'src/environments/environment';
@@ -29,10 +29,9 @@ import { selectIsLoading } from 'src/app/layouts/sidebar-layout/map/states/map.s
 })
 
 export class SelectLayoutComponent implements OnInit{
+    @Output() selectPlaceEvent = new EventEmitter<string>();
     selectedAirpod: string='';
     isLoading$!: Observable<boolean>;
-    adcData:any=[];
-    selectedSite:any;
     places:any[]=[
         {
             name:'Yaoundé-Nsimalen',
@@ -110,8 +109,6 @@ export class SelectLayoutComponent implements OnInit{
   }
 
    async ngOnInit() {
-      const reponseData  = await fetch('../../../../../assets/adc-data/Aeroports_du _Cameroun_ADC.geojson');
-      this.adcData = await reponseData.json();
       this.initialiseAirpodLayer();
       
     }
@@ -130,38 +127,40 @@ export class SelectLayoutComponent implements OnInit{
         }
       }
 
-    setPlace(event: any){
-      this.selectedSite = this.adcData.features[event.target.value];
+    async setPlace(event: any){
+      const reponseData  = await fetch('../../../../../assets/adc-data/Aeroports_du _Cameroun_ADC.geojson');
+      const adcData = await reponseData.json();
+
+      let selectedSite = adcData.features[event.target.value];
       let mapHelper = new MapHelper();
       mapHelper.clearLayerOnMap('airpodLayer');
+      this.selectPlaceEvent.emit();
       setTimeout(() => {
-        this.selectAirPod();
+        this.selectAirPod(selectedSite);
       }, 500);
     }
 
-    selectAirPod(){
+    selectAirPod(selectedSite: any){
       let mapHelper = new MapHelper();
-
       if (mapHelper.getLayerByName('airpodLayer').length > 0) {
 
           let feature = new Feature();
-          let textLabel = this.selectedSite.properties.name;
+          let textLabel = selectedSite.properties.name;
 
           feature.set('textLabel', textLabel);
           let extent: Extent;
-          for (let index = 0; index < this.selectedSite.geometry.coordinates[0].length; index++) {
-              const element = this.selectedSite.geometry.coordinates[0][index];
-              this.selectedSite.geometry.coordinates[0][index] = transform(element, 'EPSG:4326', 'EPSG:3857');
+          for (let index = 0; index < selectedSite.geometry.coordinates[0].length; index++) {
+              const element = selectedSite.geometry.coordinates[0][index];
+              selectedSite.geometry.coordinates[0][index] = transform(element, 'EPSG:4326', 'EPSG:3857');
           }
-          feature.setGeometry(new Polygon(this.selectedSite.geometry.coordinates));  
+          feature.setGeometry(new Polygon(selectedSite.geometry.coordinates));  
 
-          extent = new Polygon(this.selectedSite.geometry.coordinates).getExtent();
+          extent = new Polygon(selectedSite.geometry.coordinates).getExtent();
           
           
           let airpodLayer = mapHelper.getLayerByName('airpodLayer')[0];
           airpodLayer.getSource().clear();
           airpodLayer.getSource().addFeature(feature);
-          
           mapHelper.fit_view(extent!, 14);
       }
     }
