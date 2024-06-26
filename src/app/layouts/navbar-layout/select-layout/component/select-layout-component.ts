@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { DataHelper } from 'src/app/core/modules/dataHelper';
 import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
 import { environment } from 'src/environments/environment';
@@ -29,6 +29,7 @@ import { selectIsLoading } from 'src/app/layouts/sidebar-layout/map/states/map.s
 })
 
 export class SelectLayoutComponent implements OnInit{
+    @Output() selectPlaceEvent = new EventEmitter<string>();
     selectedAirpod: string='';
     isLoading$!: Observable<boolean>;
     adcData:any=[];
@@ -134,6 +135,7 @@ export class SelectLayoutComponent implements OnInit{
       this.selectedSite = this.adcData.features[event.target.value];
       let mapHelper = new MapHelper();
       mapHelper.clearLayerOnMap('airpodLayer');
+      this.selectPlaceEvent.emit();
       setTimeout(() => {
         this.selectAirPod();
       }, 500);
