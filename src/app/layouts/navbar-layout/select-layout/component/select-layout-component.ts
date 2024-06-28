@@ -30,8 +30,9 @@ import { selectIsLoading } from 'src/app/layouts/sidebar-layout/map/states/map.s
 
 export class SelectLayoutComponent implements OnInit{
     @Output() selectPlaceEvent = new EventEmitter<string>();
-    selectedAirpod: string='';
+    selectedAirpod=-1;
     isLoading$!: Observable<boolean>;
+    flyEffect= false;
     places:any[]=[
         {
             name:'Yaoundé-Nsimalen',
@@ -92,7 +93,7 @@ export class SelectLayoutComponent implements OnInit{
         }),
         stroke: new Stroke({
           color: environment.primarycolor,
-          width: 6
+          width: 4
         }),
         text: new Text(textStyle)
       });
@@ -128,11 +129,18 @@ export class SelectLayoutComponent implements OnInit{
       }
 
     async setPlace(event: any){
+      let mapHelper = new MapHelper();
       const reponseData  = await fetch('../../../../../assets/adc-data/Aeroports_du _Cameroun_ADC.geojson');
       const adcData = await reponseData.json();
 
+      if( (mapHelper.getLayerByName('airpodLayer').length = 0) || (this.selectedAirpod===-1)){
+        this.flyEffect=false;
+      }else{
+        this.flyEffect=true;
+      }
+      this.selectedAirpod=0;  
+      this.selectedAirpod=event.target.value;
       let selectedSite = adcData.features[event.target.value];
-      let mapHelper = new MapHelper();
       mapHelper.clearLayerOnMap('airpodLayer');
       this.selectPlaceEvent.emit();
       setTimeout(() => {
@@ -161,7 +169,7 @@ export class SelectLayoutComponent implements OnInit{
           let airpodLayer = mapHelper.getLayerByName('airpodLayer')[0];
           airpodLayer.getSource().clear();
           airpodLayer.getSource().addFeature(feature);
-          mapHelper.fit_view(extent!, 14);
+          mapHelper.fit_view(extent!, 14,this.flyEffect);                               
       }
     }
 

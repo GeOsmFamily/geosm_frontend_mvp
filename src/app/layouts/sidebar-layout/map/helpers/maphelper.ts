@@ -191,13 +191,40 @@ export class MapHelper {
     }
   }
 
-  fit_view(geom: Extent | SimpleGeometry, zoom: any) {
-    this.map?.getView().fit(geom, {
-      maxZoom: zoom,
-      size: this.map!.getSize(),
-      padding: [0, 0, 0, 0],
-      duration: 1000
-    });
+  fit_view(geom: Extent | SimpleGeometry, zoom: any, setSite: boolean=false) {
+    if(setSite===false){// this setSite parameter is just to set 
+      this.map?.getView().fit(geom, {
+        maxZoom: zoom,
+        size: this.map!.getSize(),
+        padding: [0, 0, 0, 0],
+        duration: 1000
+      });
+      return ;
+    }
+    
+      const extent: any= geom;
+      const resolution = this.map?.getView().getResolutionForExtent(extent);
+      const centerFrom:any = this.map?.getView().getCenter();
+      const centerTo =  this.getCenterOfExtent(geom as any);
+
+      this.map?.getView().animate({
+        resolution: 16 * 4, // jump effect
+        center: [
+          (centerFrom[0] + centerTo[0]) / 2,
+          (centerFrom[1] + centerTo[1]) / 2
+        ],
+        duration: 1500
+      }, {
+        resolution: resolution, // back again
+        center: centerTo,
+        duration: 1500
+      })
+  }
+
+  getCenterOfExtent(MyExtent: Extent){
+    var X = MyExtent[0] + (MyExtent[2]-MyExtent[0])/2;
+    var Y = MyExtent[1] + (MyExtent[3]-MyExtent[1])/2;
+    return [X, Y];
   }
 
   setZindexToLayer(layer: any, zIndex: number) {
