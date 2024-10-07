@@ -3,7 +3,6 @@ import { DataHelper } from 'src/app/core/modules/dataHelper';
 import { MapHelper } from 'src/app/layouts/sidebar-layout/map/helpers/maphelper';
 import { environment } from 'src/environments/environment';
 import { select, Store } from '@ngrx/store';
-
 import { Extent } from 'ol/extent';
 import {
   BaseLayer,
@@ -35,36 +34,16 @@ export class SelectLayoutComponent implements OnInit{
     flyEffect= false;
     places:any[]=[
         {
-            name:'Yaoundé-Nsimalen',
+            name:'Douala',
             id:0
         },
         {
-            name:'Bamenda',
+            name:'Batouri',
             id:1
-        },
-        {
-            name:'Bertoua',
-            id:2
-        },
-        {
-            name:'Douala',
-            id:3
-        },
-        {
-            name:'Garoua',
-            id:4
-        },
-        {
-            name:'Maroua-Salak',
-            id:5
-        },
-        {
-            name:'Ngaoundéré',
-            id:6
         }
     ];
     map!: Map;
-    airpodLayer: BaseLayer = new VectorLayer({
+    batouriLayer: BaseLayer = new VectorLayer({
     source: new VectorSource(),
     style: feature => {
       let textLabel;
@@ -99,8 +78,8 @@ export class SelectLayoutComponent implements OnInit{
       });
     },
     //@ts-ignore
-    type_layer: 'airpodLayer',
-    nom: 'airpodLayer'
+    type_layer: 'batouriLayer',
+    nom: 'batouriLayer'
   });
 
   constructor(
@@ -116,32 +95,32 @@ export class SelectLayoutComponent implements OnInit{
 
     initialiseAirpodLayer() {
         let mapHelper = new MapHelper();
-        if (mapHelper.getLayerByName('airpodLayer').length > 0) {
-          this.airpodLayer = mapHelper.getLayerByName('airpodLayer')[0];
-          this.airpodLayer.setZIndex(2000);
+        if (mapHelper.getLayerByName('batouriLayer').length > 0) {
+          this.batouriLayer = mapHelper.getLayerByName('batouriLayer')[0];
+          this.batouriLayer.setZIndex(2000);
         } else {
-          this.airpodLayer.setZIndex(2000);
-          mapHelper.map?.addLayer(this.airpodLayer);
+          this.batouriLayer.setZIndex(2000);
+          mapHelper.map?.addLayer(this.batouriLayer);
         }
-        if (mapHelper.getLayerByName('airpodLayer').length > 0) {
-          mapHelper.getLayerByName('airpodLayer')[0].getSource().clear();
+        if (mapHelper.getLayerByName('batouriLayer').length > 0) {
+          mapHelper.getLayerByName('batouriLayer')[0].getSource().clear();
         }
       }
 
     async setPlace(event: any){
       let mapHelper = new MapHelper();
-      const reponseData  = await fetch('../../../../../assets/adc-data/Aeroports_du _Cameroun_ADC.geojson');
-      const adcData = await reponseData.json();
+      const reponseData  = await fetch('../../../../../assets/layer_data/Douala_batouri.geojson');
+      const batouriData = await reponseData.json();
 
-      if( (mapHelper.getLayerByName('airpodLayer').length = 0) || (this.selectedAirpod===-1)){
+      if( (mapHelper.getLayerByName('batouriLayer').length = 0) || (this.selectedAirpod===-1)){
         this.flyEffect=false;
       }else{
         this.flyEffect=true;
       }
       this.selectedAirpod=0;  
       this.selectedAirpod=event.target.value;
-      let selectedSite = adcData.features[event.target.value];
-      mapHelper.clearLayerOnMap('airpodLayer');
+      let selectedSite = batouriData.features[event.target.value];
+      mapHelper.clearLayerOnMap('batouriLayer');
       this.selectPlaceEvent.emit();
       setTimeout(() => {
         this.selectAirPod(selectedSite);
@@ -150,7 +129,7 @@ export class SelectLayoutComponent implements OnInit{
 
     selectAirPod(selectedSite: any){
       let mapHelper = new MapHelper();
-      if (mapHelper.getLayerByName('airpodLayer').length > 0) {
+      if (mapHelper.getLayerByName('batouriLayer').length > 0) {
 
           let feature = new Feature();
           let textLabel = selectedSite.properties.name;
@@ -166,9 +145,9 @@ export class SelectLayoutComponent implements OnInit{
           extent = new Polygon(selectedSite.geometry.coordinates).getExtent();
           
           
-          let airpodLayer = mapHelper.getLayerByName('airpodLayer')[0];
-          airpodLayer.getSource().clear();
-          airpodLayer.getSource().addFeature(feature);
+          let batouriLayer = mapHelper.getLayerByName('batouriLayer')[0];
+          batouriLayer.getSource().clear();
+          batouriLayer.getSource().addFeature(feature);
           mapHelper.fit_view(extent!, 14,this.flyEffect);                               
       }
     }

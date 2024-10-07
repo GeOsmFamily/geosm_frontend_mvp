@@ -1,5 +1,5 @@
 <div id="place-container" class="flex  bottom-0  w-full justify-center items-center">
-    <h3>Selectionner un site</h3>
+    <h3>Selectionner une ville</h3>
     <select [disabled]="isLoading$ | async " class="font-bold" value="-1" name="adc-place" id="adc-place" placeholder="'" (change)="setPlace($event)">
         <option [value]="place.id" *ngFor="let place of places">{{place.name}}</option>
         <option value="-1"  style="display: none;"></option>
