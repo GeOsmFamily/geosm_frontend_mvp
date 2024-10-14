@@ -10,7 +10,6 @@
 }
 .navbar {
   background-color: #fff;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
   padding: 0;
   position: relative;
   z-index: 1030;
@@ -78,13 +77,10 @@
     background-color: #1d917d !important;
     position: absolute;
     float: unset !important;
-
     display: flex !important;
     flex-direction: column !important;
     width: 250px;
     height: 100vh;
-    //justify-content: center;
-    //visibility: hidden;
   }
 
   .menu-list a:hover {
@@ -92,7 +88,6 @@
   }
 
   .menu-list {
-    // height: 100vh;
     background-color: #1d917d !important;
   }
 
@@ -102,7 +97,6 @@
     margin-top: 30px;
     margin-left: 30px;
     background-color: white;
-    //color: white;
     padding: 15px 25px;
     height: 40px;
   }
@@ -135,19 +129,5 @@
 
   .searchbar {
     margin: unset;
-  }
-
-  .menu-list {
-    flex-direction: row !important;
-    align-content: center;
-    width: 250px;
-    margin: 0 auto;
-    float: unset;
-  }
-
-  a {
-    width: 250px;
-    display: flex;
-    align-items: center;
   }
 }
