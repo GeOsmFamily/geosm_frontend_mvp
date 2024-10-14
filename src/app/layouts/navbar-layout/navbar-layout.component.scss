@@ -1,8 +1,15 @@
 @import '../../../theme.scss';
-
+.page-title{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  align-items: center;
+  margin-left: 100px;
+}
 .navbar {
   background-color: #fff;
-  border-bottom: 1px solid #e5e5e5;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
   padding: 0;
   position: relative;
@@ -23,7 +30,7 @@
   color: black;
   text-decoration: none;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
   text-transform: uppercase;
   height: 80px;
 }
@@ -121,10 +128,8 @@
   .navbar {
     border: none;
     background-color: unset;
-    border: 10px solid red;
     height: 40px;
     padding: unset;
-    width: 100px;
     margin: unset;
   }
 
