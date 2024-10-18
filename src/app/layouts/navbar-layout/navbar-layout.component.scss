@@ -6,7 +6,19 @@
   font-size: 20px;
   font-weight: 500;
   align-items: center;
+  justify-content: space-between;
   margin-left: 100px;
+  div{
+    &:nth-child(1){
+      height:50px;
+    }
+    &:nth-child(2){
+      height:60px;
+    }
+  }
+  img{
+    height: 100%;
+  }
 }
 .navbar {
   background-color: #fff;

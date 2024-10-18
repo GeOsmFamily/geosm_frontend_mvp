@@ -3,10 +3,11 @@
   border-bottom-color: rgba(0, 0, 0, 0.08);
   border-bottom: 3px solid rgba(0, 0, 0, 0.08);
   width: 300px;
-  margin: 0 auto;
+  margin-left: -20px;
   margin-top: 10px;
   background-color: white;
 }
+
 
 .break-words {
  // overflow-wrap: break-word !important;
@@ -17,14 +18,7 @@
    color: white;
 }
 
-.cover-image {
-  background-position: center;
-  background-size: cover;
-  display: block;
-  height: 96.25px;
-  margin: -20px -12px -12px -12px;
-  background-image: url('^assets/images/svg/BACKGROUND.svg');
-}
+
 
 .logo {
   width: 24px;
@@ -34,9 +28,11 @@
 
 
 .profile-image {
-  margin: -38px auto 1.2rem;
-  border: 2px solid #fff;
-  background-color: #fff;
+  width:calc(100% + 40px );
+  object-fit: cover;
+  margin: -16px auto 1.2rem;
+  padding: 10px;
+  background-color: #273B70;
 }
 
 .entityPhoto {
