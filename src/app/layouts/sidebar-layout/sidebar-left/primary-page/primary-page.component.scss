@@ -1,14 +1,15 @@
 .user-box {
-  padding: 1.2rem 1.2rem 1.6rem;
   border-bottom-color: rgba(0, 0, 0, 0.08);
   border-bottom: 3px solid rgba(0, 0, 0, 0.08);
-  width: 300px;
-  margin-left: -20px;
   margin-top: 10px;
   background-color: white;
 }
 
-
+.image-container{
+  display: flex ;
+  width: 100%;
+  justify-content: center;
+}
 .break-words {
  // overflow-wrap: break-word !important;
   word-wrap: break-word !important;
@@ -28,11 +29,10 @@
 
 
 .profile-image {
-  width:calc(100% + 40px );
   object-fit: cover;
-  margin: -16px auto 1.2rem;
+  margin-top: -20px;
+  height: 200px;
   padding: 10px;
-  background-color: #273B70;
 }
 
 .entityPhoto {
