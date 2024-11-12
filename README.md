@@ -15,7 +15,7 @@ export const environment = {
   url_services: 'https://cuyservices.position.cm',
   apiKey: 'RGpKEijHA8iGA0HP252kk9JxKVeq0Yt5zjakBCWheOoWbvKjrulsAG9now0kWh46',
   instance_id: 1,
-  primarycolor: '#023f5f',
+  primarycolor: '#4caf50',
   nom: 'cuy',
   url_frontend: 'http://localhost:4200',
   country_code: 'ML',

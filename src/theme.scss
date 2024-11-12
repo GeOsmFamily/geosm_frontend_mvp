@@ -130,19 +130,19 @@ $color_prim: (50: #000,
 );
 
 $color_accent: (50: #000,
-  100: #00ada7,
-  200: #00ada7,
-  300: #00ada7,
-  400: #00ada7,
-  500: #00ada7,
-  600: #00ada7,
-  700: #00ada7,
-  800: #00ada7,
-  900: #00ada7,
+  100: #4caf50,
+  200: #4caf50,
+  300: #4caf50,
+  400: #4caf50,
+  500: #4caf50,
+  600: #4caf50,
+  700: #4caf50,
+  800: #4caf50,
+  900: #4caf50,
   A100: #000,
   A200: #000,
-  A400: #00ada7,
-  A700: #00ada7,
+  A400: #4caf50,
+  A700: #4caf50,
   contrast: (500: black,
     600: black,
     700: black,
@@ -151,7 +151,7 @@ $color_accent: (50: #000,
     A700: black,
   ),
 );
-$accent_color: #00ada7;
+$accent_color: #4caf50;
 
 $theme-primary: mat-palette($color_prim, 500);
 $theme-accent: mat-palette($color_accent, 600);

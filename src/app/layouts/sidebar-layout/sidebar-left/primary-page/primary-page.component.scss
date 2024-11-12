@@ -10,6 +10,19 @@
   width: 100%;
   justify-content: center;
 }
+.intro-section{
+  padding-inline: 32px;
+  text-align: center;
+  margin-bottom: 32px;
+  h3{
+    font-size: 20px;
+    font-weight: 500;
+    color: #4caf50;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
 .break-words {
  // overflow-wrap: break-word !important;
   word-wrap: break-word !important;
@@ -31,7 +44,7 @@
 .profile-image {
   object-fit: cover;
   margin-top: -20px;
-  height: 200px;
+  height: 100px;
   padding: 10px;
 }
 
@@ -122,5 +135,5 @@ a {
 
 ::ng-deep .mat-drawer-inner-container {
   overflow-x: hidden !important;
-
 }
+
