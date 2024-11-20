@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   url_services: 'https://onhmapservices.position.cm',
-  apiKey: '',
+  apiKey: 'BfST2IzHF2tAkuvKcvi7lDIYKT3aNL5WpXqYj7cUeh4aLqSEsMxghtcKEKWwVvL8',
   instance_id: 1,
   primarycolor: '#4caf50',
   nom: 'onhmap',

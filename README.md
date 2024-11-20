@@ -13,7 +13,7 @@ $ npx ng serve --open
 export const environment = {
   production: true,
   url_services: 'https://cuyservices.position.cm',
-  apiKey: 'RGpKEijHA8iGA0HP252kk9JxKVeq0Yt5zjakBCWheOoWbvKjrulsAG9now0kWh46',
+  apiKey: 'BfST2IzHF2tAkuvKcvi7lDIYKT3aNL5WpXqYj7cUeh4aLqSEsMxghtcKEKWwVvL8',
   instance_id: 1,
   primarycolor: '#4caf50',
   nom: 'cuy',
