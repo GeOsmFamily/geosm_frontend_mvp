@@ -1,4 +1,11 @@
 @import '../../../theme.scss';
+h1{
+  position: absolute;
+  margin-top: 24px;
+  font-size: 24px;
+  margin-left: 42px;
+  font-weight: 500;
+}
 .page-title{
   position: absolute;
   right: 32px;
