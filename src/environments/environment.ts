@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  url_services: 'https://adcservices.position.cm',
-  apiKey: 'LHEp0xqWjSH28WJ3wWi1n4TkwUq5Bmpw0V2Jre0Qt3wCyOZOZObQCtSDwvPfybtO',
+  url_services: 'http://31.220.79.136:5000',
+  apiKey: 'ngM52K6sdFpsEyGRx9ZufRKAwfwTR6ps4OlcyL06XANkYTvXbqSERfjZxQVzflke',
   instance_id: 1,
   primarycolor: '#023f5f',
   nom: 'adc',
