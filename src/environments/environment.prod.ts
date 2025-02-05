@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   url_services: 'https://soaservices.position.cm',
-  apiKey: '7UyxYOftuNkFHu1uWLnH8tt8TlXBGndfCZCU1Bw4CACmZahaHJyhbcweBe69AIyH',
+  apiKey: 'RuI7OCXVPeoeUHkUDAPZoBHUqirR5RKi7A1GjJqaqWAjRMlrMdHkE9TP8bya2hFo',
   instance_id: 1,
   primarycolor: '#023f5f',
   nom: 'soa',
