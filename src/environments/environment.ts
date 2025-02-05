@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   url_services: 'https://pucservices.position.cm',
-  apiKey: 'VQE6hycrFBnWcBQ5gqBvyhUzYqLf45Ap5vetcZnPe0Ft06EnmMWW47eSfNnixdhw',
+  apiKey: 'X2FsdW7Y2YEbbGyQRpC6jRnuSaM7olNKGD85rJ81gEJwHqj1vcQOeT4b4F9DVnM1',
   instance_id: 1,
   primarycolor: '#023f5f',
   nom: 'puc',
