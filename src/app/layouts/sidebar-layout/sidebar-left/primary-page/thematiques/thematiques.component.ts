@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ThematiquesComponent implements OnInit {
   lenght: number | undefined;
+  layerAmount= 0;
 
   url_prefix: string = environment.url_services;
 
@@ -20,6 +21,11 @@ export class ThematiquesComponent implements OnInit {
   constructor(private thematiqueService: ThematiqueService) {}
 
   ngOnInit(): void {
+    this.layerAmount=0
+    this.thematique?.sous_thematiques.forEach((sous_thematique) => {
+      console.log(sous_thematique.couches.length);
+      this.layerAmount= this.layerAmount + sous_thematique.couches.length;
+    });
     this.thematiqueService.getThematiques().subscribe((result) => {
       this.lenght = result.data.thematiques.length
 

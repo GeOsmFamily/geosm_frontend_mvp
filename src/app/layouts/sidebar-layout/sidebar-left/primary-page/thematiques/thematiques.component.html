@@ -41,10 +41,10 @@
       </mat-list-item>
       <p>
         <span *ngIf="thematique!.sous_thematiques[0]!.couches!.length > 1"
-          >{{ thematique!.sous_thematiques[0].couches!.length}} couches</span
+          >{{ layerAmount}} couches</span
         >
         <span *ngIf="thematique!.sous_thematiques[0]!.couches!.length === 1"
-          >{{ thematique!.sous_thematiques[0].couches!.length }} couche</span
+          >{{ layerAmount}} couche</span
         >
       </p>
       <!-- <span >

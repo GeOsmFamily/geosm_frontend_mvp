@@ -5,6 +5,7 @@
       *ngFor="let sous_thematique of thematique!.sous_thematiques"
       expanded="true"
     >
+      <h3 class="sous_thematique_name">{{sous_thematique.nom}} </h3>
       <div style="">
         <mat-selection-list (selectionChange)="coucheSelected($event)">
           <!-- <mat-list-option> -->
