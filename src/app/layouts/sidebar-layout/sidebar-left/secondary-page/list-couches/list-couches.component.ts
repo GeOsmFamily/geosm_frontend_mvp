@@ -16,14 +16,12 @@ export class ListCouchesComponent implements OnInit {
     public layerService: LayersService,
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   coucheSelected(event: MatSelectionListChange) {
     let couche: Couche = event.option.value;
     couche.check = event.option.selected;
     this.toogleLayer(couche);
-   
   }
 
   toogleLayer(couche: Couche) {
